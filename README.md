@@ -12,7 +12,7 @@
     - Tablet?
     - Laptop?
 - **Server**
-  - docker --> webserver, mqqt
+  - docker --> webserver, mqtt
 - **Ledstrips**
   - 5v, 24v
   - Lengte?
