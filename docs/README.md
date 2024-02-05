@@ -1,19 +1,19 @@
-# Documentatie
+# Documentation
 
-## Inhoudstafel
+## Table of contents
 
-- [Documentatie](#documentatie)
-  - [Inhoudstafel](#inhoudstafel)
-  - [Afmetingen](#afmetingen)
-  - [Architectuur diagram](#architectuur-diagram)
+- [Documentation](#documentation)
+  - [Table of contents](#table-of-contents)
+  - [Measurements](#measurements)
+  - [Architecture diagram](#architecture-diagram)
 
-## Afmetingen
+## Measurements
 
-De afmeting van de gang is:
+The size of the hallway is:
 
-- Hoogte: 331cm
-- Breedte: 240cm
+- Height: 331cm
+- Width: 240cm
 
-## Architectuur diagram
+## Architecture diagram
 
-Het architectuur diagram kan gevisualiseerd worden op de website [app.diagrams.net](https://app.diagrams.net/).
+The architecture diagram can be visualized in [app.diagrams.net](https://app.diagrams.net/).
