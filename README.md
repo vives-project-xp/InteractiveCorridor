@@ -1,4 +1,4 @@
-# InteractiveCorridor
+# Interactive Corridor
 
 ## Ideeën
 
