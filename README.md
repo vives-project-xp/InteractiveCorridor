@@ -1,5 +1,9 @@
 # Interactive Corridor
 
+# Inhoud
+
+    -   [Ideeën](#ideeën)
+
 ## Ideeën
 
 - **Interface**
