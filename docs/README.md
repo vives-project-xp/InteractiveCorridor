@@ -16,4 +16,4 @@ The size of the hallway is:
 
 ## Architecture diagram
 
-The architecture diagram can be visualized in [app.diagrams.net](https://app.diagrams.net/).
+The architecture diagram can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
