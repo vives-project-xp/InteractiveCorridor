@@ -2,7 +2,7 @@
 
 # Inhoud
 
-    -   [Ideeën](#ideeën)
+- [Ideeën](#ideeën)
 
 ## Ideeën
 
