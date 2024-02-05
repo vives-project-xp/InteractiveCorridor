@@ -1,8 +1,10 @@
 # Interactive Corridor
 
-# Inhoud
+## Inhoud
 
-- [Ideeën](#ideeën)
+- [Interactive Corridor](#interactive-corridor)
+  - [Inhoud](#inhoud)
+  - [Ideeën](#ideeën)
 
 ## Ideeën
 
