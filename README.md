@@ -1,5 +1,7 @@
 # Interactive Corridor
 
+This proof-of-concept project transforms hallways into interactive light corridors. Users control lights via a website, creating a personalized, immersive experience. The system uses WLED, ESP32s, a Python server, and MQTT for real-time interaction. It's all about creating captivating, customizable entertainment for all ages.
+
 ## Table of contents
 
 - [Interactive Corridor](#interactive-corridor)
