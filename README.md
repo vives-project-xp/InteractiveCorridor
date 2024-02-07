@@ -6,12 +6,21 @@ This proof-of-concept project transforms hallways into interactive light corrido
 
 - [Interactive Corridor](#interactive-corridor)
   - [Table of contents](#table-of-contents)
+  - [The Team](#the-team)
   - [The idea](#the-idea)
     - [Interface](#interface)
     - [Server](#server)
     - [Led strips](#led-strips)
     - [Corridor manager](#corridor-manager)
     - [Construction](#construction)
+
+## The Team
+
+- [Mathieu Leroy](https://github.com/MathieuLeroy2) • Projectleader
+- [Robbe De Wispelaere](https://github.com/RobbeDeW) • Scrum-master
+- [Aitor Vannevel](https://github.com/imawizzard)
+- [Simon Stijnen](https://github.com/SimonStnn)
+- [Niels Denoo](https://github.com/NielsDenoo)
 
 ## The idea
 
