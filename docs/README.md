@@ -19,7 +19,17 @@ The size of the hallway is:
 
 ## Architecture diagram
 
-![Architecture Diagram](./exports/ArchitectureDiagram.png)
+<picture>
+  <source
+    srcset="./exports/ArchitectureDiagram_dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    srcset="./exports/ArchitectureDiagram_light.png"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
+  <img alt="Architecture diagram" />
+</picture>
 
 The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
 
