@@ -5,6 +5,6 @@
   "MD028": false,
   "MD029": false,
   "MD033": {
-    "allowed_elements": ["sub", "sup", "picture", "source", "img"]
+    "allowed_elements": ["sub", "sup"]
   }
 }
