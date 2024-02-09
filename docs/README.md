@@ -8,6 +8,7 @@
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
+    - [Output requirements](#output-requirements)
     - [Architecture diagram](#architecture-diagram)
   - [Project document](#project-document)
   - [ESP32](#esp32)
@@ -41,6 +42,13 @@ The functional requirements for the project are:
 - The system should provide a variety of lighting effects and animations for the user to choose from.
 - The system should be able to handle multiple ESP32s.
 - The system should be able to handle multiple users controlling the LED strips simultaneously.
+
+### Output requirements
+
+The output requirements for the project are:
+
+- No flickering or lag in the LED strips.
+- Reaction time is below 100ms.
 
 ### Architecture diagram
 
