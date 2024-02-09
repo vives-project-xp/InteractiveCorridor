@@ -5,7 +5,8 @@
 - [Documentation](#documentation)
   - [Table of contents](#table-of-contents)
   - [Measurements](#measurements)
-  - [Architecture diagram](#architecture-diagram)
+  - [Architecture document](#architecture-document)
+    - [Architecture diagram](#architecture-diagram)
   - [Project document](#project-document)
   - [ESP32](#esp32)
     - [WLED Software](#wled-software)
@@ -17,7 +18,9 @@ The size of the hallway is:
 - Height: 331cm
 - Width: 240cm
 
-## Architecture diagram
+## Architecture document
+
+### Architecture diagram
 
 <picture>
   <source
