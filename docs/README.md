@@ -6,6 +6,7 @@
   - [Table of contents](#table-of-contents)
   - [Measurements](#measurements)
   - [Architecture document](#architecture-document)
+    - [Input requirements](#input-requirements)
     - [Architecture diagram](#architecture-diagram)
   - [Project document](#project-document)
   - [ESP32](#esp32)
@@ -19,6 +20,14 @@ The size of the hallway is:
 - Width: 240cm
 
 ## Architecture document
+
+### Input requirements
+
+The input requirements for the project are:
+
+- The user should be able to control the LED strips via a web interface.
+- The user should be able to change the color and brightness of the LED strips.
+- The user should be able to select different lighting effects and animations for the LED strips.
 
 ### Architecture diagram
 
