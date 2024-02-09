@@ -5,6 +5,7 @@
 - [Documentation](#documentation)
   - [Table of contents](#table-of-contents)
   - [Measurements](#measurements)
+  - [Bill of Materials](#bill-of-materials)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
@@ -23,6 +24,14 @@ The size of the hallway is:
 
 - Height: 331cm
 - Width: 240cm
+
+## Bill of Materials
+
+The Bill of Materials (BOM) lists all the components, parts, and materials needed for one corridor:
+
+| Component             | Quantity | Price / unit | Link | Remarks |
+| :-------------------- | :------: | -----------: | :--- | :------ |
+| WS2814 RGBW LED strip |          |              |      |         |
 
 ## Architecture document
 
