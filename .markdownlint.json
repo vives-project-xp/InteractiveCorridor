@@ -1,10 +1,18 @@
 {
   "default": true,
-  "MD007": { "indent": 2 },
+  "MD007": {
+    "indent": 2
+  },
   "MD013": false,
   "MD028": false,
   "MD029": false,
   "MD033": {
-    "allowed_elements": ["sub", "sup", "picture", "source", "img"]
+    "allowed_elements": [
+      "sub",
+      "sup",
+      "picture",
+      "source",
+      "img"
+    ]
   }
 }
