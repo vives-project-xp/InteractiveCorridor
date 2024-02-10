@@ -39,7 +39,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 
 ### WS2814 LED strip
 
-The model of the ledstrip is **BTF-24V-060L-B**. By this model we know it works on DC24V and has 60 LEDs per meter. The ledstrip is a 24V RGBW ledstrip. It has 4 channels: Red, Green, Blue, and White.
+The model of the ledstrip is **BTF-24V-060L-B**. By this model we know it works on 24V and has **60 LEDs per meter**. It has 4 channels: Red, Green, Blue, and Warm white.
 
 The ledstrip has the following connections:
 
