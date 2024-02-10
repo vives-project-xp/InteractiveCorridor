@@ -6,6 +6,8 @@
   - [Table of contents](#table-of-contents)
   - [Measurements](#measurements)
   - [Bill of Materials](#bill-of-materials)
+  - [Interfaces](#interfaces)
+    - [WS2814 LED strip](#ws2814-led-strip)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
@@ -32,6 +34,22 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | Component             | Quantity | Price / unit | Link | Remarks |
 | :-------------------- | :------: | -----------: | :--- | :------ |
 | WS2814 RGBW LED strip |          |              |      |         |
+
+## Interfaces
+
+### WS2814 LED strip
+
+The ledstrip is a 24V RGBW ledstrip. It has 4 channels: Red, Green, Blue, and White.
+
+The ledstrip has the following connections:
+
+- **VCC** (Red): 24V
+- **GND** (White): Ground
+- **DAT** (Green): Data input
+
+The length of the LED strip is **5 meters** and it has 60 LEDs per meter. The ledstrip is **IP65** rated, which means it is waterproof.
+
+> The **WS2814** ledstrip has a data input and a data output. This means that we can connect multiple ledstrips in series.
 
 ## Architecture document
 
