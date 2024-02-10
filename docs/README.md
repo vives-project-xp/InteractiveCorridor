@@ -39,7 +39,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 
 ### WS2814 LED strip
 
-The ledstrip is a 24V RGBW ledstrip. It has 4 channels: Red, Green, Blue, and White.
+The model of the ledstrip is **BTF-24V-060L-B**. By this model we know it works on DC24V and has 60 LEDs per meter. The ledstrip is a 24V RGBW ledstrip. It has 4 channels: Red, Green, Blue, and White.
 
 The ledstrip has the following connections:
 
@@ -47,7 +47,7 @@ The ledstrip has the following connections:
 - **GND** (White): Ground
 - **DAT** (Green): Data input
 
-The length of the LED strip is **5 meters** and it has 60 LEDs per meter. The ledstrip is **IP65** rated, which means it is waterproof.
+The length of the LED strip is **5 meters**. The ledstrip is **IP65** rated, which means it is waterproof. It uses 30~120W.
 
 > The **WS2814** ledstrip has a data input and a data output. This means that we can connect multiple ledstrips in series.
 
