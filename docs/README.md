@@ -7,7 +7,7 @@
   - [Measurements](#measurements)
   - [Bill of Materials](#bill-of-materials)
   - [Interfaces](#interfaces)
-    - [WS2814 LED strip](#ws2814-led-strip)
+    - [WS2814 Protocol](#ws2814-protocol)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
@@ -37,7 +37,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 
 ## Interfaces
 
-### WS2814 LED strip
+### WS2814 Protocol
 
 The model of the ledstrip is **BTF-24V-060L-B**. By this model we know it works on **24V** and has **60 LEDs per meter**. It has 4 channels: Red, Green, Blue, and Warm white.
 
