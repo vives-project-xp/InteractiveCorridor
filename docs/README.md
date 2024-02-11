@@ -86,7 +86,7 @@ We need power for our LED strips and the ESP32s.
 
 #### ESP32 supply
 
-The ESP32 can be powered via USB or a 5V power supply. The ESP32 can handle a maximum of 12V, but it is recommended to use 5V.
+The ESP32 can be powered via USB or a 5V power supply.
 
 #### LED strip supply
 
