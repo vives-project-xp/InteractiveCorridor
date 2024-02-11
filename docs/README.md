@@ -6,8 +6,8 @@
   - [Table of contents](#table-of-contents)
   - [Measurements](#measurements)
   - [Bill of Materials](#bill-of-materials)
+    - [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip)
   - [Interfaces](#interfaces)
-    - [WS2814 Protocol](#ws2814-protocol)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
@@ -31,13 +31,11 @@ The size of the hallway is:
 
 The Bill of Materials (BOM) lists all the components, parts, and materials needed for one corridor:
 
-| Component             | Quantity | Price / unit | Link | Remarks |
-| :-------------------- | :------: | -----------: | :--- | :------ |
-| WS2814 RGBW LED strip |          |              |      |         |
+| Component                                       | Quantity | Price / unit | Link | Remarks |
+| :---------------------------------------------- | :------: | -----------: | :--- | :------ |
+| [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |          |              |      |         |
 
-## Interfaces
-
-### WS2814 Protocol
+### WS2814 RGBW LED strip
 
 The model of the ledstrip is **BTF-24V-060L-B**. By this model we know it works on **24V** and has **60 LEDs per meter**. It has 4 channels: Red, Green, Blue, and Warm white.
 
@@ -50,6 +48,8 @@ The ledstrip has the following connections:
 The length of the LED strip is **5 meters**. The ledstrip is **IP65** rated, which means it is waterproof. It uses **30~120W**.
 
 > The **WS2814** ledstrip has a data input and a data output. This means that we can connect multiple ledstrips in series.
+
+## Interfaces
 
 ## Architecture document
 
