@@ -96,11 +96,11 @@ The LED strips require a 24V power supply.
 
 <picture>
   <source
-    srcset="./exports/ArchitectureDiagram_dark.png"
+    srcset="./exports/ArchitectureDiagram_dark.svg"
     media="(prefers-color-scheme: dark)"
   />
   <source
-    srcset="./exports/ArchitectureDiagram_light.png"
+    srcset="./exports/ArchitectureDiagram_light.svg"
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
   />
   <img alt="Architecture diagram" />
