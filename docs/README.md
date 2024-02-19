@@ -17,7 +17,7 @@
     - [Power](#power)
       - [ESP32 supply](#esp32-supply)
       - [LED strip supply](#led-strip-supply)
-    - [Architecture diagram](#architecture-diagram)
+    - [Software architecture diagram](#software-architecture-diagram)
   - [Project document](#project-document)
   - [ESP32](#esp32)
     - [WLED Software](#wled-software)
@@ -113,7 +113,7 @@ The ESP32 can be powered via USB or a 5V power supply.
 
 The LED strips require a 24V power supply.
 
-### Architecture diagram
+### Software architecture diagram
 
 <picture>
   <source
