@@ -36,13 +36,13 @@
                 <mxCell id="51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;swimlaneLine=1;shadow=0;" parent="4" source="39" target="38" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="ESP23" style="swimlane;whiteSpace=wrap;html=1;swimlaneLine=1;shadow=0;rounded=0;" parent="4" vertex="1">
+                <mxCell id="53" value="ESP32" style="swimlane;whiteSpace=wrap;html=1;swimlaneLine=1;shadow=0;rounded=0;startSize=23;" parent="4" vertex="1">
                     <mxGeometry x="560" y="43" width="125" height="107" as="geometry"/>
                 </mxCell>
                 <mxCell id="32" value="WLED" style="rounded=0;whiteSpace=wrap;html=1;swimlaneLine=1;shadow=0;" parent="53" vertex="1">
                     <mxGeometry x="12.5" y="30" width="100" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="ESP23" style="swimlane;whiteSpace=wrap;html=1;swimlaneLine=1;shadow=0;rounded=0;" parent="4" vertex="1">
+                <mxCell id="54" value="ESP32" style="swimlane;whiteSpace=wrap;html=1;swimlaneLine=1;shadow=0;rounded=0;" parent="4" vertex="1">
                     <mxGeometry x="560" y="160" width="125" height="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="WLED" style="rounded=0;whiteSpace=wrap;html=1;swimlaneLine=1;shadow=0;" parent="54" vertex="1">
