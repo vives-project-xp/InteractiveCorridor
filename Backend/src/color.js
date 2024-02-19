@@ -1,8 +1,11 @@
+const mqtt = require("./mqtt");
+
 topic = "";
 
 const setColor = (req, res) => {
   strip = req.query.strip;
   color = req.query.color;
+  brightness = req.query.brightness;
   if (strip == undefined) {
     res.send(
       "No strip specified. Please specify a strip number between 0 and 2 (0 = all, 1 = strip 1 , 2 = strip 2, ...)"
@@ -23,7 +26,22 @@ const setColor = (req, res) => {
     );
     return;
   }
-  res.send("Color set: " + color + " on strip " + strip);
+  color = hexToRgb(color);
+
+  if (brightness == undefined) {
+    res.send(
+      "No brightness specified. Please specify a brightness between 0 and 255"
+    );
+  }
+  res.send(
+    "Color set: \nColor: " +
+      color +
+      "\nStrip: " +
+      strip +
+      "\nBrightness: " +
+      brightness
+  );
+  mqtt.publish(topic, `{'seg':[{'col':[[${color}]]}],'bri':${brightness}`);
 };
 
 const setTopic = (strip) => {
@@ -32,6 +50,14 @@ const setTopic = (strip) => {
   } else {
     topic = "IC/ic" + strip + "/api";
   }
+};
+
+const hexToRgb = (hex) => {
+  const rgb = [];
+  rgb[0] = parseInt(hex.slice(1, 3), 16);
+  rgb[1] = parseInt(hex.slice(3, 5), 16);
+  rgb[2] = parseInt(hex.slice(5, 7), 16);
+  return rgb;
 };
 
 module.exports = {

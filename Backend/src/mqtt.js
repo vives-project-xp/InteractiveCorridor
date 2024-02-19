@@ -22,3 +22,7 @@ const publish = (topic, message) => {
     }
   });
 };
+
+module.exports = {
+  publish,
+};
