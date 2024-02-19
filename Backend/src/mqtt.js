@@ -6,7 +6,7 @@ const options = {
   clean: true,
   connectTimeout: 4000,
   // Authentication
-  clientId: "ICBackend_" + +Math.random().toString(36),
+  clientId: "ICBackend_" + Math.random().toString(36),
   username: "",
   password: "",
 };
