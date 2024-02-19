@@ -9,6 +9,7 @@
     - [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip)
     - [ESP32-C3](#esp32-c3)
     - [Ledstrip profile](#ledstrip-profile)
+    - [DC/DC converter](#dcdc-converter)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -37,8 +38,9 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | Component                                       | Quantity | Price / unit | Link | Remarks |
 | :---------------------------------------------- | :------: | -----------: | :--- | :------ |
 | [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |          |              |      |         |
-| [ESP32-C3](#esp32-c3)                                 |          |              |      |         |
+| [ESP32-C3](#esp32-c3)                           |          |              |      |         |
 | [ledstrip profile](#ledstrip-profile)           |          |              |      |         |
+| [DC/DC Converter](#dcdc-converter)              |          |              |      |         |
 
 ### WS2814 RGBW LED strip
 
@@ -70,6 +72,18 @@ The specifications are:
 - **width**: 19,9 mm
 - **insidewidth**: 12,6 mm
 - **diffuser**:opal milky white
+
+### DC/DC converter
+
+Info about the component:
+
+- **Output Power max**: 2,5W
+- **Output voltage nom**: 5V
+- **Output current max**: 500mA
+- **Input voltage DC min**: 6,5V
+- **Input voltage DC max**: 36V
+
+Link to component: https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025
 
 ## Interfaces
 
