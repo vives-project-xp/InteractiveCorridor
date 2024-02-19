@@ -1,3 +1,5 @@
+topic = "";
+
 const setColor = (req, res) => {
   strip = req.query.strip;
   color = req.query.color;
@@ -6,6 +8,8 @@ const setColor = (req, res) => {
       "No strip specified. Please specify a strip number between 0 and 2 (0 = all, 1 = strip 1 , 2 = strip 2, ...)"
     );
     return;
+  } else {
+    setTopic(strip);
   }
   if (color == undefined) {
     res.send(
@@ -20,6 +24,14 @@ const setColor = (req, res) => {
     return;
   }
   res.send("Color set: " + color + " on strip " + strip);
+};
+
+const setTopic = (strip) => {
+  if (strip == 0) {
+    topic = "IC/all/api";
+  } else {
+    topic = "IC/ic" + strip + "/api";
+  }
 };
 
 module.exports = {
