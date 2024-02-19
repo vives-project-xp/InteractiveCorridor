@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 
-const navItemClass = 'text-primary-foreground';
+const navItemClass = 'text-primary-foreground border border-opacity-5 px-3 py-2 rounded';
 </script>
 
 <template>
-  <nav class="flex justify-between p-5 bg-primary">
-    <span class="text-primary-foreground">Interactive Corridor</span>
+  <nav class="flex justify-between align-baseline p-5 bg-primary">
+    <span class="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent font-bold">
+      Interactive Corridor
+    </span>
     <ul>
-      <li :class="navItemClass">
-        <RouterLink to="/">Home</RouterLink>
+      <li>
+        <RouterLink to="/" :class="navItemClass">Home</RouterLink>
       </li>
     </ul>
   </nav>
@@ -19,6 +21,4 @@ const navItemClass = 'text-primary-foreground';
   </main>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
