@@ -7,7 +7,7 @@
   - [Measurements](#measurements)
   - [Bill of Materials](#bill-of-materials)
     - [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip)
-    - [ESP32](#esp32)
+    - [ESP32-C3](#esp32-c3)
     - [Ledstrip profile](#ledstrip-profile)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
@@ -19,7 +19,7 @@
       - [LED strip supply](#led-strip-supply)
     - [Architecture diagram](#architecture-diagram)
   - [Project document](#project-document)
-  - [ESP32](#esp32-1)
+  - [ESP32](#esp32)
     - [WLED Software](#wled-software)
 
 ## Measurements
@@ -36,7 +36,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | Component                                       | Quantity | Price / unit | Link | Remarks |
 | :---------------------------------------------- | :------: | -----------: | :--- | :------ |
 | [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |          |              |      |         |
-| [ESP32](#esp32)                                 |          |              |      |         |
+| [ESP32-C3](#esp32-c3)                                 |          |              |      |         |
 | [ledstrip profile](#ledstrip-profile)           |          |              |      |         |
 
 ### WS2814 RGBW LED strip
@@ -53,7 +53,7 @@ The length of the LED strip is **5 meters**. The ledstrip is **IP65** rated, whi
 
 > The **WS2814** ledstrip has a data input and a data output. This means that we can connect multiple ledstrips in series.
 
-### ESP32
+### ESP32-C3
 
 Each pin can be used as a general-purpose I/O, or be connected to an internal peripheral signal
 
