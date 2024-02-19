@@ -7,3 +7,9 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
+  website:
+    build: ./website/
+    ports:
+      - "80:8000"
+    depends_on:
+      - backend
