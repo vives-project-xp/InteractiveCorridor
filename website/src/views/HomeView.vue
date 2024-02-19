@@ -6,20 +6,17 @@
     </div>
 
     <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
-      <div>
-        <h3>LED-strip {{ stripIndex }}</h3>
-        <div v-if="colors[stripIndex - 1]?.length > 0">
-          <div
-            v-for="(color, index) in colors[stripIndex - 1]"
-            :key="index"
-            :style="{
-              backgroundColor: color,
-              width: '35px',
-              height: '15px',
-              display: 'inline-block',
-              margin: '5px',
-            }"
-          ></div>
+      <div class="led-strip-container">
+        <div>
+          <h3>LED-strip {{ stripIndex }}</h3>
+          <div v-if="colors[stripIndex - 1]?.length > 0" class="led-strip">
+            <div
+              v-for="(color, index) in colors[stripIndex - 1]"
+              :key="index"
+              class="led"
+              :style="{ backgroundColor: color }"
+            ></div>
+          </div>
         </div>
       </div>
     </template>
@@ -57,7 +54,7 @@ export default {
       brightness: 200,
       selectedColor: '#ff0000',
       selectedStrip: 0,
-      colors: [], // This should be defined in your data object
+      colors: [],
     };
   },
   methods: {
@@ -68,7 +65,6 @@ export default {
           .then((response) => {
             const colorsObject = response.data.leds;
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
-            // Set the colors for the corresponding strip index
             this.colors[i - 1] = colors;
           })
           .catch((error) => {
@@ -93,7 +89,7 @@ export default {
   },
   mounted() {
     this.fetchColors();
-    setInterval(this.fetchColors, 1); // Fetch colors every second
+    setInterval(this.fetchColors, 10); // Fetch colors every second
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrip],
       () => {
@@ -103,3 +99,19 @@ export default {
   },
 };
 </script>
+
+<style>
+.led-strip-container {
+  margin-bottom: 20px; /* Ruimte toegevoegd tussen LED-strips */
+}
+
+.led-strip {
+  display: flex;
+}
+
+.led {
+  width: 35px;
+  height: 15px;
+  margin: 0px;
+}
+</style>
