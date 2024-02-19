@@ -18,6 +18,7 @@
       - [ESP32 supply](#esp32-supply)
       - [LED strip supply](#led-strip-supply)
     - [Software architecture diagram](#software-architecture-diagram)
+    - [Hardware architecture diagram](#hardware-architecture-diagram)
   - [Project document](#project-document)
   - [ESP32](#esp32)
     - [WLED Software](#wled-software)
@@ -125,6 +126,20 @@ The LED strips require a 24V power supply.
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
   />
   <img alt="Architecture diagram" />
+</picture>
+
+### Hardware architecture diagram
+
+<picture>
+  <source
+    srcset="./exports/HardwareArchitectureDiagram_light.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    srcset="./exports/HardwareArchitectureDiagram_light.svg"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
+  <img alt="Hardware Architecture diagram" />
 </picture>
 
 The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
