@@ -83,7 +83,7 @@ Info about the component:
 - **Input voltage DC min**: 6,5V
 - **Input voltage DC max**: 36V
 
-Link to component: https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025
+Link to component: [farnell.com](https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025)
 
 ## Interfaces
 
