@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mqtt": "^5.3.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
