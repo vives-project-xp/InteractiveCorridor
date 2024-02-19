@@ -7,6 +7,7 @@
   - [Measurements](#measurements)
   - [Bill of Materials](#bill-of-materials)
     - [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip)
+    - [ESP32](#esp32)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -17,7 +18,7 @@
       - [LED strip supply](#led-strip-supply)
     - [Architecture diagram](#architecture-diagram)
   - [Project document](#project-document)
-  - [ESP32](#esp32)
+  - [ESP32](#esp32-1)
     - [WLED Software](#wled-software)
 
 ## Measurements
@@ -34,6 +35,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | Component                                       | Quantity | Price / unit | Link | Remarks |
 | :---------------------------------------------- | :------: | -----------: | :--- | :------ |
 | [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |          |              |      |         |
+| [ESP32](#esp32)                                 |          |              |      |         |
 
 ### WS2814 RGBW LED strip
 
@@ -48,6 +50,12 @@ The ledstrip has the following connections:
 The length of the LED strip is **5 meters**. The ledstrip is **IP65** rated, which means it is waterproof. It uses **30~120W**.
 
 > The **WS2814** ledstrip has a data input and a data output. This means that we can connect multiple ledstrips in series.
+
+### ESP32
+
+Each pin can be used as a general-purpose I/O, or be connected to an internal peripheral signal
+
+Documentation of the ESP32-C3 can be found at [espressif.com](https://www.espressif.com/en/products/socs/esp32-c3).
 
 ## Interfaces
 
