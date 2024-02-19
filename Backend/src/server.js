@@ -12,8 +12,8 @@ app.get("/", (req, res) => {
   res.send("Access denied");
 });
 
-app.get("/color", colors.setColor);
-app.get("/effect", effects.setEffect);
+app.post("/color", colors.setColor);
+app.post("/effect", effects.setEffect);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
