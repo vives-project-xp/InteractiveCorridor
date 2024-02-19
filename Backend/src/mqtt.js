@@ -23,6 +23,7 @@ client.on("reconnect", (error) => {
 });
 
 const publish = (topic, message) => {
+  console.log("Publishing to " + topic + ": " + message);
   client.publish(topic, message, function (error) {
     if (error) {
       console.log("Error: ", error);

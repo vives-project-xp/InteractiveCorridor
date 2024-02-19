@@ -4,16 +4,14 @@ topic = "";
 
 const setColor = (req, res) => {
   console.log(req.body);
-  strip = req.body.strip;
+  strips = req.body.strips;
   color = req.body.color;
   brightness = req.body.brightness;
-  if (strip == undefined) {
+  if (strips == undefined) {
     res.send(
       "No strip specified. Please specify a strip number between 0 and 2 (0 = all, 1 = strip 1 , 2 = strip 2, ...)"
     );
     return;
-  } else {
-    setTopic(strip);
   }
   if (color == undefined) {
     res.send(
@@ -38,11 +36,14 @@ const setColor = (req, res) => {
     "Color set: \nColor: " +
       color +
       "\nStrip: " +
-      strip +
+      strips +
       "\nBrightness: " +
       brightness
   );
-  mqtt.publish(topic, `{'seg':[{'col':[[${color}]]}],'bri':${brightness}`);
+  for (i = 0; i < strips.length; i++) {
+    setTopic(strips[i]);
+    mqtt.publish(topic, `{'seg':[{'col':[[${color}]]}],'bri':${brightness}`);
+  }
 };
 
 const setTopic = (strip) => {

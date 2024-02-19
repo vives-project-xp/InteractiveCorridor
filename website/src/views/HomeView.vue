@@ -6,7 +6,11 @@
     </div>
 
     <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
-      <div class="led-strip-container">
+      <div
+        class="led-strip-container"
+        :class="{ 'selected-strip': isSelected(stripIndex) }"
+        @click="toggleStrip(stripIndex)"
+      >
         <div>
           <h3>LED-strip {{ stripIndex }}</h3>
           <div v-if="colors[stripIndex - 1]?.length > 0" class="led-strip">
@@ -28,17 +32,7 @@
 
     <div>
       <label for="colorPicker">Kies een kleur:</label>
-      <input type="color" id="colorPicker" v-model="selectedColor" />
-    </div>
-
-    <div>
-      <label for="ledStrip">Selecteer LED-strip:</label>
-      <select id="ledStrip" v-model="selectedStrip">
-        <option value="0">Beide strips</option>
-        <option value="1">Enkel de eerste strip</option>
-        <option value="2">Enkel de tweede strip</option>
-        <!-- Hier kun je extra opties toevoegen voor extra strips als dat nodig is -->
-      </select>
+      <input type="color" id="colorPicker" v-model="selectedColor" @change="updateStripsColor" />
     </div>
   </main>
 </template>
@@ -53,7 +47,7 @@ export default {
       numberOfStrips: 1,
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrip: 0,
+      selectedStrips: [],
       colors: [],
     };
   },
@@ -72,9 +66,34 @@ export default {
           });
       }
     },
+    toggleStrip(stripIndex) {
+      if (this.isSelected(stripIndex)) {
+        // If strip is already selected, deselect it
+        this.selectedStrips = this.selectedStrips.filter((strip) => strip !== stripIndex);
+      } else {
+        // Otherwise, select it
+        this.selectedStrips.push(stripIndex);
+      }
+
+      // Check if the color is changed before calling setEffect
+      const previousColor = this.colors[this.selectedStrips[0] - 1][0]; // Assuming all LEDs in the strip have the same color
+      if (this.selectedStrips.length > 0 && previousColor !== this.selectedColor) {
+        this.setEffect(); // Call setEffect method to apply changes
+      }
+    },
+
+    isSelected(stripIndex) {
+      return this.selectedStrips.includes(stripIndex);
+    },
+    updateStripsColor() {
+      if (this.selectedStrips.length > 0) {
+        // Update the color of selected LED strips only when the color is changed in the color picker
+        this.setEffect();
+      }
+    },
     setEffect() {
       const formData = {
-        strip: this.selectedStrip,
+        strips: this.selectedStrips,
         color: this.selectedColor,
         brightness: this.brightness,
       };
@@ -89,9 +108,9 @@ export default {
   },
   mounted() {
     this.fetchColors();
-    setInterval(this.fetchColors, 10); // Fetch colors every second
+    setInterval(this.fetchColors, 10);
     this.$watch(
-      () => [this.brightness, this.selectedColor, this.selectedStrip],
+      () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
         this.setEffect();
       }
@@ -102,7 +121,12 @@ export default {
 
 <style>
 .led-strip-container {
-  margin-bottom: 20px; /* Ruimte toegevoegd tussen LED-strips */
+  margin-bottom: 20px;
+  cursor: pointer; /* Maak de LED-strip container lijkt alsof het klikbaar is */
+}
+
+.selected-strip {
+  background-color: lightblue; /* Achtergrondkleur voor geselecteerde LED-strip */
 }
 
 .led-strip {
