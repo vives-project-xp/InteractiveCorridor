@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./Backend/
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
