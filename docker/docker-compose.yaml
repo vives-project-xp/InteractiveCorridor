@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  mosquitto:
-    image: eclipse-mosquitto:2
-    container_name: Mosquitto
-    restart: always
+  website:
+    container_name: website
+    image: node:lts
+    working_dir: /var/www/html/app/
+    entrypoint: /bin/bash
+    posrts:
+      - 8000:8000
     volumes:
-      - ../server/mosquitto/config:/mosquitto/config
-      - ../server/mosquitto/data:/mosquitto/data
-      - ../server/mosquitto/log:/mosquitto/log
-    ports:
-      - 1883:1883
+      - ./website/:/var/www/html/app
+    tty: true
