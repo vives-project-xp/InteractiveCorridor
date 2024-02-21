@@ -146,7 +146,7 @@ The LED strips require a 24V power supply.
 
 <picture>
   <source
-    srcset="./exports/HardwareArchitectureDiagram_light.svg"
+    srcset="./exports/HardwareArchitectureDiagram_dark.svg"
     media="(prefers-color-scheme: dark)"
   />
   <source
