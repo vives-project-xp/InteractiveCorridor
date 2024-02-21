@@ -15,9 +15,6 @@
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
     - [Output requirements](#output-requirements)
-    - [Power](#power)
-      - [ESP32 supply](#esp32-supply)
-      - [LED strip supply](#led-strip-supply)
     - [Software architecture diagram](#software-architecture-diagram)
     - [Hardware architecture diagram](#hardware-architecture-diagram)
   - [Project document](#project-document)
@@ -115,18 +112,6 @@ The output requirements for the project are:
 
 - No flickering or lag in the LED strips.
 - Reaction time is below 100ms.
-
-### Power
-
-We need power for our LED strips and the ESP32s.
-
-#### ESP32 supply
-
-The ESP32 can be powered via USB or a 5V power supply.
-
-#### LED strip supply
-
-The LED strips require a 24V power supply.
 
 ### Software architecture diagram
 
