@@ -99,7 +99,6 @@ export default {
 
       axios
         .post('http://localhost:3000/color', formData)
-        .then((response) => {})
         .catch((error) => {
           console.error(error);
         });
