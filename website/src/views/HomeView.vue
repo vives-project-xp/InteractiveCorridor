@@ -1,5 +1,4 @@
 <template>
-  <main>
     <div>
       <label for="numberOfStrips">Aantal LED-strips:</label>
       <input type="number" id="numberOfStrips" v-model.number="numberOfStrips" />
@@ -34,7 +33,6 @@
       <label for="colorPicker">Kies een kleur:</label>
       <input type="color" id="colorPicker" v-model="selectedColor" @change="updateStripsColor" />
     </div>
-  </main>
 </template>
 
 <script lang="ts">
