@@ -1,38 +1,49 @@
 <template>
-    <div>
-      <label for="numberOfStrips">Aantal LED-strips:</label>
-      <input type="number" id="numberOfStrips" v-model.number="numberOfStrips" />
-    </div>
+  <div class="flex">
+    <aside class="pr-3">
+      <h2 class="text-lg font-bold">Color picker</h2>
+      <div>
+        <label for="colorPicker">Kies een kleur:</label>
+        <input type="color" id="colorPicker" v-model="selectedColor" @change="updateStripsColor" />
+      </div>
 
-    <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
-      <div
-        class="mb-5 cursor-pointer"
-        :class="{ 'bg-blue-200': isSelected(stripIndex) }"
-        @click="toggleStrip(stripIndex)"
-      >
-        <div>
-          <h3>LED-strip {{ stripIndex }}</h3>
-          <div v-if="colors[stripIndex - 1]?.length > 0" class="flex">
-            <div
-              v-for="(color, index) in colors[stripIndex - 1]"
-              :key="index"
-              class="w-9 h-4 m-0"
-              :style="{ backgroundColor: color }"
-            ></div>
+      <h2 class="text-lg font-bold">brightness</h2>
+      <div>
+        <label for="brightness">Helderheid: </label>
+        <input type="range" id="brightness" min="0" max="255" v-model="brightness" />
+      </div>
+    </aside>
+    <div class="border-x border-foreground px-3 grow">
+      <h2 class="text-lg font-bold">Individual lights</h2>
+      <div>
+        <label for="numberOfStrips">Aantal LED-strips:</label>
+        <input type="number" id="numberOfStrips" v-model.number="numberOfStrips" />
+      </div>
+
+      <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
+        <div
+          class="mb-5 cursor-pointer"
+          :class="{ 'bg-blue-200': isSelected(stripIndex) }"
+          @click="toggleStrip(stripIndex)"
+        >
+          <div>
+            <h3>LED-strip {{ stripIndex }}</h3>
+            <div v-if="colors[stripIndex - 1]?.length > 0" class="grid grid-cols-4">
+              <div
+                v-for="(color, index) in colors[stripIndex - 1]"
+                :key="index"
+                class="w-4/5 max-w-32 h-6 my-2 rounded"
+                :style="{ backgroundColor: color }"
+              ></div>
+            </div>
           </div>
         </div>
-      </div>
-    </template>
-
-    <div>
-      <label for="brightness">Helderheid: </label>
-      <input type="range" id="brightness" min="0" max="255" v-model="brightness" />
+      </template>
     </div>
-
-    <div>
-      <label for="colorPicker">Kies een kleur:</label>
-      <input type="color" id="colorPicker" v-model="selectedColor" @change="updateStripsColor" />
-    </div>
+    <aside class="pl-3">
+      <h2 class="text-lg font-bold">Effects</h2>
+    </aside>
+  </div>
 </template>
 
 <script lang="ts">
@@ -95,11 +106,9 @@ export default {
         brightness: Number(this.brightness),
       };
 
-      axios
-        .post('http://localhost:3000/color', formData)
-        .catch((error) => {
-          console.error(error);
-        });
+      axios.post('http://localhost:3000/color', formData).catch((error) => {
+        console.error(error);
+      });
     },
   },
   mounted() {
