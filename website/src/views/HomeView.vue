@@ -37,8 +37,7 @@
   </main>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts">
 import axios from 'axios';
 
 export default {
