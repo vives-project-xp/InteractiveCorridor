@@ -46,8 +46,8 @@ export default {
       numberOfStrips: 1,
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [],
-      colors: [],
+      selectedStrips: [] as number[],
+      colors: [] as string[][],
     };
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
           });
       }
     },
-    toggleStrip(stripIndex) {
+    toggleStrip(stripIndex: number) {
       if (this.isSelected(stripIndex)) {
         // If strip is already selected, deselect it
         this.selectedStrips = this.selectedStrips.filter((strip) => strip !== stripIndex);
@@ -81,7 +81,7 @@ export default {
       }
     },
 
-    isSelected(stripIndex) {
+    isSelected(stripIndex: number) {
       return this.selectedStrips.includes(stripIndex);
     },
     updateStripsColor() {
