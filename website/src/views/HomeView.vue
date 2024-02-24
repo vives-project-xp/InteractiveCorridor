@@ -92,7 +92,7 @@ export default {
       const formData = {
         strips: this.selectedStrips,
         color: this.selectedColor,
-        brightness: this.brightness,
+        brightness: Number(this.brightness),
       };
 
       axios
