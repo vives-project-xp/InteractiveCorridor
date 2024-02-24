@@ -7,17 +7,17 @@
 
     <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
       <div
-        class="led-strip-container"
-        :class="{ 'selected-strip': isSelected(stripIndex) }"
+        class="mb-5 cursor-pointer"
+        :class="{ 'bg-blue-200': isSelected(stripIndex) }"
         @click="toggleStrip(stripIndex)"
       >
         <div>
           <h3>LED-strip {{ stripIndex }}</h3>
-          <div v-if="colors[stripIndex - 1]?.length > 0" class="led-strip">
+          <div v-if="colors[stripIndex - 1]?.length > 0" class="flex">
             <div
               v-for="(color, index) in colors[stripIndex - 1]"
               :key="index"
-              class="led"
+              class="w-9 h-4 m-0"
               :style="{ backgroundColor: color }"
             ></div>
           </div>
@@ -118,24 +118,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.led-strip-container {
-  margin-bottom: 20px;
-  cursor: pointer; /* Maak de LED-strip container lijkt alsof het klikbaar is */
-}
-
-.selected-strip {
-  background-color: lightblue; /* Achtergrondkleur voor geselecteerde LED-strip */
-}
-
-.led-strip {
-  display: flex;
-}
-
-.led {
-  width: 35px;
-  height: 15px;
-  margin: 0px;
-}
-</style>
