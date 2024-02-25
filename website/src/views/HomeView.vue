@@ -1,20 +1,18 @@
 <template>
   <div class="flex">
     <aside class="pr-3">
-      <h2 class="text-lg font-bold">Color picker</h2>
+      <h2 class="text-lg font-bold">Kies een kleur:</h2>
       <div>
-        <label for="colorPicker">Kies een kleur:</label>
         <input type="color" id="colorPicker" v-model="selectedColor" @change="updateStripsColor" />
       </div>
 
-      <h2 class="text-lg font-bold">brightness</h2>
+      <h2 class="text-lg font-bold">Helderheid</h2>
       <div>
-        <label for="brightness">Helderheid: </label>
         <input type="range" id="brightness" min="0" max="255" v-model="brightness" />
       </div>
     </aside>
     <div class="border-x border-foreground px-3 grow">
-      <h2 class="text-lg font-bold">Individual lights</h2>
+      <h2 class="text-lg font-bold">Ledstrips</h2>
       <div>
         <label for="numberOfStrips">Aantal LED-strips:</label>
         <input type="number" id="numberOfStrips" v-model.number="numberOfStrips" />
@@ -28,25 +26,32 @@
         >
           <div>
             <h3>LED-strip {{ stripIndex }}</h3>
-            <div v-if="colors[stripIndex - 1]?.length > 0" class="grid grid-cols-4">
-              <div
-                v-for="(color, index) in colors[stripIndex - 1]"
-                :key="index"
-                class="w-4/5 max-w-32 h-6 my-2 rounded"
-                :style="{ backgroundColor: color }"
-              ></div>
+            <div v-if="colors[stripIndex - 1]?.length > 0" class="flex">
+              <template v-for="(length, barIndex) in barLengths" :key="barIndex">
+                <div
+                  class="flex items-center"
+                  :style="{ marginRight: barIndex < barLengths.length - 1 ? '10px' : '0' }"
+                >
+                  <div
+                    v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
+                    :key="ledIndexInBar"
+                    class="w-4 h-4"
+                    :style="{ backgroundColor: colors[stripIndex - 1][ledIndex] }"
+                  ></div>
+                </div>
+              </template>
             </div>
           </div>
         </div>
       </template>
     </div>
     <aside class="pl-3">
-      <h2 class="text-lg font-bold">Effects</h2>
+      <h2 class="text-lg font-bold">Effecten</h2>
     </aside>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import axios from 'axios';
 
 export default {
@@ -55,8 +60,9 @@ export default {
       numberOfStrips: 1,
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [] as number[],
-      colors: [] as string[][],
+      selectedStrips: [],
+      colors: [],
+      barLengths: [15, 10, 10, 15],
     };
   },
   methods: {
@@ -74,7 +80,7 @@ export default {
           });
       }
     },
-    toggleStrip(stripIndex: number) {
+    toggleStrip(stripIndex) {
       if (this.isSelected(stripIndex)) {
         // If strip is already selected, deselect it
         this.selectedStrips = this.selectedStrips.filter((strip) => strip !== stripIndex);
@@ -90,7 +96,7 @@ export default {
       }
     },
 
-    isSelected(stripIndex: number) {
+    isSelected(stripIndex) {
       return this.selectedStrips.includes(stripIndex);
     },
     updateStripsColor() {
@@ -110,10 +116,14 @@ export default {
         console.error(error);
       });
     },
+    getLedIndices(barIndex, length) {
+      const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
+      return Array.from({ length }, (_, i) => startIndex + i);
+    },
   },
   mounted() {
     this.fetchColors();
-    setInterval(this.fetchColors, 10);
+    setInterval(this.fetchColors, 50);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
