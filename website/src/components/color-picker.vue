@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div id="picker" class="w-60 border border-white"></div>
+    <div
+      id="picker"
+      class="w-60 border border-white"
+      :style="{ maxWidth: size.toString() + 'px' }"
+    ></div>
   </div>
 </template>
 
@@ -41,7 +45,7 @@ let props = defineProps({
 
 onMounted(() => {
   const picker = iro.ColorPicker('#picker', {
-    width: 200,
+    width: props.size,
     color: props.color,
   });
   picker.on('color:change', (color: iro.Color) => {
