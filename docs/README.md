@@ -34,18 +34,18 @@ The size of the hallway is:
 
 ## Bill of Materials
 
-The Bill of Materials (BOM) lists all the components, parts, and materials needed for one corridor:
+The Bill of Materials (BOM) lists all the components, parts, and materials needed for one corridor consisting of 6 pillars:
 
-| Component                                       | Quantity | Price / unit | Link | Remarks |
-| :---------------------------------------------- | :------: | -----------: | :--- | :------ |
-| [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |          |              |      |         |
-| [ESP32-C3](#esp32-c3)                           |          |              |      |         |
-| [ledstrip profile](#ledstrip-profile)           |          |              |      |         |
-| [DC/DC Converter](#dcdc-converter)              |          |              |      |         |
-| [Level shifter](#level-shifter)                 |          |              |      |         |
-| [Prototype printplate](#prototype-printplate)   |          |              |      |         |
-| [Cable box](#cable-box)                         |          |              |      |         |
-| [Power supply](#power-supply)                   |          |              |      |         |
+| Component                                       | Quantity | Price / unit | Remarks |
+| :---------------------------------------------- | :------: | -----------: | :------ |
+| [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |    6     |              |         |
+| [ESP32-C3](#esp32-c3)                           |    6     |       8,8451 |         |
+| [ledstrip profile](#ledstrip-profile)           |    24    |        17,95 |         |
+| [DC/DC Converter](#dcdc-converter)              |    6     |         5,39 |         |
+| [Level shifter](#level-shifter)                 |    6     |         0,85 |         |
+| [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
+| [Cable box](#cable-box)                         |    6     |         9,54 |         |
+| [Power supply](#power-supply)                   |    1     |        76,95 |         |
 
 ### WS2814 RGBW LED strip
 
