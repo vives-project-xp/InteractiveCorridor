@@ -16,11 +16,6 @@ import ColorPicker from '../components/color-picker.vue';
           "
         />
       </div>
-
-      <h2 class="text-lg font-bold">Helderheid</h2>
-      <div>
-        <input type="range" id="brightness" min="0" max="255" v-model="brightness" />
-      </div>
     </aside>
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
