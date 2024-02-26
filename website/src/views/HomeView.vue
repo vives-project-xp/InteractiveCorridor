@@ -6,7 +6,7 @@ import ColorPicker from '../components/color-picker.vue';
   <div class="flex flex-col md:flex-row">
     <aside>
       <h2 class="text-lg font-bold">Color picker</h2>
-      <div>
+      <div class="flex justify-center">
         <ColorPicker
           :color="selectedColor"
           :on-change="
