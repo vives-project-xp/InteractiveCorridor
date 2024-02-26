@@ -11,7 +11,7 @@
         <input type="range" id="brightness" min="0" max="255" v-model="brightness" />
       </div>
     </aside>
-    <hr class="my-5 md:my-0 md:mx-4 "/>
+    <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
       <h2 class="text-lg font-bold">Individual lights</h2>
       <div>
@@ -46,14 +46,14 @@
         </div>
       </template>
     </div>
-    <hr class="my-5 md:my-0 md:mx-4 "/>
+    <hr class="my-5 md:my-0 md:mx-4" />
     <aside>
       <h2 class="text-lg font-bold">Effects</h2>
     </aside>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
 
 export default {
@@ -62,8 +62,8 @@ export default {
       numberOfStrips: 1,
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [],
-      colors: [],
+      selectedStrips: [] as number[],
+      colors: [] as string[][],
       barLengths: [15, 10, 10, 15],
     };
   },
@@ -77,12 +77,10 @@ export default {
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
             this.colors[i - 1] = colors;
           })
-          .catch((error) => {
-            //console.error('Error fetching colors:', error);
-          });
+          .catch(() => {});
       }
     },
-    toggleStrip(stripIndex) {
+    toggleStrip(stripIndex: number) {
       if (this.isSelected(stripIndex)) {
         // If strip is already selected, deselect it
         this.selectedStrips = this.selectedStrips.filter((strip) => strip !== stripIndex);
@@ -98,7 +96,7 @@ export default {
       }
     },
 
-    isSelected(stripIndex) {
+    isSelected(stripIndex: number) {
       return this.selectedStrips.includes(stripIndex);
     },
     updateStripsColor() {
@@ -118,7 +116,7 @@ export default {
         console.error(error);
       });
     },
-    getLedIndices(barIndex, length) {
+    getLedIndices(barIndex: number, length: number) {
       const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
       return Array.from({ length }, (_, i) => startIndex + i);
     },
