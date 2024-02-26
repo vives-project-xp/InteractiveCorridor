@@ -7,7 +7,14 @@ import ColorPicker from '../components/color-picker.vue';
     <aside>
       <h2 class="text-lg font-bold">Color picker</h2>
       <div>
-        <ColorPicker />
+        <ColorPicker
+          :color="'#ff0'"
+          :color-change="
+            (color) => {
+              console.log(color);
+            }
+          "
+        />
       </div>
 
       <h2 class="text-lg font-bold">Helderheid</h2>
