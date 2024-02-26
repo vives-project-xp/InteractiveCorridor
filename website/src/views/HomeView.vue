@@ -8,8 +8,8 @@ import ColorPicker from '../components/color-picker.vue';
       <h2 class="text-lg font-bold">Color picker</h2>
       <div>
         <ColorPicker
-          :color="'#ff0'"
-          :color-change="
+          :color="selectedColor"
+          :on-change="
             (color) => {
               console.log(color);
             }

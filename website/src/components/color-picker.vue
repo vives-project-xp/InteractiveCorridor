@@ -15,7 +15,7 @@ let props = defineProps({
       return prop.match(/^#[0-9a-fA-F]{3,6}$/) !== null;
     },
   },
-  colorChange: {
+  onChange: {
     type: Function as PropType<(color: iro.Color) => void>,
     required: false,
   },
@@ -27,7 +27,7 @@ onMounted(() => {
     color: props.color,
   });
   picker.on('color:change', (color: iro.Color) => {
-    props.colorChange?.(color);
+    props.onChange?.(color);
   });
 });
 </script>
