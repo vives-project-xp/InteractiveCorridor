@@ -1,13 +1,17 @@
 <template>
   <div>
-    <div id="picker" class="w-60 border border-white"></div>
+    <div
+      id="picker"
+      class="w-60 border border-white"
+      :style="{ maxWidth: size.toString() + 'px' }"
+    ></div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import iro from '@jaames/iro';
 import { onMounted, type PropType } from 'vue';
-let props = defineProps({
+const props = defineProps({
   /**
    * The initial color value.
    * @type {string}
@@ -21,6 +25,15 @@ let props = defineProps({
     },
   },
   /**
+   * The size of the color picker.
+   * @type {number}
+   */
+  size: {
+    type: Number,
+    required: false,
+    default: 200,
+  },
+  /**
    * The function called when the color changes.
    * @type {Function}
    */
@@ -32,7 +45,7 @@ let props = defineProps({
 
 onMounted(() => {
   const picker = iro.ColorPicker('#picker', {
-    width: 200,
+    width: props.size,
     color: props.color,
   });
   picker.on('color:change', (color: iro.Color) => {
