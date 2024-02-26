@@ -10,6 +10,7 @@
     - [ESP32-C3](#esp32-c3)
     - [Ledstrip profile](#ledstrip-profile)
     - [DC/DC converter](#dcdc-converter)
+    - [Level shifter](#level-shifter)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -38,6 +39,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [ESP32-C3](#esp32-c3)                           |          |              |      |         |
 | [ledstrip profile](#ledstrip-profile)           |          |              |      |         |
 | [DC/DC Converter](#dcdc-converter)              |          |              |      |         |
+| [Level shifter](#level-shifter)                 |          |              |      |         |
 
 ### WS2814 RGBW LED strip
 
@@ -81,6 +83,24 @@ Info about the component:
 - **Input voltage DC max**: 36V
 
 Link to component: [farnell.com](https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025)
+
+### Level shifter
+
+Pin connections for 3.3V to 5V:
+
+- **AVCC**:5V
+- **ASCL**: SCL/TX pin of 5V system
+- **ASDA**: SDA/RX pin of 5V system
+- **AGND**: GND of 5V system
+
+- **BVCC**: no connection
+- **BSCL**: SCL/TX pin of 3.3V system
+- **BSDA**: SDA/RX pin of 3.3V system
+- **BGND**: GND of 5V system
+
+Pin connections are on the bottom of the component.
+
+Link to component [otronic.nl](https://www.otronic.nl/nl/i2c-uart-bi-directionele-logic-level-converter-5v.html)
 
 ## Interfaces
 
