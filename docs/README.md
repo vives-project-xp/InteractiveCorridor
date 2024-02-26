@@ -13,6 +13,7 @@
     - [Level shifter](#level-shifter)
     - [Prototype printplate](#prototype-printplate)
     - [Cable box](#cable-box)
+    - [Power supply](#power-supply)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -44,6 +45,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Level shifter](#level-shifter)                 |          |              |      |         |
 | [Prototype printplate](#prototype-printplate)   |          |              |      |         |
 | [Cable box](#cable-box)                         |          |              |      |         |
+| [Power supply](#power-supply)                   |          |              |      |         |
 
 ### WS2814 RGBW LED strip
 
@@ -128,6 +130,20 @@ Info about component:
 - **Degree of protection**: IP55
 
 Link to component: [allekabels.be](https://www.allekabels.be/lasdoos/22371/3914218/aansluitdoos.html?mc=nl-be&gad_source=4&gclid=CjwKCAiAivGuBhBEEiwAWiFmYfwxxcCCo7jKSgO8jgDI1kcRSnMjFWVOvQXYugo6C8fBlBvdbIoQIxoCPRkQAvD_BwE)
+
+### Power supply
+
+Info about product:
+
+- **Input voltage**: 170-250V
+- **Output voltage**: 24V
+- **Ouput power**: 600W
+- **Output strength**: 25A
+- **Length**: 240mm
+- **Width**: 125mm
+- **Heigth**: 65mm
+  
+Link to component: [Ledstripkoning.be](https://www.ledstripkoning.be/accessoires/adapters-12-en-24-volt/600w-24v-25a-professionele-voeding-voor-led-strips?gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTggibyc4zfjcq7FT6RLFWak3v8JL1AJRPUxQzaCdWfI0lQoOlbzJBoCOJAQAvD_BwE)
 
 ## Interfaces
 
