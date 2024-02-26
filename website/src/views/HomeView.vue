@@ -27,11 +27,10 @@
         >
           <div>
             <h3>LED-strip {{ stripIndex }}</h3>
-            <div v-if="colors[stripIndex - 1]?.length > 0" class="flex">
+            <div v-if="colors[stripIndex - 1]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(length, barIndex) in barLengths" :key="barIndex">
                 <div
                   class="flex items-center"
-                  :style="{ marginRight: barIndex < barLengths.length - 1 ? '10px' : '0' }"
                 >
                   <div
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
