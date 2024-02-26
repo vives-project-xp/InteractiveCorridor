@@ -27,7 +27,7 @@ import ColorPicker from '../components/color-picker.vue';
       <h2 class="text-lg font-bold">Individual lights</h2>
       <div>
         <label for="numberOfStrips">Aantal LED-strips:</label>
-        <input type="number" id="numberOfStrips" v-model.number="numberOfStrips" />
+        <input type="number" id="numberOfStrips" min="0" max="16" v-model.number="numberOfStrips" />
       </div>
 
       <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
