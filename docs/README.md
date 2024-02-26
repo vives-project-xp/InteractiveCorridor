@@ -12,6 +12,7 @@
     - [DC/DC converter](#dcdc-converter)
     - [Level shifter](#level-shifter)
     - [Prototype printplate](#prototype-printplate)
+    - [Cable box](#cable-box)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -42,6 +43,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [DC/DC Converter](#dcdc-converter)              |          |              |      |         |
 | [Level shifter](#level-shifter)                 |          |              |      |         |
 | [Prototype printplate](#prototype-printplate)   |          |              |      |         |
+| [Cable box](#cable-box)                         |          |              |      |         |
 
 ### WS2814 RGBW LED strip
 
@@ -106,11 +108,26 @@ Link to component [otronic.nl](https://www.otronic.nl/nl/i2c-uart-bi-directionel
 
 ### Prototype printplate
 
+Info about component:
+
 - **Size**: 7x9cm
 - **Diameter holes**: 1mm
 - **Distance holes**: 2,54mm
 
 Link to component: [otronic.nl](https://www.otronic.nl/nl/experimenteer-prototyping-printplaat-7x9cm-groen.html)
+
+### Cable box
+
+Info about component:
+
+- **Length**: 125mm
+- **width**: 86mm
+- **Heigth**: 41mm
+- **amount of inputs**: 14
+- **Cable diameter**: 7-12mm
+- **Degree of protection**: IP55
+
+Link to component: [allekabels.be](https://www.allekabels.be/lasdoos/22371/3914218/aansluitdoos.html?mc=nl-be&gad_source=4&gclid=CjwKCAiAivGuBhBEEiwAWiFmYfwxxcCCo7jKSgO8jgDI1kcRSnMjFWVOvQXYugo6C8fBlBvdbIoQIxoCPRkQAvD_BwE)
 
 ## Interfaces
 
