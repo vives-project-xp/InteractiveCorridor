@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import iro from '@jaames/iro';
 import { onMounted, type PropType } from 'vue';
-let props = defineProps({
+const props = defineProps({
   /**
    * The initial color value.
    * @type {string}
