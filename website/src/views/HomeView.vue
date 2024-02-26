@@ -76,7 +76,7 @@ export default {
             this.colors[i - 1] = colors;
           })
           .catch((error) => {
-            console.error('Error fetching colors:', error);
+            //console.error('Error fetching colors:', error);
           });
       }
     },
@@ -123,7 +123,7 @@ export default {
   },
   mounted() {
     this.fetchColors();
-    setInterval(this.fetchColors, 50);
+    setInterval(this.fetchColors, 10);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
