@@ -16,7 +16,7 @@ let props = defineProps({
     },
   },
   colorChange: {
-    type: Function as PropType<(color: string) => void>,
+    type: Function as PropType<(color: iro.Color) => void>,
     required: false,
   },
 });
@@ -27,7 +27,7 @@ onMounted(() => {
     color: props.color,
   });
   picker.on('color:change', (color: iro.Color) => {
-    props.colorChange?.(color.hexString);
+    props.colorChange?.(color);
   });
 });
 </script>
