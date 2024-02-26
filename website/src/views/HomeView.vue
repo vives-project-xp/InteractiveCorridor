@@ -7,7 +7,14 @@ import ColorPicker from '../components/color-picker.vue';
     <aside>
       <h2 class="text-lg font-bold">Color picker</h2>
       <div>
-        <ColorPicker />
+        <ColorPicker
+          :color="selectedColor"
+          :on-change="
+            (color) => {
+              console.log(color);
+            }
+          "
+        />
       </div>
 
       <h2 class="text-lg font-bold">Helderheid</h2>
@@ -20,7 +27,7 @@ import ColorPicker from '../components/color-picker.vue';
       <h2 class="text-lg font-bold">Individual lights</h2>
       <div>
         <label for="numberOfStrips">Aantal LED-strips:</label>
-        <input type="number" id="numberOfStrips" v-model.number="numberOfStrips" />
+        <input type="number" id="numberOfStrips" min="0" max="16" v-model.number="numberOfStrips" />
       </div>
 
       <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
@@ -37,7 +44,7 @@ import ColorPicker from '../components/color-picker.vue';
                   <div
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
-                    class="w-4 h-4"
+                    class="w-4 h-4 first:rounded-l last:rounded-r"
                     :style="{ backgroundColor: colors[stripIndex - 1][ledIndex] }"
                   ></div>
                 </div>

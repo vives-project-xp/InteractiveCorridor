@@ -8,6 +8,11 @@
 import iro from '@jaames/iro';
 import { onMounted, type PropType } from 'vue';
 let props = defineProps({
+  /**
+   * The initial color value.
+   * @type {string}
+   * @required
+   */
   color: {
     type: String,
     required: true,
@@ -15,8 +20,12 @@ let props = defineProps({
       return prop.match(/^#[0-9a-fA-F]{3,6}$/) !== null;
     },
   },
-  colorChange: {
-    type: Function as PropType<(color: string) => void>,
+  /**
+   * The function called when the color changes.
+   * @type {Function}
+   */
+  onChange: {
+    type: Function as PropType<(color: iro.Color) => void>,
     required: false,
   },
 });
@@ -27,7 +36,7 @@ onMounted(() => {
     color: props.color,
   });
   picker.on('color:change', (color: iro.Color) => {
-    props.colorChange?.(color.hexString);
+    props.onChange?.(color);
   });
 });
 </script>
