@@ -14,6 +14,7 @@
     - [Prototype printplate](#prototype-printplate)
     - [Cable box](#cable-box)
     - [Power supply](#power-supply)
+    - [Block terminal](#block-terminal)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -44,8 +45,9 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [DC/DC Converter](#dcdc-converter)              |    6     |         5,39 |         |
 | [Level shifter](#level-shifter)                 |    6     |         0,85 |         |
 | [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
-| [Cable box](#cable-box)                         |    6     |         9,54 |         |
+| [Cable box](#cable-box)                         |    6     |         1,59 |         |
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
+| [Block terminal](#block-terminal)               |    6     |         2,12 |         |
 
 ### WS2814 RGBW LED strip
 
@@ -133,7 +135,7 @@ Link to component: [allekabels.be](https://www.allekabels.be/lasdoos/22371/39142
 
 ### Power supply
 
-Info about product:
+Info about component:
 
 - **Input voltage**: 170-250V
 - **Output voltage**: 24V
@@ -144,6 +146,17 @@ Info about product:
 - **Heigth**: 65mm
   
 Link to component: [Ledstripkoning.be](https://www.ledstripkoning.be/accessoires/adapters-12-en-24-volt/600w-24v-25a-professionele-voeding-voor-led-strips?gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTggibyc4zfjcq7FT6RLFWak3v8JL1AJRPUxQzaCdWfI0lQoOlbzJBoCOJAQAvD_BwE)
+
+### Block terminal
+
+Info about component:
+
+- **nr of contacts**: 6
+- **pitch spacing**: 5mm
+- **Wire size AWG max**: 12AWG
+- **wire size AWG min**: 30AWG
+
+Link to component: [Farnell.com](https://nl.farnell.com/camdenboss/ctb0100-6/pcb-terminal-5mm-6p/dp/3378876)
 
 ## Interfaces
 
