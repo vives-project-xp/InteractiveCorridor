@@ -11,6 +11,7 @@
     - [Ledstrip profile](#ledstrip-profile)
     - [DC/DC converter](#dcdc-converter)
     - [Level shifter](#level-shifter)
+    - [Prototype printplate](#prototype-printplate)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -40,6 +41,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [ledstrip profile](#ledstrip-profile)           |          |              |      |         |
 | [DC/DC Converter](#dcdc-converter)              |          |              |      |         |
 | [Level shifter](#level-shifter)                 |          |              |      |         |
+| [Prototype printplate](#prototype-printplate)   |          |              |      |         |
 
 ### WS2814 RGBW LED strip
 
@@ -101,6 +103,14 @@ Pin connections for 3.3V to 5V:
 Pin connections are on the bottom of the component.
 
 Link to component [otronic.nl](https://www.otronic.nl/nl/i2c-uart-bi-directionele-logic-level-converter-5v.html)
+
+### Prototype printplate
+
+- **Size**: 7x9cm
+- **Diameter holes**: 1mm
+- **Distance holes**: 2,54mm
+
+Link to component: [otronic.nl](https://www.otronic.nl/nl/experimenteer-prototyping-printplaat-7x9cm-groen.html)
 
 ## Interfaces
 
