@@ -1,9 +1,13 @@
+<script lang="ts" setup>
+import ColorPicker from '../components/color-picker.vue';
+</script>
+
 <template>
   <div class="flex flex-col md:flex-row">
     <aside>
       <h2 class="text-lg font-bold">Color picker</h2>
       <div>
-        <input type="color" id="colorPicker" v-model="selectedColor" @change="updateStripsColor" />
+        <ColorPicker />
       </div>
 
       <h2 class="text-lg font-bold">Helderheid</h2>
@@ -29,9 +33,7 @@
             <h3>LED-strip {{ stripIndex }}</h3>
             <div v-if="colors[stripIndex - 1]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(length, barIndex) in barLengths" :key="barIndex">
-                <div
-                  class="flex items-center"
-                >
+                <div class="flex items-center">
                   <div
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
