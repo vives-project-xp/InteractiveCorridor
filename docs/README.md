@@ -45,7 +45,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [DC/DC Converter](#dcdc-converter)              |    6     |         5,39 |         |
 | [Level shifter](#level-shifter)                 |    6     |         0,85 |         |
 | [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
-| [Cable box](#cable-box)                         |    6     |         9,54 |         |
+| [Cable box](#cable-box)                         |    6     |         1,59 |         |
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
 | [Block terminal](#block-terminal)               |    6     |         2,12 |         |
 
