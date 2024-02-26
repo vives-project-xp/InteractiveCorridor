@@ -21,6 +21,15 @@ let props = defineProps({
     },
   },
   /**
+   * The size of the color picker.
+   * @type {number}
+   */
+  size: {
+    type: Number,
+    required: false,
+    default: 200,
+  },
+  /**
    * The function called when the color changes.
    * @type {Function}
    */
