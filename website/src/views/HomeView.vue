@@ -1,6 +1,6 @@
 <template>
-  <div class="flex">
-    <aside class="pr-3">
+  <div class="flex flex-col md:flex-row">
+    <aside>
       <h2 class="text-lg font-bold">Color picker</h2>
       <div>
         <label for="colorPicker">Kies een kleur:</label>
@@ -13,7 +13,8 @@
         <input type="range" id="brightness" min="0" max="255" v-model="brightness" />
       </div>
     </aside>
-    <div class="border-x border-foreground px-3 grow">
+    <hr class="my-5 md:my-0 md:mx-4 "/>
+    <div class="grow">
       <h2 class="text-lg font-bold">Individual lights</h2>
       <div>
         <label for="numberOfStrips">Aantal LED-strips:</label>
@@ -40,7 +41,8 @@
         </div>
       </template>
     </div>
-    <aside class="pl-3">
+    <hr class="my-5 md:my-0 md:mx-4 "/>
+    <aside>
       <h2 class="text-lg font-bold">Effects</h2>
     </aside>
   </div>
@@ -113,7 +115,7 @@ export default {
   },
   mounted() {
     this.fetchColors();
-    setInterval(this.fetchColors, 10);
+    setInterval(this.fetchColors, 100);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
