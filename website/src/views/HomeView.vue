@@ -44,7 +44,7 @@ import ColorPicker from '../components/color-picker.vue';
                   <div
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
-                    class="w-4 h-4"
+                    class="w-4 h-4 first:rounded-l last:rounded-r"
                     :style="{ backgroundColor: colors[stripIndex - 1][ledIndex] }"
                   ></div>
                 </div>
