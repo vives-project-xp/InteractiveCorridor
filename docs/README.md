@@ -55,7 +55,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Fuse holder](#fuse-holder)                     |    3     |         4,22 |         |
 | [Auto fuse set](#autofuse-set)                  |    1     |         7,39 |         |
 | [Cables](#cables)                               |    1     |        72,99 |         |
-| [Female pin header set](#female-pin-header-set)     |    6     |         1,60 |         |
+| [Female pin header set](#female-pin-header-set) |    6     |         1,60 |         |
 
 ### WS2814 RGBW LED strip
 
