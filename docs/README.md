@@ -15,6 +15,10 @@
     - [Cable box](#cable-box)
     - [Power supply](#power-supply)
     - [Block terminal](#block-terminal)
+    - [Fuse holder](#fuse-holder)
+    - [Autofuse set](#autofuse-set)
+    - [cables](#cables)
+    - [Female pin header set](#female-pin-header-set)
   - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
@@ -48,6 +52,10 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Cable box](#cable-box)                         |    6     |         1,59 |         |
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
 | [Block terminal](#block-terminal)               |    6     |         2,12 |         |
+| [Fuse holder](#fuse-holder)                     |    3     |         4,22 |         |
+| [Auto fuse set](#autofuse-set)                  |    1     |         7,39 |         |
+| [Cables](#cables)                               |    1     |        72,99 |         |
+| [Female pin header set](#female-pin-header-set)     |    6     |         1,60 |         |
 
 ### WS2814 RGBW LED strip
 
@@ -157,6 +165,43 @@ Info about component:
 - **wire size AWG min**: 30AWG
 
 Link to component: [Farnell.com](https://nl.farnell.com/camdenboss/ctb0100-6/pcb-terminal-5mm-6p/dp/3378876)
+
+### Fuse holder
+
+This component is a holder for auto fuses.
+
+Info about component:
+
+- **Cable length**: 300 mm
+
+Link to this component: [Autodoc.be](https://www.autodoc.be/amio/16367482?utm_medium=cpc&utm_source=google&tb_prm=18590516782&gshp=1&gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYYLitsvhD21WdmLsKnJnQUWo_0YfcfnNMd4S2Azxjulj9yzA3oOltRoCirAQAvD_BwE)
+
+### Autofuse set
+
+Info about this product:
+
+- **Amount of fuses**: 80
+- **Type of fuses**: 3A, 5A, 7.5A, 10A, 15A, 20A, 25A and 30A
+
+Link to component: [allekabels.be](https://www.allekabels.be/zekeringen/1615/1077363/standaard-autozekering-set.html?lang=nl-be)
+
+### cables
+
+Info about this component:
+
+- **Length**: 100m
+- **cablediameter**: 2,5mm
+- **Cable material**: CCA
+
+Link to this component: [allekabels.be](https://www.allekabels.be/luidspreker-kabel/4479/1168/luidspreker-kabel-op-rol.html?mc=nl-be&gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTnWu7l2dCoVfE0ADEY48N5h08rge23VWNhhXEt18r1cmNe1lxfJ3xoCM4UQAvD_BwE)
+
+### Female pin header set
+
+This component is used to prevent soldering of ESP to a breadbord.
+
+This set contains 12 pin headers and 16 pin headers.
+
+Link to the component: [kiwi-electronics.com](https://www.kiwi-electronics.com/nl/feather-stacking-headers-12-pin-16-pin-female-headers-2192?search=female%20pin%20header)
 
 ## Interfaces
 
