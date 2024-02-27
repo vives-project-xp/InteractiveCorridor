@@ -19,7 +19,6 @@
     - [Autofuse set](#autofuse-set)
     - [cables](#cables)
     - [Female pin header set](#female-pin-header-set)
-  - [Interfaces](#interfaces)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
@@ -203,8 +202,6 @@ This component is used to prevent soldering of ESP to a breadbord.
 This set contains 12 pin headers and 16 pin headers.
 
 Link to the component: [kiwi-electronics.com](https://www.kiwi-electronics.com/nl/feather-stacking-headers-12-pin-16-pin-female-headers-2192?search=female%20pin%20header)
-
-## Interfaces
 
 ## Architecture document
 
