@@ -99,7 +99,7 @@ Info about the component:
 - **Input voltage DC min**: 4V
 - **Input voltage DC max**: 40V
 
-Link to component: [Otronic.nl]([https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html))
+Link to component: [Otronic.nl](<[https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html)>)
 
 ### Level shifter
 
@@ -153,7 +153,7 @@ Info about component:
 - **Length**: 240mm
 - **Width**: 125mm
 - **Heigth**: 65mm
-  
+
 Link to component: [Ledstripkoning.be](https://www.ledstripkoning.be/accessoires/adapters-12-en-24-volt/600w-24v-25a-professionele-voeding-voor-led-strips?gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTggibyc4zfjcq7FT6RLFWak3v8JL1AJRPUxQzaCdWfI0lQoOlbzJBoCOJAQAvD_BwE)
 
 ### Block terminal
