@@ -84,13 +84,14 @@ The specifications are:
 
 Info about the component:
 
-- **Output Power max**: 2,5W
-- **Output voltage nom**: 5V
-- **Output current max**: 500mA
-- **Input voltage DC min**: 6,5V
-- **Input voltage DC max**: 36V
+- **Output Power max**: 20W
+- **Output voltage min**: 1,25V
+- **Output voltage max**: 37V
+- **Output current max**: 3A
+- **Input voltage DC min**: 4V
+- **Input voltage DC max**: 40V
 
-Link to component: [farnell.com](https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025)
+Link to component: [Otronic.nl]([https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html))
 
 ### Level shifter
 
