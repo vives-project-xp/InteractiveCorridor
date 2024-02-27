@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import ColorPicker from '../components/color-picker.vue';
+import LedEffect from '@/components/led-effect.vue';
 </script>
 
 <template>
@@ -39,7 +40,7 @@ import ColorPicker from '../components/color-picker.vue';
                   <div
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
-                    class="w-4 h-4 first:rounded-l last:rounded-r"
+                    class="w-4 h-4 first:rounded-l first:border-l last:rounded-r last:border-r border-y"
                     :style="{ backgroundColor: colors[stripIndex - 1][ledIndex] }"
                   ></div>
                 </div>
@@ -52,6 +53,14 @@ import ColorPicker from '../components/color-picker.vue';
     <hr class="my-5 md:my-0 md:mx-4" />
     <aside>
       <h2 class="text-lg font-bold">Effects</h2>
+      <div class="flex md:flex-col items-start gap-3">
+        <!-- Fetch list of effects from ic1.local/json/effects and add it as a LedEffect -->
+        <template v-if="effects">
+          <template v-for="effect in effects" :key="effect">
+            <LedEffect :effect="effect" class="md:w-full"></LedEffect>
+          </template>
+        </template>
+      </div>
     </aside>
   </div>
 </template>
@@ -62,6 +71,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      effects: [] as string[] | undefined,
       numberOfStrips: 1,
       brightness: 200,
       selectedColor: '#ff0000',
@@ -69,6 +79,9 @@ export default {
       colors: [] as string[][],
       barLengths: [15, 10, 10, 15],
     };
+  },
+  async created() {
+    this.effects = await this.fetchEffects();
   },
   methods: {
     fetchColors() {
@@ -82,6 +95,11 @@ export default {
           })
           .catch(() => {});
       }
+    },
+    async fetchEffects() {
+      return axios
+        .get('http://ic1.local/json/effects')
+        .then((response) => response.data as string[]);
     },
     toggleStrip(stripIndex: number) {
       if (this.isSelected(stripIndex)) {
