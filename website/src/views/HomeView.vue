@@ -40,7 +40,7 @@ import LedEffect from '@/components/led-effect.vue';
                   <div
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
-                    class="w-4 h-4 first:rounded-l last:rounded-r"
+                    class="w-4 h-4 first:rounded-l first:border-l last:rounded-r last:border-r border-y"
                     :style="{ backgroundColor: colors[stripIndex - 1][ledIndex] }"
                   ></div>
                 </div>
