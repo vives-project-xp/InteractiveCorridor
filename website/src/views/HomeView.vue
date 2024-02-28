@@ -85,9 +85,9 @@ export default {
   },
   methods: {
     fetchColors() {
-      for (let i = 1; i <= this.numberOfStrips; i++) {
+      for (let i = 0; i < this.numberOfStrips; i++) {
         axios
-          .get('http://ic' + i + '.local/json/live')
+          .get('http://ic' + (i + 1) + '.local/json/live')
           .then((response) => {
             const colorsObject = response.data.leds;
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
