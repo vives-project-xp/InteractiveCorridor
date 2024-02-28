@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
+import LedPixel from '@/components/led-pixel.vue';
 </script>
 
 <template>
@@ -36,13 +37,13 @@ import LedEffect from '@/components/led-effect.vue';
             <h3>LED-strip {{ stripIndex }}</h3>
             <div v-if="colors[stripIndex - 1]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(length, barIndex) in barLengths" :key="barIndex">
-                <div class="flex items-center">
-                  <div
+                <div class="flex items-center rounded">
+                  <LedPixel
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
-                    class="w-4 h-4 first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                    :style="{ backgroundColor: colors[stripIndex - 1][ledIndex] }"
-                  ></div>
+                    class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
+                    :color="colors[stripIndex - 1][ledIndex]"
+                  ></LedPixel>
                 </div>
               </template>
             </div>
