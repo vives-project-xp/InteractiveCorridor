@@ -22,11 +22,8 @@ import LedPixel from '@/components/led-pixel.vue';
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
       <h2 class="text-lg font-bold">Individual lights</h2>
-      <div>
-        <label for="numberOfStrips">Aantal LED-strips:</label>
-        <input type="number" id="numberOfStrips" min="0" max="16" v-model.number="numberOfStrips" />
-      </div>
 
+      <div v-if="searching">Searching ledstrips...</div>
       <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
         <div
           class="mb-5 cursor-pointer"
@@ -73,16 +70,14 @@ export default {
   data() {
     return {
       effects: [] as string[] | undefined,
-      numberOfStrips: 1,
+      numberOfStrips: 0,
       brightness: 200,
       selectedColor: '#ff0000',
       selectedStrips: [] as number[],
       colors: [] as string[][],
       barLengths: [15, 10, 10, 15],
+      searching: false,
     };
-  },
-  async created() {
-    this.effects = await this.fetchEffects();
   },
   methods: {
     fetchColors() {
@@ -97,7 +92,22 @@ export default {
           .catch(() => {});
       }
     },
+    fetchLeds() {
+      this.searching = true;
+      axios
+        .get('http://localhost:3000/leds')
+        .then(async (response) => {
+          this.numberOfStrips = response.data;
+          this.searching = false;
+          this.effects = await this.fetchEffects();
+        })
+        .catch((error) => {
+          this.searching = false;
+          console.error(error);
+        });
+    },
     async fetchEffects() {
+      if (this.numberOfStrips === 0) return;
       return axios
         .get('http://ic1.local/json/effects')
         .then((response) => response.data as string[]);
@@ -144,6 +154,7 @@ export default {
     },
   },
   mounted() {
+    this.fetchLeds();
     this.fetchColors();
     setInterval(this.fetchColors, 100);
     this.$watch(
