@@ -25,7 +25,7 @@ const props = defineProps({
         <div  :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
       </TooltipTrigger>
       <TooltipContent>
-        <p>{{ props.color }}</p>
+        <code class="bg-muted rounded py-[2px] px-1" >{{ props.color }}</code>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
