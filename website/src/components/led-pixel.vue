@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { cn } from '@/lib/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 type hexColor = string;
 const props = defineProps({
@@ -18,5 +19,14 @@ const props = defineProps({
 </script>
 
 <template>
-    <div :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger as-child>
+        <div  :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{{ props.color }}</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
 </template>
