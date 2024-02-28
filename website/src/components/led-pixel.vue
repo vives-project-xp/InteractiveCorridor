@@ -6,6 +6,9 @@ const props = defineProps({
   color: {
     type: String as () => hexColor,
     required: true,
+    validator: (prop: string) => {
+      return prop.match(/^#[0-9a-fA-F]{3,6}$/) !== null;
+    },
   },
   class: {
     type: String as () => string,
