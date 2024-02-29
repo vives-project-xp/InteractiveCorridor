@@ -5,3 +5,7 @@ import { camelize, getCurrentInstance, toHandlerKey } from 'vue'
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export function copyToClipboard(text: string) {
+  navigator.clipboard.writeText(text);
+}
