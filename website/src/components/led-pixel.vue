@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { cn } from '@/lib/utils';
+import { cn, copyToClipboard } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 type hexColor = string;
@@ -22,10 +23,13 @@ const props = defineProps({
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger as-child>
-        <div  :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
+        <div :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
       </TooltipTrigger>
-      <TooltipContent>
-        <code class="bg-muted rounded py-[2px] px-1" >{{ props.color }}</code>
+      <TooltipContent class="space-x-1">
+        <code class="bg-muted rounded py-[2px] px-1">{{ props.color }}</code>
+        <Button variant="secondary" class="py-[2px] px-1 h-5 text-xs" @click="() => copyToClipboard(props.color)">
+          Copy
+        </Button>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
