@@ -262,6 +262,22 @@ The output requirements for the project are:
 
 The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
 
+### Wiring architecture diagram
+
+<picture>
+  <source
+    srcset="./exports/InteractiveCorridor_Wiring_dark.drawio.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    srcset="./exports/InteractiveCorridor_Wiring_light.drawio.svg"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
+  <img alt="Hardware Architecture diagram" />
+</picture>
+
+The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
+
 ## Project document
 
 Refer to the [project document](./project_document.pdf) for a broad explanation of what this project is about.

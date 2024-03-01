@@ -11,7 +11,7 @@ const leds = require("./leds");
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.send("Access denied");
 });
 
