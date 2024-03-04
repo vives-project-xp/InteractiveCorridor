@@ -1,6 +1,7 @@
 async function fetchLedStrip(url) {
   try {
     const response = await fetch(url, {
+      method: "GET",
     });
     return response;
   } catch {

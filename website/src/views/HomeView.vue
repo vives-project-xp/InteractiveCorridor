@@ -29,16 +29,16 @@ import LedPixel from '@/components/led-pixel.vue';
             <CardContent>
               <div class="flex justify-center h-min">
                 <ColorPicker
-                :color="selectedColor"
-                :on-change="
-                  (color) => {
-                    console.log(color);
-                  }
+                  :color="selectedColor"
+                  :on-change="
+                    (color) => {
+                      console.log(color);
+                    }
                   "
-              />
-            </div>
-          </CardContent>
-        </Card>
+                />
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
         <TabsContent value="effects">
           <Card>
@@ -69,7 +69,7 @@ import LedPixel from '@/components/led-pixel.vue';
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
                     class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                    :color="colors[stripIndex - 1][ledIndex]"
+                    :color="colors[stripIndex - 1][ledIndex] || '#000000'"
                   ></LedPixel>
                 </div>
               </template>
@@ -99,25 +99,28 @@ export default {
   },
   methods: {
     fetchColors() {
+      console.log('fetching colors', this.numberOfStrips);
       for (let i = 0; i < this.numberOfStrips; i++) {
         axios
           .get('http://ic' + (i + 1) + '.local/json/live')
           .then((response) => {
             const colorsObject = response.data.leds;
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
-            this.colors[i - 1] = colors;
+            this.colors[i] = colors;
           })
           .catch(() => {});
       }
     },
     fetchLeds() {
       this.searching = true;
+      console.time('fetchLeds');
       axios
         .get('http://localhost:3000/leds')
         .then(async (response) => {
           this.numberOfStrips = response.data;
+          console.timeEnd('fetchLeds');
           this.searching = false;
-          this.effects = await this.fetchEffects();
+          // this.effects = await this.fetchEffects();
         })
         .catch((error) => {
           this.searching = false;
@@ -175,6 +178,7 @@ export default {
     this.fetchLeds();
     this.fetchColors();
     setInterval(this.fetchColors, 100);
+    setInterval(this.fetchLeds, 60000);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
