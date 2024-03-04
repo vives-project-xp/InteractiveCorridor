@@ -295,6 +295,8 @@ In this library the device names are the same as the pin names of the symbols, t
 <sheets>
 <sheet>
 <plain>
+<text x="-27.94" y="50.8" size="1.778" layer="91">3.3V</text>
+<text x="58.42" y="58.42" size="1.778" layer="91">5V output</text>
 </plain>
 <instances>
 <instance part="T1" gate="G$1" x="15.24" y="48.26" smashed="yes">
