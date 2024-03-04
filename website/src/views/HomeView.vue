@@ -113,10 +113,12 @@ export default {
     },
     fetchLeds() {
       this.searching = true;
+      console.time('fetchLeds');
       axios
         .get('http://localhost:3000/leds')
         .then(async (response) => {
           this.numberOfStrips = response.data;
+          console.timeEnd('fetchLeds');
           this.searching = false;
           // this.effects = await this.fetchEffects();
         })
