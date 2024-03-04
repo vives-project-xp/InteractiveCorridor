@@ -50,7 +50,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Level shifter](#level-shifter)                 |    6     |         0,85 |         |
 | [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
 | [Cable box](#cable-box)                         |    6     |         1,59 |         |
-| [Power supply](#power-supply)                   |    1     |        76,95 |         |
+| [Power supply](#power-supply)                   |    1     |        43,00 |         |
 | [Block terminal](#block-terminal)               |    6     |         2,12 |         |
 | [Fuse holder](#fuse-holder)                     |    3     |         4,22 |         |
 | [Auto fuse set 10A](#autofuse-set-10a)          |    1     |         5,29 |         |
@@ -157,11 +157,11 @@ Info about component:
 - **Output voltage**: 24V
 - **Ouput power**: 600W
 - **Output strength**: 25A
-- **Length**: 240mm
-- **Width**: 125mm
-- **Heigth**: 65mm
+- **Length**: 215mm
+- **Width**: 115mm
+- **Heigth**: 50mm
 
-Link to component: [Ledstripkoning.be](https://www.ledstripkoning.be/accessoires/adapters-12-en-24-volt/600w-24v-25a-professionele-voeding-voor-led-strips?gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTggibyc4zfjcq7FT6RLFWak3v8JL1AJRPUxQzaCdWfI0lQoOlbzJBoCOJAQAvD_BwE)
+Link to component: [U-buy.be](https://www.u-buy.be/nl/product/D025AT0-24v-25a-600w-led-driver-switching-power-supply-smps-monitoring-power-supply-industrial-power-transformer-110-220vac-dc24v)
 
 ### Block terminal
 
