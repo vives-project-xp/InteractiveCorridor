@@ -69,7 +69,7 @@ import LedPixel from '@/components/led-pixel.vue';
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
                     class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                    :color="colors[stripIndex - 1][ledIndex]"
+                    :color="colors[stripIndex - 1][ledIndex] || '#000000'"
                   ></LedPixel>
                 </div>
               </template>
