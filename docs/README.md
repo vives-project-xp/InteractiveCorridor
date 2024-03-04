@@ -25,6 +25,7 @@
     - [Output requirements](#output-requirements)
     - [Software architecture diagram](#software-architecture-diagram)
     - [Hardware architecture diagram](#hardware-architecture-diagram)
+    - [Wiring architecture diagram](#wiring-architecture-diagram)
   - [Project document](#project-document)
   - [ESP32](#esp32)
     - [WLED Software](#wled-software)
@@ -88,6 +89,8 @@ The specifications are:
 - **insidewidth**: 12,6 mm
 - **diffuser**:opal milky white
 
+Link to component [groenovatie.com](https://www.ledshop-groenovatie.com/Aluminium-Profiel-LED-Strip-Opbouw-1,5m-Compleet-1)
+
 ### DC/DC converter
 
 Info about the component:
@@ -99,7 +102,7 @@ Info about the component:
 - **Input voltage DC min**: 4V
 - **Input voltage DC max**: 40V
 
-Link to component: [Otronic.nl](<[https://nl.farnell.com/multicomp-pro/mp-k7805-500r3/dc-dc-converter-5v-0-5a/dp/3584025](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html)>)
+Link to component: [Otronic.nl](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html)
 
 ### Level shifter
 
@@ -123,7 +126,9 @@ Link to component [otronic.nl](https://www.otronic.nl/nl/i2c-uart-bi-directionel
 
 Info about component:
 
-- **Size**: 7x9cm
+- **Length**:7cm
+- **Width**:9cm
+- **Heigth**:0,03cm
 - **Diameter holes**: 1mm
 - **Distance holes**: 2,54mm
 
@@ -139,6 +144,8 @@ Info about component:
 - **amount of inputs**: 14
 - **Cable diameter**: 7-12mm
 - **Degree of protection**: IP55
+
+IP55 protects against non-corrosive substances and water jets sprayed from various locations.
 
 Link to component: [allekabels.be](https://www.allekabels.be/lasdoos/22371/3914218/aansluitdoos.html?mc=nl-be&gad_source=4&gclid=CjwKCAiAivGuBhBEEiwAWiFmYfwxxcCCo7jKSgO8jgDI1kcRSnMjFWVOvQXYugo6C8fBlBvdbIoQIxoCPRkQAvD_BwE)
 
@@ -183,6 +190,8 @@ Info about this product:
 
 - **Amount of fuses**: 80
 - **Type of fuses**: 3A, 5A, 7.5A, 10A, 15A, 20A, 25A and 30A
+
+There are 10 fuses for each type.
 
 Link to component: [allekabels.be](https://www.allekabels.be/zekeringen/1615/1077363/standaard-autozekering-set.html?lang=nl-be)
 
