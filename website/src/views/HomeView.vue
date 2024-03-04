@@ -29,16 +29,16 @@ import LedPixel from '@/components/led-pixel.vue';
             <CardContent>
               <div class="flex justify-center h-min">
                 <ColorPicker
-                :color="selectedColor"
-                :on-change="
-                  (color) => {
-                    console.log(color);
-                  }
+                  :color="selectedColor"
+                  :on-change="
+                    (color) => {
+                      console.log(color);
+                    }
                   "
-              />
-            </div>
-          </CardContent>
-        </Card>
+                />
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
         <TabsContent value="effects">
           <Card>
@@ -99,6 +99,7 @@ export default {
   },
   methods: {
     fetchColors() {
+      console.log('fetching colors', this.numberOfStrips);
       for (let i = 0; i < this.numberOfStrips; i++) {
         axios
           .get('http://ic' + (i + 1) + '.local/json/live')
@@ -117,7 +118,7 @@ export default {
         .then(async (response) => {
           this.numberOfStrips = response.data;
           this.searching = false;
-          this.effects = await this.fetchEffects();
+          // this.effects = await this.fetchEffects();
         })
         .catch((error) => {
           this.searching = false;
@@ -175,6 +176,7 @@ export default {
     this.fetchLeds();
     this.fetchColors();
     setInterval(this.fetchColors, 100);
+    setInterval(this.fetchLeds, 60000);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
