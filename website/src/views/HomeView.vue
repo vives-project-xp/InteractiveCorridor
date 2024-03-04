@@ -167,7 +167,22 @@ export default {
       });
     },
     setColor(color: string) {
-      console.log('setColor', color);
+      fetch('http://localhost:3000/color', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          strips: this.selectedStrips,
+          color,
+          brightness: Number(this.brightness),
+         }),
+      }).then(async (response)=>{
+        console.log('Response:', await response.text());
+        
+      }).catch((error) => {
+        console.error(error);
+      });
     },
     getLedIndices(barIndex: number, length: number) {
       const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
