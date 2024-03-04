@@ -1,4 +1,13 @@
 <script lang="ts" setup>
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -7,17 +16,38 @@ import LedPixel from '@/components/led-pixel.vue';
 <template>
   <div class="flex flex-col md:flex-row">
     <aside>
-      <h2 class="text-lg font-bold">Color picker</h2>
-      <div class="flex justify-center">
-        <ColorPicker
-          :color="selectedColor"
-          :on-change="
-            (color) => {
-              console.log(color);
-            }
-          "
-        />
-      </div>
+      <Tabs default-value="color-picker" class="w-[400px]">
+        <TabsList>
+          <TabsTrigger value="color-picker">Color Picker</TabsTrigger>
+          <TabsTrigger value="effects">Effects</TabsTrigger>
+        </TabsList>
+        <TabsContent value="color-picker">
+          <Card>
+            <CardHeader>
+              <CardTitle>Color picker</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="flex justify-center h-min">
+                <ColorPicker
+                :color="selectedColor"
+                :on-change="
+                  (color) => {
+                    console.log(color);
+                  }
+                  "
+              />
+            </div>
+          </CardContent>
+        </Card>
+        </TabsContent>
+        <TabsContent value="effects">
+          <Card>
+            <CardHeader>
+              <CardTitle>TODO</CardTitle>
+            </CardHeader>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </aside>
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
@@ -48,18 +78,6 @@ import LedPixel from '@/components/led-pixel.vue';
         </div>
       </template>
     </div>
-    <hr class="my-5 md:my-0 md:mx-4" />
-    <aside>
-      <h2 class="text-lg font-bold">Effects</h2>
-      <div class="flex md:flex-col items-start gap-3">
-        <!-- Fetch list of effects from ic1.local/json/effects and add it as a LedEffect -->
-        <template v-if="effects">
-          <template v-for="effect in effects" :key="effect">
-            <LedEffect :effect="effect" class="md:w-full"></LedEffect>
-          </template>
-        </template>
-      </div>
-    </aside>
   </div>
 </template>
 
