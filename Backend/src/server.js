@@ -11,14 +11,15 @@ const leds = require("./leds");
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/*", (req, res) => {
-  res.send("Access denied");
-});
 
 app.get("/leds", leds.getLeds);
 
 app.post("/color", colors.setColor);
 app.post("/effect", effects.setEffect);
+
+app.get("/*", (req, res) => {
+  res.send("Access denied");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
