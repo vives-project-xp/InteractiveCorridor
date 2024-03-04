@@ -11,6 +11,7 @@ import {
 import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
+import { throttle } from '@/lib/utils';
 </script>
 
 <template>
@@ -30,11 +31,7 @@ import LedPixel from '@/components/led-pixel.vue';
               <div class="flex justify-center h-min">
                 <ColorPicker
                   :color="selectedColor"
-                  :on-change="
-                    (color) => {
-                      console.log(color);
-                    }
-                  "
+                  :on-change="(color) => throttle(() => setColor(color.hexString), 100)"
                 />
               </div>
             </CardContent>
@@ -168,6 +165,9 @@ export default {
       axios.post('http://localhost:3000/color', formData).catch((error) => {
         console.error(error);
       });
+    },
+    setColor(color: string) {
+      console.log('setColor', color);
     },
     getLedIndices(barIndex: number, length: number) {
       const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
