@@ -200,7 +200,7 @@ Info about this component:
 - **Length**: 100m
 - **cablediameter**: 2,5mm
 
-Link to this component: [kabels.nl](https://www.kabel24.nl/nuldraad-2-5mm2-100-meter/)
+Link to this component: [kabel24.nl](https://www.kabel24.nl/nuldraad-2-5mm2-100-meter/)
 
 ### Female pin header set
 
