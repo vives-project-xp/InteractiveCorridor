@@ -138,12 +138,6 @@ export default {
         // Otherwise, select it
         this.selectedStrips.push(stripIndex);
       }
-
-      // Check if the color is changed before calling setEffect
-      const previousColor = this.colors[this.selectedStrips[0] - 1][0]; // Assuming all LEDs in the strip have the same color
-      if (this.selectedStrips.length > 0 && previousColor !== this.selectedColor) {
-        this.setEffect(); // Call setEffect method to apply changes
-      }
     },
 
     isSelected(stripIndex: number) {
