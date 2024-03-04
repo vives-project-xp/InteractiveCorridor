@@ -106,7 +106,7 @@ export default {
           .then((response) => {
             const colorsObject = response.data.leds;
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
-            this.colors[i - 1] = colors;
+            this.colors[i] = colors;
           })
           .catch(() => {});
       }
