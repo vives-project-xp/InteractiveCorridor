@@ -66,7 +66,8 @@ The ledstrip has the following connections:
 - **GND** (White): Ground
 - **DAT** (Green): Data input
 
-The length of the LED strip is **5 meters**. The ledstrip is **IP65** rated, which means it is waterproof. It uses **30~120W** max measured current:**3A** max calculated current:5A .
+The length of the LED strip is **5 meters**. The ledstrip is **IP65** rated, which means it is waterproof. It uses **30~120W**.
+Max measured current: **3A** max calculated current: **5A** .
 
 > The **WS2814** ledstrip has a data input and a data output. This means that we can connect multiple ledstrips in series.
 
