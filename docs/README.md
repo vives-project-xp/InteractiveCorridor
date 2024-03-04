@@ -16,7 +16,7 @@
     - [Power supply](#power-supply)
     - [Block terminal](#block-terminal)
     - [Fuse holder](#fuse-holder)
-    - [Autofuse set](#autofuse-set)
+    - [Autofuse set 10A](#autofuse-set-10a)
     - [cables](#cables)
     - [Female pin header set](#female-pin-header-set)
   - [Architecture document](#architecture-document)
@@ -53,8 +53,8 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
 | [Block terminal](#block-terminal)               |    6     |         2,12 |         |
 | [Fuse holder](#fuse-holder)                     |    3     |         4,22 |         |
-| [Auto fuse set](#autofuse-set)                  |    1     |         7,39 |         |
-| [Cables](#cables)                               |    1     |        72,99 |         |
+| [Auto fuse set 10A](#autofuse-set-10a)          |    1     |         5,29 |         |
+| [Cables](#cables)                               |    1     |        36,30 |         |
 | [Female pin header set](#female-pin-header-set) |    6     |         1,60 |         |
 
 ### WS2814 RGBW LED strip
@@ -184,16 +184,14 @@ Info about component:
 
 Link to this component: [Autodoc.be](https://www.autodoc.be/amio/16367482?utm_medium=cpc&utm_source=google&tb_prm=18590516782&gshp=1&gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYYLitsvhD21WdmLsKnJnQUWo_0YfcfnNMd4S2Azxjulj9yzA3oOltRoCirAQAvD_BwE)
 
-### Autofuse set
+### Autofuse set 10A
 
 Info about this product:
 
-- **Amount of fuses**: 80
-- **Type of fuses**: 3A, 5A, 7.5A, 10A, 15A, 20A, 25A and 30A
+- **Amount of fuses**: 25
+- **Type of fuses**: 10A
 
-There are 10 fuses for each type.
-
-Link to component: [allekabels.be](https://www.allekabels.be/zekeringen/1615/1077363/standaard-autozekering-set.html?lang=nl-be)
+Link to component: [allekabels.be](https://www.allekabels.be/zekeringen/1615/1067905/mini-autozekering-10-ampere.html)
 
 ### cables
 
@@ -201,9 +199,8 @@ Info about this component:
 
 - **Length**: 100m
 - **cablediameter**: 2,5mm
-- **Cable material**: CCA
 
-Link to this component: [allekabels.be](https://www.allekabels.be/luidspreker-kabel/4479/1168/luidspreker-kabel-op-rol.html?mc=nl-be&gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTnWu7l2dCoVfE0ADEY48N5h08rge23VWNhhXEt18r1cmNe1lxfJ3xoCM4UQAvD_BwE)
+Link to this component: [kabels.nl](https://www.kabel24.nl/nuldraad-2-5mm2-100-meter/)
 
 ### Female pin header set
 
