@@ -1,0 +1,84 @@
+
+{   
+    "Fire effect": {
+        "state": {
+            "on": true,
+            "bri": 150,  
+            "transition": 25,
+            "seg": [
+                {
+                    "id": 0,  
+                    "col": {  
+                        "r": 255,
+                        "g": 90,
+                        "b": 0
+                    },
+                    "fx": 0,  
+                    "sx": 1, 
+                    "ix": 127,  
+                    "pal": 1,  
+                    "sel": 1, 
+                    "start": 0,  
+                    "stop": 49  
+                }
+            ]
+        }
+    },
+    "Golvend effect": {
+        "state": {
+            "on": true,
+            "bri": 150,
+            "transition": 25,
+            "seg": [
+                {
+                    "id": 0,
+                    "fx": 15,
+                    "sx": 25,  
+                    "ix": 128,
+                    "pal": 0,
+                    "sel": 1,
+                    "start": 0,
+                    "stop": 49
+                }
+            ]
+        }
+    },
+    "Rain effect": {
+        "state": {
+            "on": true,
+            "bri": 150,
+            "transition": 25,
+            "seg": [
+                {
+                    "id": 0,
+                    "fx": 14,  
+                    "sx": 15,  
+                    "ix": 128,
+                    "pal": 0,
+                    "sel": 1,
+                    "start": 0,
+                    "stop": 49
+                }
+            ]
+        }
+    },
+    "Lightning effect":{
+        "state": {
+            "on": true,
+            "bri": 150,
+            "transition": 25,
+            "seg": [
+                {
+                    "id": 0,
+                    "fx": 51,
+                    "sx": 25, 
+                    "ix": 128,
+                    "pal": 0,
+                    "sel": 1,
+                    "start": 0,
+                    "stop": 49
+                }
+            ]
+        }
+    }
+ }
