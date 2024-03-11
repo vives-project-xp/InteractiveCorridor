@@ -273,11 +273,11 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 
 <picture>
   <source
-    srcset="./exports/InteractiveCorridor_Wiring_dark.drawio.svg"
+    srcset="./exports/Wiring-Wiring.drawio_Dark.svg"
     media="(prefers-color-scheme: dark)"
   />
   <source
-    srcset="./exports/InteractiveCorridor_Wiring_light.drawio.svg"
+    srcset="./exports/Wiring-Wiring.drawio_Light.svg"
     media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
   />
   <img alt="Hardware Architecture diagram" />
