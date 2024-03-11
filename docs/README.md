@@ -283,7 +283,7 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
   <img alt="Hardware Architecture diagram" />
 </picture>
 
-## Wiring for Leavel shifter
+### Wiring for Leavel shifter
 
 <picture>
   <source
