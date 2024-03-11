@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -41,8 +43,16 @@ import { throttle } from '@/lib/utils';
         <TabsContent value="effects">
           <Card>
             <CardHeader>
-              <CardTitle>TODO</CardTitle>
+              <CardTitle>Effects</CardTitle>
             </CardHeader>
+            <CardContent>
+              <ScrollArea class="h-56 w-full p-3 rounded-md border">
+                <div v-for="effect in effects || []" :key="effect">
+                  <LedEffect :effect="effect" class="w-full text-sm" variant="secondary" />
+                  <Separator class="my-2"/>
+                </div>
+              </ScrollArea>
+            </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
@@ -127,7 +137,7 @@ export default {
           this.numberOfStrips = response.data;
           console.timeEnd('fetchLeds');
           this.searching = false;
-          // this.effects = await this.fetchEffects();
+          this.effects = await this.fetchEffects();
         })
         .catch((error) => {
           this.searching = false;
