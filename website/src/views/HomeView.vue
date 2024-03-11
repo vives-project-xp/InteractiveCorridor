@@ -52,11 +52,7 @@ import { throttle } from '@/lib/utils';
                     :effect="effect"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="
-                      () => {
-                        console.log('effect', effect);
-                      }
-                    "
+                    :onClick="() => setEffect(effect)"
                   />
                   <Separator class="my-2" />
                 </div>
@@ -177,6 +173,18 @@ export default {
         // Update the color of selected LED strips only when the color is changed in the color picker
         this.setColor(this.selectedColor);
       }
+    },
+    setEffect(effect: string | number) {
+      if (this.effects === undefined) return console.warn('Effects not loaded yet');
+
+      const effectID = typeof effect === 'number' ? effect : this.effects.indexOf(effect);
+      if (effectID === -1) return console.warn('Effect not found');
+
+      axios
+        .post('http://localhost:3000/effect', { effect: effectID, strips: this.selectedStrips })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     setColor(color: string) {
       const formData = {
