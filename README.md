@@ -40,7 +40,7 @@ The server has 2 docker containers:
 
 ### Led strips
 
-- 5V or 24V, tests will show which is best. 5V would be easiest because the ESP32 works with 5V.
+- We use an 24V LED strip
 - Length: Measured in [docs](./docs/README.md).
 - Adapter
 
