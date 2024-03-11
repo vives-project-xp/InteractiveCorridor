@@ -48,8 +48,17 @@ import { throttle } from '@/lib/utils';
             <CardContent>
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-for="effect in effects || []" :key="effect">
-                  <LedEffect :effect="effect" class="w-full text-sm" variant="secondary" />
-                  <Separator class="my-2"/>
+                  <LedEffect
+                    :effect="effect"
+                    class="w-full text-sm"
+                    variant="secondary"
+                    :onClick="
+                      () => {
+                        console.log('effect', effect);
+                      }
+                    "
+                  />
+                  <Separator class="my-2" />
                 </div>
               </ScrollArea>
             </CardContent>
@@ -166,38 +175,19 @@ export default {
     updateStripsColor() {
       if (this.selectedStrips.length > 0) {
         // Update the color of selected LED strips only when the color is changed in the color picker
-        this.setEffect();
+        this.setColor(this.selectedColor);
       }
     },
-    setEffect() {
+    setColor(color: string) {
       const formData = {
         strips: this.selectedStrips,
-        color: this.selectedColor,
+        color,
         brightness: Number(this.brightness),
       };
 
       axios.post('http://localhost:3000/color', formData).catch((error) => {
         console.error(error);
       });
-    },
-    setColor(color: string) {
-      fetch('http://localhost:3000/color', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          strips: this.selectedStrips,
-          color,
-          brightness: Number(this.brightness),
-        }),
-      })
-        .then(async (response) => {
-          console.log('Response:', await response.text());
-        })
-        .catch((error) => {
-          console.error(error);
-        });
     },
     getLedIndices(barIndex: number, length: number) {
       const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
@@ -212,7 +202,7 @@ export default {
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
-        this.setEffect();
+        this.setColor(this.selectedColor);
       }
     );
   },
