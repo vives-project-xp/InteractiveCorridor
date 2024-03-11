@@ -8,6 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -17,7 +20,7 @@ import { throttle } from '@/lib/utils';
 <template>
   <div class="flex flex-col md:flex-row">
     <aside>
-      <Tabs default-value="color-picker" class="w-[400px]">
+      <Tabs default-value="color-picker" class="w-[300px]">
         <TabsList>
           <TabsTrigger value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger value="effects">Effects</TabsTrigger>
@@ -40,17 +43,43 @@ import { throttle } from '@/lib/utils';
         <TabsContent value="effects">
           <Card>
             <CardHeader>
-              <CardTitle>TODO</CardTitle>
+              <CardTitle>Effects</CardTitle>
             </CardHeader>
+            <CardContent>
+              <ScrollArea class="h-56 w-full p-3 rounded-md border">
+                <div v-for="effect in effects || []" :key="effect">
+                  <LedEffect
+                    :effect="effect"
+                    class="w-full text-sm"
+                    variant="secondary"
+                    :onClick="
+                      () => {
+                        console.log('effect', effect);
+                      }
+                    "
+                  />
+                  <Separator class="my-2" />
+                </div>
+              </ScrollArea>
+            </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
     </aside>
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
-      <h2 class="text-lg font-bold">Individual lights</h2>
+      <h2 class="text-lg font-bold">
+        Individual lights
+        <span v-if="searching">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger class="text-red-500">°</TooltipTrigger>
+              <TooltipContent>Searching for LED strips...</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </span>
+      </h2>
 
-      <div v-if="searching">Searching ledstrips...</div>
       <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
         <div
           class="mb-5 cursor-pointer"
@@ -117,7 +146,7 @@ export default {
           this.numberOfStrips = response.data;
           console.timeEnd('fetchLeds');
           this.searching = false;
-          // this.effects = await this.fetchEffects();
+          this.effects = await this.fetchEffects();
         })
         .catch((error) => {
           this.searching = false;
@@ -146,35 +175,17 @@ export default {
     updateStripsColor() {
       if (this.selectedStrips.length > 0) {
         // Update the color of selected LED strips only when the color is changed in the color picker
-        this.setEffect();
+        this.setColor(this.selectedColor);
       }
     },
-    setEffect() {
+    setColor(color: string) {
       const formData = {
         strips: this.selectedStrips,
-        color: this.selectedColor,
+        color,
         brightness: Number(this.brightness),
       };
 
       axios.post('http://localhost:3000/color', formData).catch((error) => {
-        console.error(error);
-      });
-    },
-    setColor(color: string) {
-      fetch('http://localhost:3000/color', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          strips: this.selectedStrips,
-          color,
-          brightness: Number(this.brightness),
-         }),
-      }).then(async (response)=>{
-        console.log('Response:', await response.text());
-        
-      }).catch((error) => {
         console.error(error);
       });
     },
@@ -191,7 +202,7 @@ export default {
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
-        this.setEffect();
+        this.setColor(this.selectedColor);
       }
     );
   },
