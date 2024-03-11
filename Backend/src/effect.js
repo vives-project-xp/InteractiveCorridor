@@ -3,17 +3,18 @@ const totalStrips = 2;
 topic = "";
 
 const setEffect = (req, res) => {
-  strip = req.query.strip;
-  effect = req.query.effect;
-  delay = req.query.delay;
-  speed = req.query.speed;
-  if (strip == undefined) {
+  console.log(req.body);
+  const strips = req.body.strips;
+  const effect = req.body.effect;
+  const delay = req.body.delay || 0;
+  const speed = req.body.speed || 128;
+  if (strips == undefined) {
     res.send(
       "No strip specified. Please specify a strip number between 0 and 2 (0 = all, 1 = strip 1 , 2 = strip 2, ...)"
     );
     return;
   } else {
-    setTopic(strip);
+    setTopic(strips);
   }
 
   if (effect == undefined) {
@@ -23,26 +24,18 @@ const setEffect = (req, res) => {
     return;
   }
 
-  if (delay == undefined) {
-    delay = 0;
-  }
-
-  if (speed == undefined) {
-    speed = 128;
-  }
-
   res.send(
     "Effect set: \nEffect: " +
       effect +
       "\nStrip: " +
-      strip +
+      strips +
       "\nDelay: " +
       delay +
       "\nSpeed: " +
       speed
   );
   //command = `{'seg':[{'fx':${effect}'sx':${speed}}],'tb':${i * delay}}`;
-  if (delay > 0 && strip == 0) {
+  if (delay > 0 && strips == 0) {
     for (i = 0; i < totalStrips; i++) {
       mqtt.publish(
         `IC/ic${i + 1}/api`,
