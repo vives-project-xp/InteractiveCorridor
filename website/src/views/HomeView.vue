@@ -110,7 +110,7 @@ export default {
   data() {
     return {
       effects: [] as string[] | undefined,
-      strips: [],
+      strips: [] as object[],
       brightness: 200,
       selectedColor: '#ff0000',
       selectedStrips: [] as number[],
