@@ -45,7 +45,7 @@ const setEffect = (req, res) => {
   if (delay > 0 && strip == 0) {
     for (i = 0; i < totalStrips; i++) {
       mqtt.publish(
-        `IC/ic${i + 1}/api`,
+        `IC/ic${i + 1}`,
         `{'seg':[{'fx':${effect},'sx':${speed}}],'tb':${i * delay}}`
       );
     }
@@ -58,9 +58,9 @@ const setEffect = (req, res) => {
 };
 const setTopic = (strip) => {
   if (strip == 0) {
-    topic = "IC/all/api";
+    topic = "IC/all";
   } else {
-    topic = "IC/ic" + strip + "/api";
+    topic = "IC/ic" + strip;
   }
 };
 

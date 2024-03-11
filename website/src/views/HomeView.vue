@@ -49,7 +49,7 @@ import { throttle } from '@/lib/utils';
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-for="effect in effects || []" :key="effect">
                   <LedEffect :effect="effect" class="w-full text-sm" variant="secondary" />
-                  <Separator class="my-2"/>
+                  <Separator class="my-2" />
                 </div>
               </ScrollArea>
             </CardContent>
@@ -71,7 +71,7 @@ import { throttle } from '@/lib/utils';
         </span>
       </h2>
 
-      <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
+      <template v-for="stripIndex in strips" :key="stripIndex">
         <div
           class="mb-5 cursor-pointer"
           :class="{ 'bg-blue-200': isSelected(stripIndex) }"
@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       effects: [] as string[] | undefined,
-      numberOfStrips: 0,
+      strips: [],
       brightness: 200,
       selectedColor: '#ff0000',
       selectedStrips: [] as number[],
@@ -116,26 +116,25 @@ export default {
   },
   methods: {
     fetchColors() {
-      console.log('fetching colors', this.numberOfStrips);
-      for (let i = 0; i < this.numberOfStrips; i++) {
+      this.colors = [];
+      for (const strip of this.strips) {
         axios
-          .get('http://ic' + (i + 1) + '.local/json/live')
+          .get('http://ic' + Number(strip) + '.local/json/live')
           .then((response) => {
             const colorsObject = response.data.leds;
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
-            this.colors[i] = colors;
+            this.colors[colors.length] = colors;
           })
           .catch(() => {});
       }
     },
     fetchLeds() {
       this.searching = true;
-      console.time('fetchLeds');
+      this.strips = [];
       axios
         .get('http://localhost:3000/leds')
         .then(async (response) => {
-          this.numberOfStrips = response.data;
-          console.timeEnd('fetchLeds');
+          this.strips = response.data;
           this.searching = false;
           this.effects = await this.fetchEffects();
         })
@@ -145,9 +144,9 @@ export default {
         });
     },
     async fetchEffects() {
-      if (this.numberOfStrips === 0) return;
+      if (this.strips.length === 0) return;
       return axios
-        .get('http://ic1.local/json/effects')
+        .get('http://ic' + this.strips[0] + '.local/json/effects')
         .then((response) => response.data as string[]);
     },
     toggleStrip(stripIndex: number) {
@@ -208,7 +207,7 @@ export default {
     this.fetchLeds();
     this.fetchColors();
     setInterval(this.fetchColors, 100);
-    setInterval(this.fetchLeds, 60000);
+    setInterval(this.fetchLeds, 5000);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
