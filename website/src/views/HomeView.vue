@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -48,9 +49,18 @@ import { throttle } from '@/lib/utils';
     </aside>
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
-      <h2 class="text-lg font-bold">Individual lights</h2>
+      <h2 class="text-lg font-bold">
+        Individual lights
+        <span v-if="searching">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger class="text-red-500">°</TooltipTrigger>
+              <TooltipContent>Searching for LED strips...</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </span>
+      </h2>
 
-      <div v-if="searching">Searching ledstrips...</div>
       <template v-for="stripIndex in numberOfStrips" :key="stripIndex">
         <div
           class="mb-5 cursor-pointer"
@@ -166,17 +176,18 @@ export default {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           strips: this.selectedStrips,
           color,
           brightness: Number(this.brightness),
-         }),
-      }).then(async (response)=>{
-        console.log('Response:', await response.text());
-        
-      }).catch((error) => {
-        console.error(error);
-      });
+        }),
+      })
+        .then(async (response) => {
+          console.log('Response:', await response.text());
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     getLedIndices(barIndex: number, length: number) {
       const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
