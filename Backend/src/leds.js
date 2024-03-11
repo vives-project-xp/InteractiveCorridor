@@ -1,8 +1,14 @@
-async function fetchLedStrip(url) {
+async function fetchLedStrip(url, timeout = 2000) {
   try {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+
     const response = await fetch(url, {
       method: "GET",
+      signal: controller.signal,
     });
+
+    clearInterval(id);
     return response;
   } catch {
     return { ok: false };
@@ -17,7 +23,6 @@ const getLeds = async (req, res) => {
   }
   // Wait for each response, then count the number of successful responses
   Promise.all(promises).then((responses) => {
-    console.log(responses);
     const ledcount = responses.reduce((acc, response) => {
       if (response.ok) {
         return acc + 1;
