@@ -1,166 +1,149 @@
 
 {   
-    "Fire effect": {
-        "state": {
-            "on": true,
-            "bri": 150,  
-            "transition": 25,
-            "seg": [
-                { 
-                    "fx": 66,  
-                    "sx": 10, 
-                    "ix": 127,  
-                    "pal": 1, 
-                    "start": 0,  
-                    "stop": 12  
-                },
-                {
-                    "fx": 0,
-                    "color":[255,0,0] ,
-                    "sx": 1, 
-                    "ix": 127,  
-                    "pal": 1, 
-                    "start": 13,  
-                    "stop": 25 
-
-                },
-                {
-                    "fx": 0,
-                    "color":[255,0,0] ,
-                    "sx": 1, 
-                    "ix": 127,  
-                    "pal": 1, 
-                    "start": 26,  
-                    "stop": 37 
-
-                },
-                { 
-                    "fx": 66,  
-                    "sx": 10, 
-                    "ix": 127,  
-                    "pal": 1, 
-                    "start": 38,  
-                    "stop": 49  
-                }
-            ]
-        }
+    "Breathe": {
+        "on":true,
+        "brightness": 255,
+        "transition":1000,
+        "seg":[
+            {
+                "fx":2,
+                "sx": 10, 
+                "ix": 127,
+                "col":[[255,224,160],[0,0,0]] ,
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                "fx":2,
+                "sx": 10,
+                "ix": 127,  
+                "col":[[255,224,160],[0,0,0]] ,
+                "start": 25,  
+                "stop": 50 ,
+                "rev": true
+            }
+        ]
+},
+    "Loading":{
+        "on": true,
+        "bri": 150,  
+        "transition": 5,
+        "seg": [
+             { 
+               "fx": 40,  
+                "sx": 10, 
+                "ix": 127,  
+                "pal": 36, 
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                 "fx": 40,  
+                "sx": 10, 
+                "ix": 127, 
+                "pal": 36, 
+                "start": 25,  
+                "stop": 49,
+                "rev": true
+    
+            }
+         ]
     },
-    "Golvend effect": {
-        "state": {
-            "on": true,
-            "bri": 150,
-            "transition": 25,
-            "seg": [
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 0,
-                    "stop": 12
-                },
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 13,
-                    "stop": 25
-                },
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 26,
-                    "stop": 37,
-                    "rev": 1
-                },
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 38,
-                    "stop": 49,
-                    "rev": 1
-                }
-            ]
-        }
+    
+    "Theator rainbow":{
+        "on":true,
+        "brightness": 255,
+        "transition":1000,
+        "seg":[
+            {
+                "fx":14,
+                "sx": 10, 
+                "ix": 127,  
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                "fx":14,
+                "sx": 10,
+                "ix": 127,  
+                "start": 26,  
+                "stop": 50 ,
+                "rev": true
+            }
+        ]
     },
-    "Rain effect": {
-        "state": {
-            "on": true,
-            "bri": 150,
-            "transition": 25,
-            "seg": [
-                {
-                    "color":[71, 69, 69],
-                    "fx": 0,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 13,
-                    "stop": 25
-                },
-                {
-                    "color":[71, 69, 69],
-                    "fx": 0,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 26,
-                    "stop": 37
-                },
-                {
-                    "color":[0, 0, 255],
-                    "fx": 43,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 0,
-                    "stop": 12
-                },
-                {
-                    "color":[0, 0, 255],
-                    "fx": 43,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 38,
-                    "stop": 49
-                }
-            ]
-        }
+    "Rainbow balls":{
+        "on": true,
+        "bri": 150,
+        "transition": 5,
+        "seg": [
+            {
+                "fx":91,
+                "sx": 10, 
+                "ix": 127,
+                "pal": 11,
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                "fx":91,
+                "tb":10000,
+                "sx": 10, 
+                "ix": 127,
+                "pal": 11,
+                "start": 25,  
+                "stop": 50,
+                "rev": true 
+            }
+        ]
     },
-    "Lightning effect":{
-        "state": {
-            "on": true,
-            "bri": 150,
-            "transition": 25,
-            "seg": [
-                {
-                    "fx": 57,
-                    "sx": 25, 
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 0,
-                    "stop": 24
-                },
-                {
-                    "fx": 57,
-                    "sx": 25, 
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 25,
-                    "stop": 49,
-                    "rev":1
-                }
-            ]
-        }
+    "sweep":{
+        "on":true,
+        "brightness": 150,
+        "transition":5,
+        "seg":[
+            {
+                "fx":6,
+                "sx": 127, 
+                "ix": 127, 
+                "col":[[255,224,160,0],[0,0,0,0],[0,0,0,0]] , 
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                "fx":6,
+                "sx": 127,
+                "ix": 127, 
+                "col":[[255,224,160,0],[0,0,0,0],[0,0,0,0]] ,
+                "start": 26,  
+                "stop": 50 ,
+                "rev": true
+            }
+        ]
+    },
+    "Heartbeat":{
+        "on":true,
+        "brightness": 255,
+        "transition":1000,
+        "seg":[
+            {
+                "fx":100,
+                "sx": 10, 
+                "ix": 127,
+                "col":[[255,0,0],[0,0,0]] ,
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                "fx":100,
+                "sx": 10,
+                "ix": 127,  
+                "col":[[255,0,0],[0,0,0]] ,
+                "start": 25,  
+                "stop": 50 ,
+                "rev": true
+            }
+        ]
     }
+    
  }
