@@ -45,9 +45,8 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | :---------------------------------------------- | :------: | -----------: | :------ |
 | [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |    6     |              |         |
 | [ESP32-C3](#esp32-c3)                           |    6     |       8,8451 |         |
-| [ledstrip profile](#ledstrip-profile)           |    24    |        17,95 |         |
-| [DC/DC Converter](#dcdc-converter)              |    6     |         5,39 |         |
-| [Level shifter](#level-shifter)                 |    6     |         0,85 |         |
+| [ledstrip profile](#ledstrip-profile)           |    16    |        17,95 |         |
+| [DC/DC Converter](#dcdc-converter24V5V)         |    6     |         5,39 |         |
 | [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
 | [Cable box](#cable-box)                         |    6     |         1,59 |         |
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
@@ -55,7 +54,19 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Fuse holder](#fuse-holder)                     |    3     |         4,22 |         |
 | [Auto fuse set 10A](#autofuse-set-10a)          |    1     |         5,29 |         |
 | [Cables](#cables)                               |    1     |        36,30 |         |
-| [Female pin header set](#female-pin-header-set) |    6     |         1,60 |         |
+| [Female pin header set](#female-pin-header-set) |    10    |         19,8 |         |
+| [Male pin header set](#Male-pin-header-set)     |    10    |         3,52 |         |
+| [cable tray](#cable-tray)                       |    1     |         6,79 |         |
+
+## Level shifter 
+
+| Component                                       | Quantity | Price / unit | Remarks |
+| :---------------------------------------------- | :------: | -----------: | :------ |
+| [Resistor](#Resistor1K)                         |    5     |         0,49 |         |
+| [Resistor](#Resistor1,5K)                       |    2     |         1,00 |         |
+| [transistor](#transistor)                       |    24    |         6,312|         |
+
+
 
 ### WS2814 RGBW LED strip
 

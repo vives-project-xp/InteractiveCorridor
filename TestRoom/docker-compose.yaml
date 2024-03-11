@@ -4,20 +4,52 @@ services:
   backend:
     container_name: backend
     build: ./Backend/
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     environment:
       - PORT=3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.backend.loadbalancer.server.port=3000"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=http"
+      - "traefik.http.routers.backend.middlewares=my-auth"
     networks:
       - webserver
+
+
   website:
     container_name: website
     build: ./website/
     ports:
-      - "80:8000"
+      - "3080:8000"
     depends_on:
       - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.website.loadbalancer.server.port=8000"
+      - "traefik.http.routers.website.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.website.entrypoints=http"
+      - "traefik.http.routers.website.middlewares=my-auth"
     networks:
       - webserver
+
+  traefik:
+    image: "traefik:v2.5"
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.http.address=:80"
+      - "--api.insecure=true"
+      - "--log.level=DEBUG"
+    labels:
+      - "traefik.http.middlewares.my-auth.basicauth.users=admin:$$apr1$$sticpnxd$$NFmgoSXxHc2dOmaad4vPB."
+    ports:
+      - "80:80"
+      - "8080:8080" # Traefik dashboard
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - webserver
+
 networks:
   webserver:
