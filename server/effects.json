@@ -1,147 +1,33 @@
 
 {   
     "Fire effect": {
-        "state": {
-            "on": true,
-            "bri": 150,  
-            "transition": 25,
-            "seg": [
+        "on": true,
+        "bri": 150,  
+        "transition": 5,
+        "seg": [
                 { 
                     "fx": 66,  
                     "sx": 10, 
                     "ix": 127,  
-                    "pal": 1, 
+                    "pal": 35, 
                     "start": 0,  
-                    "stop": 12  
+                    "stop": 25  
                 },
                 {
-                    "fx": 0,
-                    "color":[255,0,0] ,
-                    "sx": 1, 
-                    "ix": 127,  
-                    "pal": 1, 
-                    "start": 13,  
-                    "stop": 25 
-
-                },
-                {
-                    "fx": 0,
-                    "color":[255,0,0] ,
-                    "sx": 1, 
-                    "ix": 127,  
-                    "pal": 1, 
-                    "start": 26,  
-                    "stop": 37 
-
-                },
-                { 
                     "fx": 66,  
                     "sx": 10, 
                     "ix": 127,  
-                    "pal": 1, 
-                    "start": 38,  
-                    "stop": 49  
+                    "pal": 35, 
+                    "start": 26,  
+                    "stop": 50,
+                    "rev": true
                 }
             ]
-        }
-    },
-    "Golvend effect": {
-        "state": {
-            "on": true,
-            "bri": 150,
-            "transition": 25,
-            "seg": [
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 0,
-                    "stop": 12
-                },
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 13,
-                    "stop": 25
-                },
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 26,
-                    "stop": 37,
-                    "rev": 1
-                },
-                {
-                    "fx": 15,
-                    "sx": 25,  
-                    "ix": 128,
-                    "pal": 0,
-                    "sel": 1,
-                    "start": 38,
-                    "stop": 49,
-                    "rev": 1
-                }
-            ]
-        }
-    },
-    "Rain effect": {
-        "state": {
-            "on": true,
-            "bri": 150,
-            "transition": 25,
-            "seg": [
-                {
-                    "color":[71, 69, 69],
-                    "fx": 0,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 13,
-                    "stop": 25
-                },
-                {
-                    "color":[71, 69, 69],
-                    "fx": 0,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 26,
-                    "stop": 37
-                },
-                {
-                    "color":[0, 0, 255],
-                    "fx": 43,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 0,
-                    "stop": 12
-                },
-                {
-                    "color":[0, 0, 255],
-                    "fx": 43,  
-                    "sx": 15,  
-                    "ix": 128,
-                    "sel": 1,
-                    "start": 38,
-                    "stop": 49
-                }
-            ]
-        }
-    },
+        },
     "Lightning effect":{
-        "state": {
             "on": true,
             "bri": 150,
-            "transition": 25,
+            "transition": 5,
             "seg": [
                 {
                     "fx": 57,
@@ -157,10 +43,58 @@
                     "ix": 128,
                     "sel": 1,
                     "start": 25,
-                    "stop": 49,
+                    "stop": 50,
                     "rev":1
                 }
             ]
-        }
+    },
+    "Loading":{
+        "on": true,
+        "bri": 150,  
+        "transition": 5,
+        "seg": [
+             { 
+               "fx": 40,  
+                "sx": 10, 
+                "ix": 127,  
+                "pal": 36, 
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                 "fx": 40,  
+                "sx": 10, 
+                "ix": 127, 
+                "pal": 36, 
+                "start": 25,  
+                "stop": 49,
+                "rev": true
+    
+            }
+         ]
+    },
+    "Twinkle":{
+        "on": true,
+        "bri": 150,
+        "transition": 5,
+        "seg": [
+            {
+                "fx":18,
+                "sx": 10, 
+                "ix": 127,  
+                "col":[[245, 213, 5],[0,0,0]] ,
+                "start": 0,  
+                "stop": 25 
+            },
+            {
+                "fx":18,
+                "sx": 10, 
+                "ix": 127,  
+                "col":[[245, 213, 5],[0,0,0]] , 
+                "start": 26,  
+                "stop": 50,
+                "rev": true 
+            }
+        ]
     }
  }
