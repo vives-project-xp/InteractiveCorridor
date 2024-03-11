@@ -20,7 +20,7 @@ import { throttle } from '@/lib/utils';
 <template>
   <div class="flex flex-col md:flex-row">
     <aside>
-      <Tabs default-value="color-picker" class="w-[400px]">
+      <Tabs default-value="color-picker" class="w-[300px]">
         <TabsList>
           <TabsTrigger value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger value="effects">Effects</TabsTrigger>
