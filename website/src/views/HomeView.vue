@@ -122,14 +122,15 @@ export type IncomingStrip = {
         >
           <div>
             <h3>LED-strip {{ strip.index }}</h3>
+            {{ console.log(strip) }}
             <div v-if="colors[strip.index]?.length > 0" class="flex flex-wrap gap-2">
-              <template v-for="(length, barIndex) in barLengths" :key="barIndex">
+              <template v-for="(segment, barIndex) in strip.state.seg" :key="barIndex">
                 <div class="flex items-center rounded">
                   <LedPixel
-                    v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
+                    v-for="(ledIndex, ledIndexInBar) in segment.len"
                     :key="ledIndexInBar"
                     class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                    :color="colors[strip.index][ledIndex] || '#000000'"
+                    :color="colors[strip.index][segment.start + ledIndex - 1] || '#000000'"
                   ></LedPixel>
                 </div>
               </template>
@@ -241,10 +242,6 @@ export default {
       axios.post('http://localhost:3000/color', formData).catch((error) => {
         console.error(error);
       });
-    },
-    getLedIndices(barIndex: number, length: number) {
-      const startIndex = this.barLengths.slice(0, barIndex).reduce((acc, val) => acc + val, 0);
-      return Array.from({ length }, (_, i) => startIndex + i);
     },
   },
   mounted() {
