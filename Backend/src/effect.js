@@ -1,3 +1,4 @@
+const { response } = require("express");
 const mqtt = require("./mqtt");
 topic = "";
 
@@ -44,6 +45,14 @@ const setEffect = (req, res) => {
   );
 };
 
+const getEffect = async (req, res) => {
+  const effects = await fetch(
+    "https://raw.githubusercontent.com/scottrbailey/WLED-Utils/main/effect_descriptions.json"
+  ).then((response) => response.json());
+  res.json(effects);
+};
+
 module.exports = {
   setEffect,
+  getEffect,
 };
