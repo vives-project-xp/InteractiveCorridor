@@ -15,6 +15,44 @@ import ColorPicker from '../components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
 import { throttle } from '@/lib/utils';
+
+export type IncomingStrip = {
+  index: number;
+  state: {
+    on: boolean;
+    bri: number;
+    seg: {
+      id: number;
+      start: number;
+      stop: number;
+      len: number;
+      grp: number;
+      spc: number;
+      of: number;
+      on: boolean;
+      frz: boolean;
+      bri: number;
+      cct: number;
+      set: number;
+      col: number[][];
+      fx: number;
+      sx: number;
+      ix: number;
+      pal: number;
+      c1: number;
+      c2: number;
+      c3: number;
+      sel: boolean;
+      rev: boolean;
+      mi: boolean;
+      o1: boolean;
+      o2: boolean;
+      o3: boolean;
+      si: number;
+      m12: number;
+    }[];
+  };
+};
 </script>
 
 <template>
@@ -76,22 +114,22 @@ import { throttle } from '@/lib/utils';
         </span>
       </h2>
 
-      <template v-for="stripIndex in strips" :key="stripIndex">
+      <template v-for="strip in strips" :key="strip.index">
         <div
           class="mb-5 cursor-pointer"
-          :class="{ 'bg-blue-200': isSelected(stripIndex) }"
-          @click="toggleStrip(stripIndex)"
+          :class="{ 'bg-blue-200': isSelected(strip.index) }"
+          @click="toggleStrip(strip.index)"
         >
           <div>
-            <h3>LED-strip {{ stripIndex }}</h3>
-            <div v-if="colors[stripIndex - 1]?.length > 0" class="flex flex-wrap gap-2">
+            <h3>LED-strip {{ strip.index }}</h3>
+            <div v-if="colors[strip.index]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(length, barIndex) in barLengths" :key="barIndex">
                 <div class="flex items-center rounded">
                   <LedPixel
                     v-for="(ledIndex, ledIndexInBar) in getLedIndices(barIndex, length)"
                     :key="ledIndexInBar"
                     class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                    :color="colors[stripIndex - 1][ledIndex] || '#000000'"
+                    :color="colors[strip.index][ledIndex] || '#000000'"
                   ></LedPixel>
                 </div>
               </template>
@@ -110,7 +148,7 @@ export default {
   data() {
     return {
       effects: [] as string[] | undefined,
-      strips: [] as object[],
+      strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
       selectedStrips: [] as number[],
@@ -121,24 +159,32 @@ export default {
   },
   methods: {
     fetchColors() {
-      this.colors = [];
+      const updatedColors = [];
       for (const strip of this.strips) {
+        updatedColors.push(strip.index);
         axios
-          .get('http://ic' + Number(strip) + '.local/json/live')
+          .get('http://ic' + Number(strip.index) + '.local/json/live')
           .then((response) => {
             const colorsObject = response.data.leds;
             const colors = Object.values(colorsObject).map((color) => `#${color}`);
-            this.colors[colors.length] = colors;
+            this.colors[strip.index] = colors;
           })
           .catch(() => {});
+      }
+
+      // Remove colors for LED strips that are no longer available
+      for (const stripIndex in this.colors) {
+        if (!updatedColors.includes(Number(stripIndex))) {
+          delete this.colors[stripIndex];
+        }
       }
     },
     fetchLeds() {
       this.searching = true;
-      this.strips = [];
       axios
         .get('http://localhost:3000/leds')
         .then(async (response) => {
+          console.log('Got', response.data.length, 'LED strips from the server.');
           this.strips = response.data;
           this.searching = false;
           this.effects = await this.fetchEffects();
@@ -151,7 +197,7 @@ export default {
     async fetchEffects() {
       if (this.strips.length === 0) return;
       return axios
-        .get('http://ic' + this.strips[0] + '.local/json/effects')
+        .get('http://ic' + this.strips[0].index + '.local/json/effects')
         .then((response) => response.data as string[]);
     },
     toggleStrip(stripIndex: number) {
