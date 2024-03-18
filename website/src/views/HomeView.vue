@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton'
 import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -84,6 +85,12 @@ export type IncomingStrip = {
             </CardHeader>
             <CardContent>
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
+                <div v-if="effects?.length === 0" class="h-56 w-full">
+                  <div v-for="i in 5" :key="i">
+                    <Skeleton class="w-full h-10" />
+                    <Separator class="my-2" />
+                  </div>
+                </div>
                 <div v-for="effect in effects || []" :key="effect.id">
                   <LedEffect
                     :effect="effect.name"
