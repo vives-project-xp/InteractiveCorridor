@@ -62,8 +62,8 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 
 | Component                                       | Quantity | Price / unit | Remarks |
 | :---------------------------------------------- | :------: | -----------: | :------ |
-| [Resistor](#Resistor1K)                         |    5     |         0,49 |         |
-| [Resistor](#Resistor1,5K)                       |    2     |         1,00 |         |
+| [Resistor1K](#Resistor1K)                       |    5     |         0,49 |         |
+| [Resistor1.5K](#Resistor1,5K)                   |    2     |         1,00 |         |
 | [transistor](#transistor)                       |    24    |         6,312|         |
 
 
@@ -114,24 +114,6 @@ Info about the component:
 - **Input voltage DC max**: 40V
 
 Link to component: [Otronic.nl](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html)
-
-### Level shifter
-
-Pin connections for 3.3V to 5V:
-
-- **AVCC**:5V
-- **ASCL**: SCL/TX pin of 5V system
-- **ASDA**: SDA/RX pin of 5V system
-- **AGND**: GND of 5V system
-
-- **BVCC**: no connection
-- **BSCL**: SCL/TX pin of 3.3V system
-- **BSDA**: SDA/RX pin of 3.3V system
-- **BGND**: GND of 5V system
-
-Pin connections are on the bottom of the component.
-
-Link to component [otronic.nl](https://www.otronic.nl/nl/i2c-uart-bi-directionele-logic-level-converter-5v.html)
 
 ### Prototype printplate
 
@@ -220,6 +202,27 @@ This component is used to prevent soldering of ESP to a breadbord.
 This set contains 12 pin headers and 16 pin headers.
 
 Link to the component: [kiwi-electronics.com](https://www.kiwi-electronics.com/nl/feather-stacking-headers-12-pin-16-pin-female-headers-2192?search=female%20pin%20header)
+
+### Male pin header set
+
+This will be used to connect components together on the PCB.
+
+[Farne-component](https://be.farnell.com/harwin/m20-9990846/connector-header-tht-2-54mm-8way/dp/1022257)
+
+### Cable tray
+
+this ensures that the cables are concealed.
+
+[Hubo-component](https://www.hubo.be/nl/p/micro-trunking-kabelgoot-halve-cirkel-20x10-mm-2m-wit/930710/)
+
+
+### Resistors
+
+We use the risistors to make an level shifter. you can find the connection diagram on this page.
+
+[Resistor](https://www.kiwi-electronics.com/nl/weerstand-1-5k-ohm-1-4-watt-5-10-stuks-657)
+[Resistor](https://www.otronic.nl/nl/10x-weerstand-1k-ohm-1-4-watt-5.html)
+
 
 ## Architecture document
 

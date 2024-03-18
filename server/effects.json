@@ -23,7 +23,7 @@
                 "rev": true
             }
         ]
-},
+    },
     "Loading":{
         "on": true,
         "bri": 150,  
@@ -120,30 +120,5 @@
                 "rev": true
             }
         ]
-    },
-    "Heartbeat":{
-        "on":true,
-        "brightness": 255,
-        "transition":1000,
-        "seg":[
-            {
-                "fx":100,
-                "sx": 10, 
-                "ix": 127,
-                "col":[[255,0,0],[0,0,0]] ,
-                "start": 0,  
-                "stop": 25 
-            },
-            {
-                "fx":100,
-                "sx": 10,
-                "ix": 127,  
-                "col":[[255,0,0],[0,0,0]] ,
-                "start": 25,  
-                "stop": 50 ,
-                "rev": true
-            }
-        ]
     }
-    
  }
