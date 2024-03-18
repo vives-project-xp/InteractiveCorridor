@@ -1,11 +1,6 @@
 <script lang="ts" setup>
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
@@ -57,9 +52,9 @@ export type IncomingStrip = {
   <div class="flex flex-col md:flex-row my-7">
     <aside>
       <Tabs default-value="color-picker" class="w-[300px]">
-        <TabsList>
-          <TabsTrigger value="color-picker">Color Picker</TabsTrigger>
-          <TabsTrigger value="effects">Effects</TabsTrigger>
+        <TabsList class="w-full">
+          <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
+          <TabsTrigger class="w-full" value="effects">Effects</TabsTrigger>
         </TabsList>
         <TabsContent value="color-picker">
           <Card>
