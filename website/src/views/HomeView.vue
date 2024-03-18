@@ -54,7 +54,7 @@ export type IncomingStrip = {
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row">
+  <div class="flex flex-col md:flex-row my-7">
     <aside>
       <Tabs default-value="color-picker" class="w-[300px]">
         <TabsList>
@@ -100,7 +100,7 @@ export type IncomingStrip = {
     </aside>
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
-      <h2 class="text-2xl font-semibold leading-none tracking-tight mb-3 mt-5">
+      <h2 class="text-2xl font-semibold leading-none tracking-tight my-3">
         Individual lights
         <span v-if="searching">
           <TooltipProvider>
