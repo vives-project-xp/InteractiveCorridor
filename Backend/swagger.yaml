@@ -5,7 +5,19 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000/
+
 paths:
+  /leds:
+    get:
+      summary: Haal de huidige configuratie van de LED-strips op.
+      responses:
+        200:
+          description: Huidige configuratie succesvol opgehaald
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LEDState'
+
   /effect:
     post:
       summary: Verander het effect van de ledstrip.
@@ -65,3 +77,67 @@ paths:
             speed: 200
             reverse: false
             mirror: false
+
+components:
+  schemas:
+    LEDState:
+      type: array
+      items:
+        properties:
+          index:
+            type: number
+            description: Index van de LED-strip
+          state:
+            type: object
+            properties:
+              on:
+                type: boolean
+                description: Geeft aan of de LED-strip aan staat
+              bri:
+                type: number
+                minimum: 0
+                maximum: 255
+                description: Helderheid van de LED-strip
+              seg:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID van het segment
+                    start:
+                      type: number
+                      description: Start-LED van het segment
+                    stop:
+                      type: number
+                      description: Eind-LED van het segment
+                    bri:
+                      type: number
+                      minimum: 0
+                      maximum: 255
+                      description: Helderheid van het segment
+          info:
+            type: object
+            properties:
+              ver:
+                type: string
+                description: WLED versie
+              leds:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Naam van de LED-strip
+                  mac:
+                    type: string
+                    description: MAC-adres van de LED-strip
+                  ip:
+                    type: string
+                    description: IP-adres van de LED-strip
+                  count:
+                    type: number
+                    description: Aantal LED's
+                  rgbw:
+                    type: boolean
+                    description: Geeft aan of de LED-strip RGBW LED's bevat
