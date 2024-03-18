@@ -224,7 +224,7 @@ export default {
 
       const effectID = typeof effect === 'number' ? effect : this.effects.indexOf(effect);
       if (effectID === -1) return console.warn('Effect not found');
-
+      console.log('Setting effect', effectID, 'on strips', this.selectedStrips);
       axios
         .post('http://localhost:3000/effect', { effect: effectID, strips: this.selectedStrips })
         .catch((error) => {
