@@ -226,6 +226,7 @@ export default {
         });
     },
     setColor(color: string) {
+      this.selectedColor = color;
       const formData = {
         strips: this.selectedStrips,
         color,
