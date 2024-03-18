@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Stripconfiguratie API
+  description: API voor het configureren van LED-strips.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/
+paths:
+  /effect:
+    post:
+      summary: Verander het effect van de ledstrip.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                strips:
+                  type: object
+                  description: |
+                    Lijst van strips en hun respectievelijke LED's
+                  example:
+                    "1": "[1,2,3,4]"
+                    "2": "[1,2,3,4]"
+                effect:
+                  type: integer
+                  description: |
+                    ID van het effect dat moet worden toegepast op de LED-strip. Dit is een integer.
+                  example: 28
+                delay:
+                  type: integer
+                  description: |
+                    Vertraging tussen effectstappen (in milliseconden). Standaardwaarde is 0.
+                  example: 600
+                speed:
+                  type: integer
+                  description: |
+                    Snelheid van het effect (in milliseconden per stap). Standaardwaarde is 128.
+                  example: 200
+                reverse:
+                  type: boolean
+                  description: |
+                    Geeft aan of het effect in omgekeerde richting moet worden afgespeeld. Standaardwaarde is false.
+                  example: true
+                mirror:
+                  type: boolean
+                  description: |
+                    Geeft aan of het effect gespiegeld moet worden. Standaardwaarde is false.
+                  example: true
+      responses:
+        "200":
+          description: Configuratie succesvol toegepast
+        "400":
+          description: Ongeldige configuratiegegevens
+      examples:
+        example1:
+          summary: Voorbeeldgegevens 1
+          value:
+            strips:
+              "1": "[1,2,3,4]"
+              "2": "[1,2,3,4]"
+            effect: 28
+            delay: 600
+            speed: 200
+            reverse: false
+            mirror: false

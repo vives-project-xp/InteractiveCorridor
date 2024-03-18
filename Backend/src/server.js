@@ -8,9 +8,15 @@ const colors = require("./color");
 const effects = require("./effect");
 const leds = require("./leds");
 
+const swaggerUi = require("swagger-ui-express");
+const fs = require("fs");
+const YAML = require("yaml");
+const file = fs.readFileSync("./swagger.yaml", "utf8");
+const swaggerDocument = YAML.parse(file);
+
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/leds", leds.getLeds);
 

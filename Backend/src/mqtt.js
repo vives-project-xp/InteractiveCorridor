@@ -44,7 +44,7 @@ const publish = (topic, message) => {
   subscribe(topic + "/status", (receivedTopic, receivedMessage) => {
     statusList[topic] = receivedMessage;
   });
-
+  console.log("Publishing to", topic, ":", message);
   // Publish to the specified topic
   const apiTopic = topic + "/api";
   client.publish(apiTopic, message, (error) => {
