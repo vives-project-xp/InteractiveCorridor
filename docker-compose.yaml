@@ -7,9 +7,26 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
+    depends_on:
+      - database
+
   website:
     build: ./website/
     ports:
       - "80:8000"
     depends_on:
       - backend
+
+  database:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
