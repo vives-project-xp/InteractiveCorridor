@@ -87,6 +87,7 @@ export type IncomingStrip = {
                 <div v-for="effect in effects || []" :key="effect.id">
                   <LedEffect
                     :effect="effect.name"
+                    :tooltip-text="effect.description"
                     class="w-full text-sm"
                     variant="secondary"
                     :onClick="() => setEffect(effect.id)"
