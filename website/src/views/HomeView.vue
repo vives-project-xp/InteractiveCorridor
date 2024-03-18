@@ -9,6 +9,12 @@ import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
 import { throttle } from '@/lib/utils';
 
+export type Effect = {
+  name: string;
+  description: string;
+  id: number;
+};
+
 export type IncomingStrip = {
   index: number;
   state: {
@@ -78,12 +84,12 @@ export type IncomingStrip = {
             </CardHeader>
             <CardContent>
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
-                <div v-for="effect in effects || []" :key="effect">
+                <div v-for="effect in effects || []" :key="effect.id">
                   <LedEffect
-                    :effect="effect"
+                    :effect="effect.name"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="() => setEffect(effect)"
+                    :onClick="() => setEffect(effect.id)"
                   />
                   <Separator class="my-2" />
                 </div>
@@ -154,7 +160,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      effects: [] as string[] | undefined,
+      effects: [] as Effect[] | undefined,
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
@@ -191,9 +197,8 @@ export default {
         .get('http://localhost:3000/leds')
         .then(async (response) => {
           console.log('Got', response.data.length, 'LED strips from the server.');
-          this.strips = response.data;
+          this.strips = []; //response.data;
           this.searching = false;
-          this.effects = await this.fetchEffects();
         })
         .catch((error) => {
           this.searching = false;
@@ -201,10 +206,12 @@ export default {
         });
     },
     async fetchEffects() {
-      if (this.strips.length === 0) return;
-      return axios
-        .get('http://ic' + this.strips[0].index + '.local/json/effects')
-        .then((response) => response.data as string[]);
+      this.effects =
+        (await axios
+          .get('http://localhost:3000/effect')
+          .then((response) => response.data as Effect[])) || [];
+      console.log('Effects', this.effects);
+      return this.effects;
     },
     setEffect(effect: string | number) {
       if (this.effects === undefined) return console.warn('Effects not loaded yet');
@@ -232,6 +239,7 @@ export default {
   },
   mounted() {
     this.fetchLeds();
+    this.fetchEffects();
     this.fetchColors();
     setInterval(this.fetchColors, 100);
     setInterval(this.fetchLeds, 5000);
