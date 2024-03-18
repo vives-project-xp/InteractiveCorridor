@@ -81,19 +81,6 @@ paths:
           description: Configuratie succesvol toegepast
         "400":
           description: Ongeldige configuratiegegevens
-      examples:
-        example1:
-          summary: Voorbeeldgegevens 1
-          value:
-            strips:
-              "1": "[1,2,3,4]"
-              "2": "[1,2,3,4]"
-            effect: 28
-            delay: 600
-            speed: 200
-            intensity: 128
-            reverse: false
-            mirror: false
 
 components:
   schemas:
