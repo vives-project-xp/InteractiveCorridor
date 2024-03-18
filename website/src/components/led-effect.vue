@@ -33,17 +33,19 @@ const props = defineProps({
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger as-child>
-        <Button @click="props.onClick" :class="cn('w-full', props.class)" :variant="props.variant">
+        <Button
+          @click="props.onClick"
+          :class="cn('w-full capitalize', props.class)"
+          :variant="props.variant"
+        >
           <template v-if="!$slots.default">
-            {{ props.effect[0].toUpperCase() + props.effect.slice(1).toLowerCase() }}
+            {{ props.effect }}
           </template>
           <slot />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
-        <p class="font-bold">
-          {{ props.tooltipText[0].toUpperCase() + props.effect.slice(1).toLowerCase() }}
-        </p>
+        <p>{{ props.tooltipText }}</p>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
