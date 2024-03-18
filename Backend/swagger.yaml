@@ -38,7 +38,7 @@ paths:
                 effect:
                   type: integer
                   description: |
-                    ID van het effect dat moet worden toegepast op de LED-strip. Dit is een integer.
+                    ID van het effect dat moet worden toegepast op de LED-strip. (https://kno.wled.ge/features/effects/)
                   example: 28
                 delay:
                   type: integer
@@ -48,7 +48,12 @@ paths:
                 speed:
                   type: integer
                   description: |
-                    Snelheid van het effect (in milliseconden per stap). Standaardwaarde is 128.
+                    Snelheid van het effect [0-255]. Standaardwaarde is 128.
+                  example: 200
+                intensity:
+                  type: integer
+                  description: |
+                    Intensiteit van het effect [0-255]. Standaardwaarde is 128.
                   example: 200
                 reverse:
                   type: boolean
@@ -75,6 +80,7 @@ paths:
             effect: 28
             delay: 600
             speed: 200
+            intensity: 128
             reverse: false
             mirror: false
 

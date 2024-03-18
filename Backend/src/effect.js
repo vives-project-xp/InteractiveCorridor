@@ -7,6 +7,7 @@ const setEffect = (req, res) => {
   const effect = req.body.effect || 0;
   const delay = req.body.delay || 0;
   const speed = req.body.speed || 128;
+  const intensity = req.body.intensity || 128;
   const reverse = req.body.reverse || false;
   const mirror = req.body.mirror || false;
 
@@ -28,7 +29,7 @@ const setEffect = (req, res) => {
           `IC/ic${strip}`,
           `{'seg':[{'id':${
             segment - 1
-          },'fx':${effect},'sx':${speed}, 'rev':${reverse},'mi':${mirror}],'tb':${
+          },'fx':${effect},'sx':${speed}, 'ix':${intensity}, 'rev':${reverse},'mi':${mirror}}],'tb':${
             delay * stripCount
           }}`
         );
