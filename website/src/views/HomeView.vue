@@ -108,17 +108,28 @@ export type IncomingStrip = {
       </h2>
 
       <template v-for="strip in strips" :key="strip.index">
-        <div
-          class="mb-5 cursor-pointer"
-          :class="{ 'bg-blue-200': isSelected(strip.index) }"
-          @click="toggleStrip(strip.index)"
-        >
+        <div class="mb-5 cursor-pointer">
           <div>
             <h3>LED-strip {{ strip.index }}</h3>
             {{ console.log(strip) }}
             <div v-if="colors[strip.index]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(segment, barIndex) in strip.state.seg" :key="barIndex">
-                <div class="flex items-center rounded">
+                <div
+                  class="flex items-center rounded m-1"
+                  :class="{ 'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedStrips[strip.index]?.includes(barIndex) }"
+                  @click="
+                    () => {
+                      if (!selectedStrips[strip.index]) selectedStrips[strip.index] = [];
+                      const selectedStrip = selectedStrips[strip.index];
+
+                      if (selectedStrip.includes(barIndex)) {
+                        selectedStrip.splice(selectedStrip.indexOf(barIndex), 1);
+                      } else {
+                        selectedStrip.push(barIndex);
+                      }
+                    }
+                  "
+                >
                   <LedPixel
                     v-for="(ledIndex, ledIndexInBar) in segment.len"
                     :key="ledIndexInBar"
@@ -145,9 +156,8 @@ export default {
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [] as number[],
+      selectedStrips: [] as number[][],
       colors: [] as string[][],
-      barLengths: [15, 10, 10, 15],
       searching: false,
     };
   },
@@ -193,19 +203,6 @@ export default {
       return axios
         .get('http://ic' + this.strips[0].index + '.local/json/effects')
         .then((response) => response.data as string[]);
-    },
-    toggleStrip(stripIndex: number) {
-      if (this.isSelected(stripIndex)) {
-        // If strip is already selected, deselect it
-        this.selectedStrips = this.selectedStrips.filter((strip) => strip !== stripIndex);
-      } else {
-        // Otherwise, select it
-        this.selectedStrips.push(stripIndex);
-      }
-    },
-
-    isSelected(stripIndex: number) {
-      return this.selectedStrips.includes(stripIndex);
     },
     updateStripsColor() {
       if (this.selectedStrips.length > 0) {
