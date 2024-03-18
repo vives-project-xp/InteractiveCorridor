@@ -3,15 +3,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import ColorPicker from '../components/color-picker.vue';
+import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
 import { throttle } from '@/lib/utils';
