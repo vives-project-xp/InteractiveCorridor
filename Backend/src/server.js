@@ -23,10 +23,11 @@ app.get("/leds", leds.getLeds);
 app.post("/color", colors.setColor);
 app.post("/effect", effects.setEffect);
 
+app.get("/effect", effects.getEffect);
+
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");
 });
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
