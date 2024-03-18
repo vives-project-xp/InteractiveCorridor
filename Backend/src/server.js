@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
+const db = require('./dB');
 const colors = require("./color");
 const effects = require("./effect");
 const leds = require("./leds");
@@ -22,6 +23,7 @@ app.get("/leds", leds.getLeds);
 
 app.post("/color", colors.setColor);
 app.post("/effect", effects.setEffect);
+app.get('/data', db.getDatabaseData);
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");
