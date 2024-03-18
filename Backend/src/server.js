@@ -24,7 +24,7 @@ app.post("/color", colors.setColor);
 app.post("/effect", effects.setEffect);
 
 app.get("/*", (req, res) => {
-  res.send("Access denied");
+  res.redirect("/api-docs");
 });
 
 app.listen(port, () => {
