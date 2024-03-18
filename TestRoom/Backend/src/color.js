@@ -48,9 +48,9 @@ const setColor = (req, res) => {
 
 const setTopic = (strip) => {
   if (strip == 0) {
-    topic = "IC/all/api";
+    topic = "IC/all";
   } else {
-    topic = "IC/ic" + strip + "/api";
+    topic = "IC/ic" + strip;
   }
 };
 

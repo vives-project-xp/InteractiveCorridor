@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 version: "3.8"
 
 services:
@@ -18,7 +16,6 @@ services:
       - "traefik.http.routers.backend.middlewares=my-auth"
     networks:
       - webserver
-
 
   website:
     container_name: website
@@ -55,4 +52,3 @@ services:
 
 networks:
   webserver:
->>>>>>> 06399603f0d9f3a13ac0b19424908fd9b31bc1e0

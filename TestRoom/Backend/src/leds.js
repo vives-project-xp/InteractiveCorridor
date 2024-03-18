@@ -1,36 +1,51 @@
-async function fetchLedStrip(url, timeout = 2000) {
-  try {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), timeout);
-
-    const response = await fetch(url, {
-      method: "GET",
-      signal: controller.signal,
-    });
-
-    clearInterval(id);
-    return response;
-  } catch {
-    return { ok: false };
-  }
-}
+const mqtt = require("./mqtt");
 
 const getLeds = async (req, res) => {
-  // Send requests to all 16 LED strips
-  const promises = [];
-  for (let i = 1; i <= 16; i++) {
-    promises.push(fetchLedStrip(`http://ic${i}.local/json/live`));
+  console.log("Getting LEDS");
+  const strips = [];
+  const keys = Object.keys(mqtt.statusList);
+  const response = [];
+
+  for (let i = 0; i < keys.length; i++) {
+    const status = Object.values(mqtt.statusList)[i];
+    if (status === "online") {
+      // Extract numbers from the key using regular expression
+      const number = keys[i].match(/\d+/)[0];
+      strips.push(number);
+    }
   }
-  // Wait for each response, then count the number of successful responses
-  Promise.all(promises).then((responses) => {
-    const ledcount = responses.reduce((acc, response) => {
-      if (response.ok) {
-        return acc + 1;
-      }
-      return acc;
-    }, 0);
-    res.send(ledcount.toString());
-  });
+
+  for (const strip of strips) {
+    console.log(`http://ic${strip}.local/json`);
+    let r;
+    try {
+      r = await fetch(`http://ic${strip}.local/json`).then((response) => {
+        return response.json();
+      });
+    } catch (e) {
+      console.log("Error fetching IC", e);
+      continue;
+    }
+
+    // r.state is eens undefined geweest
+    if (!r.state) {
+      console.log("No response from IC", r);
+      continue;
+    }
+
+    delete r.effects;
+    delete r.palettes;
+
+    response.push({
+      strip: Number(strip),
+      ...r,
+    });
+
+    console.log("seg length:", r.state?.seg.length);
+  }
+
+  console.log("strips:", response);
+  res.json(response);
 };
 
 module.exports = { getLeds };

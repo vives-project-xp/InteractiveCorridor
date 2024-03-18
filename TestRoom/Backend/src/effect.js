@@ -1,67 +1,37 @@
 const mqtt = require("./mqtt");
-const totalStrips = 2;
 topic = "";
 
+//{"strips":"{1,2}", "effect":"3", "delay":1000, "speed": 200}
 const setEffect = (req, res) => {
-  strip = req.query.strip;
-  effect = req.query.effect;
-  delay = req.query.delay;
-  speed = req.query.speed;
-  if (strip == undefined) {
-    res.send(
-      "No strip specified. Please specify a strip number between 0 and 2 (0 = all, 1 = strip 1 , 2 = strip 2, ...)"
-    );
-    return;
-  } else {
-    setTopic(strip);
-  }
+  console.log(req.body);
+  const strips = req.body.strips;
+  const effect = req.body.effect;
+  const delay = req.body.delay || 0;
+  const speed = req.body.speed || 128;
 
-  if (effect == undefined) {
+  if (strips == undefined) {
+    res.send("No strip specified");
+    return;
+  } else if (effect == undefined) {
     res.send(
       "No effect specified. Please specify an effect between 0 and 117 (https://github.com/Aircoookie/WLED/wiki/List-of-effects-and-palettes)"
     );
     return;
-  }
-
-  if (delay == undefined) {
-    delay = 0;
-  }
-
-  if (speed == undefined) {
-    speed = 128;
-  }
-
-  res.send(
-    "Effect set: \nEffect: " +
-      effect +
-      "\nStrip: " +
-      strip +
-      "\nDelay: " +
-      delay +
-      "\nSpeed: " +
-      speed
-  );
-  //command = `{'seg':[{'fx':${effect}'sx':${speed}}],'tb':${i * delay}}`;
-  if (delay > 0 && strip == 0) {
-    for (i = 0; i < totalStrips; i++) {
+  } else {
+    console.log(strips, effect, delay, speed);
+    //command = `{'seg':[{'fx':${effect}'sx':${speed}}],'tb':${i * delay}}`;
+    for (const strip of strips) {
       mqtt.publish(
-        `IC/ic${i + 1}/api`,
-        `{'seg':[{'fx':${effect},'sx':${speed}}],'tb':${i * delay}}`
+        `IC/ic${strip}`,
+        `{'seg':[{'fx':${effect},'sx':${speed}}],'tb':${strip * delay}}`
       );
     }
-  } else {
-    mqtt.publish(
-      topic,
-      `{'seg':[{'fx':${effect},'sx':${speed}}],'tb':${delay}}`
-    );
   }
-};
-const setTopic = (strip) => {
-  if (strip == 0) {
-    topic = "IC/all/api";
-  } else {
-    topic = "IC/ic" + strip + "/api";
-  }
+  res.send(
+    "Effect set: \nEffect: " + effect + "\nStrip: " + strips,
+    "\nDelay: " + delay,
+    "\nSpeed: " + speed
+  );
 };
 
 module.exports = {
