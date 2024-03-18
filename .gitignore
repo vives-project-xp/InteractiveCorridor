@@ -1,2 +1,4 @@
 #TestRoom/
 .env
+node_modules/
+
