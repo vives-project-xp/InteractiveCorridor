@@ -36,7 +36,7 @@ const getLeds = async (req, res) => {
     delete r.palettes;
 
     response.push({
-      strip: Number(strip),
+      index: Number(strip),
       ...r,
     });
 
