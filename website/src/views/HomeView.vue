@@ -111,7 +111,6 @@ export type IncomingStrip = {
         <div class="mb-5 cursor-pointer">
           <div>
             <h3>LED-strip {{ strip.index }}</h3>
-            {{ console.log(strip) }}
             <div v-if="colors[strip.index]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(segment, barIndex) in strip.state.seg" :key="barIndex">
                 <div
