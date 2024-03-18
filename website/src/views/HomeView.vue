@@ -100,7 +100,7 @@ export type IncomingStrip = {
     </aside>
     <hr class="my-5 md:my-0 md:mx-4" />
     <div class="grow">
-      <h2 class="text-lg font-bold">
+      <h2 class="text-2xl font-semibold leading-none tracking-tight mb-3 mt-5">
         Individual lights
         <span v-if="searching">
           <TooltipProvider>
