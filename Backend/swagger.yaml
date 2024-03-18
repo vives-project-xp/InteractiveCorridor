@@ -16,9 +16,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LEDState'
+                $ref: "#/components/schemas/LEDState"
 
   /effect:
+    get:
+      summary: Haal de huidige effectconfiguratie van de LED-strips op.
+      responses:
+        200:
+          description: Huidige effectconfiguratie succesvol opgehaald
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Effect"
     post:
       summary: Verander het effect van de ledstrip.
       requestBody:
@@ -86,6 +97,21 @@ paths:
 
 components:
   schemas:
+    Effect:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID van het effect
+          example: "9"
+        name:
+          type: string
+          description: Naam van het effect
+          example: "Rainbow"
+        description:
+          type: string
+          description: Beschrijving van het effect
+          example: "Displays rainbow colors along the whole strip"
     LEDState:
       type: array
       items:
