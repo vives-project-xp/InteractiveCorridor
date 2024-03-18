@@ -214,14 +214,10 @@ export default {
       console.log('Effects', this.effects);
       return this.effects;
     },
-    setEffect(effect: string | number) {
-      if (this.effects === undefined) return console.warn('Effects not loaded yet');
-
-      const effectID = typeof effect === 'number' ? effect : this.effects.indexOf(effect);
-      if (effectID === -1) return console.warn('Effect not found');
-      console.log('Setting effect', effectID, 'on strips', this.selectedStrips);
+    setEffect(effect: number) {
+      console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
-        .post('http://localhost:3000/effect', { effect: effectID, strips: this.selectedStrips })
+        .post('http://localhost:3000/effect', { effect, strips: this.selectedStrips })
         .catch((error) => {
           console.error(error);
         });
