@@ -10,6 +10,10 @@ const props = defineProps({
     type: String as () => LedEffect,
     required: true,
   },
+  tooltipText: {
+    type: String as () => string,
+    required: true,
+  },
   variant: {
     type: String as () => ButtonVariants['variant'],
     default: 'primary',
@@ -38,7 +42,7 @@ const props = defineProps({
       </TooltipTrigger>
       <TooltipContent>
         <p class="font-bold">
-          {{ props.effect[0].toUpperCase() + props.effect.slice(1).toLowerCase() }}
+          {{ props.tooltipText[0].toUpperCase() + props.effect.slice(1).toLowerCase() }}
         </p>
       </TooltipContent>
     </Tooltip>
