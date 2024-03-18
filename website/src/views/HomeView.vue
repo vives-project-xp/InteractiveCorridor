@@ -115,7 +115,10 @@ export type IncomingStrip = {
               <template v-for="(segment, barIndex) in strip.state.seg" :key="barIndex">
                 <div
                   class="flex items-center rounded m-1 cursor-pointer"
-                  :class="{ 'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedStrips[strip.index]?.includes(barIndex) }"
+                  :class="{
+                    'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]':
+                      selectedStrips[strip.index]?.includes(barIndex),
+                  }"
                   @click="
                     () => {
                       if (!selectedStrips[strip.index]) selectedStrips[strip.index] = [];
