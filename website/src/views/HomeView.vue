@@ -108,13 +108,13 @@ export type IncomingStrip = {
       </h2>
 
       <template v-for="strip in strips" :key="strip.index">
-        <div class="mb-5 cursor-pointer">
+        <div class="mb-5">
           <div>
             <h3>LED-strip {{ strip.index }}</h3>
             <div v-if="colors[strip.index]?.length > 0" class="flex flex-wrap gap-2">
               <template v-for="(segment, barIndex) in strip.state.seg" :key="barIndex">
                 <div
-                  class="flex items-center rounded m-1"
+                  class="flex items-center rounded m-1 cursor-pointer"
                   :class="{ 'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedStrips[strip.index]?.includes(barIndex) }"
                   @click="
                     () => {
@@ -202,12 +202,6 @@ export default {
       return axios
         .get('http://ic' + this.strips[0].index + '.local/json/effects')
         .then((response) => response.data as string[]);
-    },
-    updateStripsColor() {
-      if (this.selectedStrips.length > 0) {
-        // Update the color of selected LED strips only when the color is changed in the color picker
-        this.setColor(this.selectedColor);
-      }
     },
     setEffect(effect: string | number) {
       if (this.effects === undefined) return console.warn('Effects not loaded yet');
