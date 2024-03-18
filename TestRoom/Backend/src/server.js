@@ -11,13 +11,12 @@ const leds = require("./leds");
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get("/api/leds", leds.getLeds);
 
-app.get("/leds", leds.getLeds);
+app.post("/api/color", colors.setColor);
+app.post("/api/effect", effects.setEffect);
 
-app.post("/color", colors.setColor);
-app.post("/effect", effects.setEffect);
-
-app.get("/*", (req, res) => {
+app.get("/api/*", (req, res) => {
   res.send("Access denied");
 });
 
