@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.8
 info:
   title: Stripconfiguratie API
   description: API voor het configureren van LED-strips.
