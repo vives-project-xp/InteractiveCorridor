@@ -26,7 +26,7 @@ app.use(
           version: process.env.npm_package_version || "0.0.0",
         },
       },
-      apis: ["./**/swagger.yaml", "./api/**/*.ts"],
+      apis: ["./**/swagger.yaml"],
     }),
     {
       customCss: ".swagger-ui .topbar { display: none }",
