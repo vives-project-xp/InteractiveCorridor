@@ -10,14 +10,20 @@ const effects = require("./effect");
 const leds = require("./leds");
 
 const swaggerUi = require("swagger-ui-express");
-const fs = require("fs");
-const YAML = require("yaml");
-const file = fs.readFileSync("./swagger.yaml", "utf8");
-const swaggerDocument = YAML.parse(file);
+const swaggerJSdoc = require("swagger-jsdoc");
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSdoc({
+  definition: {
+    openapi: '3.1.0',
+    info: {
+      title: 'Interactive Corridorn API',
+      version: process.env.npm_package_version || '0.0.0',
+    },
+  },
+  apis: ['./**/swagger.yaml', './api/**/*.ts'],
+})));
 
 app.get("/leds", leds.getLeds);
 
