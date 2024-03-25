@@ -1,4 +1,3 @@
-const mqtt = require("./mqtt");
 const { ledstrips } = require("./ledstrips");
 const { hexToRgb } = require("./utils");
 
@@ -11,6 +10,7 @@ const getLeds = async (req, res) => {
       segments.push({
         start: segment.start,
         end: segment.end,
+        length: segment.length,
         color: segment.getHex(),
       });
     }
