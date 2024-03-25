@@ -1,21 +1,27 @@
 const mqtt = require("./mqtt");
+const { ledstrips } = require("./ledstrips");
 
 const getLeds = async (req, res) => {
   console.log("Getting LEDS");
   const strips = [];
-  const keys = Object.keys(mqtt.statusList);
-  const response = [];
 
-  for (let i = 0; i < keys.length; i++) {
-    const status = Object.values(mqtt.statusList)[i];
-    if (status === "online") {
-      // Extract numbers from the key using regular expression
-      const number = keys[i].match(/\d+/)[0];
-      const segments = [11, 11, 11, 11];
-
-      strips.push({ index: number, segments });
+  for (const strip of ledstrips) {
+    const segments = [];
+    for (const segment of strip.segments) {
+      console.log(segment);
+      segments.push({
+        start: segment.start,
+        end: segment.end,
+        color: segment.color,
+      });
     }
+    strips.push({
+      index: strip.index,
+      name: strip.name,
+      segments,
+    });
   }
+
   res.send(strips);
 };
 
