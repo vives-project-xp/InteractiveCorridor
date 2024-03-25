@@ -145,17 +145,6 @@ components:
           segments:
             type: array
             items:
-              type: object
-              properties:
-                start:
-                  type: number
-                  description: Startindex van de segment
-                end:
-                  type: number
-                  description: Eindindex van de segment
-                color:
-                  type: string
-                  description: Kleurcode in hexadecimale notatie
-                brightness:
-                  type: number
-                  description: Helderheid van de kleur
+              type: number
+              description: Lengte van het segment
+              example: 11
