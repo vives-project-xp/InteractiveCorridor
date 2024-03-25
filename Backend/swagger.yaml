@@ -142,9 +142,11 @@ components:
           index:
             type: number
             description: Index van de LED-strip
+            example: 1
           segments:
             type: array
             items:
               type: number
               description: Lengte van het segment
               example: 11
+            example: [11, 11, 11, 11]
