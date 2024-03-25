@@ -29,6 +29,14 @@ class Segment {
       .padStart(2, "0")}${this.color.b.toString(16).padStart(2, "0")}`;
   }
 
+  setStart(start) {
+    this.start = start;
+  }
+
+  setEnd(end) {
+    this.end = end;
+  }
+
   setColor(color) {
     this.color = color;
   }
