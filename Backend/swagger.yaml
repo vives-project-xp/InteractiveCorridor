@@ -178,19 +178,20 @@ components:
             type: string
           example: ["waarde1", "waarde2", "waarde3"]
     Ledstrip:
-      type: array
-      items:
-        properties:
-          index:
-            type: number
-            description: Index van de LED-strip
-          name:
-            type: string
-            description: Naam van de LED-strip
-          segments:
-            type: array
-            items:
-              $ref: "#/components/schemas/Segment"
+      type: object
+      properties:
+        index:
+          type: number
+          description: Index van de LED-strip
+          example: 1
+        name:
+          type: string
+          description: Naam van de LED-strip
+          example: "ic1"
+        segments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Segment"
     Segment:
       type: object
       properties:
@@ -200,6 +201,9 @@ components:
         end:
           type: number
           description: Eindindex van het segment
+          example: 11
         color:
           type: string
           description: Kleurcode in hexadecimale notatie
+          example: "#ff0000"
+          format: hex-color
