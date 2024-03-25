@@ -13,6 +13,9 @@ const searchLeds = () => {
     ) {
       continue;
     }
+    if (ledstrips.find((strip) => strip.index === i)) {
+      continue;
+    }
     ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
   }
 };
