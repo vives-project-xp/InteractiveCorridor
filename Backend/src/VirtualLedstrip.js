@@ -23,6 +23,12 @@ class Segment {
     return this.end - this.start;
   }
 
+  getHex() {
+    return `#${this.color.r.toString(16).padStart(2, "0")}${this.color.g
+      .toString(16)
+      .padStart(2, "0")}${this.color.b.toString(16).padStart(2, "0")}`;
+  }
+
   setColor(color) {
     this.color = color;
   }
