@@ -39,9 +39,10 @@ app.get("/leds", leds.getLeds);
 
 app.post("/color", colors.setColor);
 app.post("/effect", effects.setEffect);
-app.get("/data", db.getDatabaseData);
-
 app.get("/effect", effects.getEffect);
+
+app.get("/dbeffects", db.getEffects);
+app.post("/dbeffects", db.addEffect);
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");

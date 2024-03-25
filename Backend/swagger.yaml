@@ -117,7 +117,34 @@ paths:
           description: Kleur succesvol ingesteld op de LED-strip(s).
         "400":
           description: Ongeldige invoergegevens.
-
+  /dbeffects:
+    get:
+      summary: Haal alle effecten op uit de database.
+      responses:
+        "200":
+          description: Succesvol opgehaald.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Effect"
+        "500":
+          description: Kan geen verbinding maken met de database of fout bij het uitvoeren van de query.
+  /dbeffect:
+    post:
+      summary: Voeg een effect toe aan de database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EffectInput"
+      responses:
+        "200":
+          description: Effect succesvol toegevoegd aan de database.
+        "500":
+          description: Kan geen verbinding maken met de database of fout bij het uitvoeren van de query.
 components:
   schemas:
     Effect:
@@ -135,6 +162,19 @@ components:
           type: string
           description: Beschrijving van het effect
           example: "Displays rainbow colors along the whole strip"
+    EffectInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Naam van het effect dat moet worden toegevoegd.
+          example: "Nieuw Effect"
+        effectData:
+          type: array
+          description: Array van effectgegevens.
+          items:
+            type: string
+          example: ["waarde1", "waarde2", "waarde3"]
     LEDState:
       type: array
       items:
@@ -142,11 +182,9 @@ components:
           index:
             type: number
             description: Index van de LED-strip
-            example: 1
           segments:
             type: array
             items:
               type: number
               description: Lengte van het segment
               example: 11
-            example: [11, 11, 11, 11]
