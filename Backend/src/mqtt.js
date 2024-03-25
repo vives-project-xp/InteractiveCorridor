@@ -13,12 +13,6 @@ let statusList = {};
 
 const client = mqtt.connect(url, options);
 
-client.on("connect", () => {
-  console.log("Connected to MQTT server!");
-  searchLeds();
-  setInterval(searchLeds, 10000);
-});
-
 client.on("error", (error) => {
   console.error("Connection failed:", error);
 });
@@ -26,17 +20,6 @@ client.on("error", (error) => {
 client.on("reconnect", (error) => {
   console.error("Reconnect failed:", error);
 });
-
-const searchLeds = () => {
-  for (let i = 1; i <= 6; i++) {
-    if (
-      statusList["IC/ic" + i] == "offline" ||
-      statusList["IC/ic" + i] == undefined
-    ) {
-      publish(`IC/ic${i}`, "{'on':true}");
-    }
-  }
-};
 
 const publish = (topic, message) => {
   // Subscribe to the status topic to check message receipt
@@ -73,6 +56,7 @@ const subscribe = (topic, callback) => {
 };
 
 module.exports = {
+  client,
   publish,
   subscribe,
   statusList,
