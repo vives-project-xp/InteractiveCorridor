@@ -29,7 +29,6 @@ client.on("reconnect", (error) => {
 
 const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
-    console.log(i, statusList["IC/ic" + i]);
     if (
       statusList["IC/ic" + i] == "offline" ||
       statusList["IC/ic" + i] == undefined
@@ -44,7 +43,6 @@ const publish = (topic, message) => {
   subscribe(topic + "/status", (receivedTopic, receivedMessage) => {
     statusList[topic] = receivedMessage;
   });
-  console.log("Publishing to", topic, ":", message);
   // Publish to the specified topic
   const apiTopic = topic + "/api";
   client.publish(apiTopic, message, (error) => {

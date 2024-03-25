@@ -82,6 +82,42 @@ paths:
         "400":
           description: Ongeldige configuratiegegevens
 
+  /color:
+    post:
+      summary: Stel de kleur in voor de LED-strip(s).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                strips:
+                  type: array
+                  description: |
+                    Lijst van strips waarvoor de kleur moet worden ingesteld.
+                  items:
+                    type: integer
+                    minimum: 0
+                    description: |
+                      Nummer van de strip waarop de kleur moet worden ingesteld. 0 voor alle strips.
+                  example: [1, 2]
+                color:
+                  type: string
+                  description: Kleurcode in hexadecimale notatie (bijv. #FF0000 voor rood).
+                  example: "#FF0000"
+                brightness:
+                  type: integer
+                  minimum: 0
+                  maximum: 255
+                  description: Helderheid van de kleur (0 - 255).
+                  example: 150
+      responses:
+        "200":
+          description: Kleur succesvol ingesteld op de LED-strip(s).
+        "400":
+          description: Ongeldige invoergegevens.
+
 components:
   schemas:
     Effect:
