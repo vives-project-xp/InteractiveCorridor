@@ -19,6 +19,37 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Ledstrip"
+    post:
+      summary: Verander de configuratie van de LED-strips.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  index:
+                    type: number
+                    description: Index van de LED-strip
+                    example: 1
+                  segments:
+                    type: array
+                    description: Lijst van segmenten en hun configuratiegegevens.
+                    items:
+                      $ref: "#/components/schemas/Segment"
+
+              description: Lijst van LED-strips en hun configuratiegegevens.
+      responses:
+        200:
+          description: Configuratie succesvol toegepast
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ledstrip"
 
   /effect:
     get:
