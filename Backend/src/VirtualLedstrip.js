@@ -26,7 +26,12 @@ class VirtualLedstrip {
   _name = ""; // enforce type
   _segments = [new Segment(0, 0)]; // enforce type
 
-  constructor(name = "VirtualLedstrip", stripIndex, segmentLengths = [11, 11, 11, 11], mqtt_enabled = true) {
+  constructor(
+    name = "VirtualLedstrip",
+    stripIndex,
+    segmentLengths = [11, 11, 11, 11],
+    mqtt_enabled = true
+  ) {
     this.mqtt_enabled = mqtt_enabled;
     this._name = name;
     this.index = stripIndex;
@@ -39,8 +44,8 @@ class VirtualLedstrip {
         new Segment(this.length, this.length + segmentLengths[i])
       );
     }
-    console.log("mqttt inpoirt",mqtt);
-    mqtt.publish(`IC/ic${this.index}`, JSON.stringify({ on: true }));
+    if (this.mqtt_enabled)
+      mqtt.publish(`IC/ic${this.index}`, JSON.stringify({ on: true }));
   }
 
   get name() {
