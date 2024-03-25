@@ -7,11 +7,13 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
+    restart: always
     depends_on:
       - database
 
   website:
     build: ./website/
+    restart: always
     ports:
       - "80:8000"
     depends_on:
@@ -21,8 +23,10 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "database"
     ports:
       - "3307:3306"
     volumes:
