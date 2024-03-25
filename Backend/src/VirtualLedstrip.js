@@ -1,14 +1,22 @@
 const mqtt = require("./mqtt");
 
 class Segment {
-  start;
-  end;
-  color;
+  start = 0;
+  end = 0;
+  color = {
+    r: 255,
+    g: 0,
+    b: 0,
+  };
 
   constructor(start, end, color) {
     this.start = start;
     this.end = end;
-    this.color = color;
+    this.color = color || {
+      r: 255,
+      g: 0,
+      b: 0,
+    };
   }
 
   get length() {
