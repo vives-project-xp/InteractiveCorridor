@@ -102,21 +102,25 @@ export type IncomingStrip = {
               :key="barIndex"
               class="flex flex-wrap gap-2"
             >
+              <!-- Add the shadow class if the segment is in the selectedStrips -->
               <div
                 class="flex items-center rounded m-1 cursor-pointer"
                 :class="{
-                  'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]':
-                    selectedStrips[strip.index]?.includes(barIndex),
+                  'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedStrips.find(
+                    (s) => s.index === strip.index && s.segments.includes(barIndex)
+                  ),
                 }"
                 @click="
                   () => {
-                    if (!selectedStrips[strip.index]) selectedStrips[strip.index] = [];
-                    const selectedStrip = selectedStrips[strip.index];
-
-                    if (selectedStrip.includes(barIndex)) {
-                      selectedStrip.splice(selectedStrip.indexOf(barIndex), 1);
+                    const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
+                    if (!selectedStrip) {
+                      selectedStrips.push({ index: strip.index, segments: [barIndex] });
                     } else {
-                      selectedStrip.push(barIndex);
+                      if (selectedStrip.segments.includes(barIndex)) {
+                        selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
+                      } else {
+                        selectedStrip.segments.push(barIndex);
+                      }
                     }
                   }
                 "
@@ -146,7 +150,7 @@ export default {
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [] as number[][],
+      selectedStrips: [] as { index: number; segments: number[] }[],
       searching: false,
     };
   },
@@ -157,7 +161,6 @@ export default {
         .get('http://localhost:3000/leds')
         .then(async (response) => {
           console.log('Got', response.data.length, 'LED strips from the server.');
-          console.log('LED strips:', response.data);
           this.strips = response.data;
           this.searching = false;
         })
@@ -184,13 +187,38 @@ export default {
     },
     setColor(color: string) {
       this.selectedColor = color;
-      const formData = {
-        strips: this.selectedStrips,
-        color,
-        brightness: Number(this.brightness),
-      };
 
-      axios.post('http://localhost:3000/color', formData).catch((error) => {
+      const formData = [];
+      for (const strip of this.selectedStrips) {
+        const s = this.strips.find((s) => s.index === strip.index);
+        if (!s) continue;
+
+        const stripData = {
+          index: strip.index,
+          segments: [] as { start: number; end: number; color: string }[],
+        };
+        for (let i = 0; i < s.segments.length; i++) {
+          const segment = s.segments[i];
+
+          stripData.segments.push({
+            start: segment.start,
+            end: segment.end,
+            color: strip.segments.includes(i) ? color : segment.color,
+          });
+        }
+
+        formData.push(stripData);
+      }
+
+      console.log('formData', formData);
+
+      // const formData = {
+      //   strips: this.selectedStrips,
+      //   color,
+      //   brightness: Number(this.brightness),
+      // };
+
+      axios.post('http://localhost:3000/leds', formData).catch((error) => {
         console.error(error);
       });
     },
