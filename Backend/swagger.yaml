@@ -16,7 +16,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LEDState"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ledstrip"
 
   /effect:
     get:
@@ -175,16 +177,29 @@ components:
           items:
             type: string
           example: ["waarde1", "waarde2", "waarde3"]
-    LEDState:
+    Ledstrip:
       type: array
       items:
         properties:
           index:
             type: number
             description: Index van de LED-strip
+          name:
+            type: string
+            description: Naam van de LED-strip
           segments:
             type: array
             items:
-              type: number
-              description: Lengte van het segment
-              example: 11
+              $ref: "#/components/schemas/Segment"
+    Segment:
+      type: object
+      properties:
+        start:
+          type: number
+          description: Startindex van het segment
+        end:
+          type: number
+          description: Eindindex van het segment
+        color:
+          type: string
+          description: Kleurcode in hexadecimale notatie
