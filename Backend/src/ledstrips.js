@@ -11,8 +11,9 @@ const searchLeds = () => {
       mqtt.statusList["IC/ic" + i] == "offline" ||
       mqtt.statusList["IC/ic" + i] == undefined
     ) {
-      ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
+      continue;
     }
+    ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
   }
 };
 
