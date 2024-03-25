@@ -85,7 +85,7 @@ export type IncomingStrip = {
             </CardHeader>
             <CardContent>
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
-                <div v-if="effects?.length === 0" class="h-56 w-full">
+                <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
                     <Skeleton class="w-full h-10" />
                     <Separator class="my-2" />
