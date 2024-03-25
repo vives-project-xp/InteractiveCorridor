@@ -2,16 +2,18 @@ version: "3.8"
 
 services:
   backend:
+    container_name: backend
     build: ./Backend/
     ports:
       - "3000:3000"
     environment:
       - PORT=3000
     restart: always
-    depends_on:
-      - database
+    env_file:
+      - .env
 
   website:
+    container_name: website
     build: ./website/
     restart: always
     ports:
@@ -20,15 +22,15 @@ services:
       - backend
 
   database:
+    container_name: db
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_USER: "user"
-      MYSQL_PASSWORD: "password"
-      MYSQL_DATABASE: "database"
-    ports:
-      - "3307:3306"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "${MYSQL_ALLOW_EMPTY_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      PORT: "3000"
     volumes:
       - db_data:/var/lib/mysql
 
