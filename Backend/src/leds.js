@@ -12,7 +12,7 @@ const getLeds = async (req, res) => {
       segments.push({
         start: segment.start,
         end: segment.end,
-        color: segment.color,
+        color: segment.getHex(),
       });
     }
     strips.push({
