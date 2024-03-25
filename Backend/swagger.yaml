@@ -142,57 +142,20 @@ components:
           index:
             type: number
             description: Index van de LED-strip
-          state:
-            type: object
-            properties:
-              on:
-                type: boolean
-                description: Geeft aan of de LED-strip aan staat
-              bri:
-                type: number
-                minimum: 0
-                maximum: 255
-                description: Helderheid van de LED-strip
-              seg:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                      description: ID van het segment
-                    start:
-                      type: number
-                      description: Start-LED van het segment
-                    stop:
-                      type: number
-                      description: Eind-LED van het segment
-                    bri:
-                      type: number
-                      minimum: 0
-                      maximum: 255
-                      description: Helderheid van het segment
-          info:
-            type: object
-            properties:
-              ver:
-                type: string
-                description: WLED versie
-              leds:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Naam van de LED-strip
-                  mac:
-                    type: string
-                    description: MAC-adres van de LED-strip
-                  ip:
-                    type: string
-                    description: IP-adres van de LED-strip
-                  count:
-                    type: number
-                    description: Aantal LED's
-                  rgbw:
-                    type: boolean
-                    description: Geeft aan of de LED-strip RGBW LED's bevat
+          segments:
+            type: array
+            items:
+              type: object
+              properties:
+                start:
+                  type: number
+                  description: Startindex van de segment
+                end:
+                  type: number
+                  description: Eindindex van de segment
+                color:
+                  type: string
+                  description: Kleurcode in hexadecimale notatie
+                brightness:
+                  type: number
+                  description: Helderheid van de kleur
