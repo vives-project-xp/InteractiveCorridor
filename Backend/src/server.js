@@ -36,6 +36,7 @@ app.use(
 );
 
 app.get("/leds", leds.getLeds);
+app.post("/leds", leds.postLeds);
 
 app.post("/color", colors.setColor);
 app.post("/effect", effects.setEffect);
