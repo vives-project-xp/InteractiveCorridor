@@ -226,7 +226,7 @@ export default {
   mounted() {
     this.fetchLeds();
     this.fetchEffects();
-    setInterval(this.fetchLeds, 1000);
+    setInterval(this.fetchLeds, 250);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],
       () => {
