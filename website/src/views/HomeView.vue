@@ -86,7 +86,7 @@ export type IncomingStrip = {
         <span v-if="searching">
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger class="text-red-500">°</TooltipTrigger>
+              <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
               <TooltipContent>Searching for LED strips...</TooltipContent>
             </Tooltip>
           </TooltipProvider>
