@@ -29,7 +29,7 @@ export type IncomingStrip = {
 
 <template>
   <div class="flex flex-col md:flex-row my-7">
-    <aside>
+    <aside class="m-auto md:m-0">
       <Tabs default-value="color-picker" class="w-[300px]">
         <TabsList class="w-full">
           <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
