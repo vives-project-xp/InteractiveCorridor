@@ -95,8 +95,8 @@ export type IncomingStrip = {
 
       <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
-          <div>
-            <h3>LED-strip {{ strip.name }}</h3>
+          <h3>LED-strip {{ strip.name }}</h3>
+          <div class="flex flex-wrap">
             <div
               v-for="(segment, barIndex) in strip.segments"
               :key="barIndex"
