@@ -27,4 +27,6 @@ class VirtualLedstrip{
     +get length: number
     +constructor(name: string, index: number, segments: number[], mqtt_enabled: boolean)
 }
+
+Segment *-- VirtualLedstrip
 ```
