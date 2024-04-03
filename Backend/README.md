@@ -8,13 +8,13 @@ classDiagram
 class Segment {
     -start: number
     -end: number
-    -color: object
-    +constructor(start: number, end: number, color: object)
+    -color: Color
+    +constructor(start: number, end: number, color: Color)
     +get length(): number
     +getHex(): string
     +setStart(start: number)
     +setEnd(end: number)
-    +setColor(color: object)
+    +setColor(color: Color)
 }
 
 class Color {
