@@ -17,6 +17,13 @@ class Segment {
     +setColor(color: object)
 }
 
+class Color {
+    <<interface>>
+    +r: number
+    +g: number
+    +b: number
+}
+
 class VirtualLedstrip{
     -_name: string
     -_segments: Segment[]
