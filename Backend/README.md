@@ -68,3 +68,32 @@ The constructor of the Virtual Ledstrip class receives the following parameters:
 ### Methods
 
 The Virtual Ledstrip class has no methods.
+
+## Segment
+
+The Segment class represents a segment of a ledstrip. It has a start, an end and a color.
+
+### Constructor
+
+The constructor of the Segment class receives the following parameters:
+
+- `start`: The start of the segment.
+- `end`: The end of the segment.
+- `color`: The color of the segment.
+
+### Attributes
+
+- `start`: The start of the segment.
+- `end`: The end of the segment.
+- `color`: The color of the segment.
+
+### Properties
+
+- `length`: The length of the segment.
+
+### Methods
+
+- `getHex()`: Returns the color of the segment in hexadecimal format.
+- `setStart(start)`: Sets the start of the segment.
+- `setEnd(end)`: Sets the end of the segment.
+- `setColor(color)`: Sets the color of the segment.
