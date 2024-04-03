@@ -16,4 +16,15 @@ class Segment {
     +setEnd(end: number)
     +setColor(color: object)
 }
+
+class VirtualLedstrip{
+    -_name: string
+    -_segments: Segment[]
+    +index: number
+    +mqtt_enabled: boolean
+    +get name: string
+    +get segments: Segment[]
+    +get length: number
+    +constructor(name: string, index: number, segments: number[], mqtt_enabled: boolean)
+}
 ```
