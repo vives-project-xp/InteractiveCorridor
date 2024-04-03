@@ -1,5 +1,7 @@
 # Backend
 
+The backend is responsible for managing the ledstrips and the MQTT communication. It is implemented in JavaScript using [Node.js](https://nodejs.org/) and the [Express framework](https://expressjs.com/).
+
 ## UML Diagrams
 
 ```mermaid
