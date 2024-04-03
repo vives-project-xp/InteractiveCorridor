@@ -1,6 +1,6 @@
 # Backend
 
-## Virtual Ledstrip
+## UML Diagrams
 
 ```mermaid
 classDiagram
