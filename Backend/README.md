@@ -12,7 +12,7 @@ class Segment {
     -end: number
     -color: Color
     -effect: Effect
-    +constructor(start: number, end: number, color: Color)
+    +constructor(parent: VirtualLedstrip, start: number, end: number, color: Color)
     +get length(): number
     +getHex(): string
     +setStart(start: number)
