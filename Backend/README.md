@@ -11,6 +11,7 @@ class Segment {
     -start: number
     -end: number
     -color: Color
+    -effect: Effect
     +constructor(start: number, end: number, color: Color)
     +get length(): number
     +getHex(): string
@@ -26,6 +27,16 @@ class Color {
     +b: number
 }
 
+class Effect {
+    <<interface>>
+    +id: number,
+    +delay: number,
+    +speed: number,
+    +intensity: number,
+    +reverse: bool,
+    +mirror: bool,
+}
+
 class VirtualLedstrip{
     -_name: string
     -_segments: Segment[]
@@ -39,6 +50,7 @@ class VirtualLedstrip{
 
 VirtualLedstrip "1" --* "1.." Segment
 Color "1.." o-- Segment
+Effect "1.." o-- Segment
 ```
 
 ## Virtual Ledstrip
