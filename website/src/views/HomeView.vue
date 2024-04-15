@@ -178,6 +178,7 @@ export default {
       return this.effects;
     },
     setEffect(effect: number) {
+      if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
         .post('http://localhost:3000/effect', { effect, strips: this.selectedStrips })
