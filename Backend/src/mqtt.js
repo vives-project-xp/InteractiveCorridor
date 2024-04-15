@@ -23,9 +23,7 @@ client.on("reconnect", (error) => {
 
 const publish = (topic, message) => {
   // Subscribe to the status topic to check message receipt
-  subscribe(topic + "/status", (receivedTopic, receivedMessage) => {
-    statusList[topic] = receivedMessage;
-  });
+
   // Publish to the specified topic
   const apiTopic = topic + "/api";
   client.publish(apiTopic, message, (error) => {
@@ -33,7 +31,10 @@ const publish = (topic, message) => {
       console.log("Error:", error);
     }
     // Assume device is offline upon message publication until proven otherwise
-    statusList[topic] = "offline";
+    //statusList[topic] = "offline";
+  });
+  subscribe(topic + "/status", (receivedTopic, receivedMessage) => {
+    statusList[topic] = receivedMessage;
   });
 };
 
@@ -44,7 +45,6 @@ const subscribe = (topic, callback) => {
       console.log("Error:", error);
     }
   });
-
   // Add a listener for incoming messages on the specified topic
   client.on("message", (receivedTopic, message) => {
     // Check if the received topic matches the specified topic
