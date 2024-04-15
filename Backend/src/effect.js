@@ -21,7 +21,24 @@ const setEffect = (req, res) => {
       "No effect specified. Please specify an effect between 0 and 117 (https://github.com/Aircoookie/WLED/wiki/List-of-effects-and-palettes)"
     );
     return;
+  } else {
+    let stripCount = 0;
+    for (const [strip, segments] of Object.entries(strips)) {
+      const segmentsArray = JSON.parse(segments);
+      for (const segment of segmentsArray) {
+        mqtt.publish(
+          `IC/ic${strip}`,
+          `{'seg':[{'id':${
+            segment - 1
+          },'fx':${effect},'sx':${speed}, 'ix':${intensity}, 'rev':${reverse},'mi':${mirror}}],'tb':${
+            delay * stripCount
+          }}`
+        );
+      }
+      stripCount++;
+    }
   }
+
   for (const [strip, segmentsStr] of Object.entries(strips)) {
     const virtualStrip = ledstrips.find(
       (vstrip) => vstrip.index === Number(strip)
