@@ -23,11 +23,10 @@ const setEffect = (req, res) => {
     return;
   } else {
     let stripCount = 0;
-    for (const [stripIndex, strip] of Object.entries(strips)) {
-      console.log(stripIndex, strip);
+    for (const strip of strips) {
       for (const segment of strip.segments) {
         mqtt.publish(
-          `IC/ic${stripIndex}`,
+          `IC/ic${strip.index}`,
           `{'seg':[{'id':${
             segment - 1
           },'fx':${effect},'sx':${speed}, 'ix':${intensity}, 'rev':${reverse},'mi':${mirror}}],'tb':${
