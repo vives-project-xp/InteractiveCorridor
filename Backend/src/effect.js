@@ -22,26 +22,31 @@ const setEffect = (req, res) => {
     );
     return;
   }
-
-  for (const strip of strips) {
-    console.log(strip);
+  for (const [strip, segmentsStr] of Object.entries(strips)) {
     const virtualStrip = ledstrips.find(
-      (vstrip) => vstrip.index === strip.index
+      (vstrip) => vstrip.index === Number(strip)
     );
     if (virtualStrip === undefined) {
       res.send(`Strip ${strip} not found`);
       return;
     }
 
-    for(const segment in strip.segments){
-      virtualStrip.segments[segment].setEffect({
+    const segments = JSON.parse(segmentsStr);
+    for (const segment of segments) {
+      const targetSegment = virtualStrip.segments[segment];
+      if (!targetSegment) {
+        console.log(`Segment ${segment} not found for strip ${strip}`);
+        continue; // Move to the next segment
+      }
+
+      targetSegment.setEffect({
         id: effect,
         delay,
         speed,
         intensity,
         reverse,
         mirror,
-      })
+      });
     }
   }
 

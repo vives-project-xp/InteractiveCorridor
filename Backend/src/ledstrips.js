@@ -3,7 +3,7 @@ const VirtualLedstrip = require("./VirtualLedstrip");
 
 const ledstrips = [new VirtualLedstrip(0, 0)];
 ledstrips.pop(); // enforce type
-// ledstrips.push(new VirtualLedstrip("testLedstrip", 100, [11, 11, 11, 11]));
+//ledstrips.push(new VirtualLedstrip("testLedstrip", 100, [11, 11, 11, 11]));
 
 const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
@@ -19,6 +19,7 @@ const searchLeds = () => {
     }
     console.log(i);
     ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
+    console.log(ledstrips);
   }
 
   // Remove ledstrips that are offline

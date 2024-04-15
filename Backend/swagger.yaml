@@ -77,8 +77,8 @@ paths:
                   description: |
                     Lijst van strips en hun respectievelijke LED's
                   example:
-                    "1": "[1,2,3,4]"
-                    "2": "[1,2,3,4]"
+                    "1": "[0,1,2,3]"
+                    "2": "[0,1,2,3]"
                 effect:
                   type: integer
                   description: |
