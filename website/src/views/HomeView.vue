@@ -181,7 +181,10 @@ export default {
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
-        .post('http://localhost:3000/effect', { effect, strips: this.selectedStrips })
+        .post('http://localhost:3000/effect', {
+          effect: Number(effect),
+          strips: this.selectedStrips,
+        })
         .catch((error) => {
           console.error(error);
         });
