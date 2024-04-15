@@ -8,6 +8,14 @@ class Segment {
     g: 0,
     b: 0,
   };
+  effect = {
+    id: 0,
+    delay: 0,
+    speed: 0,
+    intensity: 0,
+    reverse: false,
+    mirror: false,
+  };
 
   constructor(start, end, color) {
     this.start = start;
@@ -39,6 +47,10 @@ class Segment {
 
   setColor(color) {
     this.color = color;
+  }
+
+  setEffect(effect) {
+    this.effect = effect;
   }
 }
 
