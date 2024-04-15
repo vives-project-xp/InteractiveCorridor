@@ -1,5 +1,6 @@
 const { response } = require("express");
 const mqtt = require("./mqtt");
+const { ledstrips } = require("./ledstrips");
 topic = "";
 
 //{"strips":"{1,2}", "effect":"3", "delay":1000, "speed": 200}
@@ -20,24 +21,30 @@ const setEffect = (req, res) => {
       "No effect specified. Please specify an effect between 0 and 117 (https://github.com/Aircoookie/WLED/wiki/List-of-effects-and-palettes)"
     );
     return;
-  } else {
-    console.log(strips, effect, delay, speed);
-    let stripCount = 0;
-    for (const [strip, segments] of Object.entries(strips)) {
-      const segmentsArray = JSON.parse(segments);
-      for (const segment of segmentsArray) {
-        mqtt.publish(
-          `IC/ic${strip}`,
-          `{'seg':[{'id':${
-            segment - 1
-          },'fx':${effect},'sx':${speed}, 'ix':${intensity}, 'rev':${reverse},'mi':${mirror}}],'tb':${
-            delay * stripCount
-          }}`
-        );
-      }
-      stripCount++;
+  }
+
+  for (const strip of strips) {
+    console.log(strip);
+    const virtualStrip = ledstrips.find(
+      (vstrip) => vstrip.index === strip.index
+    );
+    if (virtualStrip === undefined) {
+      res.send(`Strip ${strip} not found`);
+      return;
+    }
+
+    for(const segment in strip.segments){
+      virtualStrip.segments[segment].setEffect({
+        id: effect,
+        delay,
+        speed,
+        intensity,
+        reverse,
+        mirror,
+      })
     }
   }
+
   res.send(
     `Effect set: \nEffect: ${effect}\nStrips: ${JSON.stringify(
       strips
