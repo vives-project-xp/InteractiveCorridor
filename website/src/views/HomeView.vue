@@ -192,7 +192,6 @@ export default {
         });
     },
     async fetchEffects() {
-<<<<<<< HEAD
       try {
         // Haal de effecten op van 'http://localhost:3000/effect'
         const response1 = await axios.get('http://localhost:3000/effect');
@@ -207,14 +206,6 @@ export default {
       } catch (error) {
         console.error('Error fetching effects:', error);
       }
-=======
-      this.effects =
-        (await axios
-          .get(`http://${window.location.hostname}:3000/effect`)
-          .then((response) => response.data as Effect[])) || [];
-      console.log('Effects', this.effects);
-      return this.effects;
->>>>>>> cb58ea7cbf98c4d9d17078f9d0223ca1a846a569
     },
     setEffect(effect: number) {
       console.log(window.location);
