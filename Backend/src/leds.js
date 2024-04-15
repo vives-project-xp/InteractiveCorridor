@@ -20,7 +20,7 @@ const getLeds = async (req, res) => {
       segments,
     });
   }
-
+  console.log(strips[0].segments);
   res.send(strips);
 };
 
@@ -41,7 +41,6 @@ const postLeds = async (req, res) => {
         seg.setEnd(reqStrip.segments[i].end);
     }
   }
-
   return getLeds(req, res); // return the updated ledstrips
 };
 
