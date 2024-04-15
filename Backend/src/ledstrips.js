@@ -17,9 +17,7 @@ const searchLeds = () => {
     if (ledstrips.find((strip) => strip.index === i)) {
       continue;
     }
-    console.log(i);
     ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
-    console.log(ledstrips);
   }
 
   // Remove ledstrips that are offline
