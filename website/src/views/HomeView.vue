@@ -214,7 +214,7 @@ export default {
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
         .post(`http://${window.location.hostname}:3000/effect`, {
-          effect: Number(effect),
+          effect: Number(effect)+1,
           strips: this.selectedStrips,
         })
         .catch((error) => {
