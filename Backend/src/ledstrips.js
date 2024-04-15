@@ -7,6 +7,7 @@ ledstrips.pop(); // enforce type
 
 const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
+    mqtt.publish("IC/ic" + i, '{"on": true}');
     if (
       mqtt.statusList["IC/ic" + i] == "offline" ||
       mqtt.statusList["IC/ic" + i] == undefined
@@ -16,6 +17,7 @@ const searchLeds = () => {
     if (ledstrips.find((strip) => strip.index === i)) {
       continue;
     }
+    console.log(i);
     ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
   }
 
@@ -29,7 +31,6 @@ const searchLeds = () => {
       ledstrips.splice(index, 1);
     }
   });
-
 };
 
 mqtt.client.on("connect", () => {
