@@ -3,7 +3,7 @@ const VirtualLedstrip = require("./VirtualLedstrip");
 
 const ledstrips = [new VirtualLedstrip(0, 0)];
 ledstrips.pop(); // enforce type
-// ledstrips.push(new VirtualLedstrip("testLedstrip", 100, [11, 11, 11, 11]));
+//ledstrips.push(new VirtualLedstrip("testLedstrip", 100, [11, 11, 11, 11]));
 
 const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
