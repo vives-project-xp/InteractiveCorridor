@@ -194,11 +194,11 @@ export default {
     async fetchEffects() {
       try {
         // Haal de effecten op van 'http://localhost:3000/effect'
-        const response1 = await axios.get('http://localhost:3000/effect');
+        const response1 = await axios.get(`http://${window.location.hostname}:3000/effect`);
         this.effects = response1.data;
 
         // Haal de effecten op van 'http://localhost:3000/dbeffects'
-        const response2 = await axios.get('http://localhost:3000/dbeffects');
+        const response2 = await axios.get(`http://${window.location.hostname}:3000/dbeffects`);
         this.dbeffects = response2.data;
 
         console.log('Effects from /effect:', this.effects);
