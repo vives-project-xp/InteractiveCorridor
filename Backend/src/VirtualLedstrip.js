@@ -17,7 +17,7 @@ class Segment {
     mirror: false,
   };
 
-  constructor(start, end, color) {
+  constructor(parent, start, end, color) {
     this.setStart(start);
     this.setEnd(end);
     this.setColor(
@@ -27,6 +27,7 @@ class Segment {
         b: 0,
       }
     );
+    this.parent = parent
   }
 
   get length() {
@@ -60,7 +61,7 @@ class VirtualLedstrip {
   mqtt_enabled = true; // enforce type
   index = 0; // enforce type
   _name = ""; // enforce type
-  _segments = [new Segment(0, 0)]; // enforce type
+  _segments = [new Segment(this, 0, 0)]; // enforce type
 
   constructor(
     name = "VirtualLedstrip",
@@ -77,7 +78,7 @@ class VirtualLedstrip {
         segmentLengths[i] = 0;
       }
       this._segments.push(
-        new Segment(this.length, this.length + segmentLengths[i])
+        new Segment(this, this.length, this.length + segmentLengths[i])
       );
     }
     if (this.mqtt_enabled)
