@@ -52,10 +52,10 @@ export type IncomingStrip = {
         </TabsContent>
         <TabsContent value="effects">
           <Card>
-            <CardHeader>
-              <CardTitle>Effects</CardTitle>
-            </CardHeader>
             <CardContent>
+              <CardHeader>
+                <CardTitle>Effects</CardTitle>
+              </CardHeader>
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -64,6 +64,27 @@ export type IncomingStrip = {
                   </div>
                 </div>
                 <div v-for="effect in effects || []" :key="effect.id">
+                  <LedEffect
+                    :effect="effect.name"
+                    :tooltip-text="effect.description"
+                    class="w-full text-sm"
+                    variant="secondary"
+                    :onClick="() => setEffect(effect.id)"
+                  />
+                  <Separator class="my-2" />
+                </div>
+              </ScrollArea>
+            <CardHeader>
+              <CardTitle>OwnEffects</CardTitle>
+            </CardHeader>
+              <ScrollArea class="h-56 w-full p-3 rounded-md border">
+                <div v-if="dbeffects === undefined || dbeffects.length === 0" class="h-56 w-full">
+                  <div v-for="i in 5" :key="i">
+                    <Skeleton class="w-full h-10" />
+                    <Separator class="my-2" />
+                  </div>
+                </div>
+                <div v-for="effect in dbeffects || []" :key="effect.id">
                   <LedEffect
                     :effect="effect.name"
                     :tooltip-text="effect.description"
@@ -147,6 +168,7 @@ export default {
   data() {
     return {
       effects: [] as Effect[] | undefined,
+      dbeffects: [] as Effect[] | undefined,
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
@@ -170,12 +192,20 @@ export default {
         });
     },
     async fetchEffects() {
-      this.effects =
-        (await axios
-          .get('http://localhost:3000/effect')
-          .then((response) => response.data as Effect[])) || [];
-      console.log('Effects', this.effects);
-      return this.effects;
+      try {
+        // Haal de effecten op van 'http://localhost:3000/effect'
+        const response1 = await axios.get('http://localhost:3000/effect');
+        this.effects = response1.data;
+
+        // Haal de effecten op van 'http://localhost:3000/dbeffects'
+        const response2 = await axios.get('http://localhost:3000/dbeffects');
+        this.dbeffects = response2.data;
+
+        console.log('Effects from /effect:', this.effects);
+        console.log('Effects from /dbeffects:', this.dbeffects);
+      } catch (error) {
+        console.error('Error fetching effects:', error);
+      }
     },
     setEffect(effect: number) {
       if (this.selectedStrips.length === 0) return;
