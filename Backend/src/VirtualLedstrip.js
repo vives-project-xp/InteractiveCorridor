@@ -34,6 +34,10 @@ class Segment {
     return this.end - this.start;
   }
 
+  get index(){
+    return this.parent.segments.indexOf(this)
+  }
+
   getHex() {
     return `#${this.color.r.toString(16).padStart(2, "0")}${this.color.g
       .toString(16)
