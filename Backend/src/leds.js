@@ -20,7 +20,6 @@ const getLeds = async (req, res) => {
       segments,
     });
   }
-  console.log(strips[0].segments);
   res.send(strips);
 };
 

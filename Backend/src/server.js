@@ -14,7 +14,7 @@ const swaggerJSdoc = require("swagger-jsdoc");
 
 app.use(
   cors({
-    origin: "http://localhost",
+    origin: "*",
   })
 );
 app.use(bodyParser.json());
