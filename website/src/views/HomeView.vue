@@ -180,7 +180,7 @@ export default {
     fetchLeds() {
       this.searching = true;
       axios
-        .get('http://localhost:3000/leds')
+        .get(`http://${window.location.hostname}:3000/leds`)
         .then(async (response) => {
           console.log('Got', response.data.length, 'LED strips from the server.');
           this.strips = response.data;
@@ -192,6 +192,7 @@ export default {
         });
     },
     async fetchEffects() {
+<<<<<<< HEAD
       try {
         // Haal de effecten op van 'http://localhost:3000/effect'
         const response1 = await axios.get('http://localhost:3000/effect');
@@ -206,12 +207,25 @@ export default {
       } catch (error) {
         console.error('Error fetching effects:', error);
       }
+=======
+      this.effects =
+        (await axios
+          .get(`http://${window.location.hostname}:3000/effect`)
+          .then((response) => response.data as Effect[])) || [];
+      console.log('Effects', this.effects);
+      return this.effects;
+>>>>>>> cb58ea7cbf98c4d9d17078f9d0223ca1a846a569
     },
     setEffect(effect: number) {
+      console.log(window.location);
+      
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
-        .post('http://localhost:3000/effect', { effect, strips: this.selectedStrips })
+        .post(`http://${window.location.hostname}:3000/effect`, {
+          effect: Number(effect),
+          strips: this.selectedStrips,
+        })
         .catch((error) => {
           console.error(error);
         });
@@ -249,7 +263,7 @@ export default {
       //   brightness: Number(this.brightness),
       // };
 
-      axios.post('http://localhost:3000/leds', formData).catch((error) => {
+      axios.post(`http://${window.location.hostname}:3000/leds`, formData).catch((error) => {
         console.error(error);
       });
     },

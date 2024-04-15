@@ -12,7 +12,11 @@ const leds = require("./leds");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSdoc = require("swagger-jsdoc");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost",
+  })
+);
 app.use(bodyParser.json());
 app.use(
   "/api-docs",
