@@ -104,6 +104,10 @@ class VirtualLedstrip {
   get length() {
     return this._segments.reduce((acc, segment) => acc + segment.length, 0);
   }
+
+  publish(body) {
+    if (this.mqtt_enabled) mqtt.publish(this.topic, body);
+  }
 }
 
 module.exports = VirtualLedstrip;
