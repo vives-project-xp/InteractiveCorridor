@@ -27,15 +27,15 @@ class Segment {
         b: 0,
       }
     );
-    this.parent = parent
+    this.parent = parent;
   }
 
   get length() {
     return this.end - this.start;
   }
 
-  get index(){
-    return this.parent.segments.indexOf(this)
+  get index() {
+    return this.parent.segments.indexOf(this);
   }
 
   getHex() {
@@ -85,8 +85,7 @@ class VirtualLedstrip {
         new Segment(this, this.length, this.length + segmentLengths[i])
       );
     }
-    if (this.mqtt_enabled)
-      mqtt.publish(`IC/ic${this.index}`, JSON.stringify({ on: true }));
+    this.publish(JSON.stringify({ on: true }));
   }
 
   get name() {
