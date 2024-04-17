@@ -48,7 +48,7 @@ class VirtualLedstrip{
     +constructor(name: string, index: number, segments: number[], mqtt_enabled: boolean)
 }
 
-VirtualLedstrip "1" --* "1.." Segment
+VirtualLedstrip "1" *--o "1.." Segment
 Color "1.." --* Segment
 Effect "1.." --* Segment
 ```
