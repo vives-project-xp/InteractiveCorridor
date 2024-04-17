@@ -49,8 +49,8 @@ class VirtualLedstrip{
 }
 
 VirtualLedstrip "1" --* "1.." Segment
-Color "1.." o-- Segment
-Effect "1.." o-- Segment
+Color "1.." --* Segment
+Effect "1.." --* Segment
 ```
 
 ## Virtual Ledstrip
