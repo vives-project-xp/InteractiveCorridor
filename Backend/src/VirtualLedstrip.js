@@ -18,6 +18,7 @@ class Segment {
   };
 
   constructor(parent, start, end, color) {
+    this.parent = parent;
     this.setStart(start);
     this.setEnd(end);
     this.setColor(
@@ -53,6 +54,18 @@ class Segment {
 
   setColor(color) {
     this.color = color;
+    if (!this.parent.segments) return;
+
+    const body = {
+      seg: [
+        {
+          col: [[this.color.r, this.color.g, this.color.b]],
+        },
+      ],
+    };
+
+    console.log(body);
+    this.parent.publish(JSON.stringify(body));
   }
 
   setEffect(effect) {
