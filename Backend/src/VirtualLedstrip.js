@@ -65,7 +65,6 @@ class Segment {
       })),
     };
 
-    console.log(body);
     this.parent.publish(JSON.stringify(body));
   }
 
