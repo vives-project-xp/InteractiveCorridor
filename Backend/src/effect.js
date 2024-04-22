@@ -21,37 +21,21 @@ const setEffect = (req, res) => {
       "No effect specified. Please specify an effect between 0 and 117 (https://github.com/Aircoookie/WLED/wiki/List-of-effects-and-palettes)"
     );
     return;
-  } else {
-    let stripCount = 0;
-    for (const strip of strips) {
-      for (const segment of strip.segments) {
-        mqtt.publish(
-          `IC/ic${strip.index}`,
-          `{'seg':[{'id':${
-            segment
-          },'fx':${effect},'sx':${speed}, 'ix':${intensity}, 'rev':${reverse},'mi':${mirror}}],'tb':${
-            delay * stripCount
-          }}`
-        );
-      }
-      stripCount++;
-    }
   }
 
-  for (const [strip, segmentsStr] of Object.entries(strips)) {
+  for (const reqStrip of Object.values(strips)) {
     const virtualStrip = ledstrips.find(
-      (vstrip) => vstrip.index === Number(strip)
+      (vstrip) => vstrip.index === reqStrip.index
     );
     if (virtualStrip === undefined) {
-      res.send(`Strip ${strip} not found`);
+      res.send(`Strip ${reqStrip.index} not found`);
       return;
     }
 
-    const segments = JSON.parse(segmentsStr);
-    for (const segment of segments) {
+    for (const segment of reqStrip.segments) {
       const targetSegment = virtualStrip.segments[segment];
       if (!targetSegment) {
-        console.log(`Segment ${segment} not found for strip ${strip}`);
+        console.log(`Segment ${segment} not found for strip ${reqStrip.index}`);
         continue; // Move to the next segment
       }
 
@@ -64,6 +48,7 @@ const setEffect = (req, res) => {
         mirror,
       });
     }
+    virtualStrip.updateEffect();
   }
 
   res.send(
