@@ -120,6 +120,21 @@ class VirtualLedstrip {
 
     this.publish(JSON.stringify(body));
   }
+
+  updateEffect() {
+    const body = {
+      seg: this.segments.map((segment) => ({
+        fx: segment.effect.id,
+        sx: segment.effect.speed,
+        ix: segment.effect.intensity,
+        rev: segment.effect.reverse,
+        mi: segment.effect.mirror,
+      })),
+      tb: 0,
+    };
+
+    this.publish(JSON.stringify(body));
+  }
 }
 
 module.exports = VirtualLedstrip;
