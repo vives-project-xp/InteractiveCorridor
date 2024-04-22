@@ -54,18 +54,6 @@ class Segment {
 
   setColor(color) {
     this.color = color;
-    if (!this.parent.segments) return;
-
-    const body = {
-      seg: this.parent.segments.map((segment) => ({
-        col: [
-          [segment.color.r, segment.color.g, segment.color.b],
-          [segment.color.r, segment.color.g, segment.color.b],
-        ],
-      })),
-    };
-
-    this.parent.publish(JSON.stringify(body));
   }
 
   setEffect(effect) {
@@ -118,6 +106,19 @@ class VirtualLedstrip {
 
   publish(body) {
     if (this.mqtt_enabled) mqtt.publish(this.topic, body);
+  }
+
+  updateColor() {
+    const body = {
+      seg: this.segments.map((segment) => ({
+        col: [
+          [segment.color.r, segment.color.g, segment.color.b],
+          [segment.color.r, segment.color.g, segment.color.b],
+        ],
+      })),
+    };
+
+    this.publish(JSON.stringify(body));
   }
 }
 
