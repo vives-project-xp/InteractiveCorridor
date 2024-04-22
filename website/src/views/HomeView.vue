@@ -258,6 +258,7 @@ export default {
     },
   },
   mounted() {
+    document.body.classList.add('bg-background');
     this.fetchLeds();
     this.fetchEffects();
     setInterval(this.fetchLeds, 250);
