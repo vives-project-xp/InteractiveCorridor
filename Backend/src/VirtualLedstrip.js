@@ -27,7 +27,6 @@ class Segment {
         b: 0,
       }
     );
-    this.parent = parent;
   }
 
   get length() {
