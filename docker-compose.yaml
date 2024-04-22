@@ -30,6 +30,8 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_DATABASE}"
+    ports:
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
 
