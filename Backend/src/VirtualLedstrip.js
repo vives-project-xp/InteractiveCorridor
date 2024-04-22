@@ -18,6 +18,7 @@ class Segment {
   };
 
   constructor(parent, start, end, color) {
+    this.parent = parent;
     this.setStart(start);
     this.setEnd(end);
     this.setColor(
@@ -27,15 +28,14 @@ class Segment {
         b: 0,
       }
     );
-    this.parent = parent
   }
 
   get length() {
     return this.end - this.start;
   }
 
-  get index(){
-    return this.parent.segments.indexOf(this)
+  get index() {
+    return this.parent.segments.indexOf(this);
   }
 
   getHex() {
@@ -85,12 +85,15 @@ class VirtualLedstrip {
         new Segment(this, this.length, this.length + segmentLengths[i])
       );
     }
-    if (this.mqtt_enabled)
-      mqtt.publish(`IC/ic${this.index}`, JSON.stringify({ on: true }));
+    this.publish(JSON.stringify({ on: true }));
   }
 
   get name() {
     return this._name;
+  }
+
+  get topic() {
+    return `IC/ic${this.index}`;
   }
 
   get segments() {
@@ -99,6 +102,38 @@ class VirtualLedstrip {
 
   get length() {
     return this._segments.reduce((acc, segment) => acc + segment.length, 0);
+  }
+
+  publish(body) {
+    if (this.mqtt_enabled) mqtt.publish(this.topic, body);
+  }
+
+  updateColor() {
+    const body = {
+      seg: this.segments.map((segment) => ({
+        col: [
+          [segment.color.r, segment.color.g, segment.color.b],
+          [segment.color.r, segment.color.g, segment.color.b],
+        ],
+      })),
+    };
+
+    this.publish(JSON.stringify(body));
+  }
+
+  updateEffect() {
+    const body = {
+      seg: this.segments.map((segment) => ({
+        fx: segment.effect.id,
+        sx: segment.effect.speed,
+        ix: segment.effect.intensity,
+        rev: segment.effect.reverse,
+        mi: segment.effect.mirror,
+      })),
+      tb: 0,
+    };
+
+    this.publish(JSON.stringify(body));
   }
 }
 

@@ -3,7 +3,6 @@ const mqtt = require("./mqtt");
 topic = "";
 
 const setColor = (req, res) => {
-  console.log(req.body);
   strips = req.body.strips;
   color = req.body.color;
   brightness = req.body.brightness;

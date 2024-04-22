@@ -74,9 +74,9 @@ export type IncomingStrip = {
                   <Separator class="my-2" />
                 </div>
               </ScrollArea>
-            <CardHeader>
-              <CardTitle>OwnEffects</CardTitle>
-            </CardHeader>
+              <CardHeader>
+                <CardTitle>OwnEffects</CardTitle>
+              </CardHeader>
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="dbeffects === undefined || dbeffects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -208,8 +208,6 @@ export default {
       }
     },
     setEffect(effect: number) {
-      console.log(window.location);
-      
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios

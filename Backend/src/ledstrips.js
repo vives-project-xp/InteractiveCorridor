@@ -20,6 +20,8 @@ const searchLeds = () => {
     ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
   }
 
+  ledstrips.sort((a, b) => a.index - b.index);
+
   // Remove ledstrips that are offline
   ledstrips.forEach((strip, index) => {
     if (
