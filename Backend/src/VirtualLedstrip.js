@@ -57,11 +57,12 @@ class Segment {
     if (!this.parent.segments) return;
 
     const body = {
-      seg: [
-        {
-          col: [[this.color.r, this.color.g, this.color.b]],
-        },
-      ],
+      seg: this.parent.segments.map((segment) => ({
+        col: [
+          [segment.color.r, segment.color.g, segment.color.b],
+          [segment.color.r, segment.color.g, segment.color.b],
+        ],
+      })),
     };
 
     console.log(body);
