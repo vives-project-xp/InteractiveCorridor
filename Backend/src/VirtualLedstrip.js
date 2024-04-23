@@ -108,6 +108,19 @@ class VirtualLedstrip {
     if (this.mqtt_enabled) mqtt.publish(this.topic, body);
   }
 
+  updateSegments() {
+    const body = {
+      seg: this.segments.map((segment) => ({
+        start: segment.start,
+        stop: segment.end,
+        len: segment.length,
+        grp: 0,
+      })),
+    };
+
+    this.publish(JSON.stringify(body));
+  }
+
   updateColor() {
     const body = {
       seg: this.segments.map((segment) => ({
