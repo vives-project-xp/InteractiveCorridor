@@ -69,7 +69,7 @@ export type IncomingStrip = {
                 </div>
                 <div
                   v-for="effect in effects?.filter((e) =>
-                    e.name.toLowerCase().startsWith(effectSearch.toLocaleLowerCase())
+                    e.name.toLowerCase().includes(effectSearch.toLocaleLowerCase())
                   ) || []"
                   :key="effect.id"
                 >
