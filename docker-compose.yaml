@@ -4,8 +4,8 @@ services:
   backend:
     container_name: backend
     build: ./Backend/
-    ports:
-      - "3000:3000"
+    #ports:
+    #  - "3000:3000"
     environment:
       - PORT=3000
     restart: always
@@ -17,15 +17,13 @@ services:
       - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=http"
       - "traefik.http.routers.backend.middlewares=my-auth"
-    networks:
-      - webserver
 
   website:
     container_name: website
     build: ./website/
     restart: always
-    ports:
-      - "80:8000"
+    #ports:
+    #  - "80:8000"
     depends_on:
       - backend
     labels:
@@ -34,8 +32,6 @@ services:
       - "traefik.http.routers.website.rule=PathPrefix(`/`)"
       - "traefik.http.routers.website.entrypoints=http"
       - "traefik.http.routers.website.middlewares=my-auth"
-    networks:
-      - webserver
 
   database:
     container_name: db
@@ -59,14 +55,11 @@ services:
     labels:
       - "traefik.http.middlewares.my-auth.basicauth.users=admin:$$apr1$$sticpnxd$$NFmgoSXxHc2dOmaad4vPB."
     ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
       - "8080:8080" # Traefik dashboard
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    networks:
-      - webserver
 
 volumes:
   db_data:
-
-networks:
-  webserver:

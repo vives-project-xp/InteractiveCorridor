@@ -4,10 +4,10 @@ info:
   description: API voor het configureren van LED-strips.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/
+  - url: http://localhost/api
 
 paths:
-  /leds:
+  /api/leds:
     get:
       summary: Haal de huidige configuratie van de LED-strips op.
       responses:
@@ -79,7 +79,7 @@ paths:
                   items:
                     type: object
                     properties:
-                      index: 
+                      index:
                         type: integer
                         description: |
                           Index van de LED-strip waarop het effect moet worden toegepast.
