@@ -5,9 +5,10 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost/api
+    description: Backend server # Beschrijving van de server
 
 paths:
-  /api/leds:
+  /leds:
     get:
       summary: Haal de huidige configuratie van de LED-strips op.
       responses:

@@ -59,7 +59,12 @@ export type IncomingStrip = {
               <CardHeader>
                 <CardTitle>Effects</CardTitle>
               </CardHeader>
-              <Input v-model="effectSearch" type="search" placeholder="Effect" class="w-full mb-2" />
+              <Input
+                v-model="effectSearch"
+                type="search"
+                placeholder="Effect"
+                class="w-full mb-2"
+              />
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -197,7 +202,7 @@ export default {
     fetchLeds() {
       this.searching = true;
       axios
-        .get(`http://${window.location.hostname}:3000/leds`)
+        .get(`http://${window.location.hostname}/api/leds`)
         .then(async (response) => {
           console.log('Got', response.data.length, 'LED strips from the server.');
           this.strips = response.data;
@@ -210,12 +215,12 @@ export default {
     },
     async fetchEffects() {
       try {
-        // Haal de effecten op van 'http://localhost:3000/effect'
-        const response1 = await axios.get(`http://${window.location.hostname}:3000/effect`);
+        // Haal de effecten op van 'http://localhost/api/effect'
+        const response1 = await axios.get(`http://${window.location.hostname}/api/effect`);
         this.effects = response1.data;
 
-        // Haal de effecten op van 'http://localhost:3000/dbeffects'
-        const response2 = await axios.get(`http://${window.location.hostname}:3000/dbeffects`);
+        // Haal de effecten op van 'http://localhost/api/dbeffects'
+        const response2 = await axios.get(`http://${window.location.hostname}/api/dbeffects`);
         this.dbeffects = response2.data;
 
         console.log('Effects from /effect:', this.effects);
@@ -228,7 +233,7 @@ export default {
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
-        .post(`http://${window.location.hostname}:3000/effect`, {
+        .post(`http://${window.location.hostname}/api/effect`, {
           effect: Number(effect),
           strips: this.selectedStrips,
         })
@@ -269,7 +274,7 @@ export default {
       //   brightness: Number(this.brightness),
       // };
 
-      axios.post(`http://${window.location.hostname}:3000/leds`, formData).catch((error) => {
+      axios.post(`http://${window.location.hostname}/api/leds`, formData).catch((error) => {
         console.error(error);
       });
     },
