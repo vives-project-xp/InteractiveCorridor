@@ -40,7 +40,8 @@ const postLeds = async (req, res) => {
       if (reqStrip.segments[i].end !== seg.end)
         seg.setEnd(reqStrip.segments[i].end);
     }
-    strip.updateColor()
+    strip.updateSegments();
+    strip.updateColor();
   }
   return getLeds(req, res); // return the updated ledstrips
 };
