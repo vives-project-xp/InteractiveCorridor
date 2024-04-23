@@ -5,6 +5,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input';
 import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -58,6 +59,7 @@ export type IncomingStrip = {
               <CardHeader>
                 <CardTitle>Effects</CardTitle>
               </CardHeader>
+              <Input v-model="effectSearch" type="search" placeholder="Effect" class="w-full mb-2" />
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -65,7 +67,12 @@ export type IncomingStrip = {
                     <Separator class="my-2" />
                   </div>
                 </div>
-                <div v-for="effect in effects || []" :key="effect.id">
+                <div
+                  v-for="effect in effects?.filter((e) =>
+                    e.name.toLowerCase().startsWith(effectSearch.toLocaleLowerCase())
+                  ) || []"
+                  :key="effect.id"
+                >
                   <LedEffect
                     :effect="effect.name"
                     :tooltip-text="effect.description"
@@ -183,6 +190,7 @@ export default {
       selectedColor: '#ff0000',
       selectedStrips: [] as { index: number; segments: number[] }[],
       searching: false,
+      effectSearch: '',
     };
   },
   methods: {
