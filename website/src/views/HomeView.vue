@@ -153,6 +153,13 @@ export type IncomingStrip = {
                   :key="ledIndexInBar"
                   class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
                   :color="segment.color || '#000000'"
+                  :effect="
+                    effects?.find((e) => Number(e.id) === segment.effect) || {
+                      name: 'Unknown',
+                      description: 'Unknown',
+                      id: -1,
+                    }
+                  "
                 ></LedPixel>
               </div>
             </div>
