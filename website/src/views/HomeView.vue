@@ -22,6 +22,8 @@ export type IncomingStrip = {
   segments: {
     start: number;
     end: number;
+    length: number;
+    effect: number;
     color: string;
   }[];
 };
