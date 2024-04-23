@@ -11,6 +11,7 @@ const getLeds = async (req, res) => {
         start: segment.start,
         end: segment.end,
         length: segment.length,
+        effect: segment.effect.id,
         color: segment.getHex(),
       });
     }
