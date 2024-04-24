@@ -267,8 +267,6 @@ export default {
         formData.push(stripData);
       }
 
-      console.log('formData', formData);
-
       axios.post(`${this.remoteURL}/leds`, formData).catch((error) => {
         console.error(error);
       });
