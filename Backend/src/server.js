@@ -29,6 +29,11 @@ app.use(
           title: "Interactive Corridor API",
           version: process.env.npm_package_version || "0.0.0",
         },
+        servers: [
+          {
+            url: "http://localhost:3000/api",
+          },
+        ],
       },
       apis: ["./**/swagger.yaml"],
     }),
