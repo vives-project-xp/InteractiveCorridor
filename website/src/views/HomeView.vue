@@ -5,6 +5,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input';
 import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedPixel from '@/components/led-pixel.vue';
@@ -22,6 +23,8 @@ export type IncomingStrip = {
   segments: {
     start: number;
     end: number;
+    length: number;
+    effect: number;
     color: string;
   }[];
 };
@@ -56,6 +59,12 @@ export type IncomingStrip = {
               <CardHeader>
                 <CardTitle>Effects</CardTitle>
               </CardHeader>
+              <Input
+                v-model="effectSearch"
+                type="search"
+                placeholder="Effect"
+                class="w-full mb-2"
+              />
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -63,7 +72,12 @@ export type IncomingStrip = {
                     <Separator class="my-2" />
                   </div>
                 </div>
-                <div v-for="effect in effects || []" :key="effect.id">
+                <div
+                  v-for="effect in effects?.filter((e) =>
+                    e.name.toLowerCase().includes(effectSearch.toLocaleLowerCase())
+                  ) || []"
+                  :key="effect.id"
+                >
                   <LedEffect
                     :effect="effect.name"
                     :tooltip-text="effect.description"
@@ -151,6 +165,13 @@ export type IncomingStrip = {
                   :key="ledIndexInBar"
                   class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
                   :color="segment.color || '#000000'"
+                  :effect="
+                    effects?.find((e) => Number(e.id) === segment.effect) || {
+                      name: 'Unknown',
+                      description: 'Unknown',
+                      id: -1,
+                    }
+                  "
                 ></LedPixel>
               </div>
             </div>
@@ -174,13 +195,15 @@ export default {
       selectedColor: '#ff0000',
       selectedStrips: [] as { index: number; segments: number[] }[],
       searching: false,
+      effectSearch: '',
+      remoteURL: `http://${window.location.hostname}/api`
     };
   },
   methods: {
     fetchLeds() {
       this.searching = true;
       axios
-        .get(`http://${window.location.hostname}:3000/leds`)
+        .get(`${this.remoteURL}/leds`)
         .then(async (response) => {
           console.log('Got', response.data.length, 'LED strips from the server.');
           this.strips = response.data;
@@ -193,12 +216,12 @@ export default {
     },
     async fetchEffects() {
       try {
-        // Haal de effecten op van 'http://localhost:3000/effect'
-        const response1 = await axios.get(`http://${window.location.hostname}:3000/effect`);
+        // Haal de effecten op van 'http://localhost/api/effect'
+        const response1 = await axios.get(`${this.remoteURL}/effect`);
         this.effects = response1.data;
 
-        // Haal de effecten op van 'http://localhost:3000/dbeffects'
-        const response2 = await axios.get(`http://${window.location.hostname}:3000/dbeffects`);
+        // Haal de effecten op van 'http://localhost/api/dbeffects'
+        const response2 = await axios.get(`${this.remoteURL}/dbeffects`);
         this.dbeffects = response2.data;
 
         console.log('Effects from /effect:', this.effects);
@@ -211,7 +234,7 @@ export default {
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
-        .post(`http://${window.location.hostname}:3000/effect`, {
+        .post(`${this.remoteURL}/effect`, {
           effect: Number(effect),
           strips: this.selectedStrips,
         })
@@ -244,20 +267,13 @@ export default {
         formData.push(stripData);
       }
 
-      console.log('formData', formData);
-
-      // const formData = {
-      //   strips: this.selectedStrips,
-      //   color,
-      //   brightness: Number(this.brightness),
-      // };
-
-      axios.post(`http://${window.location.hostname}:3000/leds`, formData).catch((error) => {
+      axios.post(`${this.remoteURL}/leds`, formData).catch((error) => {
         console.error(error);
       });
     },
   },
   mounted() {
+    document.body.classList.add('bg-background');
     this.fetchLeds();
     this.fetchEffects();
     setInterval(this.fetchLeds, 250);

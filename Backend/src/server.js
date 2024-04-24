@@ -29,6 +29,11 @@ app.use(
           title: "Interactive Corridor API",
           version: process.env.npm_package_version || "0.0.0",
         },
+        servers: [
+          {
+            url: "http://localhost:3000/api",
+          },
+        ],
       },
       apis: ["./**/swagger.yaml"],
     }),
@@ -39,19 +44,19 @@ app.use(
   )
 );
 
-app.get("/leds", leds.getLeds);
-app.post("/leds", leds.postLeds);
+app.get("/api/leds", leds.getLeds);
+app.post("/api/leds", leds.postLeds);
 
-app.post("/color", colors.setColor);
-app.post("/effect", effects.setEffect);
-app.get("/effect", effects.getEffect);
+app.post("/api/color", colors.setColor);
+app.post("/api/effect", effects.setEffect);
+app.get("/api/effect", effects.getEffect);
 
-app.get("/dbeffects", db.getEffects);
-app.post("/dbeffects", db.addEffect);
+app.get("/api/dbeffects", db.getEffects);
+app.post("/api/dbeffects", db.addEffect);
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");
 });
 app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
+  console.log(`Server listening on http://localhost/api`);
 });

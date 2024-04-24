@@ -13,24 +13,26 @@ try {
     insecureAuth: true,
   });
 
-  try{
-  connection.connect((err) => {
-    console.log(
-      "trying to connect with this credentials",
-      process.env.MYSQL_PASSWORD,
-      process.env.MYSQL_USER,
-      process.env.MYSQL_DATABASE
-    );
-  });
-  }catch (err){
+  try {
+    connection.connect((err) => {
+      console.log(
+        "trying to connect with this credentials",
+        process.env.MYSQL_PASSWORD,
+        process.env.MYSQL_USER,
+        process.env.MYSQL_DATABASE
+      );
+    });
+  } catch (err) {
     process.exit(1);
   }
-}catch (err){
+} catch (err) {
+  console.log(err);
   process.exit(1);
 }
 
 connection.on("error", function (err) {
   console.log("Error in database connection");
+  console.log(err);
   process.exit(1);
 });
 
@@ -53,24 +55,23 @@ const getEffects = (req, res) => {
 };
 
 const addEffect = (req, res) => {
-
   const insertEffectQuery =
     "INSERT INTO effects (name, effectData) VALUES (?, ?)";
 
-    const effectDataString = JSON.stringify(req.body.effectData);
+  const effectDataString = JSON.stringify(req.body.effectData);
 
-    connection.query(
-      insertEffectQuery,
-      [req.body.name, effectDataString],
-      (err, results) => {
-        if (err) {
-          console.error("Error executing database query:", err);
-          res.status(500).send(err);
-          return;
-        }
-        res.status(200).send("Effect added successfully");
+  connection.query(
+    insertEffectQuery,
+    [req.body.name, effectDataString],
+    (err, results) => {
+      if (err) {
+        console.error("Error executing database query:", err);
+        res.status(500).send(err);
+        return;
       }
-    );
+      res.status(200).send("Effect added successfully");
+    }
+  );
 };
 
 const createTable = () => {
@@ -89,6 +90,6 @@ const createTable = () => {
     }
     console.log("Table created successfully");
   });
-}
+};
 
 module.exports = { getEffects, addEffect };

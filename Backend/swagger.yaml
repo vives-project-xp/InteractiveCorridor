@@ -4,7 +4,8 @@ info:
   description: API voor het configureren van LED-strips.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/
+  - url: http://localhost/api
+    description: Backend server # Beschrijving van de server
 
 paths:
   /leds:
@@ -79,7 +80,7 @@ paths:
                   items:
                     type: object
                     properties:
-                      index: 
+                      index:
                         type: integer
                         description: |
                           Index van de LED-strip waarop het effect moet worden toegepast.
@@ -202,10 +203,12 @@ components:
           type: string
           description: Naam van het effect
           example: "Rainbow"
+          nullable: true
         description:
           type: string
           description: Beschrijving van het effect
           example: "Displays rainbow colors along the whole strip"
+          nullable: true
     EffectInput:
       type: object
       properties:
@@ -244,6 +247,14 @@ components:
           type: number
           description: Eindindex van het segment
           example: 11
+        lenght:
+          type: number
+          description: Lengte van het segment
+          example: 11
+        effect:
+          type: number
+          description: ID van het effect
+          example: 28
         color:
           type: string
           description: Kleurcode in hexadecimale notatie

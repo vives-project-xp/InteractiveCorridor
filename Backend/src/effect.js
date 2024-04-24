@@ -48,6 +48,7 @@ const setEffect = (req, res) => {
         mirror,
       });
     }
+    virtualStrip.updateSegments();
     virtualStrip.updateEffect();
   }
 

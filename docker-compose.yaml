@@ -4,22 +4,34 @@ services:
   backend:
     container_name: backend
     build: ./Backend/
-    ports:
-      - "3000:3000"
+    #ports:
+    #  - "3000:3000"
     environment:
       - PORT=3000
     restart: always
     env_file:
       - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.backend.loadbalancer.server.port=3000"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=http"
+      - "traefik.http.routers.backend.middlewares=my-auth"
 
   website:
     container_name: website
     build: ./website/
     restart: always
-    ports:
-      - "80:8000"
+    #ports:
+    #  - "80:8000"
     depends_on:
       - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.website.loadbalancer.server.port=8000"
+      - "traefik.http.routers.website.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.website.entrypoints=http"
+      - "traefik.http.routers.website.middlewares=my-auth"
 
   database:
     container_name: db
@@ -30,10 +42,24 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_DATABASE}"
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+
+  traefik:
+    image: "traefik:v2.5"
+    command:
+      - "--providers.docker=true"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--log.level=DEBUG"
+    labels:
+      - "traefik.http.middlewares.my-auth.basicauth.users=admin:$$apr1$$sticpnxd$$NFmgoSXxHc2dOmaad4vPB."
+    ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "8080:8080" # Traefik dashboard
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
 volumes:
   db_data:

@@ -12,6 +12,10 @@ const props = defineProps({
       return prop.match(/^#[0-9a-fA-F]{3,6}$/) !== null;
     },
   },
+  effect: {
+    type: Object as () => { name: string; description: string; id: number },
+    required: true,
+  },
   class: {
     type: String as () => string,
     default: '',
@@ -25,9 +29,14 @@ const props = defineProps({
       <TooltipTrigger as-child>
         <div :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
       </TooltipTrigger>
-      <TooltipContent class="space-x-1">
-        <code class="bg-muted rounded py-[2px] px-1">{{ props.color }}</code>
-        <Button
+      <TooltipContent class="flex flex-col gap-2 max-w-48">
+        <div>
+          <p class="text-sm">{{ props.effect.name }}</p>
+          <p class="text-xs text-wrap">{{ props.effect.description }}</p>
+        </div>
+        <div class="flex justify-center space-x-1">
+          <code class="bg-muted rounded py-[2px] px-1">{{ props.color }}</code>
+          <Button
           variant="secondary"
           class="py-[2px] px-1 h-5 text-xs"
           @click="
@@ -40,6 +49,7 @@ const props = defineProps({
         >
           {{ copyButtonText }}
         </Button>
+      </div>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
