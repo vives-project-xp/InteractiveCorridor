@@ -50,7 +50,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |    6     |              |         |
 | [ESP32-C3](#esp32-c3)                           |    6     |       8,8451 |         |
 | [ledstrip profile](#ledstrip-profile)           |    16    |        17,95 |         |
-| [DC/DC Converter](#dcdc-converter)         |    6     |         5,39 |         |
+| [DC/DC Converter](#dcdc-converter)              |    6     |         5,39 |         |
 | [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
 | [Cable box](#cable-box)                         |    6     |         1,59 |         |
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
