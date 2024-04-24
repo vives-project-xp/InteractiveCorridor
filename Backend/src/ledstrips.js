@@ -17,7 +17,7 @@ const searchLeds = () => {
     if (ledstrips.find((strip) => strip.index === i)) {
       continue;
     }
-    ledstrips.push(new VirtualLedstrip("ic" + i, i, [11, 11, 11, 11]));
+    ledstrips.push(new VirtualLedstrip("ic" + i, i, [10, 10, 10, 10]));
   }
 
   ledstrips.sort((a, b) => a.index - b.index);
@@ -35,9 +35,8 @@ const searchLeds = () => {
 };
 
 mqtt.client.on("connect", () => {
-  console.log("Connected to MQTT server!");
   searchLeds();
-  setInterval(searchLeds, 10000);
+  setInterval(searchLeds, 1000);
 });
 
 module.exports = { ledstrips };

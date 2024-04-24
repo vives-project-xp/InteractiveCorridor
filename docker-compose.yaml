@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
   backend:
     container_name: backend
@@ -16,7 +15,6 @@ services:
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
       - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=http"
-      - "traefik.http.routers.backend.middlewares=my-auth"
 
   website:
     container_name: website
@@ -31,7 +29,6 @@ services:
       - "traefik.http.services.website.loadbalancer.server.port=8000"
       - "traefik.http.routers.website.rule=PathPrefix(`/`)"
       - "traefik.http.routers.website.entrypoints=http"
-      - "traefik.http.routers.website.middlewares=my-auth"
 
   database:
     container_name: db
@@ -42,6 +39,8 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MQTT_HOST: "${MQTT_HOST}"
+      MQTT_PORT: "${MQTT_PORT}"
     volumes:
       - db_data:/var/lib/mysql
 
@@ -51,9 +50,7 @@ services:
       - "--providers.docker=true"
       - "--api.dashboard=true"
       - "--api.insecure=true"
-      - "--log.level=DEBUG"
-    labels:
-      - "traefik.http.middlewares.my-auth.basicauth.users=admin:$$apr1$$sticpnxd$$NFmgoSXxHc2dOmaad4vPB."
+      - "--log.level=WARN"
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
@@ -61,5 +58,18 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
+  mosquitto:
+    container_name: mqtt
+    image: eclipse-mosquitto:2
+    restart: always
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/conf:/mosquitto/config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+
 volumes:
   db_data:
+  mosquitto_data:
+  mosquitto_log:

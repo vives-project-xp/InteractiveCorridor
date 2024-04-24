@@ -1,5 +1,12 @@
 const mqtt = require("mqtt");
-const url = "mqtt://mqtt.devbit.be:1883";
+require("dotenv").config();
+
+let url;
+if(!process.env.MQTT_CONTAINER){
+  url = process.env.MQTT_HOST + ":" + process.env.MQTT_PORT;
+}else{
+  url = "mqtt://mosquitto";
+}
 
 const options = {
   clean: true, // Clean session
@@ -13,12 +20,20 @@ let statusList = {};
 
 const client = mqtt.connect(url, options);
 
-client.on("error", (error) => {
-  console.error("Connection failed:", error);
+client.on("error", (err) => {
+  console.error("Connection failed:", err);
 });
 
-client.on("reconnect", (error) => {
-  console.error("Reconnect failed:", error);
+client.on("connect", () => {
+  console.log("Connected to MQTT server: " + url);
+});
+
+client.on("disconnect", () => {
+  console.error("Disconnected from MQTT server:");
+});
+
+client.on("reconnect", () => {
+  console.error("Reconnect failed:");
 });
 
 const publish = (topic, message) => {
