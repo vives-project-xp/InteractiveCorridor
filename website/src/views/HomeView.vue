@@ -196,13 +196,14 @@ export default {
       selectedStrips: [] as { index: number; segments: number[] }[],
       searching: false,
       effectSearch: '',
+      remoteURL: `http://${window.location.hostname}/api`
     };
   },
   methods: {
     fetchLeds() {
       this.searching = true;
       axios
-        .get(`http://${window.location.hostname}/api/leds`)
+        .get(`${this.remoteURL}/leds`)
         .then(async (response) => {
           console.log('Got', response.data.length, 'LED strips from the server.');
           this.strips = response.data;
@@ -216,11 +217,11 @@ export default {
     async fetchEffects() {
       try {
         // Haal de effecten op van 'http://localhost/api/effect'
-        const response1 = await axios.get(`http://${window.location.hostname}/api/effect`);
+        const response1 = await axios.get(`${this.remoteURL}/effect`);
         this.effects = response1.data;
 
         // Haal de effecten op van 'http://localhost/api/dbeffects'
-        const response2 = await axios.get(`http://${window.location.hostname}/api/dbeffects`);
+        const response2 = await axios.get(`${this.remoteURL}/dbeffects`);
         this.dbeffects = response2.data;
 
         console.log('Effects from /effect:', this.effects);
@@ -233,7 +234,7 @@ export default {
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
       axios
-        .post(`http://${window.location.hostname}/api/effect`, {
+        .post(`${this.remoteURL}/effect`, {
           effect: Number(effect),
           strips: this.selectedStrips,
         })
@@ -268,13 +269,7 @@ export default {
 
       console.log('formData', formData);
 
-      // const formData = {
-      //   strips: this.selectedStrips,
-      //   color,
-      //   brightness: Number(this.brightness),
-      // };
-
-      axios.post(`http://${window.location.hostname}/api/leds`, formData).catch((error) => {
+      axios.post(`${this.remoteURL}/leds`, formData).catch((error) => {
         console.error(error);
       });
     },
