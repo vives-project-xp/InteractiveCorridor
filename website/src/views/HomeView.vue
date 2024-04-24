@@ -91,6 +91,12 @@ export type IncomingStrip = {
               <CardHeader>
                 <CardTitle>OwnEffects</CardTitle>
               </CardHeader>
+              <Input
+                v-model="dbeffectSearch"
+                type="search"
+                placeholder="Own Effects"
+                class="w-full mb-2"
+              />
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="dbeffects === undefined || dbeffects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -98,7 +104,11 @@ export type IncomingStrip = {
                     <Separator class="my-2" />
                   </div>
                 </div>
-                <div v-for="effect in dbeffects || []" :key="effect.id">
+                <div v-for="effect in dbeffects?.filter((e) =>
+                    e.name.toLowerCase().includes(dbeffectSearch.toLocaleLowerCase())
+                  ) || []"
+                  :key="effect.id"
+                >
                   <LedEffect
                     :effect="effect.name"
                     :tooltip-text="effect.description"
@@ -196,6 +206,7 @@ export default {
       selectedStrips: [] as { index: number; segments: number[] }[],
       searching: false,
       effectSearch: '',
+      dbeffectSearch: '',
       remoteURL: `http://${window.location.hostname}/api`
     };
   },
