@@ -6,11 +6,11 @@
   - [Table of contents](#table-of-contents)
   - [Measurements](#measurements)
   - [Bill of Materials](#bill-of-materials)
+  - [Level shifter](#level-shifter)
     - [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip)
     - [ESP32-C3](#esp32-c3)
     - [Ledstrip profile](#ledstrip-profile)
     - [DC/DC converter](#dcdc-converter)
-    - [Level shifter](#level-shifter)
     - [Prototype printplate](#prototype-printplate)
     - [Cable box](#cable-box)
     - [Power supply](#power-supply)
@@ -19,6 +19,9 @@
     - [Autofuse set 10A](#autofuse-set-10a)
     - [cables](#cables)
     - [Female pin header set](#female-pin-header-set)
+    - [Male pin header set](#male-pin-header-set)
+    - [Cable tray](#cable-tray)
+    - [Resistors](#resistors)
   - [Architecture document](#architecture-document)
     - [Input requirements](#input-requirements)
     - [Functional requirements](#functional-requirements)
@@ -26,6 +29,7 @@
     - [Software architecture diagram](#software-architecture-diagram)
     - [Hardware architecture diagram](#hardware-architecture-diagram)
     - [Wiring architecture diagram](#wiring-architecture-diagram)
+    - [Wiring for Level shifter](#wiring-for-level-shifter)
   - [Project document](#project-document)
   - [ESP32](#esp32)
     - [WLED Software](#wled-software)
@@ -46,7 +50,7 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [WS2814 RGBW LED strip](#ws2814-rgbw-led-strip) |    6     |              |         |
 | [ESP32-C3](#esp32-c3)                           |    6     |       8,8451 |         |
 | [ledstrip profile](#ledstrip-profile)           |    16    |        17,95 |         |
-| [DC/DC Converter](#dcdc-converter24V5V)         |    6     |         5,39 |         |
+| [DC/DC Converter](#dcdc-converter)              |    6     |         5,39 |         |
 | [Prototype printplate](#prototype-printplate)   |    6     |         1,25 |         |
 | [Cable box](#cable-box)                         |    6     |         1,59 |         |
 | [Power supply](#power-supply)                   |    1     |        76,95 |         |
