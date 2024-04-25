@@ -84,7 +84,7 @@ export type IncomingStrip = {
                     :tooltip-text="effect.description"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="() => setEffect(effect.id)"
+                    :onClick="() => setEffect('effect', effect.id)"
                   />
                   <Separator class="my-2" />
                 </div>

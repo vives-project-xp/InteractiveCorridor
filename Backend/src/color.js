@@ -6,6 +6,7 @@ const setColor = (req, res) => {
   strips = req.body.strips;
   color = req.body.color;
   brightness = req.body.brightness;
+  console.log(strips);
   if (strips == undefined) {
     res.send(
       "No strip specified. Please specify a strip number between 0 and 2 (0 = all, 1 = strip 1 , 2 = strip 2, ...)"
