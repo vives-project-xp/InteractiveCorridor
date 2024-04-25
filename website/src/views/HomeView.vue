@@ -105,7 +105,8 @@ export type IncomingStrip = {
                     <Separator class="my-2" />
                   </div>
                 </div>
-                <div v-for="effect in dbeffects?.filter((e) =>
+                <div
+                  v-for="effect in dbeffects?.filter((e) =>
                     e.name.toLowerCase().includes(dbeffectSearch.toLocaleLowerCase())
                   ) || []"
                   :key="effect.id"
@@ -115,7 +116,7 @@ export type IncomingStrip = {
                     :tooltip-text="effect.description"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="() => setEffect('effect',effect.id)"
+                    :onClick="() => setEffect('effect', effect.id)"
                   />
                   <Separator class="my-2" />
                 </div>
@@ -131,7 +132,7 @@ export type IncomingStrip = {
             <CardContent>
               <div class="flex justify-center h-min flex-col">
                 <label for="speedSlider">Speed: {{ speed }}</label>
-                  <input
+                <input
                   type="range"
                   id="speedSlider"
                   v-model="speed"
@@ -141,38 +142,48 @@ export type IncomingStrip = {
                   label="Speed"
                   class="w-full"
                   @input="setEffect('speed', speed)"
-                >
+                />
                 <br />
                 <label for="intensitySlider">Intensity: {{ intensity }}</label>
-                  <input
-                    type="range"
-                    v-model="intensity"
-                    min="0"
-                    max="255"
-                    step="1"
-                    label="Intensity"
-                    class="w-full"
-                    @input="setEffect('intensity', intensity)"
-                  >
-                  <br />
+                <input
+                  type="range"
+                  v-model="intensity"
+                  min="0"
+                  max="255"
+                  step="1"
+                  label="Intensity"
+                  class="w-full"
+                  @input="setEffect('intensity', intensity)"
+                />
+                <br />
                 <label for="delaySlider">Delay: {{ delay }}</label>
+                <input
+                  type="range"
+                  v-model="delay"
+                  min="0"
+                  max="1000"
+                  step="1"
+                  label="Delay"
+                  class="w-full"
+                  @input="setEffect('delay', delay)"
+                />
+                <br />
+                <div flex justify-center h-min flex-row>
+                  <label for="mirror">Mirror </label>
                   <input
-                    type="range"
-                    v-model="delay"
-                    min="0"
-                    max="1000"
-                    step="1"
-                    label="Delay"
-                    class="w-full"
-                    @input="setEffect('delay', delay)"
-                  >
+                    type="checkbox"
+                    id="mirror"
+                    v-model="mirror"
+                    v-on:change="setEffect('mirror', mirror)"
+                  />
                   <br />
-                  <div flex justify-center h-min flex-row>
-                    <label for="mirror">Mirror </label>
-                  <input type="checkbox" id="mirror" v-model="mirror" v-on:change="setEffect('mirror', mirror)"/>
-                  <br />
-                  <label for="reverse">Reverse </label>  
-                  <input type="checkbox" id="reverse" v-model="reverse" v-on:change="setEffect('reverse', reverse)"/>
+                  <label for="reverse">Reverse </label>
+                  <input
+                    type="checkbox"
+                    id="reverse"
+                    v-model="reverse"
+                    v-on:change="setEffect('reverse', reverse)"
+                  />
                 </div>
               </div>
             </CardContent>
@@ -196,7 +207,14 @@ export type IncomingStrip = {
 
       <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
-          <h3>LED-strip {{ strip.name }}</h3>
+          <h3 class="font-semibold">{{ strip.name }}</h3>
+          <button @click="() => combineStrip(strip)">
+            {{
+              striptype.find((s) => s.name === strip.name).action === 'combine'
+                ? 'Combine'
+                : 'Split'
+            }}
+          </button>
           <div class="flex flex-wrap">
             <div
               v-for="(segment, barIndex) in strip.segments"
@@ -259,17 +277,18 @@ export default {
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [] as { index: number; segments: number[] }[],
+      selectedStrips: [] as { index: number; start: number; end: number }[],
+      striptype: [] as { name: string; action: string }[],
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
       remoteURL: `http://${window.location.hostname}/api`,
       effectid: 0,
-      speed:128,
-      intensity:128,
-      delay:0,
+      speed: 128,
+      intensity: 128,
+      delay: 0,
       reverse: false,
-      mirror: false
+      mirror: false,
     };
   },
   methods: {
@@ -278,8 +297,12 @@ export default {
       axios
         .get(`${this.remoteURL}/leds`)
         .then(async (response) => {
-          console.log('Got', response.data.length, 'LED strips from the server.');
           this.strips = response.data;
+          this.strips.forEach((strip) => {
+            if (this.striptype.find((s) => s.name === strip.name) === undefined) {
+              this.striptype.push({ name: strip.name, action: 'split' });
+            }
+          });
           this.searching = false;
         })
         .catch((error) => {
@@ -307,15 +330,14 @@ export default {
       if (this.selectedStrips.length === 0) return;
 
       const data: any = {
-          strips: this.selectedStrips};
+        strips: this.selectedStrips,
+      };
       if (option !== undefined && value !== undefined) {
-          data[option] = value;
-        } 
-      axios
-        .post(`${this.remoteURL}/effect`, data)
-        .catch((error) => {
-          console.error(error);
-        });
+        data[option] = value;
+      }
+      axios.post(`${this.remoteURL}/effect`, data).catch((error) => {
+        console.error(error);
+      });
     },
     setColor(color: string) {
       this.selectedColor = color;
@@ -345,6 +367,13 @@ export default {
       axios.post(`${this.remoteURL}/leds`, formData).catch((error) => {
         console.error(error);
       });
+    },
+
+    combineStrip(strip) {
+      const stripType = this.striptype.find((s) => s.name === strip.name);
+      if (stripType) {
+        stripType.action = stripType.action === 'combine' ? 'split' : 'combine';
+      }
     },
   },
   mounted() {

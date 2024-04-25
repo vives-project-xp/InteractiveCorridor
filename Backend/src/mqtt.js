@@ -2,9 +2,9 @@ const mqtt = require("mqtt");
 require("dotenv").config();
 
 let url;
-if(!process.env.MQTT_CONTAINER){
+if (process.env.MQTT_CONTAINER === "false") {
   url = process.env.MQTT_HOST + ":" + process.env.MQTT_PORT;
-}else{
+} else {
   url = "mqtt://mosquitto";
 }
 
