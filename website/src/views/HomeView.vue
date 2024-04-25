@@ -37,6 +37,7 @@ export type IncomingStrip = {
         <TabsList class="w-full">
           <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger class="w-full" value="effects">Effects</TabsTrigger>
+          <TabsTrigger class="w-full" value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="color-picker">
           <Card>
@@ -91,6 +92,12 @@ export type IncomingStrip = {
               <CardHeader>
                 <CardTitle>OwnEffects</CardTitle>
               </CardHeader>
+              <Input
+                v-model="dbeffectSearch"
+                type="search"
+                placeholder="Own Effects"
+                class="w-full mb-2"
+              />
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="dbeffects === undefined || dbeffects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -98,17 +105,76 @@ export type IncomingStrip = {
                     <Separator class="my-2" />
                   </div>
                 </div>
-                <div v-for="effect in dbeffects || []" :key="effect.id">
+                <div v-for="effect in dbeffects?.filter((e) =>
+                    e.name.toLowerCase().includes(dbeffectSearch.toLocaleLowerCase())
+                  ) || []"
+                  :key="effect.id"
+                >
                   <LedEffect
                     :effect="effect.name"
                     :tooltip-text="effect.description"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="() => setEffect(effect.id)"
+                    :onClick="() => setEffect('effect',effect.id)"
                   />
                   <Separator class="my-2" />
                 </div>
               </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="settings">
+          <Card>
+            <CardHeader>
+              <CardTitle>Settings</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="flex justify-center h-min flex-col">
+                <label for="speedSlider">Speed: {{ speed }}</label>
+                  <input
+                  type="range"
+                  id="speedSlider"
+                  v-model="speed"
+                  min="0"
+                  max="255"
+                  step="1"
+                  label="Speed"
+                  class="w-full"
+                  @input="setEffect('speed', speed)"
+                >
+                <br />
+                <label for="intensitySlider">Intensity: {{ intensity }}</label>
+                  <input
+                    type="range"
+                    v-model="intensity"
+                    min="0"
+                    max="255"
+                    step="1"
+                    label="Intensity"
+                    class="w-full"
+                    @input="setEffect('intensity', intensity)"
+                  >
+                  <br />
+                <label for="delaySlider">Delay: {{ delay }}</label>
+                  <input
+                    type="range"
+                    v-model="delay"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    label="Delay"
+                    class="w-full"
+                    @input="setEffect('delay', delay)"
+                  >
+                  <br />
+                  <div flex justify-center h-min flex-row>
+                    <label for="mirror">Mirror </label>
+                  <input type="checkbox" id="mirror" v-model="mirror" v-on:change="setEffect('mirror', mirror)"/>
+                  <br />
+                  <label for="reverse">Reverse </label>  
+                  <input type="checkbox" id="reverse" v-model="reverse" v-on:change="setEffect('reverse', reverse)"/>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
@@ -196,7 +262,14 @@ export default {
       selectedStrips: [] as { index: number; segments: number[] }[],
       searching: false,
       effectSearch: '',
-      remoteURL: `http://${window.location.hostname}/api`
+      dbeffectSearch: '',
+      remoteURL: `http://${window.location.hostname}/api`,
+      effectid: 0,
+      speed:128,
+      intensity:128,
+      delay:0,
+      reverse: false,
+      mirror: false
     };
   },
   methods: {
@@ -230,14 +303,16 @@ export default {
         console.error('Error fetching effects:', error);
       }
     },
-    setEffect(effect: number) {
+    setEffect(option?: string, value?: any) {
       if (this.selectedStrips.length === 0) return;
-      console.log('Setting effect', effect, 'on strips', this.selectedStrips);
+
+      const data: any = {
+          strips: this.selectedStrips};
+      if (option !== undefined && value !== undefined) {
+          data[option] = value;
+        } 
       axios
-        .post(`${this.remoteURL}/effect`, {
-          effect: Number(effect),
-          strips: this.selectedStrips,
-        })
+        .post(`${this.remoteURL}/effect`, data)
         .catch((error) => {
           console.error(error);
         });
