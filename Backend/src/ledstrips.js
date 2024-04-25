@@ -1,5 +1,9 @@
 const mqtt = require("./mqtt");
 const VirtualLedstrip = require("./VirtualLedstrip");
+require("dotenv").config();
+
+const startTime = process.env.START_TIME || 8;
+const endTime = process.env.END_TIME || 22;
 
 const ledstrips = [new VirtualLedstrip(0, 0)];
 ledstrips.pop(); // enforce type
@@ -7,7 +11,12 @@ ledstrips.pop(); // enforce type
 
 const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
-    mqtt.publish("IC/ic" + i, '{"on": true}');
+    const currentTime = new Date().getUTCHours();
+    const action =
+      currentTime + 2 < startTime || currentTime + 2 >= endTime
+        ? "false"
+        : "true";
+    mqtt.publish(`IC/ic${i}`, `{"on": ${action}}`);
     if (
       mqtt.statusList["IC/ic" + i] == "offline" ||
       mqtt.statusList["IC/ic" + i] == undefined
