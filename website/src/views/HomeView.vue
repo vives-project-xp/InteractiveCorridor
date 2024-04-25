@@ -37,6 +37,7 @@ export type IncomingStrip = {
         <TabsList class="w-full">
           <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger class="w-full" value="effects">Effects</TabsTrigger>
+          <TabsTrigger class="w-full" value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="color-picker">
           <Card>
@@ -119,6 +120,61 @@ export type IncomingStrip = {
                   <Separator class="my-2" />
                 </div>
               </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="settings">
+          <Card>
+            <CardHeader>
+              <CardTitle>Settings</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="flex justify-center h-min flex-col">
+                <label for="speedSlider">Speed: {{ speed }}</label>
+                  <input
+                  type="range"
+                  id="speedSlider"
+                  v-model="speed"
+                  min="0"
+                  max="255"
+                  step="1"
+                  label="Speed"
+                  class="w-full"
+                  @input="setEffect(effectid, 'speed', speed)"
+                >
+                <br />
+                <label for="intensitySlider">Intensity: {{ intensity }}</label>
+                  <input
+                    type="range"
+                    v-model="intensity"
+                    min="0"
+                    max="255"
+                    step="1"
+                    label="Intensity"
+                    class="w-full"
+                    @input="setEffect(effectid, 'intensity', intensity)"
+                  >
+                  <br />
+                <label for="delaySlider">Delay: {{ delay }}</label>
+                  <input
+                    type="range"
+                    v-model="delay"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    label="Delay"
+                    class="w-full"
+                    @input="setEffect(effectid, 'delay', delay)"
+                  >
+                  <br />
+                  <div flex justify-center h-min flex-row>
+                    <label for="mirror">Mirror </label>
+                  <input type="checkbox" id="mirror" v-model="mirror" v-on:change="setEffect(effectid, 'mirror', mirror)"/>
+                  <br />
+                  <label for="reverse">Reverse </label>  
+                  <input type="checkbox" id="reverse" v-model="reverse" v-on:change="setEffect(effectid, 'reverse', reverse)"/>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
@@ -207,7 +263,13 @@ export default {
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
-      remoteURL: `http://${window.location.hostname}/api`
+      remoteURL: `http://${window.location.hostname}/api`,
+      effectid: 0,
+      speed:128,
+      intensity:128,
+      delay:0,
+      reverse: false,
+      mirror: false
     };
   },
   methods: {
@@ -241,14 +303,19 @@ export default {
         console.error('Error fetching effects:', error);
       }
     },
-    setEffect(effect: number) {
+    setEffect(effect: number, option?: string, value?: any) {
+      this.effectid = effect;
       if (this.selectedStrips.length === 0) return;
       console.log('Setting effect', effect, 'on strips', this.selectedStrips);
-      axios
-        .post(`${this.remoteURL}/effect`, {
+
+      const data: any = {
           effect: Number(effect),
-          strips: this.selectedStrips,
-        })
+          strips: this.selectedStrips};
+      if (option !== undefined && value !== undefined) {
+          data[option] = value;
+        } 
+      axios
+        .post(`${this.remoteURL}/effect`, data)
         .catch((error) => {
           console.error(error);
         });
