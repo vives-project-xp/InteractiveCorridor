@@ -115,7 +115,7 @@ export type IncomingStrip = {
                     :tooltip-text="effect.description"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="() => setEffect(effect.id)"
+                    :onClick="() => setEffect('effect',effect.id)"
                   />
                   <Separator class="my-2" />
                 </div>
@@ -140,7 +140,7 @@ export type IncomingStrip = {
                   step="1"
                   label="Speed"
                   class="w-full"
-                  @input="setEffect(effectid, 'speed', speed)"
+                  @input="setEffect('speed', speed)"
                 >
                 <br />
                 <label for="intensitySlider">Intensity: {{ intensity }}</label>
@@ -152,7 +152,7 @@ export type IncomingStrip = {
                     step="1"
                     label="Intensity"
                     class="w-full"
-                    @input="setEffect(effectid, 'intensity', intensity)"
+                    @input="setEffect('intensity', intensity)"
                   >
                   <br />
                 <label for="delaySlider">Delay: {{ delay }}</label>
@@ -164,15 +164,15 @@ export type IncomingStrip = {
                     step="1"
                     label="Delay"
                     class="w-full"
-                    @input="setEffect(effectid, 'delay', delay)"
+                    @input="setEffect('delay', delay)"
                   >
                   <br />
                   <div flex justify-center h-min flex-row>
                     <label for="mirror">Mirror </label>
-                  <input type="checkbox" id="mirror" v-model="mirror" v-on:change="setEffect(effectid, 'mirror', mirror)"/>
+                  <input type="checkbox" id="mirror" v-model="mirror" v-on:change="setEffect('mirror', mirror)"/>
                   <br />
                   <label for="reverse">Reverse </label>  
-                  <input type="checkbox" id="reverse" v-model="reverse" v-on:change="setEffect(effectid, 'reverse', reverse)"/>
+                  <input type="checkbox" id="reverse" v-model="reverse" v-on:change="setEffect('reverse', reverse)"/>
                 </div>
               </div>
             </CardContent>
@@ -303,13 +303,10 @@ export default {
         console.error('Error fetching effects:', error);
       }
     },
-    setEffect(effect: number, option?: string, value?: any) {
-      this.effectid = effect;
+    setEffect(option?: string, value?: any) {
       if (this.selectedStrips.length === 0) return;
-      console.log('Setting effect', effect, 'on strips', this.selectedStrips);
 
       const data: any = {
-          effect: Number(effect),
           strips: this.selectedStrips};
       if (option !== undefined && value !== undefined) {
           data[option] = value;
