@@ -1,6 +1,8 @@
 const { ledstrips } = require("./ledstrips");
 const { hexToRgb } = require("./utils");
 
+const segmentsLengths = [8, 4, 2, 1];
+
 const getLeds = async (req, res) => {
   const strips = [];
 
@@ -46,4 +48,17 @@ const postLeds = async (req, res) => {
   return getLeds(req, res); // return the updated ledstrips
 };
 
-module.exports = { getLeds, postLeds };
+const changeLeds = async (req, res) => {
+  const strip = ledstrips.find((s) => s.index === req.body.strip.index);
+  const currentLength = strip.segments.length;
+  const totalLeds = strip.length;
+
+  const currentIndex = segmentsLengths.indexOf(currentLength);
+  let nextIndex = (currentIndex + 1) % segmentsLengths.length;
+  const nextLength = segmentsLengths[nextIndex];
+
+  strip.adjustSegments(Array(nextLength).fill(totalLeds / nextLength));
+  res.send("Segments changed");
+};
+
+module.exports = { getLeds, postLeds, changeLeds };

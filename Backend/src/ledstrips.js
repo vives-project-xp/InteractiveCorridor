@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const startTime = process.env.START_TIME || 8;
 const endTime = process.env.END_TIME || 22;
+const utcDiff = parseInt(process.env.UTC_DIFF) || 1;
 
 const ledstrips = [new VirtualLedstrip(0, 0)];
 ledstrips.pop(); // enforce type
@@ -13,7 +14,7 @@ const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
     const currentTime = new Date().getUTCHours();
     const action =
-      currentTime + 2 < startTime || currentTime + 2 >= endTime
+      currentTime + utcDiff < startTime || currentTime + utcDiff >= endTime
         ? "false"
         : "true";
     mqtt.publish(`IC/ic${i}`, `{"on": ${action}}`);

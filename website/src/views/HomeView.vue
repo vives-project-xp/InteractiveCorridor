@@ -208,13 +208,7 @@ export type IncomingStrip = {
       <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
           <h3 class="font-semibold">{{ strip.name }}</h3>
-          <button @click="() => combineStrip(strip)">
-            {{
-              striptype.find((s) => s.name === strip.name).action === 'combine'
-                ? 'Combine'
-                : 'Split'
-            }}
-          </button>
+          <button @click="() => splitStrip(strip)">Split</button>
           <div class="flex flex-wrap">
             <div
               v-for="(segment, barIndex) in strip.segments"
@@ -268,6 +262,7 @@ export type IncomingStrip = {
 
 <script lang="ts">
 import axios from 'axios';
+import { time } from 'console';
 
 export default {
   data() {
@@ -278,7 +273,6 @@ export default {
       brightness: 200,
       selectedColor: '#ff0000',
       selectedStrips: [] as { index: number; start: number; end: number }[],
-      striptype: [] as { name: string; action: string }[],
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
@@ -295,14 +289,9 @@ export default {
     fetchLeds() {
       this.searching = true;
       axios
-        .get(`${this.remoteURL}/leds`)
+        .get(`${this.remoteURL}/leds`, { timeout: 250 })
         .then(async (response) => {
           this.strips = response.data;
-          this.strips.forEach((strip) => {
-            if (this.striptype.find((s) => s.name === strip.name) === undefined) {
-              this.striptype.push({ name: strip.name, action: 'split' });
-            }
-          });
           this.searching = false;
         })
         .catch((error) => {
@@ -369,11 +358,14 @@ export default {
       });
     },
 
-    combineStrip(strip) {
-      const stripType = this.striptype.find((s) => s.name === strip.name);
-      if (stripType) {
-        stripType.action = stripType.action === 'combine' ? 'split' : 'combine';
-      }
+    splitStrip(strip) {
+      const data: any = {
+        strip: strip,
+      };
+
+      axios.post(`${this.remoteURL}/changeled`, data).catch((error) => {
+        console.error(error);
+      });
     },
   },
   mounted() {

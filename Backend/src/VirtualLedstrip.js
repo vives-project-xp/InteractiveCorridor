@@ -148,6 +148,32 @@ class VirtualLedstrip {
 
     this.publish(JSON.stringify(body));
   }
+
+  adjustSegments(segmentLengths) {
+    if (!Array.isArray(segmentLengths) || segmentLengths.length === 0) {
+      console.error("Segment lengths should be a non-empty array.");
+      return;
+    }
+
+    for (let i = 0; i < this.segments.length; i++) {
+      mqtt.publish(
+        this.topic,
+        JSON.stringify({ seg: [{ id: i, start: 0, stop: 0 }] })
+      );
+    }
+
+    // Verwijder eerst alle bestaande segmenten
+    this._segments = [];
+
+    // Maak nieuwe segmenten op basis van de gegeven lengtes
+    for (let i = 0; i < segmentLengths.length; i++) {
+      const length = Math.max(segmentLengths[i], 0); // Zorg ervoor dat de lengte niet negatief is
+      this._segments.push(new Segment(this, this.length, this.length + length));
+    }
+
+    // Stuur updates naar de MQTT-server
+    this.updateSegments();
+  }
 }
 
 module.exports = VirtualLedstrip;

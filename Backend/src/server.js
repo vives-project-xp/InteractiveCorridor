@@ -17,6 +17,7 @@ app.use(
     origin: "*",
   })
 );
+
 app.use(bodyParser.json());
 app.use(
   "/api-docs",
@@ -46,6 +47,7 @@ app.use(
 
 app.get("/api/leds", leds.getLeds);
 app.post("/api/leds", leds.postLeds);
+app.post("/api/changeled", leds.changeLeds);
 
 app.post("/api/color", colors.setColor);
 app.post("/api/effect", effects.setEffect);
