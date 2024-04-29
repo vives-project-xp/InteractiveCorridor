@@ -93,7 +93,7 @@ class VirtualLedstrip {
   }
 
   get topic() {
-    return `IC/ic${this.index}`;
+    return `ic${this.index}`;
   }
 
   get segments() {

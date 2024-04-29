@@ -1,5 +1,4 @@
 const { response } = require("express");
-const mqtt = require("./mqtt");
 const { ledstrips } = require("./ledstrips");
 topic = "";
 

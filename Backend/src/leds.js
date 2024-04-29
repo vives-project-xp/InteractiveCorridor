@@ -5,7 +5,6 @@ const segmentsLengths = [8, 4, 2, 1];
 
 const getLeds = async (req, res) => {
   const strips = [];
-
   for (const strip of ledstrips) {
     const segments = [];
     for (const segment of strip.segments) {
