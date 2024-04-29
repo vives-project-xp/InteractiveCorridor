@@ -209,7 +209,7 @@ export type IncomingStrip = {
           </TooltipProvider>
         </span>
       </h2>
-
+      <button @click="saveEffect" class="mb-5">Save effect</button>
       <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
           <h3 class="font-semibold">{{ strip.name }}</h3>
@@ -372,6 +372,12 @@ export default {
         console.error(error);
       });
     },
+
+    saveEffect(){
+      axios.post(`${this.remoteURL}/saveeffect`).catch((error) => {
+        console.error(error);
+      });
+    }
   },
   mounted() {
     document.body.classList.add('bg-background');

@@ -139,11 +139,11 @@ class VirtualLedstrip {
   updateEffect() {
     const body = {
       seg: this.segments.map((segment) => ({
-        fx: segment.effect.id,
-        sx: segment.effect.speed,
-        ix: segment.effect.intensity,
-        rev: segment.effect.reverse,
-        mi: segment.effect.mirror,
+        fx: segment.effect.id || 0,
+        sx: segment.effect.speed || 128,
+        ix: segment.effect.intensity || 128,
+        rev: segment.effect.reverse || false,
+        mi: segment.effect.mirror || false,
       })),
       tb: 0,
     };

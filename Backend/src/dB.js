@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 require("dotenv").config();
+const ledstrips = require("./ledstrips");
 
 let connection;
 
@@ -54,24 +55,17 @@ const getEffects = (req, res) => {
   });
 };
 
-const addEffect = (req, res) => {
-  const insertEffectQuery =
-    "INSERT INTO effects (name, effectData) VALUES (?, ?)";
-
-  const effectDataString = JSON.stringify(req.body.effectData);
-
-  connection.query(
-    insertEffectQuery,
-    [req.body.name, effectDataString],
-    (err, results) => {
-      if (err) {
-        console.error("Error executing database query:", err);
-        res.status(500).send(err);
-        return;
-      }
-      res.status(200).send("Effect added successfully");
-    }
-  );
+const saveEffect = (req, res) => {
+  res.status(200).send("saved effect");
+  console.log("ledstrips:")
+  console.table(ledstrips.ledstrips);
+  ledstrips.ledstrips.forEach((ledstrip) => {
+    console.log("ledstrip: ", ledstrip.name)
+    ledstrip.segments.forEach((segment) => {
+      console.log("segment: ", segment.index)
+      console.table(segment);
+  });
+  });
 };
 
 const createTable = () => {
@@ -92,4 +86,4 @@ const createTable = () => {
   });
 };
 
-module.exports = { getEffects, addEffect };
+module.exports = { getEffects, saveEffect };
