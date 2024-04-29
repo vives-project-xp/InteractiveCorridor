@@ -4,7 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
 import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
@@ -48,7 +50,7 @@ export type IncomingStrip = {
               <div class="flex justify-center h-min">
                 <ColorPicker
                   :color="selectedColor"
-                  :on-change="(color) => throttle(() => setColor(color.hexString), 100)"
+                  :on-change="(color) => throttle(() => setColor(color.hexString), throttleDelay)"
                 />
               </div>
             </CardContent>
@@ -130,59 +132,62 @@ export type IncomingStrip = {
               <CardTitle>Settings</CardTitle>
             </CardHeader>
             <CardContent>
-              <div class="flex justify-center h-min flex-col">
-                <label for="speedSlider">Speed: {{ speed }}</label>
-                <input
-                  type="range"
-                  id="speedSlider"
-                  v-model="speed"
-                  min="0"
-                  max="255"
-                  step="1"
-                  label="Speed"
-                  class="w-full"
-                  @input="setEffect('speed', speed)"
-                />
-                <br />
-                <label for="intensitySlider">Intensity: {{ intensity }}</label>
-                <input
-                  type="range"
-                  v-model="intensity"
-                  min="0"
-                  max="255"
-                  step="1"
-                  label="Intensity"
-                  class="w-full"
-                  @input="setEffect('intensity', intensity)"
-                />
-                <br />
-                <label for="delaySlider">Delay: {{ delay }}</label>
-                <input
-                  type="range"
-                  v-model="delay"
-                  min="0"
-                  max="1000"
-                  step="1"
-                  label="Delay"
-                  class="w-full"
-                  @input="setEffect('delay', delay)"
-                />
-                <br />
-                <div flex justify-center h-min flex-row>
-                  <label for="mirror">Mirror </label>
-                  <input
-                    type="checkbox"
-                    id="mirror"
-                    v-model="mirror"
-                    v-on:change="setEffect('mirror', mirror)"
+              <div class="flex flex-col gap-4 h-min">
+                <div>
+                  <label for="speedSlider">Speed: {{ speed[0] }}</label>
+                  <Slider
+                    v-model="speed"
+                    id="speedSlider"
+                    label="Speed"
+                    class="w-full pt-2"
+                    :min="0"
+                    :step="1"
+                    :max="255"
+                    @input="throttle(() => setEffect('speed', speed[0]), throttleDelay)"
                   />
-                  <br />
-                  <label for="reverse">Reverse </label>
-                  <input
-                    type="checkbox"
+                </div>
+                <div>
+                  <label for="intensitySlider">Intensity: {{ intensity[0] }}</label>
+                  <Slider
+                    v-model="intensity"
+                    id="intensitySlider"
+                    label="Intensity"
+                    class="w-full pt-2"
+                    :min="0"
+                    :step="1"
+                    :max="255"
+                    @input="throttle(() => setEffect('intensity', intensity[0]), throttleDelay)"
+                  />
+                </div>
+                <div>
+                  <label for="delaySlider">Delay: {{ delay[0] }}</label>
+                  <Slider
+                    v-model="delay"
+                    id="delaySlider"
+                    label="Delay"
+                    class="w-full pt-2"
+                    :min="0"
+                    :step="1"
+                    :max="1000"
+                    @input="throttle(() => setEffect('delay', delay[0]), throttleDelay)"
+                  />
+                </div>
+                <div class="flex justify-between">
+                  <label for="mirror">Mirror</label>
+                  <Checkbox
+                    id="mirror"
+                    class="self-center"
+                    v-model="mirror"
+                    @change="setEffect('mirror', mirror)"
+                  />
+                </div>
+                <div class="flex justify-between">
+                  <label for="reverse">Reverse</label>
+                  <Checkbox
                     id="reverse"
+                    class="self-center"
                     v-model="reverse"
-                    v-on:change="setEffect('reverse', reverse)"
+                    @change="setEffect('reverse', reverse)"
                   />
                 </div>
               </div>
@@ -262,7 +267,6 @@ export type IncomingStrip = {
 
 <script lang="ts">
 import axios from 'axios';
-import { time } from 'console';
 
 export default {
   data() {
@@ -278,11 +282,12 @@ export default {
       dbeffectSearch: '',
       remoteURL: `http://${window.location.hostname}/api`,
       effectid: 0,
-      speed: 128,
-      intensity: 128,
-      delay: 0,
+      speed: [128],
+      intensity: [128],
+      delay: [0],
       reverse: false,
       mirror: false,
+      throttleDelay: 100,
     };
   },
   methods: {
