@@ -99,9 +99,9 @@ const loadEffect = (req, res) => {
       const matchingLedStrip = ledstrips.ledstrips.find(strip => strip.name === deserializedStrip.name);
       if(matchingLedStrip){
       deserializedStrip.segments.forEach(segment => {
-        const matchingSegment = matchingLedStrip.segments.find(seg => seg.start === segment.start && seg.end === segment.end);
+        for(let i = 0; i < deserializedStrip.segments.length; i++){
+        const matchingSegment = matchingLedStrip.segments[i];
         if (matchingSegment) {
-          console.log('updating segment' , matchingSegment.index)
           matchingSegment.setEffect({
             id: segment.effect.id,
             delay: segment.effect.delay,
@@ -114,6 +114,7 @@ const loadEffect = (req, res) => {
           matchingSegment.setStart(segment.start);
           matchingSegment.setEnd(segment.end);
         } else {
+          console.log('adding segment');
           const newSegment = new Segment(matchingLedStrip, segment.start, segment.end, segment.color);
           newSegment.setEffect({
             id: segment.effect.id,
@@ -125,9 +126,11 @@ const loadEffect = (req, res) => {
           });
           matchingLedStrip.segments.push(newSegment);
         }
+      }
       });
-      
+    
       if (matchingLedStrip.segments.length > deserializedStrip.segments.length) {
+        console.log('removing segments');
         const numToRemove = matchingLedStrip.segments.length - deserializedStrip.segments.length;
         matchingLedStrip.segments.splice(-numToRemove);
       }
@@ -140,6 +143,7 @@ const loadEffect = (req, res) => {
     }
   });
   });
+  res.send("Effect loaded");
 };
 
 function splitIntoLedStrips(data) {
