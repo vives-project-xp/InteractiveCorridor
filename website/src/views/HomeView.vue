@@ -388,10 +388,10 @@ export default {
     },
 
     saveEffect(ownEffectName: string) {
-      axios.post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })  // Stuur 'ownEffectName' in het POST-verzoek
+      axios.post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })  
         .then(() => {
           console.log("Effect opgeslagen!");
-          this.fetchEffects();  // Werk eventuele effecten bij na een succesvolle POST
+          this.fetchEffects(); 
         })
         .catch((error) => {
           console.error("Fout bij opslaan effect:", error);
