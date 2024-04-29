@@ -178,4 +178,7 @@ class VirtualLedstrip {
   }
 }
 
-module.exports = VirtualLedstrip;
+module.exports = {
+  Segment: Segment,
+  VirtualLedstrip: VirtualLedstrip
+};
