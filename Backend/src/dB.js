@@ -101,18 +101,10 @@ const loadEffect = (req, res) => {
       //return deserializedEffect;
     });
   });
-
-<<<<<<< HEAD
-
-    ledstrips.ledstrips = [];
-};
-
-
-=======
+  
   ledstrips.ledstrips = [];
 };
 
->>>>>>> 56997ef85f14f34a96a8474600b46ea39509bb5a
 function splitIntoLedStrips(data) {
   const ledStrips = [];
   data.forEach((item) => {
