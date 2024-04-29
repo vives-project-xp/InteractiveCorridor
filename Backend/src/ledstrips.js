@@ -1,5 +1,5 @@
 const mqtt = require("./mqtt");
-const VirtualLedstrip = require("./VirtualLedstrip");
+const { VirtualLedstrip } = require("./VirtualLedstrip");
 require("dotenv").config();
 
 const startTime = process.env.START_TIME || 8;
