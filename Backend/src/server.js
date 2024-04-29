@@ -53,6 +53,7 @@ app.get("/api/effect", effects.getEffect);
 
 app.get("/api/dbeffects", db.getEffects);
 app.post("/api/saveeffect", db.saveEffect);
+app.post("/api/loadeffect", db.loadEffect);
 
 
 

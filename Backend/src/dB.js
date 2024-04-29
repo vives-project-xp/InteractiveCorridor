@@ -57,16 +57,95 @@ const getEffects = (req, res) => {
 
 const saveEffect = (req, res) => {
   res.status(200).send("saved effect");
-  console.log("ledstrips:")
-  console.table(ledstrips.ledstrips);
-  ledstrips.ledstrips.forEach((ledstrip) => {
-    console.log("ledstrip: ", ledstrip.name)
-    ledstrip.segments.forEach((segment) => {
-      console.log("segment: ", segment.index)
-      console.table(segment);
-  });
-  });
+  const effectName = req.body.name || "test";
+
+  const serializedLedstrips = ledstrips.ledstrips.map(ledstrip => ({
+    name: ledstrip.name,
+    segments: ledstrip.segments.map(segment => ({
+      start: segment.start,
+      end: segment.end,
+      color: segment.color,
+      effect: segment.effect,
+    })),
+  }));
+
+  connection.query(
+    "INSERT INTO effects (name, effectData) VALUES (?, ?)",
+    [effectName, JSON.stringify(serializedLedstrips)],
+    (err) => {
+      if (err) {
+        console.error("Error saving effect:", err);
+        return;
+      }
+      console.log("Effect saved successfully");
+    }
+  );
 };
+
+const loadEffect = (req, res) => {
+  const name = req.body.name;
+  const query = "SELECT * FROM effects WHERE name = ?";
+  console.log("loading effect", name);
+  connection.query(query, [name], (err, results) => {
+    if (err) {
+      console.error("Error executing database query:", err);
+      res.status(500).send(err);
+      return;
+    }
+    ledstrips = splitIntoLedStrips(results[0].effectData);
+    ledstrips.forEach(strip => {
+      const deserializedStrip = deserializeEffect(strip);
+        console.table(deserializedStrip);  
+        //const deserializedEffect = deserializeEffect(result.effectData);
+        //console.table(deserializedEffect);
+        //return deserializedEffect;
+      });
+  });
+
+
+    ledstrips.ledstrips = [];
+
+
+
+  });
+}
+
+function splitIntoLedStrips(data) {
+  const ledStrips = [];
+  data.forEach(item => {
+    const ledStrip = {
+      name: item.name,
+      segments: item.segments
+    };
+    ledStrips.push(ledStrip);
+  });
+  return ledStrips;
+}
+
+
+const deserializeEffect = (serializedEffect) => {
+  // Controleer of de serializedEffect een geldige string is
+  if (typeof serializedEffect !== 'string') {
+    throw new Error('Ongeldige serialized effect. Het moet een string zijn.');
+  }
+
+  try {
+    const parsedEffect = JSON.parse(serializedEffect);
+    const deserializedEffect = {
+      name: parsedEffect.name,
+      segments: parsedEffect.segments.map(segment => ({
+        start: segment.start,
+        end: segment.end,
+        color: segment.color,
+        effect: segment.effect,
+      })),
+    };
+    return deserializedEffect;
+  } catch (error) {
+    throw new Error('Fout bij het deserialiseren van het effect:', error);
+  }
+};
+
 
 const createTable = () => {
   const createTableQuery = `
@@ -86,4 +165,4 @@ const createTable = () => {
   });
 };
 
-module.exports = { getEffects, saveEffect };
+module.exports = { getEffects, saveEffect, loadEffect };

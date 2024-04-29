@@ -118,7 +118,7 @@ export type IncomingStrip = {
                     :tooltip-text="effect.description"
                     class="w-full text-sm"
                     variant="secondary"
-                    :onClick="() => setEffect('effect', effect.id)"
+                    :onClick="() => loadEffect(effect.name)"
                   />
                   <Separator class="my-2" />
                 </div>
@@ -382,7 +382,19 @@ export default {
       axios.post(`${this.remoteURL}/saveeffect`).catch((error) => {
         console.error(error);
       });
-    }
+      this.fetchEffects();
+    },
+    async loadEffect(_name: string) {
+      const data: any = {
+        name: _name,
+      }
+      
+      const response = await axios.post(`${this.remoteURL}/loadeffect`, data).catch((error) => {
+        console.error(error);
+      });
+
+      console.table(response.data);
+    },
   },
   mounted() {
     document.body.classList.add('bg-background');
