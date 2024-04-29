@@ -59,9 +59,9 @@ const saveEffect = (req, res) => {
   res.status(200).send("saved effect");
   const effectName = req.body.name || "test";
 
-  const serializedLedstrips = ledstrips.ledstrips.map(ledstrip => ({
+  const serializedLedstrips = ledstrips.ledstrips.map((ledstrip) => ({
     name: ledstrip.name,
-    segments: ledstrip.segments.map(segment => ({
+    segments: ledstrip.segments.map((segment) => ({
       start: segment.start,
       end: segment.end,
       color: segment.color,
@@ -93,44 +93,49 @@ const loadEffect = (req, res) => {
       return;
     }
     ledstrips = splitIntoLedStrips(results[0].effectData);
-    ledstrips.forEach(strip => {
+    ledstrips.forEach((strip) => {
       const deserializedStrip = deserializeEffect(strip);
-        console.table(deserializedStrip);  
-        //const deserializedEffect = deserializeEffect(result.effectData);
-        //console.table(deserializedEffect);
-        //return deserializedEffect;
-      });
+      console.table(deserializedStrip);
+      //const deserializedEffect = deserializeEffect(result.effectData);
+      //console.table(deserializedEffect);
+      //return deserializedEffect;
+    });
   });
 
+<<<<<<< HEAD
 
     ledstrips.ledstrips = [];
 };
 
 
+=======
+  ledstrips.ledstrips = [];
+};
+
+>>>>>>> 56997ef85f14f34a96a8474600b46ea39509bb5a
 function splitIntoLedStrips(data) {
   const ledStrips = [];
-  data.forEach(item => {
+  data.forEach((item) => {
     const ledStrip = {
       name: item.name,
-      segments: item.segments
+      segments: item.segments,
     };
     ledStrips.push(ledStrip);
   });
   return ledStrips;
 }
 
-
 const deserializeEffect = (serializedEffect) => {
   // Controleer of de serializedEffect een geldige string is
-  if (typeof serializedEffect !== 'string') {
-    throw new Error('Ongeldige serialized effect. Het moet een string zijn.');
+  if (typeof serializedEffect !== "string") {
+    throw new Error("Ongeldige serialized effect. Het moet een string zijn.");
   }
 
   try {
     const parsedEffect = JSON.parse(serializedEffect);
     const deserializedEffect = {
       name: parsedEffect.name,
-      segments: parsedEffect.segments.map(segment => ({
+      segments: parsedEffect.segments.map((segment) => ({
         start: segment.start,
         end: segment.end,
         color: segment.color,
@@ -139,10 +144,9 @@ const deserializeEffect = (serializedEffect) => {
     };
     return deserializedEffect;
   } catch (error) {
-    throw new Error('Fout bij het deserialiseren van het effect:', error);
+    throw new Error("Fout bij het deserialiseren van het effect:", error);
   }
 };
-
 
 const createTable = () => {
   const createTableQuery = `
