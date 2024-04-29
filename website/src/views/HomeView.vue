@@ -326,7 +326,6 @@ export default {
       }
     },
     setEffect(option?: string, value?: any) {
-      console.log('Setting effect:', option);
       if (this.selectedStrips.length === 0) return;
 
       const data: any = {
