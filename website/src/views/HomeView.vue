@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
@@ -171,25 +172,23 @@ export type IncomingStrip = {
                     @input="setEffect('delay', delay[0])"
                   />
                 </div>
-                <div>
-                  <div flex justify-center h-min flex-row>
-                    <label for="mirror">Mirror </label>
-                    <input
-                      type="checkbox"
-                      id="mirror"
-                      v-model="mirror"
-                      v-on:change="setEffect('mirror', mirror)"
-                    />
-                  </div>
-                  <div>
-                    <label for="reverse">Reverse </label>
-                    <input
-                      type="checkbox"
-                      id="reverse"
-                      v-model="reverse"
-                      v-on:change="setEffect('reverse', reverse)"
-                    />
-                  </div>
+                <div class="flex justify-between">
+                  <label for="mirror">Mirror</label>
+                  <Checkbox
+                    id="mirror"
+                    class="self-center"
+                    v-model="mirror"
+                    @change="setEffect('mirror', mirror)"
+                  />
+                </div>
+                <div class="flex justify-between">
+                  <label for="reverse">Reverse</label>
+                  <Checkbox
+                    id="reverse"
+                    class="self-center"
+                    v-model="reverse"
+                    @change="setEffect('reverse', reverse)"
+                  />
                 </div>
               </div>
             </CardContent>
