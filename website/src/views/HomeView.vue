@@ -376,7 +376,7 @@ export default {
       });
     },
 
-    splitStrip(strip: SelectedStrip) {
+    splitStrip(strip: IncomingStrip) {
       const data = { strip: strip };
       axios.post(`${this.remoteURL}/changeled`, data).catch((error) => {
         console.error(error);
