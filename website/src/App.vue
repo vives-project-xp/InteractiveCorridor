@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import { Button } from '@/components/ui/button';
+import { Computer } from 'lucide-vue-next';
+
 
 const navItemClass = 'text-primary-foreground border border-opacity-5 px-3 py-2 rounded';
+
+const toggleDarkMode = () => {
+  document.body.classList.toggle('dark');
+};
 </script>
 
 <template>
@@ -12,6 +19,9 @@ const navItemClass = 'text-primary-foreground border border-opacity-5 px-3 py-2 
     <ul>
       <li>
         <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
+      </li>
+      <li>
+        <Button @click="toggleDarkMode"><Computer /></Button>
       </li>
     </ul>
   </nav>
