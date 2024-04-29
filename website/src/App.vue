@@ -21,7 +21,7 @@ const toggleDarkMode = () => {
         <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
       </li>
       <li>
-        <Button @click="toggleDarkMode"><Computer /></Button>
+        <Button variant="outline" @click="toggleDarkMode"><Computer /></Button>
       </li>
     </ul>
   </nav>
