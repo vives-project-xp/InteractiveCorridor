@@ -55,6 +55,20 @@ const getEffects = (req, res) => {
   });
 };
 
+const deleteEffect = (req, res) => {
+  const effectName  = req.body.name;
+  const query = "DELETE FROM effects WHERE name = ?";
+
+  connection.query(query, [effectName], (err) => {
+    if (err) {
+      console.error("Error executing database query:", err);
+      res.status(500).send(err);
+      return;
+    }
+    res.status(200).send("Effect deleted");
+  });
+};
+
 const saveEffect = (req, res) => {
   res.status(200).send("saved effect");
   const effectName = req.body.name || "test";
@@ -158,4 +172,4 @@ const createTable = () => {
   });
 };
 
-module.exports = { getEffects, saveEffect, loadEffect };
+module.exports = { getEffects, saveEffect, loadEffect, deleteEffect };

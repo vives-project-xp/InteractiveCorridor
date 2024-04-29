@@ -122,6 +122,7 @@ export type SelectedStrip = { index: number; segments: number[] };
                     variant="secondary"
                     :onClick="() => loadEffect(effect.name)"
                   />
+                  <button @click="deleteEffect(effect.name)" class="text-red-600 hover:text-red-800">Delete</button>
                   <Separator class="my-2" />
                 </div>
               </ScrollArea>
@@ -396,6 +397,21 @@ export default {
         .catch((error) => {
           console.error("Fout bij opslaan effect:", error);
         });
+    },
+
+    async deleteEffect(effectName: string){
+      try {
+        const response = await axios.delete(`${this.remoteURL}/deleteeffect`, {
+          data: { name: effectName },
+        });
+      
+        if (response.status === 200) {
+          console.log(`Effect '${effectName}' succesvol verwijderd`);
+          this.fetchEffects();  
+        }
+      } catch (error) {
+        console.error("Fout bij het verwijderen van het effect:", error);
+      }
     },
 
     async loadEffect(_name: string) {
