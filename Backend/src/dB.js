@@ -60,9 +60,9 @@ const saveEffect = (req, res) => {
   res.status(200).send("saved effect");
   const effectName = req.body.name || "test";
 
-  const serializedLedstrips = ledstrips.ledstrips.map(ledstrip => ({
+  const serializedLedstrips = ledstrips.ledstrips.map((ledstrip) => ({
     name: ledstrip.name,
-    segments: ledstrip.segments.map(segment => ({
+    segments: ledstrip.segments.map((segment) => ({
       start: segment.start,
       end: segment.end,
       color: segment.color,
@@ -97,9 +97,11 @@ const loadEffect = (req, res) => {
     leds.forEach(strip => {
       const deserializedStrip = deserializeStrip(strip);
       const matchingLedStrip = ledstrips.ledstrips.find(strip => strip.name === deserializedStrip.name);
+      if(matchingLedStrip){
       deserializedStrip.segments.forEach(segment => {
         const matchingSegment = matchingLedStrip.segments.find(seg => seg.start === segment.start && seg.end === segment.end);
         if (matchingSegment) {
+          console.log('updating segment' , matchingSegment.index)
           matchingSegment.setEffect({
             id: segment.effect.id,
             delay: segment.effect.delay,
@@ -108,6 +110,9 @@ const loadEffect = (req, res) => {
             reverse: segment.effect.reverse,
             mirror: segment.effect.mirror,
           });
+          matchingSegment.setColor(segment.color);
+          matchingSegment.setStart(segment.start);
+          matchingSegment.setEnd(segment.end);
         } else {
           const newSegment = new Segment(matchingLedStrip, segment.start, segment.end, segment.color);
           newSegment.setEffect({
@@ -126,16 +131,23 @@ const loadEffect = (req, res) => {
         const numToRemove = matchingLedStrip.segments.length - deserializedStrip.segments.length;
         matchingLedStrip.segments.splice(-numToRemove);
       }
+      matchingLedStrip.updateSegments();
+      matchingLedStrip.updateEffect();
+      matchingLedStrip.updateColor();
+    }
+    else {
+      console.log("Ledstrip not found");
+    }
   });
   });
 };
 
 function splitIntoLedStrips(data) {
   const ledStrips = [];
-  data.forEach(item => {
+  data.forEach((item) => {
     const ledStrip = {
       name: item.name,
-      segments: item.segments
+      segments: item.segments,
     };
     ledStrips.push(ledStrip);
   });
@@ -156,10 +168,9 @@ const deserializeStrip = (serializedStrip) => {
     };
     return deserializedStrip;
   } catch (error) {
-    throw new Error('Fout bij het deserialiseren van het effect:', error);
+    throw new Error("Fout bij het deserialiseren van het effect:", error);
   }
 };
-
 
 const createTable = () => {
   const createTableQuery = `
