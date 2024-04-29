@@ -104,11 +104,8 @@ const loadEffect = (req, res) => {
 
 
     ledstrips.ledstrips = [];
+};
 
-
-
-  });
-}
 
 function splitIntoLedStrips(data) {
   const ledStrips = [];

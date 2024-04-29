@@ -217,7 +217,10 @@ export type SelectedStrip = { index: number; segments: number[] };
           </TooltipProvider>
         </span>
       </h2>
-      <button @click="saveEffect" class="mb-5">Save effect</button>
+      <input
+      type="text" placeholder="Naam van effect" v-model="ownEffectName"
+      class="border border-gray-300 rounded-lg px-4 py-2 mr-2 focus:outline-none focus:border-blue-500"/>
+      <button @click="saveEffect(ownEffectName)" margin="10px"class="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Save effect</button>
       <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
           <h3 class="font-semibold">{{ strip.name }}</h3>
@@ -288,6 +291,7 @@ export default {
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
+      ownEffectName: "",
       remoteURL: `http://${window.location.hostname}/api`,
       effectid: 0,
       speed: [128],
@@ -383,12 +387,17 @@ export default {
       });
     },
 
-    saveEffect() {
-      axios.post(`${this.remoteURL}/saveeffect`).catch((error) => {
-        console.error(error);
-      });
-      this.fetchEffects();
+    saveEffect(ownEffectName: string) {
+      axios.post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })  // Stuur 'ownEffectName' in het POST-verzoek
+        .then(() => {
+          console.log("Effect opgeslagen!");
+          this.fetchEffects();  // Werk eventuele effecten bij na een succesvolle POST
+        })
+        .catch((error) => {
+          console.error("Fout bij opslaan effect:", error);
+        });
     },
+
     async loadEffect(_name: string) {
       const data: any = {
         name: _name,
