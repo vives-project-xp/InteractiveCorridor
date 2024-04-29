@@ -5,6 +5,7 @@ require("dotenv").config();
 const startTime = process.env.START_TIME || 8;
 const endTime = process.env.END_TIME || 22;
 const utcDiff = parseInt(process.env.UTC_DIFF) || 1;
+const baseTopic = process.env.MQTT_BASE_TOPIC;
 
 const ledstrips = [new VirtualLedstrip(0, 0)];
 ledstrips.pop(); // enforce type
@@ -17,10 +18,10 @@ const searchLeds = () => {
       currentTime + utcDiff < startTime || currentTime + utcDiff >= endTime
         ? "false"
         : "true";
-    mqtt.publish(`IC/ic${i}`, `{"on": ${action}}`);
+    mqtt.publish(`ic${i}`, `{"on": ${action}}`);
     if (
-      mqtt.statusList["IC/ic" + i] == "offline" ||
-      mqtt.statusList["IC/ic" + i] == undefined
+      mqtt.statusList[baseTopic + "ic" + i] == "offline" ||
+      mqtt.statusList[baseTopic + "ic" + i] == undefined
     ) {
       continue;
     }
@@ -35,8 +36,8 @@ const searchLeds = () => {
   // Remove ledstrips that are offline
   ledstrips.forEach((strip, index) => {
     if (
-      (mqtt.statusList["IC/" + strip.name] == "offline" ||
-        mqtt.statusList["IC/" + strip.name] == undefined) &&
+      (mqtt.statusList[baseTopic + strip.name] == "offline" ||
+        mqtt.statusList[baseTopic + strip.name] == undefined) &&
       strip.name.toLocaleLowerCase().includes("ic")
     ) {
       ledstrips.splice(index, 1);

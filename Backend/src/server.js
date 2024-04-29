@@ -5,7 +5,6 @@ const app = express();
 const port = 3000;
 
 const db = require("./dB");
-const colors = require("./color");
 const effects = require("./effect");
 const leds = require("./leds");
 
@@ -49,7 +48,6 @@ app.get("/api/leds", leds.getLeds);
 app.post("/api/leds", leds.postLeds);
 app.post("/api/changeled", leds.changeLeds);
 
-app.post("/api/color", colors.setColor);
 app.post("/api/effect", effects.setEffect);
 app.get("/api/effect", effects.getEffect);
 

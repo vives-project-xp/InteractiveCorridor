@@ -8,12 +8,13 @@ if (process.env.MQTT_CONTAINER === "false") {
   url = "mqtt://mosquitto";
 }
 
+const baseTopic = process.env.MQTT_BASE_TOPIC;
+
 const options = {
   clean: true, // Clean session
   connectTimeout: 4000,
-  clientId: "ICBackend_" + Math.random().toString(36),
-  username: "",
-  password: "",
+  username: process.env.MQTT_USERNAME,
+  password: process.env.MQTT_PASSWORD,
 };
 
 let statusList = {};
@@ -38,9 +39,8 @@ client.on("reconnect", () => {
 
 const publish = (topic, message) => {
   // Subscribe to the status topic to check message receipt
-
   // Publish to the specified topic
-  const apiTopic = topic + "/api";
+  const apiTopic = baseTopic+ topic + "/api";
   client.publish(apiTopic, message, (error) => {
     if (error) {
       console.log("Error:", error);
@@ -49,13 +49,13 @@ const publish = (topic, message) => {
     //statusList[topic] = "offline";
   });
   subscribe(topic + "/status", (receivedTopic, receivedMessage) => {
-    statusList[topic] = receivedMessage;
+    statusList[baseTopic + topic] = receivedMessage;
   });
 };
 
 const subscribe = (topic, callback) => {
   // Subscribe to the specified MQTT topic
-  client.subscribe(topic, (error) => {
+  client.subscribe(baseTopic + topic, (error) => {
     if (error) {
       console.log("Error:", error);
     }
@@ -63,7 +63,7 @@ const subscribe = (topic, callback) => {
   // Add a listener for incoming messages on the specified topic
   client.on("message", (receivedTopic, message) => {
     // Check if the received topic matches the specified topic
-    if (receivedTopic === topic) {
+    if (receivedTopic === baseTopic + topic) {
       // Call the specified callback function with the received message
       callback(receivedTopic, message.toString());
     }

@@ -50,7 +50,7 @@ export type IncomingStrip = {
               <div class="flex justify-center h-min">
                 <ColorPicker
                   :color="selectedColor"
-                  :on-change="(color) => throttle(() => setColor(color.hexString), 100)"
+                  :on-change="(color) => throttle(() => setColor(color.hexString), throttleDelay)"
                 />
               </div>
             </CardContent>
@@ -143,7 +143,7 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="255"
-                    @input="setEffect('speed', speed[0])"
+                    @input="throttle(() => setEffect('speed', speed[0]), throttleDelay)"
                   />
                 </div>
                 <div>
@@ -156,7 +156,7 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="255"
-                    @input="setEffect('intensity', intensity[0])"
+                    @input="throttle(() => setEffect('intensity', intensity[0]), throttleDelay)"
                   />
                 </div>
                 <div>
@@ -169,7 +169,7 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="1000"
-                    @input="setEffect('delay', delay[0])"
+                    @input="throttle(() => setEffect('delay', delay[0]), throttleDelay)"
                   />
                 </div>
                 <div class="flex justify-between">
@@ -287,6 +287,7 @@ export default {
       delay: [0],
       reverse: false,
       mirror: false,
+      throttleDelay: 100,
     };
   },
   methods: {
@@ -295,6 +296,11 @@ export default {
       axios
         .get(`${this.remoteURL}/leds`, { timeout: 250 })
         .then(async (response) => {
+          // Check if the response is an array
+          if (!Array.isArray(response.data)) {
+            console.error('Invalid response:', response.data);
+            return;
+          }
           this.strips = response.data;
           this.searching = false;
         })

@@ -93,7 +93,7 @@ class VirtualLedstrip {
   }
 
   get topic() {
-    return `IC/ic${this.index}`;
+    return `ic${this.index}`;
   }
 
   get segments() {
@@ -126,8 +126,10 @@ class VirtualLedstrip {
       seg: this.segments.map((segment) => ({
         col: [
           [segment.color.r, segment.color.g, segment.color.b],
-          [segment.color.r, segment.color.g, segment.color.b],
+          [0,0,0],
+          [0,0,0]
         ],
+        pal: 0,
       })),
     };
 
