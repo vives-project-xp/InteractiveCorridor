@@ -296,6 +296,11 @@ export default {
       axios
         .get(`${this.remoteURL}/leds`, { timeout: 250 })
         .then(async (response) => {
+          // Check if the response is an array
+          if (!Array.isArray(response.data)) {
+            console.error('Invalid response:', response.data);
+            return;
+          }
           this.strips = response.data;
           this.searching = false;
         })
