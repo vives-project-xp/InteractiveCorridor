@@ -30,6 +30,8 @@ export type IncomingStrip = {
     color: string;
   }[];
 };
+
+export type SelectedStrip = { index: number; segments: number[] };
 </script>
 
 <template>
@@ -143,7 +145,9 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="255"
-                    @update:model-value="throttle(() => setEffect('speed', speed[0]), throttleDelay)"
+                    @update:model-value="
+                      throttle(() => setEffect('speed', speed[0]), throttleDelay)
+                    "
                   />
                 </div>
                 <div>
@@ -156,7 +160,9 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="255"
-                    @update:model-value="throttle(() => setEffect('intensity', intensity[0]), throttleDelay)"
+                    @update:model-value="
+                      throttle(() => setEffect('intensity', intensity[0]), throttleDelay)
+                    "
                   />
                 </div>
                 <div>
@@ -169,7 +175,9 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="1000"
-                    @update:model-value="throttle(() => setEffect('delay', delay[0]), throttleDelay)"
+                    @update:model-value="
+                      throttle(() => setEffect('delay', delay[0]), throttleDelay)
+                    "
                   />
                 </div>
                 <div class="flex justify-between">
@@ -276,7 +284,7 @@ export default {
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [] as { index: number; start: number; end: number }[],
+      selectedStrips: [] as SelectedStrip[],
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
@@ -368,21 +376,18 @@ export default {
       });
     },
 
-    splitStrip(strip) {
-      const data: any = {
-        strip: strip,
-      };
-
+    splitStrip(strip: SelectedStrip) {
+      const data = { strip: strip };
       axios.post(`${this.remoteURL}/changeled`, data).catch((error) => {
         console.error(error);
       });
     },
 
-    saveEffect(){
+    saveEffect() {
       axios.post(`${this.remoteURL}/saveeffect`).catch((error) => {
         console.error(error);
       });
-    }
+    },
   },
   mounted() {
     document.body.classList.add('bg-background');
