@@ -52,7 +52,9 @@ app.post("/api/effect", effects.setEffect);
 app.get("/api/effect", effects.getEffect);
 
 app.get("/api/dbeffects", db.getEffects);
-app.post("/api/dbeffects", db.addEffect);
+app.post("/api/saveeffect", db.saveEffect);
+
+
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");

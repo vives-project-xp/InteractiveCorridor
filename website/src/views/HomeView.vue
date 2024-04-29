@@ -30,6 +30,8 @@ export type IncomingStrip = {
     color: string;
   }[];
 };
+
+export type SelectedStrip = { index: number; segments: number[] };
 </script>
 
 <template>
@@ -143,7 +145,9 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="255"
-                    @input="throttle(() => setEffect('speed', speed[0]), throttleDelay)"
+                    @update:model-value="
+                      throttle(() => setEffect('speed', speed[0]), throttleDelay)
+                    "
                   />
                 </div>
                 <div>
@@ -156,7 +160,9 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="255"
-                    @input="throttle(() => setEffect('intensity', intensity[0]), throttleDelay)"
+                    @update:model-value="
+                      throttle(() => setEffect('intensity', intensity[0]), throttleDelay)
+                    "
                   />
                 </div>
                 <div>
@@ -169,7 +175,9 @@ export type IncomingStrip = {
                     :min="0"
                     :step="1"
                     :max="1000"
-                    @input="throttle(() => setEffect('delay', delay[0]), throttleDelay)"
+                    @update:model-value="
+                      throttle(() => setEffect('delay', delay[0]), throttleDelay)
+                    "
                   />
                 </div>
                 <div class="flex justify-between">
@@ -178,7 +186,7 @@ export type IncomingStrip = {
                     id="mirror"
                     class="self-center"
                     v-model="mirror"
-                    @change="setEffect('mirror', mirror)"
+                    @update:checked="setEffect('mirror', mirror)"
                   />
                 </div>
                 <div class="flex justify-between">
@@ -187,7 +195,7 @@ export type IncomingStrip = {
                     id="reverse"
                     class="self-center"
                     v-model="reverse"
-                    @change="setEffect('reverse', reverse)"
+                    @update:checked="setEffect('reverse', reverse)"
                   />
                 </div>
               </div>
@@ -209,7 +217,7 @@ export type IncomingStrip = {
           </TooltipProvider>
         </span>
       </h2>
-
+      <button @click="saveEffect" class="mb-5">Save effect</button>
       <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
           <h3 class="font-semibold">{{ strip.name }}</h3>
@@ -276,7 +284,7 @@ export default {
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ff0000',
-      selectedStrips: [] as { index: number; start: number; end: number }[],
+      selectedStrips: [] as SelectedStrip[],
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
@@ -304,9 +312,9 @@ export default {
           this.strips = response.data;
           this.searching = false;
         })
-        .catch((error) => {
+        .catch(() => {
           this.searching = false;
-          console.error(error);
+          // console.error(error);
         });
     },
     async fetchEffects() {
@@ -368,12 +376,15 @@ export default {
       });
     },
 
-    splitStrip(strip) {
-      const data: any = {
-        strip: strip,
-      };
-
+    splitStrip(strip: SelectedStrip) {
+      const data = { strip: strip };
       axios.post(`${this.remoteURL}/changeled`, data).catch((error) => {
+        console.error(error);
+      });
+    },
+
+    saveEffect() {
+      axios.post(`${this.remoteURL}/saveeffect`).catch((error) => {
         console.error(error);
       });
     },

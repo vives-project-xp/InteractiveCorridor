@@ -5,12 +5,12 @@ topic = "";
 //{"strips":"{1,2}", "effect":"3", "delay":1000, "speed": 200}
 const setEffect = (req, res) => {
   const strips = req.body.strips;
-  const effect = req.body.effect;
-  const delay = req.body.delay;
-  const speed = req.body.speed;
-  const intensity = req.body.intensity;
-  const reverse = req.body.reverse;
-  const mirror = req.body.mirror;
+  const effect = req.body.effect || 0;
+  const delay = req.body.delay || 0;
+  const speed = req.body.speed || 128;
+  const intensity = req.body.intensity || 128;
+  const reverse = req.body.reverse || false;
+  const mirror = req.body.mirror || false;
 
   if (strips === undefined) {
     res.send("No strips specified");
