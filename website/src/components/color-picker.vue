@@ -2,8 +2,8 @@
   <div>
     <div
       id="picker"
-      class="w-60 border border-white"
-      :style="{ maxWidth: size.toString() + 'px' }"
+      class="border none" style="border: none;"
+      
     ></div>
   </div>
 </template>
