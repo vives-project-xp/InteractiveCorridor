@@ -11,7 +11,7 @@ import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
 import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
-import LedPixel from '@/components/led-pixel.vue';
+import LedStrip, { type SelectedStrip, type IncomingStrip } from '@/components/led-strip.vue';
 import { throttle } from '@/lib/utils';
 
 export type Effect = {
@@ -19,20 +19,6 @@ export type Effect = {
   description: string;
   id: number;
 };
-
-export type IncomingStrip = {
-  index: number;
-  name: string;
-  segments: {
-    start: number;
-    end: number;
-    length: number;
-    effect: number;
-    color: string;
-  }[];
-};
-
-export type SelectedStrip = { index: number; segments: number[] };
 </script>
 
 <template>
@@ -225,60 +211,33 @@ export type SelectedStrip = { index: number; segments: number[] };
           </span>
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent class="flex flex-col gap-4">
         <template v-for="strip in strips" :key="strip.index">
-          <div class="mb-5">
-            <h3 class="font-semibold">{{ strip.name }}</h3>
-            <button @click="() => splitStrip(strip)">Split</button>
-            <div class="flex flex-wrap">
-              <div
-                v-for="(segment, barIndex) in strip.segments"
-                :key="barIndex"
-                class="flex flex-wrap gap-2"
-              >
-                <!-- Add the shadow class if the segment is in the selectedStrips -->
-                <div
-                  class="flex items-center rounded m-1 cursor-pointer"
-                  :class="{
-                    'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedStrips.find(
-                      (s) => s.index === strip.index && s.segments.includes(barIndex)
-                    ),
-                  }"
-                  @click="
-                    () => {
-                      const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
-                      if (!selectedStrip) {
-                        selectedStrips.push({ index: strip.index, segments: [barIndex] });
-                      } else {
-                        if (selectedStrip.segments.includes(barIndex)) {
-                          selectedStrip.segments.splice(
-                            selectedStrip.segments.indexOf(barIndex),
-                            1
-                          );
-                        } else {
-                          selectedStrip.segments.push(barIndex);
-                        }
-                      }
-                    }
-                  "
-                >
-                  <LedPixel
-                    v-for="(ledIndex, ledIndexInBar) in segment.end - segment.start + 1"
-                    :key="ledIndexInBar"
-                    class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                    :color="segment.color || '#000000'"
-                    :effect="
-                      effects?.find((e) => Number(e.id) === segment.effect) || {
-                        name: 'Unknown',
-                        description: 'Unknown',
-                        id: -1,
-                      }
-                    "
-                  ></LedPixel>
-                </div>
-              </div>
-            </div>
-          </div>
+          <LedStrip
+            class="grow shadow-md"
+            :strip
+            :effects="effects ? effects : []"
+            :selectedSegments="selectedStrips.find((s) => s.index === strip.index)?.segments || []"
+            @strip-select="
+              (strip, barIndex) => {
+                const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
+                if (!selectedStrip) {
+                  selectedStrips.push({
+                    index: strip.index,
+                    name: strip.name,
+                    segments: [barIndex],
+                  });
+                } else {
+                  if (selectedStrip.segments.includes(barIndex)) {
+                    selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
+                  } else {
+                    selectedStrip.segments.push(barIndex);
+                  }
+                }
+              }
+            "
+            @split="splitStrip"
+          />
         </template>
         <div class="flex max-w-xs gap-1">
           <Input
