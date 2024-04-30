@@ -24,7 +24,7 @@ export type Effect = {
 <template>
   <div class="flex flex-col md:flex-row my-7 gap-4">
     <aside class="m-auto md:m-0">
-      <Tabs default-value="color-picker" class="w-[300px]">
+      <Tabs default-value="color-picker" class="w-[300px] sticky top-4">
         <TabsList class="w-full">
           <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger class="w-full" value="effects">Effects</TabsTrigger>
