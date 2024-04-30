@@ -49,7 +49,7 @@ const props = defineProps({
 
 <template>
   <Card :class="cn('', props.class)">
-    <CardHeader class="flex flex-row justify-between">
+    <CardHeader class="flex flex-row justify-between gap-4">
       <CardTitle class="flex items-center">{{ props.strip.name }}</CardTitle>
       <CardDescription class="flex gap-2">
         <Button variant="secondary" @click="() => onSplit(strip)">Split</Button>
@@ -107,7 +107,7 @@ const props = defineProps({
               class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
               :color="segment.color || '#000000'"
               :effect="
-                props.effects?.find((e) => Number(e.id) === segment.effect) || {
+                props.effects?.find((e) => Number(e.id) === Number(segment.effect)) || {
                   name: 'Unknown',
                   description: 'Unknown',
                   id: -1,

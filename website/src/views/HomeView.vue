@@ -400,7 +400,7 @@ export default {
         console.error(error);
       });
 
-      console.table(response.data);
+      console.table(response?.data);
     },
   },
   mounted() {
