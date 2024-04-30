@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
 import ColorPicker from '@/components/color-picker.vue';
@@ -218,11 +219,15 @@ export type SelectedStrip = { index: number; segments: number[] };
           </TooltipProvider>
         </span>
       </h2>
-      <input
-      type="text" placeholder="Naam van effect" v-model="ownEffectName"
-      class="border border-gray-300 rounded-lg px-4 py-2 mr-2 focus:outline-none focus:border-blue-500"/>
-      <button @click="saveEffect(ownEffectName)" margin="10px"class="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Save effect</button>
-      <template v-for="strip in strips" :key="strip.index">
+      <div class="flex max-w-xs gap-1">
+        <Input
+          type="text"
+          placeholder="Naam van effect"
+          v-model="ownEffectName"
+          class="px-4 py-2 mr-2 inline-block"
+        />
+        <Button @click="saveEffect(ownEffectName)" variant="default"> Save effect </Button>
+      </div>      <template v-for="strip in strips" :key="strip.index">
         <div class="mb-5">
           <h3 class="font-semibold">{{ strip.name }}</h3>
           <button @click="() => splitStrip(strip)">Split</button>
