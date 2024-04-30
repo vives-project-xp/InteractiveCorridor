@@ -27,7 +27,7 @@ const toggleDarkMode = () => {
     </ul>
   </nav>
 
-  <main class="w-4/5 m-auto">
+  <main class="p-6">
     <RouterView />
   </main>
 </template>
