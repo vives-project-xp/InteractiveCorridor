@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardDescription, CardTitle } from '@/components/ui/card';
 import LedPixel from '@/components/led-pixel.vue';
 import { cn } from '@/lib/utils';
+import type { PropType } from 'vue';
 
 export type SelectedStrip = { index: number; name: string; segments: number[] };
 
@@ -23,6 +24,10 @@ const props = defineProps({
     type: Object as () => IncomingStrip,
     required: true,
   },
+  selectedSegments: {
+    type: Array as () => number[],
+    required: true,
+  },
   effects: {
     type: Array as () => any[],
     required: true,
@@ -31,6 +36,14 @@ const props = defineProps({
     type: String as () => string,
     default: '',
   },
+  onStripSelect: {
+    type: Function as PropType<(strip: SelectedStrip, barIndex: number) => void>,
+    required: true,
+  },
+  onSplit: {
+    type: Function as PropType<(strip: IncomingStrip) => void>,
+    required: true,
+  },
 });
 </script>
 
@@ -38,7 +51,9 @@ const props = defineProps({
   <Card :class="cn('', props.class)">
     <CardHeader class="flex flex-row justify-between">
       <CardTitle class="flex items-center">{{ props.strip.name }}</CardTitle>
-      <CardDescription><Button variant="secondary">Split</Button></CardDescription>
+      <CardDescription
+        ><Button variant="secondary" @click="() => onSplit(strip)">Split</Button></CardDescription
+      >
     </CardHeader>
     <CardContent>
       <div class="flex flex-wrap">
@@ -49,19 +64,19 @@ const props = defineProps({
         >
           <div
             class="flex items-center rounded m-1 cursor-pointer"
-            
+            :class="{
+              'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedSegments.includes(barIndex),
+            }"
             @click="
               () => {
-              //   const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
-              //   if (!selectedStrip) {
-              //     selectedStrips.push({ index: strip.index, segments: [barIndex] });
-              //   } else {
-              //     if (selectedStrip.segments.includes(barIndex)) {
-              //       selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
-              //     } else {
-              //       selectedStrip.segments.push(barIndex);
-              //     }
-              //   }
+                props.onStripSelect(
+                  {
+                    index: props.strip.index,
+                    name: props.strip.name,
+                    segments: props.strip.segments.map((_, i) => i),
+                  },
+                  barIndex
+                );
               }
             "
           >
