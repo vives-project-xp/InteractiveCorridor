@@ -51,9 +51,30 @@ const props = defineProps({
   <Card :class="cn('', props.class)">
     <CardHeader class="flex flex-row justify-between">
       <CardTitle class="flex items-center">{{ props.strip.name }}</CardTitle>
-      <CardDescription
-        ><Button variant="secondary" @click="() => onSplit(strip)">Split</Button></CardDescription
-      >
+      <CardDescription class="flex gap-2">
+        <Button variant="secondary" @click="() => onSplit(strip)">Split</Button>
+        <Button
+          variant="secondary"
+          @click="
+            () => {
+              const toggleAll = props.selectedSegments.length === 0;
+              props.strip.segments.forEach(
+                (_, i) =>
+                  (props.selectedSegments.includes(i) || toggleAll) &&
+                  props.onStripSelect(
+                    {
+                      index: props.strip.index,
+                      name: props.strip.name,
+                      segments: props.strip.segments.map((_, i) => i),
+                    },
+                    i
+                  )
+              );
+            }
+          "
+          >All</Button
+        >
+      </CardDescription>
     </CardHeader>
     <CardContent>
       <div class="flex flex-wrap">
