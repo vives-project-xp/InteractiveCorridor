@@ -1,13 +1,7 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
 import { Button } from '@/components/ui/button';
-import { Computer } from 'lucide-vue-next';
-
-const navItemClass = 'text-primary-foreground border border-opacity-5 px-3 py-2 rounded';
-
-const toggleDarkMode = () => {
-  document.body.classList.toggle('dark');
-};
+import { Moon, Sun } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -22,7 +16,14 @@ const toggleDarkMode = () => {
         <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
       </li>
       <li>
-        <Button variant="outline" @click="toggleDarkMode"><Computer /></Button>
+        <Button variant="outline" @click="toggleDarkMode">
+          <template v-if="isDarkMode">
+            <Moon />
+          </template>
+          <template v-else>
+            <Sun />
+          </template>
+        </Button>
       </li>
     </ul>
   </nav>
@@ -33,3 +34,23 @@ const toggleDarkMode = () => {
 </template>
 
 <style scoped></style>
+
+<script lang="ts">
+export default {
+  components: {
+    Sun,
+    Moon,
+  },
+  data() {
+    return {
+      isDarkMode: document.body.classList.contains('dark'),
+    };
+  },
+  methods: {
+    toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      this.isDarkMode = document.body.classList.contains('dark');
+    },
+  },
+};
+</script>
