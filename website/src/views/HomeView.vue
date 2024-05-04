@@ -362,6 +362,9 @@ export default {
       axios.post(`${this.remoteURL}/changeled`, data).catch((error) => {
         console.error(error);
       });
+
+      const selectedStrip = this.selectedStrips.find((s) => s.index === strip.index)!;
+      selectedStrip.segments = [];
     },
 
     saveEffect(ownEffectName: string) {
