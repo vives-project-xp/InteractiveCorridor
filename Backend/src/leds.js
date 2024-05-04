@@ -56,7 +56,9 @@ const changeLeds = async (req, res) => {
   let nextIndex = (currentIndex + 1) % segmentsLengths.length;
   const nextLength = segmentsLengths[nextIndex];
 
-  strip.adjustSegments(Array(nextLength).fill(totalLeds / nextLength));
+  strip.adjustSegments(
+    Array(nextLength).fill(Math.floor(totalLeds / nextLength))
+  );
   res.send("Segments changed");
 };
 
