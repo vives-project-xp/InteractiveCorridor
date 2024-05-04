@@ -363,8 +363,8 @@ export default {
         console.error(error);
       });
 
-      const selectedStrip = this.selectedStrips.find((s) => s.index === strip.index)!;
-      selectedStrip.segments = [];
+      const selectedStrip = this.selectedStrips.find((s) => s.index === strip.index);
+      if (selectedStrip) selectedStrip.segments = [];
     },
 
     saveEffect(ownEffectName: string) {
