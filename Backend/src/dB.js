@@ -9,7 +9,7 @@ try {
   connection = mysql.createConnection({
     password: process.env.MYSQL_PASSWORD,
     user: process.env.MYSQL_USER,
-    host: "db",
+    host: "database",
     port: 3306,
     database: process.env.MYSQL_DATABASE,
     insecureAuth: true,
