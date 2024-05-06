@@ -16,4 +16,4 @@ RUN npm install
 EXPOSE 3000
 
 # Start the application
-CMD [ "npm", "run", "dev", "--", "--legacy-watch"]
+CMD [ "npm", "run", "start"]
