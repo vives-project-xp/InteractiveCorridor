@@ -6,11 +6,12 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
 import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
-import LedPixel from '@/components/led-pixel.vue';
+import LedStrip, { type SelectedStrip, type IncomingStrip } from '@/components/led-strip.vue';
 import { throttle } from '@/lib/utils';
 
 export type Effect = {
@@ -18,26 +19,12 @@ export type Effect = {
   description: string;
   id: number;
 };
-
-export type IncomingStrip = {
-  index: number;
-  name: string;
-  segments: {
-    start: number;
-    end: number;
-    length: number;
-    effect: number;
-    color: string;
-  }[];
-};
-
-export type SelectedStrip = { index: number; segments: number[] };
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row my-7">
-    <aside class="m-auto md:m-0">
-      <Tabs default-value="color-picker" class="w-[300px]">
+  <div class="flex flex-col md:flex-row gap-4">
+    <aside class="m-auto md:m-0 w-full md:w-fit">
+      <Tabs default-value="color-picker" class="w-full sticky top-4">
         <TabsList class="w-full">
           <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger class="w-full" value="effects">Effects</TabsTrigger>
@@ -122,7 +109,12 @@ export type SelectedStrip = { index: number; segments: number[] };
                     variant="secondary"
                     :onClick="() => loadEffect(effect.name)"
                   />
-                  <button @click="deleteEffect(effect.name)" class="text-red-600 hover:text-red-800">Delete</button>
+                  <button
+                    @click="deleteEffect(effect.name)"
+                    class="text-red-600 hover:text-red-800"
+                  >
+                    Delete
+                  </button>
                   <Separator class="my-2" />
                 </div>
               </ScrollArea>
@@ -205,75 +197,59 @@ export type SelectedStrip = { index: number; segments: number[] };
         </TabsContent>
       </Tabs>
     </aside>
-    <hr class="my-5 md:my-0 md:mx-4" />
-    <div class="grow">
-      <h2 class="text-2xl font-semibold leading-none tracking-tight my-3">
-        Individual lights
-        <span v-if="searching">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
-              <TooltipContent>Searching for LED strips...</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </span>
-      </h2>
-      <input
-      type="text" placeholder="Naam van effect" v-model="ownEffectName"
-      class="border border-gray-300 rounded-lg px-4 py-2 mr-2 focus:outline-none focus:border-blue-500"/>
-      <button @click="saveEffect(ownEffectName)" margin="10px"class="ml-2 bg-blue-500 text-white px-4 py-2 rounded">Save effect</button>
-      <template v-for="strip in strips" :key="strip.index">
-        <div class="mb-5">
-          <h3 class="font-semibold">{{ strip.name }}</h3>
-          <button @click="() => splitStrip(strip)">Split</button>
-          <div class="flex flex-wrap">
-            <div
-              v-for="(segment, barIndex) in strip.segments"
-              :key="barIndex"
-              class="flex flex-wrap gap-2"
-            >
-              <!-- Add the shadow class if the segment is in the selectedStrips -->
-              <div
-                class="flex items-center rounded m-1 cursor-pointer"
-                :class="{
-                  'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedStrips.find(
-                    (s) => s.index === strip.index && s.segments.includes(barIndex)
-                  ),
-                }"
-                @click="
-                  () => {
-                    const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
-                    if (!selectedStrip) {
-                      selectedStrips.push({ index: strip.index, segments: [barIndex] });
-                    } else {
-                      if (selectedStrip.segments.includes(barIndex)) {
-                        selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
-                      } else {
-                        selectedStrip.segments.push(barIndex);
-                      }
-                    }
+    <Card class="grow">
+      <CardHeader>
+        <CardTitle>
+          Individual lights
+          <span v-if="searching">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
+                <TooltipContent>Searching for LED strips...</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </span>
+        </CardTitle>
+      </CardHeader>
+      <CardContent class="flex flex-col gap-4">
+        <template v-for="strip in strips" :key="strip.index">
+          <LedStrip
+            class="grow shadow-md"
+            :strip
+            :effects="effects ? effects : []"
+            :selectedSegments="selectedStrips.find((s) => s.index === strip.index)?.segments || []"
+            @strip-select="
+              (strip, barIndex) => {
+                const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
+                if (!selectedStrip) {
+                  selectedStrips.push({
+                    index: strip.index,
+                    name: strip.name,
+                    segments: [barIndex],
+                  });
+                } else {
+                  if (selectedStrip.segments.includes(barIndex)) {
+                    selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
+                  } else {
+                    selectedStrip.segments.push(barIndex);
                   }
-                "
-              >
-                <LedPixel
-                  v-for="(ledIndex, ledIndexInBar) in segment.end - segment.start + 1"
-                  :key="ledIndexInBar"
-                  class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-                  :color="segment.color || '#000000'"
-                  :effect="
-                    effects?.find((e) => Number(e.id) === segment.effect) || {
-                      name: 'Unknown',
-                      description: 'Unknown',
-                      id: -1,
-                    }
-                  "
-                ></LedPixel>
-              </div>
-            </div>
-          </div>
+                }
+              }
+            "
+            @split="splitStrip"
+          />
+        </template>
+        <div class="flex max-w-xs gap-1">
+          <Input
+            type="text"
+            placeholder="Naam van effect"
+            v-model="ownEffectName"
+            class="px-4 py-2 mr-2 inline-block"
+          />
+          <Button @click="saveEffect(ownEffectName)" variant="default"> Save effect </Button>
         </div>
-      </template>
-    </div>
+      </CardContent>
+    </Card>
   </div>
 </template>
 
@@ -292,7 +268,7 @@ export default {
       searching: false,
       effectSearch: '',
       dbeffectSearch: '',
-      ownEffectName: "",
+      ownEffectName: '',
       remoteURL: `http://${window.location.hostname}/api`,
       effectid: 0,
       speed: [128],
@@ -386,44 +362,48 @@ export default {
       axios.post(`${this.remoteURL}/changeled`, data).catch((error) => {
         console.error(error);
       });
+
+      const selectedStrip = this.selectedStrips.find((s) => s.index === strip.index);
+      if (selectedStrip) selectedStrip.segments = [];
     },
 
     saveEffect(ownEffectName: string) {
-      axios.post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })  
+      axios
+        .post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })
         .then(() => {
-          console.log("Effect opgeslagen!");
-          this.fetchEffects(); 
+          console.log('Effect opgeslagen!');
+          this.fetchEffects();
         })
         .catch((error) => {
-          console.error("Fout bij opslaan effect:", error);
+          console.error('Fout bij opslaan effect:', error);
         });
     },
 
-    async deleteEffect(effectName: string){
+    async deleteEffect(effectName: string) {
       try {
         const response = await axios.delete(`${this.remoteURL}/deleteeffect`, {
           data: { name: effectName },
         });
-      
+
         if (response.status === 200) {
           console.log(`Effect '${effectName}' succesvol verwijderd`);
-          this.fetchEffects();  
+          this.fetchEffects();
         }
       } catch (error) {
-        console.error("Fout bij het verwijderen van het effect:", error);
+        console.error('Fout bij het verwijderen van het effect:', error);
       }
     },
 
     async loadEffect(_name: string) {
       const data: any = {
         name: _name,
-      }
-      
+      };
+
       const response = await axios.post(`${this.remoteURL}/loadeffect`, data).catch((error) => {
         console.error(error);
       });
 
-      console.table(response.data);
+      console.table(response?.data);
     },
   },
   mounted() {

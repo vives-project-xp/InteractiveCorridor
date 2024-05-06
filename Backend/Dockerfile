@@ -4,19 +4,16 @@ FROM node:21-alpine3.18
 # FROM  --platform=linux/amd64 node:16.14.0-alpine
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /usr/local/Backend
 
 # Copy package.json and package-lock.json
-COPY package*.json ./
+COPY . .
 
 # Install dependencies
 RUN npm install
-
-# Copy the application files
-COPY . .
 
 # Expose the port
 EXPOSE 3000
 
 # Start the application
-CMD [ "node", "src/server.js" ]
+CMD [ "npm", "run", "dev", "--", "--legacy-watch"]

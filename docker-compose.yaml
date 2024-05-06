@@ -14,6 +14,9 @@ services:
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
       - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
       - "traefik.http.routers.backend.entrypoints=http"
+    volumes:
+      - ./Backend:/usr/local/Backend
+      - /usr/local/Backend/node_modules
 
   website:
     build: ./website/
@@ -27,6 +30,9 @@ services:
       - "traefik.http.services.website.loadbalancer.server.port=8000"
       - "traefik.http.routers.website.rule=PathPrefix(`/`)"
       - "traefik.http.routers.website.entrypoints=http"
+    volumes:
+      - ./website:/usr/local/website
+      - /usr/local/website/node_modules
 
   database:
     image: mysql:latest
