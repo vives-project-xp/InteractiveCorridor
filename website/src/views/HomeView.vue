@@ -300,12 +300,12 @@ export default {
         const response1 = await axios.get(`${this.remoteURL}/effect`);
         this.effects = response1.data;
 
-        // Haal de effecten op van 'http://localhost/api/dbeffects'
-        const response2 = await axios.get(`${this.remoteURL}/dbeffects`);
+        // Haal de effecten op van 'http://localhost/api/db/effects'
+        const response2 = await axios.get(`${this.remoteURL}/db/effects`);
         this.dbeffects = response2.data;
 
         console.log('Effects from /effect:', this.effects);
-        console.log('Effects from /dbeffects:', this.dbeffects);
+        console.log('Effects from /db/effects:', this.dbeffects);
       } catch (error) {
         console.error('Error fetching effects:', error);
       }
