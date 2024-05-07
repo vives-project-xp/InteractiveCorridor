@@ -162,7 +162,7 @@ paths:
           description: Kleur succesvol ingesteld op de LED-strip(s).
         "400":
           description: Ongeldige invoergegevens.
-  /dbeffects:
+  /db/effects:
     get:
       summary: Haal alle effecten op uit de database.
       responses:

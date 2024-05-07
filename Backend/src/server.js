@@ -48,10 +48,10 @@ app.get("/api/leds", leds.getLeds);
 app.post("/api/leds", leds.postLeds);
 app.post("/api/changeled", leds.changeLeds);
 
-app.post("/api/effect", effects.setEffect);
-app.get("/api/effect", effects.getEffect);
+app.post("/api/effects", effects.setEffect);
+app.get("/api/effects", effects.getEffect);
 
-app.get("/api/dbeffects", db.getEffects);
+app.get("/api/db/effects", db.getEffects);
 app.post("/api/saveeffect", db.saveEffect);
 app.post("/api/loadeffect", db.loadEffect);
 app.delete("/api/deleteeffect", db.deleteEffect);
