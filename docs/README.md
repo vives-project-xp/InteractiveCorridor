@@ -59,18 +59,16 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | [Auto fuse set 10A](#autofuse-set-10a)          |    1     |         5,29 |         |
 | [Cables](#cables)                               |    1     |        36,30 |         |
 | [Female pin header set](#female-pin-header-set) |    10    |         19,8 |         |
-| [Male pin header set](#Male-pin-header-set)     |    10    |         3,52 |         |
+| [Male pin header set](#male-pin-header-set)     |    10    |         3,52 |         |
 | [cable tray](#cable-tray)                       |    1     |         6,79 |         |
 
-## Level shifter 
+## Level shifter
 
-| Component                                       | Quantity | Price / unit | Remarks |
-| :---------------------------------------------- | :------: | -----------: | :------ |
-| [Resistor1K](#Resistor1K)                       |    5     |         0,49 |         |
-| [Resistor1.5K](#Resistor1,5K)                   |    2     |         1,00 |         |
-| [transistor](#transistor)                       |    24    |         6,312|         |
-
-
+| Component                  | Quantity | Price / unit | Remarks |
+| :------------------------- | :------: | -----------: | :------ |
+| [Resistor1K](#resistors)   |    5     |         0,49 |         |
+| [Resistor1.5K](#resistors) |    2     |         1,00 |         |
+| [transistor](#resistors)   |    24    |        6,312 |         |
 
 ### WS2814 RGBW LED strip
 
@@ -219,14 +217,12 @@ this ensures that the cables are concealed.
 
 [Hubo-component](https://www.hubo.be/nl/p/micro-trunking-kabelgoot-halve-cirkel-20x10-mm-2m-wit/930710/)
 
-
 ### Resistors
 
 We use the risistors to make an level shifter. you can find the connection diagram on this page.
 
 [Resistor](https://www.kiwi-electronics.com/nl/weerstand-1-5k-ohm-1-4-watt-5-10-stuks-657)
 [Resistor](https://www.otronic.nl/nl/10x-weerstand-1k-ohm-1-4-watt-5.html)
-
 
 ## Architecture document
 
