@@ -52,5 +52,8 @@ export default {
       this.isDarkMode = document.body.classList.contains('dark');
     },
   },
+  mounted() {
+    this.toggleDarkMode();
+  }
 };
 </script>
