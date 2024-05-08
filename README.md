@@ -44,3 +44,30 @@ https://www.youtube.com/watch?v=xEEKBbKvuMQ
   />
   <img alt="Architecture diagram" />
 </picture>
+
+### Input requirements
+
+The input requirements for the project are:
+
+- The user should be able to control the LED strips via a web interface.
+- The user should be able to change the color and brightness of the LED strips.
+- The user should be able to select different lighting effects and animations for the LED strips.
+
+### Functional requirements
+
+The functional requirements for the project are:
+
+- The system should provide a web interface for the user to control the LED strips.
+- The system should provide an API for the web interface to communicate with the server.
+- The server should listen to the API and control the ESP32s via the [WLED MQTT interface](https://kno.wled.ge/interfaces/mqtt/).
+- The system should provide a user-friendly interface to adjust the color, brightness, and lighting effects of the LED strips.
+- The system should provide a variety of lighting effects and animations for the user to choose from.
+- The system should be able to handle multiple ESP32s.
+- The system should be able to handle multiple users controlling the LED strips simultaneously.
+
+### Output requirements
+
+The output requirements for the project are:
+
+- No flickering or lag in the LED strips.
+- Reaction time is below 100ms.
