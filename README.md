@@ -27,6 +27,9 @@ https://www.youtube.com/watch?v=xEEKBbKvuMQ
 
 ## Folder Structure
 
+- [Website](website/README.md): All information about how the website works and how the user can interact with it.
+- [Backend](Backend/README.md) All information about how the website communicates with the ledstip's.
+- [Docs](docs/README.md): All information about the hardware and setup
 
 ## Corridor data flow diagram
 
