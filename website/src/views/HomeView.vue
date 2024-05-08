@@ -240,7 +240,7 @@ export type Effect = {
         <div class="flex max-w-xs gap-1">
           <Input
             type="text"
-            placeholder="Naam van effect"
+            placeholder="Effect name"
             v-model="ownEffectName"
             class="px-4 py-2 mr-2 inline-block"
           />
@@ -297,15 +297,13 @@ export default {
     async fetchEffects() {
       try {
         // Haal de effecten op van 'http://localhost/api/effect'
-        const response1 = await axios.get(`${this.remoteURL}/effect`);
+        const response1 = await axios.get(`${this.remoteURL}/effects`);
         this.effects = response1.data;
 
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
         this.dbeffects = response2.data;
 
-        console.log('Effects from /effect:', this.effects);
-        console.log('Effects from /db/effects:', this.dbeffects);
       } catch (error) {
         console.error('Error fetching effects:', error);
       }
@@ -319,7 +317,7 @@ export default {
       if (option !== undefined && value !== undefined) {
         data[option] = value;
       }
-      axios.post(`${this.remoteURL}/effect`, data).catch((error) => {
+      axios.post(`${this.remoteURL}/effects`, data).catch((error) => {
         console.error(error);
       });
     },

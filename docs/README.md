@@ -51,7 +51,6 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 | **transistor**                                  |    24    |         6,312|    
 | **capacity**                                    |    24    |         0,08 |
 
-
 ## Architecture document
 
 ### Input requirements

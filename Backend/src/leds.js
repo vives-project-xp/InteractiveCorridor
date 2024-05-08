@@ -62,4 +62,15 @@ const changeLeds = async (req, res) => {
   res.send("Segments changed");
 };
 
-module.exports = { getLeds, postLeds, changeLeds };
+const white = async () => {
+  for (const strip of ledstrips) {
+    for (const segment of strip.segments) {
+      segment.setColor(hexToRgb("#ffffff"));
+      segment.setEffect(0);
+    }
+    strip.updateColor();
+    strip.updateEffect();
+  }
+}
+
+module.exports = { getLeds, postLeds, changeLeds, white };

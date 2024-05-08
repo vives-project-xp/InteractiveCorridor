@@ -44,6 +44,33 @@ app.use(
   )
 );
 
+let lastRequestTime = Date.now();
+const TIMER_INTERVAL = 1 * 60 * 1000; // 5 minuten
+const executeTask = () => {
+  // Voer hier je taak uit die je wilt uitvoeren na 5 minuten inactiviteit
+  leds.white();
+};
+
+const startTimer = () => {
+  setTimeout(() => {
+    const currentTime = Date.now();
+    // Controleer of er gedurende de timerinterval geen verzoeken zijn ontvangen
+    if (currentTime - lastRequestTime >= TIMER_INTERVAL) {
+      executeTask();
+    }
+    // Herstart de timer
+    startTimer();
+  }, TIMER_INTERVAL);
+};
+startTimer();
+
+app.use((req, res, next) => {
+  if (req.method !== "GET" || req.path !== "/api/leds") {
+    lastRequestTime = Date.now();
+  }
+  next();
+});
+
 app.get("/api/leds", leds.getLeds);
 app.post("/api/leds", leds.postLeds);
 app.post("/api/changeled", leds.changeLeds);
