@@ -7,10 +7,6 @@ Welcome to the documentation page! This is your go-to resource for understanding
 - [Bill of Materials](#bill-of-materials)
 - [Level shifter](#level-shifter)
 - [Architecture document](#architecture-document)
-  - [Input requirements](#input-requirements)
-  - [Functional requirements](#functional-requirements)
-  - [Output requirements](#output-requirements)
-  - [Software architecture diagram](#software-architecture-diagram)
   - [Hardware architecture diagram](#hardware-architecture-diagram)
   - [Wiring architecture diagram](#wiring-architecture-diagram)
   - [Wiring for Level shifter](#wiring-for-level-shifter)
@@ -69,6 +65,10 @@ The Bill of Materials (BOM) lists all the components, parts, and materials neede
 
 The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
 
+If we look at the datasheets of all components, we need 2 different voltages.
+- 24V for the ledstip
+- 5V for the data and esp
+
 ### Wiring architecture diagram
 
 <picture>
@@ -98,19 +98,3 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 </picture>
 
 The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
-
-## Project document
-
-Refer to the [project document](./project_document.pdf) for a broad explanation of what this project is about.
-
-## ESP32
-
-The ESP32 is a series of low-cost, low-power system on a chip microcontrollers with integrated Wi-Fi and dual-mode Bluetooth.
-
-In this project, we use the ESP32 to control the LED strips via the WLED software.
-
-### WLED Software
-
-WLED is a fast and feature-rich implementation of an LED controller based on the ESP8266/ESP32 platform. It supports a variety of animations and allows for extensive customization.
-
-In this project, WLED is used to control the LED lights connected to the ESP32. It provides a user-friendly interface to adjust the lighting effects.

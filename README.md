@@ -71,3 +71,7 @@ The output requirements for the project are:
 
 - No flickering or lag in the LED strips.
 - Reaction time is below 100ms.
+
+## Project document
+
+Refer to the [project document](./project_document.pdf) for a broad explanation of what this project is about.
