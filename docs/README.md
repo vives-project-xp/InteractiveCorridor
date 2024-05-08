@@ -11,7 +11,7 @@ Welcome to the documentation page! This is your go-to resource for understanding
   - [Wiring architecture diagram](#wiring-architecture-diagram)
   - [Wiring for Level shifter](#wiring-for-level-shifter)
 - [ESP Pinout](#ESP-Pinout)
-- [Measurements](#measurments)
+- [Measurements](#Measurements)
 
 ## Bill of Materials
 
@@ -100,4 +100,4 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 
 ## ESP Pinout
 
-## Measurments
+## Measurements
