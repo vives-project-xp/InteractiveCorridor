@@ -240,7 +240,7 @@ export type Effect = {
         <div class="flex max-w-xs gap-1">
           <Input
             type="text"
-            placeholder="Naam van effect"
+            placeholder="Effect name"
             v-model="ownEffectName"
             class="px-4 py-2 mr-2 inline-block"
           />
