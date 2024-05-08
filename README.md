@@ -4,6 +4,10 @@ Welcome to the Interactive Corridor Project! This unique corridor is designed to
 
 Controlling the effects is simple, just use the web interface hosted on a central server to customize the lighting. Whether you're aiming for subtle transitions or dramatic transformations, the Interactive Corridor Project gives you the tools to set the perfect mood. Enjoy exploring the endless possibilities!
 
+![ExampleCorridor](img/ExampleCorridor.PNG)
+The project is based on a video of the River Nights Festival (Singapore) where there was a beautiful light setup.
+https://www.youtube.com/watch?v=xEEKBbKvuMQ 
+
 ## The Team
 
 [<img src="https://github.com/RobbeDeW.png" width="25">Robbe De Wispelaere](https://github.com/RobbeDeW) 
