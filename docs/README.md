@@ -1,6 +1,8 @@
 # Documentation
 Welcome to the documentation page! This is your go-to resource for understanding everything about our hardware system, including a detailed breakdown of the components we use. Whether you're building your own setup or simply exploring the technology, this page aims to provide all the information you need.
 
+If you would like to know more about how we have adjusted the setup at our school, click [here](mounting/readme.md).
+
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
@@ -101,3 +103,5 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 ## ESP Pinout
 
 ## Measurements
+
+## The Set Up
