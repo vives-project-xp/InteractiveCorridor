@@ -1,18 +1,17 @@
-# OPSTELLING
+# SETUP
 
-> Voorzie een verzorgde opstelling waarbij de ledstrips stevig bevestigd zijn en waarbij alles mooi weggewerkt is.
+> Ensure a well-organized setup where the LED strips are securely fastened and everything is neatly concealed.
 
-#### Gesprek met technische dienst (21/02/24)
+#### Discussion with Technical Service (02/21/24)
 
-Technische dienst kijkt om stroom te voorzien in de kabelgoot die de B gang doorkruist. Wij voorzien een adapter die 220v omzet naar 24v. Deze wordt bevestigd in lokaal B303 in het plafond bij de beamer. Technische dienst voorziet een kabelgoot boven in de gang tot aan de 1ste betonnen paal.
-Wij kijken voor aluminium beugels voor de ledstrip die de technische dienst dan zal bevestigen (Boren / plakken).
+The technical service is considering providing power in the cable tray that crosses corridor B. We will provide an adapter that converts 220V to 24V. This will be installed in room B303, in the ceiling near the projector. The technical service will install a cable tray at the top of the corridor up to the first concrete pillar. We will supply aluminum brackets for the LED strip, which the technical service will then attach (drilling/adhesion).
 
-Wij zorgen voor de afwerking:
+We will handle the finishing touches:
 
-- Doosje voor de esp's
-- Beugels voor de ledstrips
-- Afwerking bedrading
+- Box for the ESPs
+- Brackets for the LED strips
+- Wiring concealment
 
-<img src="./images/Opstelling 1.jpg" alt="image" width="300" height="auto">
-<img src="./images/Opstelling 2.jpg" alt="image" width="300" height="auto">
-<img src="./images/Opstelling 3.jpg" alt="image" width="600" height="auto">
+![Setup1](images/Opstelling%201.jpg)
+![Setup2](images/Opstelling%202.jpg)
+![Setup3](images/Opstelling%203.jpg)
