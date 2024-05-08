@@ -10,6 +10,8 @@ Welcome to the documentation page! This is your go-to resource for understanding
   - [Hardware architecture diagram](#hardware-architecture-diagram)
   - [Wiring architecture diagram](#wiring-architecture-diagram)
   - [Wiring for Level shifter](#wiring-for-level-shifter)
+- [ESP Pinout](#ESP-Pinout)
+- [Measurements](#measurments)
 
 ## Bill of Materials
 
@@ -95,3 +97,7 @@ If we look at the datasheets of all components, we need 2 different voltages.
 </picture>
 
 The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [app.diagrams.net](https://app.diagrams.net/) or with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) vscode extension.
+
+## ESP Pinout
+
+## Measurments
