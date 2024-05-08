@@ -1,12 +1,7 @@
 const mqtt = require("mqtt");
 require("dotenv").config();
 
-let url;
-if (process.env.MQTT_CONTAINER === "false") {
-  url = process.env.MQTT_HOST + ":" + process.env.MQTT_PORT;
-} else {
-  url = "mqtt://mosquitto";
-}
+let url = process.env.MQTT_HOST + ":" + process.env.MQTT_PORT;
 
 const baseTopic = process.env.MQTT_BASE_TOPIC;
 
@@ -40,7 +35,7 @@ client.on("reconnect", () => {
 const publish = (topic, message) => {
   // Subscribe to the status topic to check message receipt
   // Publish to the specified topic
-  const apiTopic = baseTopic+ topic + "/api";
+  const apiTopic = baseTopic + topic + "/api";
   client.publish(apiTopic, message, (error) => {
     if (error) {
       console.log("Error:", error);

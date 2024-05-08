@@ -62,16 +62,6 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
-  mosquitto:
-    image: eclipse-mosquitto:2
-    restart: always
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./mosquitto/conf:/mosquitto/config
-      - mosquitto_data:/mosquitto/data
-      - mosquitto_log:/mosquitto/log
-
 volumes:
   db_data:
   mosquitto_data:
