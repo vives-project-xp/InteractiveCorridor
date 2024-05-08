@@ -10,9 +10,6 @@ Welcome to the documentation page! This is your go-to resource for understanding
   - [Hardware architecture diagram](#hardware-architecture-diagram)
   - [Wiring architecture diagram](#wiring-architecture-diagram)
   - [Wiring for Level shifter](#wiring-for-level-shifter)
-- [Project document](#project-document)
-- [ESP32](#esp32)
-  - [WLED Software](#wled-software)
 
 ## Bill of Materials
 
