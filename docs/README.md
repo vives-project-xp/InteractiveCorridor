@@ -21,32 +21,32 @@ These are the components that we purchased. You of course have different website
 
 The Bill of Materials (BOM) lists all the components, parts, and materials needed for one corridor consisting of 6 pillars:
 
-| Component                                                                                                                          | Quantity | Price / unit | 
-| :----------------------------------------------------------------------------------------------------------------------------------| :------: | -----------: | 
-| [**ws2814-rgbw-led-strip**](https://www.btf-lighting.com/products/ws2814-12v-24v-4-in-1-similar-sk6812-rgbw-pixels-addressable-ws2811-rgbww-rgbcw-5050-3pin-led-lights?variant=43463309459682)                                                                                                              |    6     |              |         
-| [**esp32-c3**](https://www.digikey.be/en/products/detail/espressif-systems/ESP32-C3-DEVKITM-1/13684315?s=N4IgTCBcDaIIwE4BsBWAtAUQMoAUDMYaAwnmgCIYBqA0gJIAqAsmnGgHJkgC6AvkA)                                                                 |    6     |       8,8451 |         
-| [**ledstrip-profile**](https://www.ledshop-groenovatie.com/Aluminium-Profiel-LED-Strip-Opbouw-1,5m-Compleet-1)                     |    16    |        17,95 |         
-| [**dcdc-converter**](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html)                            |    6     |         5,39 |         
-| [**prototype-printplate**](https://www.otronic.nl/nl/experimenteer-prototyping-printplaat-7x9cm-groen.html)                        |    6     |         1,25 |         
-| [**cable-box**](https://www.allekabels.be/lasdoos/22371/3914218/aansluitdoos.html?mc=nl-be&gad_source=4&gclid=CjwKCAiAivGuBhBEEiwAWiFmYfwxxcCCo7jKSgO8jgDI1kcRSnMjFWVOvQXYugo6C8fBlBvdbIoQIxoCPRkQAvD_BwE)                                   |    6     |         1,59 |         
-| [**power-supply**](https://www.ledstripkoning.be/accessoires/adapters-12-en-24-volt/600w-24v-25a-professionele-voeding-voor-led-strips?gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTggibyc4zfjcq7FT6RLFWak3v8JL1AJRPUxQzaCdWfI0lQoOlbzJBoCOJAQAvD_BwE)                                   |    1     |        76,95 |         
-| [**block-terminal**](https://be.farnell.com/camdenboss/ctb0100-6/pcb-terminal-5mm-6p/dp/3378876)                                   |    6     |         2,12 |         
-| [**fuse-holder**](https://www.allekabels.be/zekeringen/1615/5715/standaard-zekeringhouder.html?lang=nl-be)                         |    3     |         4,22 |         
-| [**autofuse-set-10a**](https://www.allekabels.be/zekeringen/1615/1067905/mini-autozekering-10-ampere.html)                         |    1     |         5,29 |         
-| [**cables**](https://netstore.rexel.be/NS/servlet/be.rex.ns.cf.RexStartServlet?sessionreset=1)                                     |    1     |        36,30 |         
-| [**female-pin-header-set**](https://be.farnell.com/en-BE/harwin/m20-7822046/connector-receptacle-tht-2-54mm/dp/7991967?gad_source=1&gclid=CjwKCAiA_5WvBhBAEiwAZtCU72bh7TvcaRVvL1va6MB8IyMt07SbZYtpANeCO3Gfjd5bcRMUCOIMTRoCZ2kQAvD_BwE&CMP=KNC-GBE-SHOPPING-PMAX-Test1607&gross_price=true)                                                                                                                    |    10    |         19,8 |         
-| [**Male-pin-header-set**](https://be.farnell.com/harwin/m20-9990846/connector-header-tht-2-54mm-8way/dp/1022257)                   |    10    |         3,52 |          
-| [**Lusterklemmen**](https://www.hubo.be/nl/p/profile-lusterklem-6mm-pvc-4-stuks/98445/)                                            |    1     |         4,59 |     
+| Component                                                                                                                          | Quantity |  Price / unit | 
+| :----------------------------------------------------------------------------------------------------------------------------------| :------: | ------------: | 
+| [**ws2814-rgbw-led-strip**](https://www.btf-lighting.com/products/ws2814-12v-24v-4-in-1-similar-sk6812-rgbw-pixels-addressable-ws2811-rgbww-rgbcw-5050-3pin-led-lights?variant=43463309459682)                                                                                                              |    6     |        €22,35 |         
+| [**esp32-c3**](https://www.digikey.be/en/products/detail/espressif-systems/ESP32-C3-DEVKITM-1/13684315?s=N4IgTCBcDaIIwE4BsBWAtAUQMoAUDMYaAwnmgCIYBqA0gJIAqAsmnGgHJkgC6AvkA)                                                                 |    6     |       €8,8451 |         
+| [**ledstrip-profile**](https://www.ledshop-groenovatie.com/Aluminium-Profiel-LED-Strip-Opbouw-1,5m-Compleet-1)                     |    16    |        €17,95 |         
+| [**dcdc-converter**](https://www.otronic.nl/nl/lm2596s-instelbare-step-down-4-40v-125-37v-met-onb.html)                            |    6     |         €5,39 |         
+| [**prototype-printplate**](https://www.otronic.nl/nl/experimenteer-prototyping-printplaat-7x9cm-groen.html)                        |    6     |         €1,25 |         
+| [**cable-box**](https://www.allekabels.be/lasdoos/22371/3914218/aansluitdoos.html?mc=nl-be&gad_source=4&gclid=CjwKCAiAivGuBhBEEiwAWiFmYfwxxcCCo7jKSgO8jgDI1kcRSnMjFWVOvQXYugo6C8fBlBvdbIoQIxoCPRkQAvD_BwE)                                   |    6     |         €1,59 |         
+| [**power-supply**](https://www.ledstripkoning.be/accessoires/adapters-12-en-24-volt/600w-24v-25a-professionele-voeding-voor-led-strips?gad_source=1&gclid=CjwKCAiAivGuBhBEEiwAWiFmYTggibyc4zfjcq7FT6RLFWak3v8JL1AJRPUxQzaCdWfI0lQoOlbzJBoCOJAQAvD_BwE)                                   |    1     |        €76,95 |         
+| [**block-terminal**](https://be.farnell.com/camdenboss/ctb0100-6/pcb-terminal-5mm-6p/dp/3378876)                                   |    6     |         €2,12 |         
+| [**fuse-holder**](https://www.allekabels.be/zekeringen/1615/5715/standaard-zekeringhouder.html?lang=nl-be)                         |    3     |         €4,22 |         
+| [**autofuse-set-10a**](https://www.allekabels.be/zekeringen/1615/1067905/mini-autozekering-10-ampere.html)                         |    1     |         €5,29 |         
+| [**cables**](https://netstore.rexel.be/NS/servlet/be.rex.ns.cf.RexStartServlet?sessionreset=1)                                     |    1     |        €36,30 |         
+| [**female-pin-header-set**](https://be.farnell.com/en-BE/harwin/m20-7822046/connector-receptacle-tht-2-54mm/dp/7991967?gad_source=1&gclid=CjwKCAiA_5WvBhBAEiwAZtCU72bh7TvcaRVvL1va6MB8IyMt07SbZYtpANeCO3Gfjd5bcRMUCOIMTRoCZ2kQAvD_BwE&CMP=KNC-GBE-SHOPPING-PMAX-Test1607&gross_price=true)                                                                                                                    |    10    |         €19,8 |         
+| [**Male-pin-header-set**](https://be.farnell.com/harwin/m20-9990846/connector-header-tht-2-54mm-8way/dp/1022257)                   |    10    |         €3,52 |          
+| [**Lusterklemmen**](https://www.hubo.be/nl/p/profile-lusterklem-6mm-pvc-4-stuks/98445/)                                            |    1     |         €4,59 |     
 
 
 ## Level shifter 
 
-| Component                                                                                                                         | Quantity | Price / unit | 
-| :---------------------------------------------------------------------------------------------------------------------------------| :------: | -----------: | 
-| [**Resistor1K**](https://www.otronic.nl/nl/10x-weerstand-1k-ohm-1-4-watt-5.html)                                                  |    5     |         0,49 |         
-| [**Resistor1,5K**](https://www.kiwi-electronics.com/nl/weerstand-1-5k-ohm-1-4-watt-5-10-stuks-657)                                |    2     |         1,00 |         
-| [**transistor**](https://be.farnell.com/on-semiconductor/bc547ctfr/transistor-bipol-npn-45v-to-92/dp/2453792?st=BC547CTFR)        |    24    |         6,312|    
-| [**capacity1nF**](https://gigatek.be/nl/velleman-keramische-condensator-1nf--velvec1n0)                                           |    24    |         0,08 |
+| Component                                                                                                                         | Quantity |  Price / unit | 
+| :---------------------------------------------------------------------------------------------------------------------------------| :------: | ------------: | 
+| [**Resistor1K**](https://www.otronic.nl/nl/10x-weerstand-1k-ohm-1-4-watt-5.html)                                                  |    5     |         €0,49 |         
+| [**Resistor1,5K**](https://www.kiwi-electronics.com/nl/weerstand-1-5k-ohm-1-4-watt-5-10-stuks-657)                                |    2     |         €1,00 |         
+| [**transistor**](https://be.farnell.com/on-semiconductor/bc547ctfr/transistor-bipol-npn-45v-to-92/dp/2453792?st=BC547CTFR)        |    24    |         €6,312|    
+| [**capacity1nF**](https://gigatek.be/nl/velleman-keramische-condensator-1nf--velvec1n0)                                           |    24    |         €0,08 |
 
 ## Architecture documents
 
