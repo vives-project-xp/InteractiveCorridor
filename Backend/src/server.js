@@ -45,10 +45,9 @@ app.use(
 );
 
 let lastRequestTime = Date.now();
-const TIMER_INTERVAL = 1 * 60 * 1000; // 5 minuten
+const TIMER_INTERVAL = process.env.TIMEOUT_TIME * 60 * 1000;
 const executeTask = () => {
-  // Voer hier je taak uit die je wilt uitvoeren na 5 minuten inactiviteit
-  leds.white();
+  leds.setDefault();
 };
 
 const startTimer = () => {
@@ -65,7 +64,7 @@ const startTimer = () => {
 startTimer();
 
 app.use((req, res, next) => {
-  if (req.method !== "GET" || req.path !== "leds") {
+  if (!(req.method === "GET" && req.path === "/leds")) {
     lastRequestTime = Date.now();
   }
   next();

@@ -1,3 +1,4 @@
+const mqtt = require("./mqtt");
 const { ledstrips } = require("./ledstrips");
 const { hexToRgb } = require("./utils");
 
@@ -80,4 +81,9 @@ const white = async () => {
   }
 }
 
-module.exports = { getLeds, postLeds, changeLeds, white };
+const setDefault = async () => {
+  console.log("default");
+  mqtt.publish("all", `{"ps":"${process.env.DEFAULT_EFFECT_ID}"}`);
+};
+
+module.exports = { getLeds, postLeds, changeLeds, setDefault };
