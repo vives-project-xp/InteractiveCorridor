@@ -66,7 +66,7 @@ const setEffect = (req, res) => {
 
 const getEffect = async (req, res) => {
   const effects = await fetch(
-    "https://raw.githubusercontent.com/scottrbailey/WLED-Utils/main/effect_descriptions.json"
+    "https://raw.githubusercontent.com/scottrbailey/WLED-Utils/ec0bad83b35358137569d4cc9a016e235e00ffed/effect_descriptions.json"
   ).then((response) => response.json());
   res.json(effects);
 };
