@@ -19,6 +19,12 @@ export type IncomingStrip = {
   }[];
 };
 
+export type Effect = {
+  name: string;
+  description: string;
+  id: number;
+};
+
 const props = defineProps({
   strip: {
     type: Object as () => IncomingStrip,
@@ -29,7 +35,7 @@ const props = defineProps({
     required: true,
   },
   effects: {
-    type: Array as () => any[],
+    type: Array as () => Effect[],
     required: true,
   },
   class: {
@@ -77,14 +83,14 @@ const props = defineProps({
       </CardDescription>
     </CardHeader>
     <CardContent>
-      <div class="flex flex-wrap">
+      <div class="flex flex-row-reverse justify-end flex-wrap">
         <div
           v-for="(segment, barIndex) in props.strip.segments"
           :key="barIndex"
           class="flex flex-wrap gap-2"
         >
           <div
-            class="flex items-center rounded m-1 cursor-pointer max-w-60 md:max-w-96 "
+            class="flex items-center rounded m-1 cursor-pointer max-w-60 md:max-w-96"
             :class="{
               'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedSegments.includes(barIndex),
             }"
