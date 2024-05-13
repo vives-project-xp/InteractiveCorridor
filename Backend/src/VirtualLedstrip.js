@@ -4,9 +4,9 @@ class Segment {
   start = 0;
   end = 0;
   color = {
-    r: 0,
-    g: 0,
-    b: 0,
+    r: 255,
+    g: 255,
+    b: 255,
   };
   effect = {
     id: 0,
@@ -23,9 +23,9 @@ class Segment {
     this.setEnd(end);
     this.setColor(
       color || {
-        r: 0,
-        g: 0,
-        b: 0,
+        r: 255,
+        g: 255,
+        b: 255,
       }
     );
   }
@@ -151,7 +151,7 @@ class VirtualLedstrip {
           [0, 0, 0],
         ],
       })),
-      tb: 0,
+      tb: this.segments[0].effect.delay * this.index || 0,
     };
 
     this.publish(JSON.stringify(body));

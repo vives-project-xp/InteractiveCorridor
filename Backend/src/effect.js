@@ -32,7 +32,7 @@ const setEffect = (req, res) => {
         console.log(`Segment ${segment} not found for strip ${reqStrip.index}`);
         continue; // Move to the next segment
       }
-
+/* 
       console.log({
         id: effect !== undefined ? effect : targetSegment.effect.id,
         delay: delay !== undefined ? delay : targetSegment.effect.delay,
@@ -41,7 +41,7 @@ const setEffect = (req, res) => {
           intensity !== undefined ? intensity : targetSegment.effect.intensity,
         reverse: reverse !== undefined ? reverse : targetSegment.effect.reverse,
         mirror: mirror !== undefined ? mirror : targetSegment.effect.mirror,
-      });
+      }); */
 
       targetSegment.setEffect({
         id: effect !== undefined ? effect : targetSegment.effect.id,
