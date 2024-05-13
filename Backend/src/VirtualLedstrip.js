@@ -4,7 +4,7 @@ class Segment {
   start = 0;
   end = 0;
   color = {
-    r: 255,
+    r: 0,
     g: 0,
     b: 0,
   };
@@ -23,7 +23,7 @@ class Segment {
     this.setEnd(end);
     this.setColor(
       color || {
-        r: 255,
+        r: 0,
         g: 0,
         b: 0,
       }
@@ -126,8 +126,8 @@ class VirtualLedstrip {
       seg: this.segments.map((segment) => ({
         col: [
           [segment.color.r, segment.color.g, segment.color.b],
-          [0,0,0],
-          [0,0,0]
+          [0, 0, 0],
+          [0, 0, 0],
         ],
         pal: 0,
       })),
@@ -144,6 +144,12 @@ class VirtualLedstrip {
         ix: segment.effect.intensity || 128,
         rev: segment.effect.reverse || false,
         mi: segment.effect.mirror || false,
+        pal: 0,
+        col: [
+          [segment.color.r, segment.color.g, segment.color.b],
+          [0, 0, 0],
+          [0, 0, 0],
+        ],
       })),
       tb: 0,
     };
@@ -180,5 +186,5 @@ class VirtualLedstrip {
 
 module.exports = {
   Segment: Segment,
-  VirtualLedstrip: VirtualLedstrip
+  VirtualLedstrip: VirtualLedstrip,
 };
