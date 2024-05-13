@@ -31,7 +31,7 @@ app.use(
         },
         servers: [
           {
-            url: "http://localhost/api",
+            url: process.env.BACKEND_URL + ":" + process.env.BACKEND_PORT,
           },
         ],
       },
@@ -65,27 +65,27 @@ const startTimer = () => {
 startTimer();
 
 app.use((req, res, next) => {
-  if (req.method !== "GET" || req.path !== "/api/leds") {
+  if (req.method !== "GET" || req.path !== "leds") {
     lastRequestTime = Date.now();
   }
   next();
 });
 
-app.get("/api/leds", leds.getLeds);
-app.post("/api/leds", leds.postLeds);
-app.post("/api/changeled", leds.changeLeds);
+app.get("/leds", leds.getLeds);
+app.post("/leds", leds.postLeds);
+app.post("/changeled", leds.changeLeds);
 
-app.post("/api/effects", effects.setEffect);
-app.get("/api/effects", effects.getEffect);
+app.post("/effects", effects.setEffect);
+app.get("/effects", effects.getEffect);
 
-app.get("/api/db/effects", db.getEffects);
-app.post("/api/saveeffect", db.saveEffect);
-app.post("/api/loadeffect", db.loadEffect);
-app.delete("/api/deleteeffect", db.deleteEffect);
+app.get("/db/effects", db.getEffects);
+app.post("/saveeffect", db.saveEffect);
+app.post("/loadeffect", db.loadEffect);
+app.delete("/deleteeffect", db.deleteEffect);
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");
 });
 app.listen(port, () => {
-  console.log(`Server listening on http://localhost/api`);
+  console.log(`Backend started`);
 });

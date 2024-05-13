@@ -2,18 +2,16 @@ version: "3.8"
 services:
   backend:
     build: ./Backend/
-    #ports:
-    #  - "3000:3000"
-    environment:
-      - PORT=3000
+    ports:
+      - "${BACKEND_PORT}:3000"
     restart: always
     env_file:
       - .env
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.services.backend.loadbalancer.server.port=3000"
-      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
-      - "traefik.http.routers.backend.entrypoints=http"
+    #    labels:
+    #      - "traefik.enable=true"
+    #      - "traefik.http.services.backend.loadbalancer.server.port=3000"
+    #      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+    #      - "traefik.http.routers.backend.entrypoints=http"
     volumes:
       - ./Backend:/usr/local/Backend
       - /usr/local/Backend/node_modules
@@ -22,20 +20,20 @@ services:
     build:
       context: ./website/
       args:
-        VITE_BACKEND_URL: ${BACKEND_URL}
+        VITE_BACKEND_URL: "${BACKEND_URL}:${BACKEND_PORT}"
     restart: always
     env_file:
       - ./.env
-    #ports:
-    #  - "80:8000"
+    ports:
+      - "${FRONTEND_PORT}:80"
     depends_on:
       - backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.services.website.loadbalancer.server.port=8000"
-      - "traefik.http.routers.website.rule=PathPrefix(`/`)"
-      - "traefik.http.routers.website.entrypoints=http"
-      - "traefik.http.services.website.loadbalancer.server.port=80"
+    #   labels:
+    #     - "traefik.enable=true"
+    #     - "traefik.http.services.website.loadbalancer.server.port=8000"
+    ##     - "traefik.http.routers.website.rule=PathPrefix(`/`)"
+    #     - "traefik.http.routers.website.entrypoints=http"
+    #     - "traefik.http.services.website.loadbalancer.server.port=80"
     volumes:
       - ./website:/usr/local/website
       - /usr/local/website/node_modules
@@ -53,22 +51,20 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  traefik:
-    image: "traefik:v2.5"
-    restart: always
-    command:
-      - "--providers.docker=true"
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--log.level=WARN"
-    ports:
-      - "80:80" # HTTP
-      - "443:443" # HTTPS
-      - "8080:8080" # Traefik dashboard
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+#  traefik:
+#    image: "traefik:v2.5"
+#    restart: always
+#    command:
+#      - "--providers.docker=true"
+#      - "--api.dashboard=true"
+#      - "--api.insecure=true"
+#      - "--log.level=WARN"
+##    ports:
+#      - "80:80" # HTTP
+#      - "443:443" # HTTPS
+#      - "8080:8080" # Traefik dashboard
+#    volumes:
+#      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
 volumes:
   db_data:
-  mosquitto_data:
-  mosquitto_log:
