@@ -1,17 +1,19 @@
-FROM node:21-alpine3.18
+FROM node:latest AS builder
 
-RUN npm install -g http-server
-
-WORKDIR /usr/local/website
+WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm install
 
+ARG VITE_BACKEND_URL
+
 COPY . .
 
 RUN npm run build
 
-EXPOSE 80
+FROM httpd:latest
 
-CMD [ "npm", "run", "production" ]
+COPY --from=builder /app/dist/ /usr/local/apache2/htdocs/
+
+CMD ["httpd-foreground"]

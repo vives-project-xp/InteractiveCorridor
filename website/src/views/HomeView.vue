@@ -267,7 +267,7 @@ export default {
       effectSearch: '',
       dbeffectSearch: '',
       ownEffectName: '',
-      remoteURL: `http://${window.location.hostname}/api`,
+      remoteURL: import.meta.env.VITE_BACKEND_URL,
       effectid: 0,
       speed: [128],
       intensity: [128],
@@ -303,7 +303,6 @@ export default {
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
         this.dbeffects = response2.data;
-
       } catch (error) {
         console.error('Error fetching effects:', error);
       }

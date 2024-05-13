@@ -31,7 +31,7 @@ app.use(
         },
         servers: [
           {
-            url: "http://localhost:3000/api",
+            url: "http://localhost/api",
           },
         ],
       },
@@ -82,7 +82,6 @@ app.get("/api/db/effects", db.getEffects);
 app.post("/api/saveeffect", db.saveEffect);
 app.post("/api/loadeffect", db.loadEffect);
 app.delete("/api/deleteeffect", db.deleteEffect);
-
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");

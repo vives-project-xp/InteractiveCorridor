@@ -19,8 +19,13 @@ services:
       - /usr/local/Backend/node_modules
 
   website:
-    build: ./website/
+    build:
+      context: ./website/
+      args:
+        VITE_BACKEND_URL: ${BACKEND_URL}
     restart: always
+    env_file:
+      - ./.env
     #ports:
     #  - "80:8000"
     depends_on:
@@ -30,6 +35,7 @@ services:
       - "traefik.http.services.website.loadbalancer.server.port=8000"
       - "traefik.http.routers.website.rule=PathPrefix(`/`)"
       - "traefik.http.routers.website.entrypoints=http"
+      - "traefik.http.services.website.loadbalancer.server.port=80"
     volumes:
       - ./website:/usr/local/website
       - /usr/local/website/node_modules
