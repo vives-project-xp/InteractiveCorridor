@@ -1,53 +1,77 @@
 # Interactive Corridor
 
-This proof-of-concept project transforms hallways into interactive light corridors. Users control lights via a website, creating a personalized, immersive experience. The system uses WLED, ESP32s, a Python server, and MQTT for real-time interaction. It's all about creating captivating, customizable entertainment for all ages.
+Welcome to the Interactive Corridor Project! This unique corridor is designed to create depth and atmosphere through innovative lighting effects. With a variety of pre-programmed light patterns and the ability to design your own, you can transform the corridor into a dynamic and immersive space.
 
-## Table of contents
+Controlling the effects is simple, just use the web interface hosted on a central server to customize the lighting. Whether you're aiming for subtle transitions or dramatic transformations, the Interactive Corridor Project gives you the tools to set the perfect mood. Enjoy exploring the endless possibilities!
 
-- [Interactive Corridor](#interactive-corridor)
-  - [Table of contents](#table-of-contents)
-  - [The Team](#the-team)
-  - [The idea](#the-idea)
-    - [Interface](#interface)
-    - [Server](#server)
-    - [Led strips](#led-strips)
-    - [Corridor manager](#corridor-manager)
-    - [Construction](#construction)
+![ExampleCorridor](img/ExampleCorridor.PNG)
+The project is based on a video of the River Nights Festival (Singapore) where there was a beautiful light setup.
+https://www.youtube.com/watch?v=xEEKBbKvuMQ 
 
 ## The Team
 
-- [Mathieu Leroy](https://github.com/MathieuLeroy2) • Projectleader
-- [Robbe De Wispelaere](https://github.com/RobbeDeW) • Scrum-master
-- [Aitor Vannevel](https://github.com/imawizzard)
-- [Simon Stijnen](https://github.com/SimonStnn)
-- [Niels Denoo](https://github.com/NielsDenoo)
+[<img src="https://github.com/RobbeDeW.png" width="25">Robbe De Wispelaere](https://github.com/RobbeDeW) 
+
+[<img src="https://github.com/imawizzard.png" width="25">Aitor Vannevel](https://github.com/imawizzard)
+
+[<img src="https://github.com/SimonStnn.png" width="25">Simon Stijnen](https://github.com/SimonStnn)
+
+[<img src="https://github.com/NielsDenoo.png" width="25">Niels Denoo](https://github.com/NielsDenoo)
 
 ## The idea
 
-### Interface
+- **Dynamic Light Patterns** : Create customizable lighting sequences that can change in intensity, color, and direction to generate a sense of movement and depth within the corridor.
+- **User-Friendly Web Interface**: Design an intuitive web page where users can easily control and customize the corridor's lighting effects. The interface should allow for real-time adjustments, offer a library of pre-set themes, and provide options to create and save custom patterns for future use.
+- **MQTT Communication**: Use MQTT (Message Queuing Telemetry Transport) to send commands from the web interface to the LED strips. This lightweight messaging protocol ensures fast and reliable communication, allowing for seamless updates to the light patterns.
+- **WLED Integration**: Implement WLED, an open-source control system for LED strips, to manage the lighting effects in the corridor. WLED allows for a wide range of customization options and can be controlled remotely, making it a perfect fit for this project.
 
-- ~~App~~ of **website**
-  - Google home display?
-  - Tablet?
-  - Laptop?
+## Folder Structure
 
-### Server
+- [Website](website/README.md): All information about how the website works and how the user can interact with it.
+- [Backend](Backend/README.md) All information about how the website communicates with the ledstip's.
+- [Docs](docs/README.md): All information about the hardware and setup
 
-The server has 2 docker containers:
+## Corridor data flow diagram
 
-- **MQTT** server for communication.
-- **Web server** to serve the website.
+<picture>
+  <source
+    srcset="docs/exports/SoftwareArchitectureDiagram_dark.svg"
+    media="(prefers-color-scheme: dark)"
+  />
+  <source
+    srcset="docs/exports/SoftwareArchitectureDiagram_light.svg"
+    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+  />
+  <img alt="Architecture diagram" />
+</picture>
 
-### Led strips
+### Input requirements
 
-- We use an 24V LED strip
-- Length: Measured in [docs](./docs/README.md).
-- Adapter
+The input requirements for the project are:
 
-### Corridor manager
+- The user should be able to control the LED strips via a web interface.
+- The user should be able to change the color and brightness of the LED strips.
+- The user should be able to select different lighting effects and animations for the LED strips.
 
-- ESP32-C3
+### Functional requirements
 
-### Construction
+The functional requirements for the project are:
 
-- Attach to the wall in the B hallway
+- The system should provide a web interface for the user to control the LED strips.
+- The system should provide an API for the web interface to communicate with the server.
+- The server should listen to the API and control the ESP32s via the [WLED MQTT interface](https://kno.wled.ge/interfaces/mqtt/).
+- The system should provide a user-friendly interface to adjust the color, brightness, and lighting effects of the LED strips.
+- The system should provide a variety of lighting effects and animations for the user to choose from.
+- The system should be able to handle multiple ESP32s.
+- The system should be able to handle multiple users controlling the LED strips simultaneously.
+
+### Output requirements
+
+The output requirements for the project are:
+
+- No flickering or lag in the LED strips.
+- Reaction time is below 100ms.
+
+## Project document
+
+Refer to the [project document](./project_document.pdf) for a broad explanation of what this project is about.

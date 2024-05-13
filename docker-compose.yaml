@@ -1,7 +1,6 @@
 version: "3.8"
 services:
   backend:
-    container_name: backend
     build: ./Backend/
     #ports:
     #  - "3000:3000"
@@ -20,7 +19,6 @@ services:
       - /usr/local/Backend/node_modules
 
   website:
-    container_name: website
     build: ./website/
     restart: always
     #ports:
@@ -37,7 +35,6 @@ services:
       - /usr/local/website/node_modules
 
   database:
-    container_name: db
     image: mysql:latest
     restart: always
     environment:
@@ -64,17 +61,6 @@ services:
       - "8080:8080" # Traefik dashboard
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-  mosquitto:
-    container_name: mqtt
-    image: eclipse-mosquitto:2
-    restart: always
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./mosquitto/conf:/mosquitto/config
-      - mosquitto_data:/mosquitto/data
-      - mosquitto_log:/mosquitto/log
 
 volumes:
   db_data:

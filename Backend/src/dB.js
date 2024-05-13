@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 require("dotenv").config();
 const ledstrips = require("./ledstrips");
-const { Segment } = require('./VirtualLedstrip');
+const { Segment } = require("./VirtualLedstrip");
 
 let connection;
 
@@ -9,7 +9,7 @@ try {
   connection = mysql.createConnection({
     password: process.env.MYSQL_PASSWORD,
     user: process.env.MYSQL_USER,
-    host: "db",
+    host: "database",
     port: 3306,
     database: process.env.MYSQL_DATABASE,
     insecureAuth: true,
@@ -57,7 +57,7 @@ const getEffects = (req, res) => {
 };
 
 const deleteEffect = (req, res) => {
-  const effectName  = req.body.name;
+  const effectName = req.body.name;
   const query = "DELETE FROM effects WHERE name = ?";
 
   connection.query(query, [effectName], (err) => {
@@ -108,54 +108,64 @@ const loadEffect = (req, res) => {
       return;
     }
     let leds = splitIntoLedStrips(JSON.parse(results[0].effectData));
-    leds.forEach(strip => {
+    leds.forEach((strip) => {
       const deserializedStrip = deserializeStrip(strip);
-      const matchingLedStrip = ledstrips.ledstrips.find(strip => strip.name === deserializedStrip.name);
-      if(matchingLedStrip){
-      deserializedStrip.segments.forEach(segment => {
-        for(let i = 0; i < deserializedStrip.segments.length; i++){
-        const matchingSegment = matchingLedStrip.segments[i];
-        if (matchingSegment) {
-          matchingSegment.setEffect({
-            id: segment.effect.id,
-            delay: segment.effect.delay,
-            speed: segment.effect.speed,
-            intensity: segment.effect.intensity,
-            reverse: segment.effect.reverse,
-            mirror: segment.effect.mirror,
-          });
-          matchingSegment.setColor(segment.color);
-          matchingSegment.setStart(segment.start);
-          matchingSegment.setEnd(segment.end);
-        } else {
-          console.log('adding segment');
-          const newSegment = new Segment(matchingLedStrip, segment.start, segment.end, segment.color);
-          newSegment.setEffect({
-            id: segment.effect.id,
-            delay: segment.effect.delay,
-            speed: segment.effect.speed,
-            intensity: segment.effect.intensity,
-            reverse: segment.effect.reverse,
-            mirror: segment.effect.mirror,
-          });
-          matchingLedStrip.segments.push(newSegment);
+      const matchingLedStrip = ledstrips.ledstrips.find(
+        (strip) => strip.name === deserializedStrip.name
+      );
+      if (matchingLedStrip) {
+        deserializedStrip.segments.forEach((segment) => {
+          for (let i = 0; i < deserializedStrip.segments.length; i++) {
+            const matchingSegment = matchingLedStrip.segments[i];
+            if (matchingSegment) {
+              matchingSegment.setEffect({
+                id: segment.effect.id,
+                delay: segment.effect.delay,
+                speed: segment.effect.speed,
+                intensity: segment.effect.intensity,
+                reverse: segment.effect.reverse,
+                mirror: segment.effect.mirror,
+              });
+              matchingSegment.setColor(segment.color);
+              matchingSegment.setStart(segment.start);
+              matchingSegment.setEnd(segment.end);
+            } else {
+              console.log("adding segment");
+              const newSegment = new Segment(
+                matchingLedStrip,
+                segment.start,
+                segment.end,
+                segment.color
+              );
+              newSegment.setEffect({
+                id: segment.effect.id,
+                delay: segment.effect.delay,
+                speed: segment.effect.speed,
+                intensity: segment.effect.intensity,
+                reverse: segment.effect.reverse,
+                mirror: segment.effect.mirror,
+              });
+              matchingLedStrip.segments.push(newSegment);
+            }
+          }
+        });
+
+        if (
+          matchingLedStrip.segments.length > deserializedStrip.segments.length
+        ) {
+          console.log("removing segments");
+          const numToRemove =
+            matchingLedStrip.segments.length -
+            deserializedStrip.segments.length;
+          matchingLedStrip.segments.splice(-numToRemove);
         }
+        matchingLedStrip.updateSegments();
+        matchingLedStrip.updateEffect();
+        matchingLedStrip.updateColor();
+      } else {
+        console.log("Ledstrip not found");
       }
-      });
-    
-      if (matchingLedStrip.segments.length > deserializedStrip.segments.length) {
-        console.log('removing segments');
-        const numToRemove = matchingLedStrip.segments.length - deserializedStrip.segments.length;
-        matchingLedStrip.segments.splice(-numToRemove);
-      }
-      matchingLedStrip.updateSegments();
-      matchingLedStrip.updateEffect();
-      matchingLedStrip.updateColor();
-    }
-    else {
-      console.log("Ledstrip not found");
-    }
-  });
+    });
   });
   res.send("Effect loaded");
 };
@@ -172,12 +182,11 @@ function splitIntoLedStrips(data) {
   return ledStrips;
 }
 
-
 const deserializeStrip = (serializedStrip) => {
   try {
     const deserializedStrip = {
       name: serializedStrip.name,
-      segments: serializedStrip.segments.map(segment => ({
+      segments: serializedStrip.segments.map((segment) => ({
         start: segment.start,
         end: segment.end,
         color: segment.color,

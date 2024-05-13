@@ -44,14 +44,41 @@ app.use(
   )
 );
 
+let lastRequestTime = Date.now();
+const TIMER_INTERVAL = 1 * 60 * 1000; // 5 minuten
+const executeTask = () => {
+  // Voer hier je taak uit die je wilt uitvoeren na 5 minuten inactiviteit
+  leds.white();
+};
+
+const startTimer = () => {
+  setTimeout(() => {
+    const currentTime = Date.now();
+    // Controleer of er gedurende de timerinterval geen verzoeken zijn ontvangen
+    if (currentTime - lastRequestTime >= TIMER_INTERVAL) {
+      executeTask();
+    }
+    // Herstart de timer
+    startTimer();
+  }, TIMER_INTERVAL);
+};
+startTimer();
+
+app.use((req, res, next) => {
+  if (req.method !== "GET" || req.path !== "/api/leds") {
+    lastRequestTime = Date.now();
+  }
+  next();
+});
+
 app.get("/api/leds", leds.getLeds);
 app.post("/api/leds", leds.postLeds);
 app.post("/api/changeled", leds.changeLeds);
 
-app.post("/api/effect", effects.setEffect);
-app.get("/api/effect", effects.getEffect);
+app.post("/api/effects", effects.setEffect);
+app.get("/api/effects", effects.getEffect);
 
-app.get("/api/dbeffects", db.getEffects);
+app.get("/api/db/effects", db.getEffects);
 app.post("/api/saveeffect", db.saveEffect);
 app.post("/api/loadeffect", db.loadEffect);
 app.delete("/api/deleteeffect", db.deleteEffect);
