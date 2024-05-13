@@ -1,3 +1,4 @@
+const mqtt = require("./mqtt");
 const { ledstrips } = require("./ledstrips");
 const { hexToRgb } = require("./utils");
 
@@ -62,15 +63,9 @@ const changeLeds = async (req, res) => {
   res.send("Segments changed");
 };
 
-const white = async () => {
-  for (const strip of ledstrips) {
-    for (const segment of strip.segments) {
-      segment.setColor(hexToRgb("#ffffff"));
-      segment.setEffect(0);
-    }
-    strip.updateColor();
-    strip.updateEffect();
-  }
-}
+const setDefault = async () => {
+  console.log("default");
+  mqtt.publish("all", `{"ps":"${process.env.DEFAULT_EFFECT_ID}"}`);
+};
 
-module.exports = { getLeds, postLeds, changeLeds, white };
+module.exports = { getLeds, postLeds, changeLeds, setDefault };
