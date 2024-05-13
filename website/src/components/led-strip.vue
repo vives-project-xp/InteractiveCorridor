@@ -83,7 +83,7 @@ const props = defineProps({
       </CardDescription>
     </CardHeader>
     <CardContent>
-      <div class="flex flex-row-reverse flex-wrap">
+      <div class="flex flex-row-reverse justify-end flex-wrap">
         <div
           v-for="(segment, barIndex) in props.strip.segments"
           :key="barIndex"
