@@ -63,6 +63,24 @@ const changeLeds = async (req, res) => {
   res.send("Segments changed");
 };
 
+const white = async () => {
+  for (const strip of ledstrips) {
+    for (const segment of strip.segments) {
+      segment.setColor(hexToRgb("#ffffff"));
+      segment.setEffect({
+        id: 0,
+        delay: 0,
+        speed: 0,
+        intensity: 0,
+        reverse: false,
+        mirror: false,
+      });
+    }
+    strip.updateColor();
+    strip.updateEffect();
+  }
+}
+
 const setDefault = async () => {
   console.log("default");
   mqtt.publish("all", `{"ps":"${process.env.DEFAULT_EFFECT_ID}"}`);

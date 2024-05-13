@@ -182,6 +182,10 @@ class VirtualLedstrip {
     // Stuur updates naar de MQTT-server
     this.updateSegments();
   }
+
+  clearSegments() {
+    this._segments = [];
+  }
 }
 
 module.exports = {
