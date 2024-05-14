@@ -12,7 +12,9 @@
       "sup",
       "picture",
       "source",
-      "img"
+      "img",
+      "details",
+      "summary"
     ]
   }
 }
