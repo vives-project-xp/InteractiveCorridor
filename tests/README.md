@@ -42,6 +42,23 @@ A list of tests that should be performed on the software. The software should be
 ## Hardware
 
 <details>
+<summary>components</summary>
+
+- [ ] The converter should convert the 24V input into 5V output
+- [ ] The level shifter should be able to make the 3.3V signal into a 5V signal
+- [ ] The electrical supply should be able to power all the 5 ledstrips
+- [ ] Test the ledstrips
+  - [ ] Test the max current of the ledstrips
+  - [ ] Check the required voltage of the ledstrips
+- [ ] Test if the ESP sends a signal
+- [ ] Test if the ledstrips are working with the signal
+  - [ ] Check if the signal at the end is 5V
+  - [ ] Check if u get the right effect on the ledstrips
+- [ ] Test if everything works
+
+</details>
+
+<details>
 <summary>Documentation</summary>
 
 - [ ] The signals of the hardware should be documented with scope images
