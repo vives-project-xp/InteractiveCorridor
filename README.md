@@ -6,17 +6,17 @@ Controlling the effects is simple, just use the web interface hosted on a centra
 
 ![ExampleCorridor](img/ExampleCorridor.PNG)
 The project is based on a video of the River Nights Festival (Singapore) where there was a beautiful light setup.
-https://www.youtube.com/watch?v=xEEKBbKvuMQ 
+<https://www.youtube.com/watch?v=xEEKBbKvuMQ>
 
 ## The Team
 
-[<img src="https://github.com/RobbeDeW.png" width="25">Robbe De Wispelaere](https://github.com/RobbeDeW) 
+[<img src="https://github.com/RobbeDeW.png" alt="" width="25" style="margin-bottom:-6px;"> Robbe De Wispelaere](https://github.com/RobbeDeW)
 
-[<img src="https://github.com/imawizzard.png" width="25">Aitor Vannevel](https://github.com/imawizzard)
+[<img src="https://github.com/imawizzard.png" alt="" width="25" style="margin-bottom:-6px;"> Aitor Vannevel](https://github.com/imawizzard)
 
-[<img src="https://github.com/SimonStnn.png" width="25">Simon Stijnen](https://github.com/SimonStnn)
+[<img src="https://github.com/SimonStnn.png" alt="" width="25" style="margin-bottom:-6px;"> Simon Stijnen](https://github.com/SimonStnn)
 
-[<img src="https://github.com/NielsDenoo.png" width="25">Niels Denoo](https://github.com/NielsDenoo)
+[<img src="https://github.com/NielsDenoo.png" alt="" width="25" style="margin-bottom:-6px;"> Niels Denoo](https://github.com/NielsDenoo)
 
 ## The idea
 
