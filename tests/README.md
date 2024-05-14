@@ -35,6 +35,10 @@ A list of tests that should be performed on the software. The software should be
   - [ ] The README.md file should contain the technologies used
   - [ ] The README.md file should contain some screenshots of the website
 - [ ] The backend should have a README.md file
+  - [ ] The README.md file should contain a description of the software
+  - [ ] The README.md file should contain the technologies used
+  - [ ] The README.md file should contain an UML diagram of the Virtual Ledstrip
+  - [ ] The README.md file should contain documentation of the Virtual Ledstrip
 - [ ] There shoud be a docs folder with a README.md file
 
 </details>
