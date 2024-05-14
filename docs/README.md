@@ -103,5 +103,3 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 ## ESP Pinout
 
 ## Measurements
-
-## The Set Up
