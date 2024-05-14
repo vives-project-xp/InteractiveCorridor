@@ -244,7 +244,13 @@ export type Effect = {
             v-model="ownEffectName"
             class="px-4 py-2 mr-2 inline-block"
           />
-          <Button @click="saveEffect(ownEffectName)" variant="default"> Save effect </Button>
+          <Button
+            :disabled="ownEffectName === ''"
+            @click="saveEffect(ownEffectName)"
+            variant="default"
+          >
+            Save effect
+          </Button>
         </div>
       </CardContent>
     </Card>

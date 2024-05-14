@@ -79,10 +79,9 @@ const white = async () => {
     strip.updateColor();
     strip.updateEffect();
   }
-}
+};
 
 const setDefault = async () => {
-  console.log("default");
   mqtt.publish("all", `{"ps":"${process.env.DEFAULT_EFFECT_ID}"}`);
 };
 
