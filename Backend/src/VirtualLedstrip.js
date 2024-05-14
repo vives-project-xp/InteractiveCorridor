@@ -5,8 +5,8 @@ class Segment {
   end = 0;
   color = {
     r: 255,
-    g: 0,
-    b: 0,
+    g: 255,
+    b: 255,
   };
   effect = {
     id: 0,
@@ -24,8 +24,8 @@ class Segment {
     this.setColor(
       color || {
         r: 255,
-        g: 0,
-        b: 0,
+        g: 255,
+        b: 255,
       }
     );
   }
@@ -126,8 +126,8 @@ class VirtualLedstrip {
       seg: this.segments.map((segment) => ({
         col: [
           [segment.color.r, segment.color.g, segment.color.b],
-          [0,0,0],
-          [0,0,0]
+          [0, 0, 0],
+          [0, 0, 0],
         ],
         pal: 0,
       })),
@@ -144,8 +144,14 @@ class VirtualLedstrip {
         ix: segment.effect.intensity || 128,
         rev: segment.effect.reverse || false,
         mi: segment.effect.mirror || false,
+        pal: 0,
+        col: [
+          [segment.color.r, segment.color.g, segment.color.b],
+          [0, 0, 0],
+          [0, 0, 0],
+        ],
       })),
-      tb: 0,
+      tb: this.segments[0].effect.delay * this.index || 0,
     };
 
     this.publish(JSON.stringify(body));
@@ -176,9 +182,13 @@ class VirtualLedstrip {
     // Stuur updates naar de MQTT-server
     this.updateSegments();
   }
+
+  clearSegments() {
+    this._segments = [];
+  }
 }
 
 module.exports = {
   Segment: Segment,
-  VirtualLedstrip: VirtualLedstrip
+  VirtualLedstrip: VirtualLedstrip,
 };

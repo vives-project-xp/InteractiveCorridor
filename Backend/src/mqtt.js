@@ -17,7 +17,7 @@ let statusList = {};
 const client = mqtt.connect(url, options);
 
 client.on("error", (err) => {
-  console.error("Connection failed:", err);
+  console.error("MQTT Connection failed:", err);
 });
 
 client.on("connect", () => {
@@ -26,10 +26,6 @@ client.on("connect", () => {
 
 client.on("disconnect", () => {
   console.error("Disconnected from MQTT server:");
-});
-
-client.on("reconnect", () => {
-  console.error("Reconnect failed:");
 });
 
 const publish = (topic, message) => {
