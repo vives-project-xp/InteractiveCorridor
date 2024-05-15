@@ -112,9 +112,9 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 
 ## ESP Pinout
 
-|  Pin  | Function | Description |
-| :---: | -------- | ----------- |
-| GPIO1 | GPIO1    | Ledstrip 1  |
-| GPIO3 | GPIO3    | LedFstrip 2 |
+|  Pin  | Description |
+| :---: | ----------- |
+| GPIO1 | Ledstrip 1  |
+| GPIO3 | LedFstrip 2 |
 
 ## Measurements
