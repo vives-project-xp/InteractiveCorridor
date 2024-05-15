@@ -385,7 +385,7 @@ export default {
     },
 
     async deleteEffect(effectName: string) {
-      const confirmDelete = confirm(`Weet je zeker dat je het effect '${effectName}' wilt verwijderen?`);
+      const confirmDelete = confirm(`Are you sure you want to remove the effect '${effectName}'?`);
 
       if (confirmDelete) {
         try {
@@ -394,14 +394,14 @@ export default {
           });
 
           if (response.status === 200) {
-            console.log(`Effect '${effectName}' succesvol verwijderd`);
+            console.log(`Effect '${effectName}' successfully deleted`);
             this.fetchEffects();
           }
         } catch (error) {
-          console.error('Fout bij het verwijderen van het effect:', error);
+          console.error('Error removing effect:', error);
         }
       } else {
-        console.log('Verwijdering geannuleerd'); // Log naar de console als de gebruiker de verwijdering annuleert
+        console.log('Deletion cancelled'); 
       }
     },
 
