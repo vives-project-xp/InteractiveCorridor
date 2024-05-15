@@ -2,6 +2,30 @@
 
 The backend is responsible for managing the ledstrips and the MQTT communication. It is implemented in JavaScript using [Node.js](https://nodejs.org/) and the [Express framework](https://expressjs.com/).
 
+## Setup
+
+First clone the repository:
+
+```bash
+git clone https://github.com/vives-project-xp/InteractiveCorridor.git
+```
+
+Setup your environment variables:
+
+```bash
+cp .env-example .env
+```
+
+Fill in the environment variables in the `.env` file.
+
+Start the backend:
+
+```bash
+docker-compose up -d
+```
+
+The backend is now served on the URL specified in the `.env` file.
+
 ## UML Diagrams
 
 ```mermaid
