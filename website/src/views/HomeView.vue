@@ -368,28 +368,40 @@ export default {
 
     saveEffect(ownEffectName: string) {
       axios
-        .post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })
-        .then(() => {
-          console.log('Effect opgeslagen!');
-          this.fetchEffects();
+        .get<{ name: string }[]>(`${this.remoteURL}/db/effects`)
+        .then(response => {
+          const existingEffects = response.data.map(effect => effect.name);
+          if (existingEffects.includes(ownEffectName)) {
+            alert('Effect name already exists!');
+            return; 
+          }
+          
+          axios
+            .post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })
+            .then(() => {
+              this.fetchEffects();
+            })
         })
-        .catch((error) => {
-          console.error('Fout bij opslaan effect:', error);
-        });
     },
 
     async deleteEffect(effectName: string) {
-      try {
-        const response = await axios.delete(`${this.remoteURL}/deleteeffect`, {
-          data: { name: effectName },
-        });
+      const confirmDelete = confirm(`Weet je zeker dat je het effect '${effectName}' wilt verwijderen?`);
 
-        if (response.status === 200) {
-          console.log(`Effect '${effectName}' succesvol verwijderd`);
-          this.fetchEffects();
+      if (confirmDelete) {
+        try {
+          const response = await axios.delete(`${this.remoteURL}/deleteeffect`, {
+            data: { name: effectName },
+          });
+
+          if (response.status === 200) {
+            console.log(`Effect '${effectName}' succesvol verwijderd`);
+            this.fetchEffects();
+          }
+        } catch (error) {
+          console.error('Fout bij het verwijderen van het effect:', error);
         }
-      } catch (error) {
-        console.error('Fout bij het verwijderen van het effect:', error);
+      } else {
+        console.log('Verwijdering geannuleerd'); // Log naar de console als de gebruiker de verwijdering annuleert
       }
     },
 
