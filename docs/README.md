@@ -121,4 +121,5 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 
 We have scope images of the level shifter, illustrating how the ESP (depicted in yellow) sends a 3.3V data signal. As it traverses the level shifter (represented by the blue signal), it is boosted to 5V. The green signal, measured at the collector of the first transistor, demonstrates signal inversion, necessitating the use of a second transistor.
 
-![Level Shifter](./images/scope_level_shifter.png)
+<img src="./images/scope_level_shifter.png" alt="Level Shifter" width="450">
+
