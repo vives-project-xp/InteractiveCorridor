@@ -115,7 +115,7 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 |  Pin  | Description |
 | :---: | ----------- |
 | GPIO1 | Ledstrip 1  |
-| GPIO3 | LedFstrip 2 |
+| GPIO3 | Ledstrip 2 |
 
 ## Measurements
 
