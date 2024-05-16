@@ -10,158 +10,67 @@ servers:
 paths:
   /leds:
     get:
-      summary: Haal de huidige configuratie van de LED-strips op.
+      summary: Get LED configurations
       responses:
         200:
-          description: Huidige configuratie succesvol opgehaald
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Ledstrip"
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LEDConfiguration'
     post:
-      summary: Verander de configuratie van de LED-strips.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
+      summary: Set LED configurations
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LEDConfiguration'
+      responses:
+        200:
+          description: LED configurations set successfully
+  /changeled:
+    post:
+      summary: Change LED segments
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              strip:
                 type: object
                 properties:
                   index:
                     type: number
-                    description: Index van de LED-strip
-                    example: 1
-                  segments:
-                    type: array
-                    description: Lijst van segmenten en hun configuratiegegevens.
-                    items:
-                      $ref: "#/components/schemas/Segment"
-
-              description: Lijst van LED-strips en hun configuratiegegevens.
+                    description: The index of the LED strip
       responses:
         200:
-          description: Configuratie succesvol toegepast
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Ledstrip"
-
-  /effect:
+          description: LED segments changed successfully      
+  /effects:
+    post:
+      summary: Set effect for LED strips
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetEffectRequest'
+      responses:
+        200:
+          description: Effect set successfully
     get:
-      summary: Haal de huidige effectconfiguratie van de LED-strips op.
+      summary: Get available LED effects
       responses:
         200:
-          description: Huidige effectconfiguratie succesvol opgehaald
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Effect"
-    post:
-      summary: Verander het effect van de ledstrip.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                strips:
-                  type: array
-                  description: |
-                    Lijst van strips en hun respectievelijke LED's
-                  items:
-                    type: object
-                    properties:
-                      index:
-                        type: integer
-                        description: |
-                          Index van de LED-strip waarop het effect moet worden toegepast.
-                        example: 1
-                      segments:
-                        type: array
-                        description: |
-                          Lijst van segmenten
-                        items:
-                          type: number
-                effect:
-                  type: integer
-                  description: |
-                    ID van het effect dat moet worden toegepast op de LED-strip. (https://kno.wled.ge/features/effects/)
-                  example: 28
-                delay:
-                  type: integer
-                  description: |
-                    Vertraging tussen effectstappen (in milliseconden). Standaardwaarde is 0.
-                  example: 600
-                speed:
-                  type: integer
-                  description: |
-                    Snelheid van het effect [0-255]. Standaardwaarde is 128.
-                  example: 200
-                intensity:
-                  type: integer
-                  description: |
-                    Intensiteit van het effect [0-255]. Standaardwaarde is 128.
-                  example: 200
-                reverse:
-                  type: boolean
-                  description: |
-                    Geeft aan of het effect in omgekeerde richting moet worden afgespeeld. Standaardwaarde is false.
-                  example: true
-                mirror:
-                  type: boolean
-                  description: |
-                    Geeft aan of het effect gespiegeld moet worden. Standaardwaarde is false.
-                  example: true
-      responses:
-        "200":
-          description: Configuratie succesvol toegepast
-        "400":
-          description: Ongeldige configuratiegegevens
-
-  /color:
-    post:
-      summary: Stel de kleur in voor de LED-strip(s).
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                strips:
-                  type: array
-                  description: |
-                    Lijst van strips waarvoor de kleur moet worden ingesteld.
-                  items:
-                    type: integer
-                    minimum: 0
-                    description: |
-                      Nummer van de strip waarop de kleur moet worden ingesteld. 0 voor alle strips.
-                  example: [1, 2]
-                color:
-                  type: string
-                  description: Kleurcode in hexadecimale notatie (bijv. #FF0000 voor rood).
-                  example: "#FF0000"
-                brightness:
-                  type: integer
-                  minimum: 0
-                  maximum: 255
-                  description: Helderheid van de kleur (0 - 255).
-                  example: 150
-      responses:
-        "200":
-          description: Kleur succesvol ingesteld op de LED-strip(s).
-        "400":
-          description: Ongeldige invoergegevens.
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EffectDescription'
   /db/effects:
     get:
       summary: Get all effects
