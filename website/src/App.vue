@@ -54,6 +54,6 @@ export default {
   },
   mounted() {
     this.toggleDarkMode();
-  }
+  },
 };
 </script>

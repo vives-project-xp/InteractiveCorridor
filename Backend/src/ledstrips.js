@@ -9,12 +9,14 @@ const endTimeM = parseInt(process.env.END_TIME.split(":")[1]) || 0;
 const utcDiff = parseInt(process.env.UTC_DIFF) || 1;
 const baseTopic = process.env.MQTT_BASE_TOPIC;
 
+const ledstripCount = process.env.LEDSTRIP_COUNT || 6;
+
 const ledstrips = [new VirtualLedstrip(0, 0)];
 ledstrips.pop(); // enforce type
 //ledstrips.push(new VirtualLedstrip("testLedstrip", 100, [11, 11, 11, 11]));
 
 const searchLeds = () => {
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 1; i <= ledstripCount; i++) {
     const currentTimeH = new Date().getUTCHours() + utcDiff;
     const currentTimeM = new Date().getUTCMinutes();
     const currentTime = currentTimeH * 60 + currentTimeM;

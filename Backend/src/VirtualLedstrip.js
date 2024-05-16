@@ -1,4 +1,7 @@
 const mqtt = require("./mqtt");
+const env = require("dotenv").config();
+
+const ledstripCount = process.env.LEDSTRIP_COUNT || 6;
 
 class Segment {
   start = 0;
@@ -153,7 +156,7 @@ class VirtualLedstrip {
         ],
       })),
       tb: this.segments[0].effect.reverseDelay
-        ? this.segments[0].effect.delay * (6 - this.index)
+        ? this.segments[0].effect.delay * (ledstripCount - this.index)
         : this.segments[0].effect.delay * this.index || 0,
     };
 
