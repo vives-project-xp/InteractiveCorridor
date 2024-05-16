@@ -15,6 +15,7 @@ class Segment {
     intensity: 0,
     reverse: false,
     mirror: false,
+    reverseDelay: false,
   };
 
   constructor(parent, start, end, color) {
@@ -151,7 +152,9 @@ class VirtualLedstrip {
           [0, 0, 0],
         ],
       })),
-      tb: this.segments[0].effect.delay * this.index || 0,
+      tb: this.segments[0].effect.reverseDelay
+        ? this.segments[0].effect.delay * (6 - this.index)
+        : this.segments[0].effect.delay * this.index || 0,
     };
 
     this.publish(JSON.stringify(body));

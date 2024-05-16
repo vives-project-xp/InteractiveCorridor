@@ -24,7 +24,6 @@ const searchLeds = () => {
     const action =
       currentTime < startTime || currentTime >= endTime ? "false" : "true";
     mqtt.publish(`ic${i}`, `{"on": ${action}}`);
-    console.log(action);
     if (
       mqtt.statusList[baseTopic + "ic" + i] == "offline" ||
       mqtt.statusList[baseTopic + "ic" + i] == undefined

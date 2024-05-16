@@ -142,7 +142,7 @@ export type Effect = {
                     id="speedSlider"
                     label="Speed"
                     class="w-full pt-2"
-                    :min="0"
+                    :min="1"
                     :step="1"
                     :max="255"
                     @update:model-value="
@@ -157,7 +157,7 @@ export type Effect = {
                     id="intensitySlider"
                     label="Intensity"
                     class="w-full pt-2"
-                    :min="0"
+                    :min="1"
                     :step="1"
                     :max="255"
                     @update:model-value="
@@ -178,6 +178,15 @@ export type Effect = {
                     @update:model-value="
                       throttle(() => setEffect('delay', delay[0]), throttleDelay)
                     "
+                  />
+                </div>
+
+                <div class="flex justify-between">
+                  <label for="reverseDelay">Reverse Delay</label>
+                  <Checkbox
+                    id="reverseDelay"
+                    class="self-center"
+                    @update:checked="(e) => setEffect('reverseDelay', e.valueOf())"
                   />
                 </div>
                 <div class="flex justify-between">

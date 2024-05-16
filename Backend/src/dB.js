@@ -60,7 +60,7 @@ const getEffects = (req, res) => {
 
 const checkPreDefinedEffects = () => {
   predefinedEffects.forEach((effect) => {
-    const serializedEffect = JSON.stringify(effect);
+    const serializedEffect = JSON.stringify(effect.effectData);
 
     connection.query(
       "SELECT COUNT(*) AS count FROM effects WHERE name = ?",
@@ -158,7 +158,10 @@ const loadEffect = (req, res) => {
       res.status(500).send(err);
       return;
     }
-    const leds = splitIntoLedStrips(JSON.parse(results[0].effectData));
+    var leds = results[0].effectData;
+    while (typeof leds != "object") {
+      leds = JSON.parse(leds);
+    }
     leds.forEach((strip) => {
       const deserializedStrip = strip;
       const matchingLedStrip = ledstrips.ledstrips.find(
