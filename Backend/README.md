@@ -2,6 +2,8 @@
 
 The backend is responsible for managing the ledstrips and the MQTT communication. It is implemented in JavaScript using [Node.js](https://nodejs.org/) and the [Express framework](https://expressjs.com/).
 
+If you want to know more about the backend requests, click [here](http://10.11.0.100:9002/api-docs/). This link takes you to a swagger page where everything is explained.
+
 ## Setup
 
 First clone the repository:
