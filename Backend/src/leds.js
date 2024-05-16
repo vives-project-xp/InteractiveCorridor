@@ -1,6 +1,8 @@
 const mqtt = require("./mqtt");
 const { ledstrips } = require("./ledstrips");
 const { hexToRgb } = require("./utils");
+const db = require("./dB");
+const axios = require("axios");
 
 const segmentsLengths = [8, 4, 2, 1];
 
@@ -63,26 +65,19 @@ const changeLeds = async (req, res) => {
   res.send("Segments changed");
 };
 
-const white = async () => {
-  for (const strip of ledstrips) {
-    for (const segment of strip.segments) {
-      segment.setColor(hexToRgb("#ffffff"));
-      segment.setEffect({
-        id: 0,
-        delay: 0,
-        speed: 0,
-        intensity: 0,
-        reverse: false,
-        mirror: false,
-      });
-    }
-    strip.updateColor();
-    strip.updateEffect();
-  }
-};
-
 const setDefault = async () => {
-  mqtt.publish("all", `{"ps":"${process.env.DEFAULT_EFFECT_ID}"}`);
+  const data = {
+    name: process.env.DEFAULT_EFFECT_NAME,
+  };
+
+  await axios
+    .post(
+      process.env.BACKEND_URL + ":" + process.env.BACKEND_PORT + `/loadeffect`,
+      data
+    )
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 module.exports = { getLeds, postLeds, changeLeds, setDefault };

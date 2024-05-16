@@ -158,6 +158,10 @@ const loadEffect = (req, res) => {
       res.status(500).send(err);
       return;
     }
+    if (results.length === 0) {
+      console.log("Effect not found");
+      return;
+    }
     var leds = results[0].effectData;
     while (typeof leds != "object") {
       leds = JSON.parse(leds);

@@ -427,11 +427,9 @@ export default {
         name: _name,
       };
 
-      const response = await axios.post(`${this.remoteURL}/loadeffect`, data).catch((error) => {
+      await axios.post(`${this.remoteURL}/loadeffect`, data).catch((error) => {
         console.error(error);
       });
-
-      console.table(response?.data);
     },
   },
   mounted() {
