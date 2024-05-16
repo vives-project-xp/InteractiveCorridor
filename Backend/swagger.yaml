@@ -179,7 +179,7 @@ components:
           type: number
           description: Eindindex van het segment
           example: 11
-        lenght:
+        length: 
           type: number
           description: Lengte van het segment
           example: 11
