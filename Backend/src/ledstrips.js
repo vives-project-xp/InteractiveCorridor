@@ -2,8 +2,10 @@ const mqtt = require("./mqtt");
 const { VirtualLedstrip } = require("./VirtualLedstrip");
 require("dotenv").config();
 
-const startTime = process.env.START_TIME || 8;
-const endTime = process.env.END_TIME || 22;
+const startTimeH = parseInt(process.env.START_TIME.split(":")[0]) || 8;
+const endTimeH = parseInt(process.env.END_TIME.split(":")[0]) || 22;
+const startTimeM = parseInt(process.env.START_TIME.split(":")[1]) || 0;
+const endTimeM = parseInt(process.env.END_TIME.split(":")[1]) || 0;
 const utcDiff = parseInt(process.env.UTC_DIFF) || 1;
 const baseTopic = process.env.MQTT_BASE_TOPIC;
 
@@ -13,12 +15,16 @@ ledstrips.pop(); // enforce type
 
 const searchLeds = () => {
   for (let i = 1; i <= 6; i++) {
-    const currentTime = new Date().getUTCHours();
+    const currentTimeH = new Date().getUTCHours() + utcDiff;
+    const currentTimeM = new Date().getUTCMinutes();
+    const currentTime = currentTimeH * 60 + currentTimeM;
+    const startTime = startTimeH * 60 + startTimeM;
+    const endTime = endTimeH * 60 + endTimeM;
+
     const action =
-      currentTime + utcDiff < startTime || currentTime + utcDiff >= endTime
-        ? "false"
-        : "true";
+      currentTime < startTime || currentTime >= endTime ? "false" : "true";
     mqtt.publish(`ic${i}`, `{"on": ${action}}`);
+    console.log(action);
     if (
       mqtt.statusList[baseTopic + "ic" + i] == "offline" ||
       mqtt.statusList[baseTopic + "ic" + i] == undefined
