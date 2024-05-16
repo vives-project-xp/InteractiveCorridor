@@ -72,7 +72,7 @@ const checkPreDefinedEffects = () => {
         }
 
         if (results[0].count > 0) {
-          console.log(`Effect ${effect.name} already exists`);
+          return;
         } else {
           connection.query(
             "INSERT INTO effects (name, effectData) VALUES (?, ?)",
@@ -82,9 +82,6 @@ const checkPreDefinedEffects = () => {
                 console.error("Error saving predefined effect:", err);
                 return;
               }
-              console.log(
-                `Predefined effect ${effect.name} saved successfully`
-              );
             }
           );
         }
@@ -145,7 +142,6 @@ const saveEffect = (req, res) => {
               return;
             }
             res.status(200).send("Effect saved successfully");
-            console.log("Effect saved successfully");
           }
         );
       }
@@ -156,7 +152,6 @@ const saveEffect = (req, res) => {
 const loadEffect = (req, res) => {
   const name = req.body.name;
   const query = "SELECT * FROM effects WHERE name = ?";
-  console.log("loading effect", name);
   connection.query(query, [name], (err, results) => {
     if (err) {
       console.error("Error executing database query:", err);
@@ -173,9 +168,6 @@ const loadEffect = (req, res) => {
         console.log("Ledstrip not found");
         return;
       }
-
-      console.log("loading effect", JSON.stringify(deserializedStrip, null, 2));
-      console.log("matching ledstrip", matchingLedStrip);
 
       matchingLedStrip.clearSegments();
       deserializedStrip.segments.forEach((segment) => {

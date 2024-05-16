@@ -57,6 +57,13 @@ export type Effect = {
                 placeholder="Effect"
                 class="w-full mb-2"
               />
+              <LedEffect
+                effect="Solid"
+                tooltip-text="Solid color"
+                class="w-full text-sm"
+                variant="secondary"
+                :onClick="() => setEffect('effect', 0)"
+              />
               <ScrollArea class="h-56 w-full p-3 rounded-md border">
                 <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
@@ -304,15 +311,20 @@ export default {
       try {
         // Haal de effecten op van 'http://localhost/api/effect'
         const response1 = await axios.get(`${this.remoteURL}/effects`);
-        this.effects = response1.data;
+        this.effects = response1.data.sort((a: { name: string }, b: { name: string }) =>
+          a.name.localeCompare(b.name)
+        );
 
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
-        this.dbeffects = response2.data;
+        this.dbeffects = response2.data.sort((a: { name: string }, b: { name: string }) =>
+          a.name.localeCompare(b.name)
+        );
       } catch (error) {
         console.error('Error fetching effects:', error);
       }
     },
+
     setEffect(option?: string, value?: any) {
       if (this.selectedStrips.length === 0) return;
 
@@ -367,21 +379,17 @@ export default {
     },
 
     saveEffect(ownEffectName: string) {
-      axios
-        .get<{ name: string }[]>(`${this.remoteURL}/db/effects`)
-        .then(response => {
-          const existingEffects = response.data.map(effect => effect.name);
-          if (existingEffects.includes(ownEffectName)) {
-            alert('Effect name already exists!');
-            return; 
-          }
-          
-          axios
-            .post(`${this.remoteURL}/saveeffect`, { name: ownEffectName })
-            .then(() => {
-              this.fetchEffects();
-            })
-        })
+      axios.get<{ name: string }[]>(`${this.remoteURL}/db/effects`).then((response) => {
+        const existingEffects = response.data.map((effect) => effect.name);
+        if (existingEffects.includes(ownEffectName)) {
+          alert('Effect name already exists!');
+          return;
+        }
+
+        axios.post(`${this.remoteURL}/saveeffect`, { name: ownEffectName }).then(() => {
+          this.fetchEffects();
+        });
+      });
     },
 
     async deleteEffect(effectName: string) {
@@ -401,7 +409,7 @@ export default {
           console.error('Error removing effect:', error);
         }
       } else {
-        console.log('Deletion cancelled'); 
+        console.log('Deletion cancelled');
       }
     },
 
