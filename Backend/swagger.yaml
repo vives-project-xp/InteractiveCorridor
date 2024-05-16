@@ -164,32 +164,55 @@ paths:
           description: Ongeldige invoergegevens.
   /db/effects:
     get:
-      summary: Haal alle effecten op uit de database.
+      summary: Get all effects
       responses:
-        "200":
-          description: Succesvol opgehaald.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Effect"
-        "500":
-          description: Kan geen verbinding maken met de database of fout bij het uitvoeren van de query.
-  /dbeffect:
+        200:
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Effect'
+  /saveeffect:
     post:
-      summary: Voeg een effect toe aan de database.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EffectInput"
+      summary: Save a new effect
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Effect'
       responses:
-        "200":
-          description: Effect succesvol toegevoegd aan de database.
-        "500":
-          description: Kan geen verbinding maken met de database of fout bij het uitvoeren van de query.
+        200:
+          description: Effect saved successfully
+  /loadeffect:
+    post:
+      summary: Load an effect
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the effect to load
+      responses:
+        200:
+          description: Effect loaded successfully
+  /deleteeffect:
+    delete:
+      summary: Delete an effect by name
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the effect to delete
 components:
   schemas:
     Effect:
