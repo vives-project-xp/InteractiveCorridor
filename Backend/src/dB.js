@@ -2,6 +2,7 @@ const mysql = require("mysql2");
 require("dotenv").config();
 const ledstrips = require("./ledstrips");
 const { Segment } = require("./VirtualLedstrip");
+const predefinedEffects = require("./predefined-effects.json");
 
 let connection;
 
@@ -44,6 +45,7 @@ connection.on("connect", function () {
 });
 
 const getEffects = (req, res) => {
+  checkPreDefinedEffects();
   const query = "SELECT * FROM effects";
 
   connection.query(query, (err, results) => {
@@ -53,6 +55,41 @@ const getEffects = (req, res) => {
       return;
     }
     res.send(results);
+  });
+};
+
+const checkPreDefinedEffects = () => {
+  predefinedEffects.forEach((effect) => {
+    const serializedEffect = JSON.stringify(effect);
+
+    connection.query(
+      "SELECT COUNT(*) AS count FROM effects WHERE name = ?",
+      [effect.name],
+      (err, results) => {
+        if (err) {
+          console.error("Error checking for existing predefined effect:", err);
+          return;
+        }
+
+        if (results[0].count > 0) {
+          console.log(`Effect ${effect.name} already exists`);
+        } else {
+          connection.query(
+            "INSERT INTO effects (name, effectData) VALUES (?, ?)",
+            [effect.name, serializedEffect],
+            (err) => {
+              if (err) {
+                console.error("Error saving predefined effect:", err);
+                return;
+              }
+              console.log(
+                `Predefined effect ${effect.name} saved successfully`
+              );
+            }
+          );
+        }
+      }
+    );
   });
 };
 
@@ -66,12 +103,11 @@ const deleteEffect = (req, res) => {
       res.status(500).send(err);
       return;
     }
-    res.status(200).send("Effect deleted");
+    getEffects(req, res);
   });
 };
 
 const saveEffect = (req, res) => {
-  res.status(200).send("saved effect");
   const effectName = req.body.name || "test";
 
   const serializedLedstrips = ledstrips.ledstrips.map((ledstrip) => ({
@@ -84,15 +120,35 @@ const saveEffect = (req, res) => {
     })),
   }));
 
+  const effectData = JSON.stringify(serializedLedstrips);
+
   connection.query(
-    "INSERT INTO effects (name, effectData) VALUES (?, ?)",
-    [effectName, JSON.stringify(serializedLedstrips)],
-    (err) => {
+    "SELECT COUNT(*) AS count FROM effects WHERE name = ?",
+    [effectName],
+    (err, results) => {
       if (err) {
-        console.error("Error saving effect:", err);
+        console.error("Error checking for existing effect:", err);
+        res.status(500).send("Error checking for existing effect");
         return;
       }
-      console.log("Effect saved successfully");
+
+      if (results[0].count > 0) {
+        res.status(400).send("Effect already exists");
+      } else {
+        connection.query(
+          "INSERT INTO effects (name, effectData) VALUES (?, ?)",
+          [effectName, effectData],
+          (err) => {
+            if (err) {
+              console.error("Error saving effect:", err);
+              res.status(500).send("Error saving effect");
+              return;
+            }
+            res.status(200).send("Effect saved successfully");
+            console.log("Effect saved successfully");
+          }
+        );
+      }
     }
   );
 };
@@ -123,14 +179,14 @@ const loadEffect = (req, res) => {
 
       matchingLedStrip.clearSegments();
       deserializedStrip.segments.forEach((segment) => {
-          const newSegment = new Segment(
-            matchingLedStrip,
-            segment.start,
-            segment.end,
-            segment.color
-          );
-          newSegment.setEffect(segment.effect);
-          matchingLedStrip.segments.push(newSegment);
+        const newSegment = new Segment(
+          matchingLedStrip,
+          segment.start,
+          segment.end,
+          segment.color
+        );
+        newSegment.setEffect(segment.effect);
+        matchingLedStrip.segments.push(newSegment);
       });
       matchingLedStrip.updateSegments();
       matchingLedStrip.updateEffect();
