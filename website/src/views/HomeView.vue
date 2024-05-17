@@ -214,14 +214,19 @@ export type Effect = {
     <Card class="grow">
       <CardHeader>
         <CardTitle>
-          Individual lights
-          <span v-if="searching">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
-                <TooltipContent>Searching for LED strips...</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+          <span class="flex justify-between items-center">
+            <span>
+              Individual lights
+              <span v-if="searching">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
+                    <TooltipContent>Searching for LED strips...</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </span>
+            </span>
+            <Button @click="selectAll" variant="secondary">Select all</Button>
           </span>
         </CardTitle>
       </CardHeader>
@@ -431,6 +436,19 @@ export default {
       await axios.post(`${this.remoteURL}/loadeffect`, data).catch((error) => {
         console.error(error);
       });
+    },
+    selectAll() {
+      // If one is selected, deselect all
+      if (this.selectedStrips.length !== 0) {
+        this.selectedStrips = [];
+        return;
+      }
+
+      this.selectedStrips = this.strips.map((strip) => ({
+        index: strip.index,
+        name: strip.name,
+        segments: strip.segments.map((_, i) => i),
+      }));
     },
   },
   mounted() {
