@@ -61,6 +61,7 @@ const getEffects = (req, res) => {
 const checkPreDefinedEffects = () => {
   predefinedEffects.forEach((effect) => {
     const serializedEffect = JSON.stringify(effect.effectData);
+    serializedEffect.preDefined = true;
 
     connection.query(
       "SELECT COUNT(*) AS count FROM effects WHERE name = ?",

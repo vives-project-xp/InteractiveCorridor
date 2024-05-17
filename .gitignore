@@ -2,4 +2,3 @@ TestRoom/
 .env
 node_modules/
 wled_cfg.json
-predefined-effects.json

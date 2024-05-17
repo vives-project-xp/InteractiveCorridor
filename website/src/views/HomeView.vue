@@ -329,6 +329,7 @@ export default {
         this.dbeffects = response2.data.sort((a: { name: string }, b: { name: string }) =>
           a.name.localeCompare(b.name)
         );
+        console.log(this.dbeffects);
       } catch (error) {
         console.error('Error fetching effects:', error);
       }
