@@ -30,16 +30,16 @@ A list of tests that should be performed on the software. The software should be
 <details>
 <summary>Documentation</summary>
 
-- [ ] The website should have a README.md file
-  - [ ] The README.md file should contain a description of the software
-  - [ ] The README.md file should contain the technologies used
-  - [ ] The README.md file should contain some screenshots of the website
-- [ ] The backend should have a README.md file
-  - [ ] The README.md file should contain a description of the software
-  - [ ] The README.md file should contain the technologies used
-  - [ ] The README.md file should contain an UML diagram of the Virtual Ledstrip
-  - [ ] The README.md file should contain documentation of the Virtual Ledstrip
-- [ ] There shoud be a docs folder with a README.md file
+- [x] The website should have a README.md file
+  - [x] The README.md file should contain a description of the software
+  - [x] The README.md file should contain the technologies used
+  - [x] The README.md file should contain some screenshots of the website
+- [x] The backend should have a README.md file
+  - [x] The README.md file should contain a description of the software
+  - [x] The README.md file should contain the technologies used
+  - [x] The README.md file should contain an UML diagram of the Virtual Ledstrip
+  - [x] The README.md file should contain documentation of the Virtual Ledstrip
+- [x] There shoud be a docs folder with a README.md file
 
 </details>
 
@@ -48,23 +48,26 @@ A list of tests that should be performed on the software. The software should be
 <details>
 <summary>components</summary>
 
-- [ ] The converter should convert the 24V input into 5V output
-- [ ] The level shifter should be able to make the 3.3V signal into a 5V signal
-- [ ] The electrical supply should be able to power all the 5 ledstrips
-- [ ] Test the ledstrips
-  - [ ] Test the max current of the ledstrips
-  - [ ] Check the required voltage of the ledstrips
-- [ ] Test if the ESP sends a signal
-- [ ] Test if the ledstrips are working with the signal
-  - [ ] Check if the signal at the end is 5V
-  - [ ] Check if u get the right effect on the ledstrips
-- [ ] Test if everything works
+- [x] The converter should convert the 24V input into 5V output
+- [x] The level shifter should be able to make the 3.3V signal into a 5V signal
+- [x] The electrical supply should be able to power all the 5 ledstrips
+- [x] Test the ledstrips
+  - [x] Test the max current of the ledstrips
+  - [x] Check the required voltage of the ledstrips
+- [x] Test if the ESP sends a signal
+- [x] Test if the ledstrips are working with the signal
+  - [x] Check if the signal at the end is 5V
+  - [x] Check if u get the right effect on the ledstrips
+- [x] Test if everything works
 
 </details>
 
 <details>
 <summary>Documentation</summary>
 
-- [ ] The signals of the hardware should be documented with scope images
+- [x] The signals of the hardware should be documented with scope images
+- [x] The README.md file in docs should contain info about the used components
+- [x] The README.md file in docs should contain both hardware and software architecture diagram
+- [x] The README.md file in docs should contain wiring diagram and how the level-shifter is made
 
 </details>
