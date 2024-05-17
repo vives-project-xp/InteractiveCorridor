@@ -337,6 +337,7 @@ export default {
 
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
+        console.log(response2.data);
         this.dbeffects = response2.data.sort(
           (a: { name: string; preDefined: number }, b: { name: string; preDefined: number }) => {
             // First, check if either of the effects has preDefined set to 1

@@ -75,8 +75,8 @@ const checkPreDefinedEffects = () => {
           return;
         } else {
           connection.query(
-            "INSERT INTO effects (name, effectData, preDefined) VALUES (?, ?, ?)",
-            [effect.name, serializedEffect, true],
+            "INSERT INTO effects (name, preDefined, effectData) VALUES (?, ?, ?)",
+            [effect.name, true, serializedEffect],
             (err) => {
               if (err) {
                 console.error("Error saving predefined effect:", err);
@@ -133,8 +133,8 @@ const saveEffect = (req, res) => {
         res.status(400).send("Effect already exists");
       } else {
         connection.query(
-          "INSERT INTO effects (name, effectData, preDefined) VALUES (?, ?, ?)",
-          [effectName, effectData, false],
+          "INSERT INTO effects (name, preDefined, effectData) VALUES (?, ?, ?)",
+          [effectName, false, effectData],
           (err) => {
             if (err) {
               console.error("Error saving effect:", err);
@@ -229,8 +229,8 @@ const createTable = () => {
     CREATE TABLE IF NOT EXISTS effects (
       id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      effectData TEXT NOT NULL,
-      preDefined BOOLEAN NOT NULL
+      preDefined BOOLEAN NOT NULL,
+      effectData TEXT NOT NULL
     )
   `;
 
