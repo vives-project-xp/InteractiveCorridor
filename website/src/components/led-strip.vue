@@ -22,6 +22,7 @@ export type IncomingStrip = {
 export type Effect = {
   name: string;
   description: string;
+  preDefined: number;
   id: number;
 };
 
