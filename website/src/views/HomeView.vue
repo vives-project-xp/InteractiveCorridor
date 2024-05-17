@@ -288,7 +288,7 @@ export default {
       dbeffects: [] as Effect[] | undefined,
       strips: [] as IncomingStrip[],
       brightness: 200,
-      selectedColor: '#000000',
+      selectedColor: '#ffffff',
       selectedStrips: [] as SelectedStrip[],
       searching: false,
       effectSearch: '',
