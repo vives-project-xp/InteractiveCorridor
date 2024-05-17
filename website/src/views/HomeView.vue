@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
@@ -215,46 +215,50 @@ export type Effect = {
       </Tabs>
     </aside>
     <Card class="grow">
-      <CardHeader>
-        <CardTitle>
-          <span class="flex justify-between items-center">
+      <CardHeader class="flex flex-row justify-between items-start p-4">
+        <div class="flex flex-col gap-y-1.5">
+          <CardTitle>
             <span> Individual lights </span>
-            <Button @click="selectAll" variant="secondary">Select all</Button>
-          </span>
-        </CardTitle>
+          </CardTitle>
+          <CardDescription>
+            Click on a segment to select it. Click on the 'All' button to select all segments.
+          </CardDescription>
+        </div>
+        <Button @click="selectAll" variant="secondary">Select all</Button>
       </CardHeader>
       <CardContent>
         <ScrollArea class="h-[500px] w-full p-2.5 rounded-md border">
           <div class="flex flex-col gap-4">
-          <template v-for="strip in strips" :key="strip.index">
-            <LedStrip
-              class="grow shadow-md"
-              :strip
-              :effects="effects ? effects : []"
-              :selectedSegments="
-                selectedStrips.find((s) => s.index === strip.index)?.segments || []
-              "
-              @strip-select="
-                (strip, barIndex) => {
-                  const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
-                  if (!selectedStrip) {
-                    selectedStrips.push({
-                      index: strip.index,
-                      name: strip.name,
-                      segments: [barIndex],
-                    });
-                  } else {
-                    if (selectedStrip.segments.includes(barIndex)) {
-                      selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
+            <template v-for="strip in strips" :key="strip.index">
+              <LedStrip
+                class="grow shadow-md"
+                :strip
+                :effects="effects ? effects : []"
+                :selectedSegments="
+                  selectedStrips.find((s) => s.index === strip.index)?.segments || []
+                "
+                @strip-select="
+                  (strip, barIndex) => {
+                    const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
+                    if (!selectedStrip) {
+                      selectedStrips.push({
+                        index: strip.index,
+                        name: strip.name,
+                        segments: [barIndex],
+                      });
                     } else {
-                      selectedStrip.segments.push(barIndex);
+                      if (selectedStrip.segments.includes(barIndex)) {
+                        selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
+                      } else {
+                        selectedStrip.segments.push(barIndex);
+                      }
                     }
                   }
-                }
-              "
-              @split="splitStrip"
-            />
-          </template>
+                "
+                @split="splitStrip"
+              />
+            </template>
+          </div>
         </ScrollArea>
         <div class="flex max-w-xs gap-1">
           <Input
