@@ -218,17 +218,7 @@ export type Effect = {
       <CardHeader>
         <CardTitle>
           <span class="flex justify-between items-center">
-            <span>
-              Individual lights
-              <span v-if="searching">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
-                    <TooltipContent>Searching for LED strips...</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </span>
-            </span>
+            <span> Individual lights </span>
             <Button @click="selectAll" variant="secondary">Select all</Button>
           </span>
         </CardTitle>
@@ -298,7 +288,6 @@ export default {
       brightness: 200,
       selectedColor: '#ffffff',
       selectedStrips: [] as SelectedStrip[],
-      searching: false,
       effectSearch: '',
       dbeffectSearch: '',
       ownEffectName: '',
@@ -312,7 +301,6 @@ export default {
   },
   methods: {
     fetchLeds() {
-      this.searching = true;
       axios
         .get(`${this.remoteURL}/leds`, { timeout: 250 })
         .then(async (response) => {
@@ -322,12 +310,8 @@ export default {
             return;
           }
           this.strips = response.data;
-          this.searching = false;
         })
-        .catch(() => {
-          this.searching = false;
-          // console.error(error);
-        });
+        .catch(() => {});
     },
     async fetchEffects() {
       try {
