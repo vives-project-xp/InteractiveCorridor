@@ -233,8 +233,9 @@ export type Effect = {
           </span>
         </CardTitle>
       </CardHeader>
-      <CardContent class="flex flex-col gap-4">
-        <ScrollArea class="h-[500px] w-full p-3 rounded-md border">
+      <CardContent>
+        <ScrollArea class="h-[500px] w-full p-2.5 rounded-md border">
+          <div class="flex flex-col gap-4">
           <template v-for="strip in strips" :key="strip.index">
             <LedStrip
               class="grow shadow-md"
