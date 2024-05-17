@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ./start-server.js",
-    "production": "vite --host",
+    "dev": "vite --host",
+    "production": "node ./start-server.js",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
