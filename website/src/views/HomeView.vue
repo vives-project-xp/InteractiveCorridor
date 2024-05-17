@@ -17,6 +17,7 @@ export type Effect = {
   name: string;
   description: string;
   id: number;
+  preDefined: number;
 };
 </script>
 
