@@ -93,7 +93,7 @@ const props = defineProps({
           <div
             class="flex items-center rounded m-1 cursor-pointer max-w-60 md:max-w-96"
             :class="{
-              'shadow-[0px_0px_0px_5px_rgba(109,40,217,0.5)]': selectedSegments.includes(barIndex),
+              'shadow-[0px_0px_0px_5px_rgba(25,120,255,0.8)]': selectedSegments.includes(barIndex),
             }"
             @click="
               () => {
