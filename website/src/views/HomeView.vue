@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -13,11 +12,11 @@ import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedStrip, { type SelectedStrip, type IncomingStrip } from '@/components/led-strip.vue';
 import { throttle } from '@/lib/utils';
-
 export type Effect = {
   name: string;
   description: string;
   id: number;
+  preDefined: number;
 };
 </script>
 
@@ -54,7 +53,7 @@ export type Effect = {
               <Input
                 v-model="effectSearch"
                 type="search"
-                placeholder="Effect"
+                placeholder="Search"
                 class="w-full mb-2"
               />
               <LedEffect
@@ -64,7 +63,7 @@ export type Effect = {
                 variant="secondary"
                 :onClick="() => setEffect('effect', 0)"
               />
-              <ScrollArea class="h-56 w-full p-3 rounded-md border">
+              <ScrollArea class="h-40 w-full p-3 rounded-md border">
                 <div v-if="effects === undefined || effects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
                     <Skeleton class="w-full h-10" />
@@ -93,10 +92,10 @@ export type Effect = {
               <Input
                 v-model="dbeffectSearch"
                 type="search"
-                placeholder="Own Effects"
+                placeholder="Search"
                 class="w-full mb-2"
               />
-              <ScrollArea class="h-56 w-full p-3 rounded-md border">
+              <ScrollArea class="h-40 w-full p-3 rounded-md border">
                 <div v-if="dbeffects === undefined || dbeffects.length === 0" class="h-56 w-full">
                   <div v-for="i in 5" :key="i">
                     <Skeleton class="w-full h-10" />
@@ -109,19 +108,22 @@ export type Effect = {
                   ) || []"
                   :key="effect.id"
                 >
-                  <LedEffect
-                    :effect="effect.name"
-                    :tooltip-text="effect.description"
-                    class="w-full text-sm"
-                    variant="secondary"
-                    :onClick="() => loadEffect(effect.name)"
-                  />
-                  <button
-                    @click="deleteEffect(effect.name)"
-                    class="text-red-600 hover:text-red-800"
-                  >
-                    Delete
-                  </button>
+                  <div class="flex items-center w-40 justify-between h-[50px] ml-2 mr-2">
+                    <LedEffect
+                      :effect="effect.name"
+                      :tooltip-text="effect.description"
+                      class="w-full text-sm overflow-hidden"
+                      variant="secondary"
+                      :onClick="() => loadEffect(effect.name)"
+                    />
+                    <button
+                      v-if="effect.preDefined !== 1"
+                      @click="deleteEffect(effect.name)"
+                      class="text-red-600 hover:text-red-800"
+                    >
+                      <img src="../../img/delete.png" alt="Delete" class="ml-2 h-10 mr-2" />
+                    </button>
+                  </div>
                   <Separator class="my-2" />
                 </div>
               </ScrollArea>
@@ -212,58 +214,61 @@ export type Effect = {
       </Tabs>
     </aside>
     <Card class="grow">
-      <CardHeader>
-        <CardTitle>
-          <span class="flex justify-between items-center">
-            <span>
-              Individual lights
-              <span v-if="searching">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger class="text-red-500 select-none">°</TooltipTrigger>
-                    <TooltipContent>Searching for LED strips...</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </span>
-            </span>
-            <Button @click="selectAll" variant="secondary">Select all</Button>
-          </span>
-        </CardTitle>
+      <CardHeader class="flex flex-row justify-between items-start p-4">
+        <div class="flex flex-col gap-y-1.5">
+          <CardTitle>
+            <span> Individual lights </span>
+          </CardTitle>
+          <CardDescription>
+            Click on a segment to select it. Click on the 'All' button to select all segments.
+          </CardDescription>
+        </div>
+        <Button @click="selectAll" variant="secondary">Select all</Button>
       </CardHeader>
-      <CardContent class="flex flex-col gap-4">
-        <template v-for="strip in strips" :key="strip.index">
-          <LedStrip
-            class="grow shadow-md"
-            :strip
-            :effects="effects ? effects : []"
-            :selectedSegments="selectedStrips.find((s) => s.index === strip.index)?.segments || []"
-            @strip-select="
-              (strip, barIndex) => {
-                const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
-                if (!selectedStrip) {
-                  selectedStrips.push({
-                    index: strip.index,
-                    name: strip.name,
-                    segments: [barIndex],
-                  });
-                } else {
-                  if (selectedStrip.segments.includes(barIndex)) {
-                    selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
-                  } else {
-                    selectedStrip.segments.push(barIndex);
+      <CardContent>
+        <ScrollArea class="h-[500px] w-full p-2.5 rounded-md border">
+          <div class="flex flex-col gap-4">
+            <template v-for="strip in strips" :key="strip.index">
+              <LedStrip
+                class="grow shadow-md"
+                :strip
+                :effects="effects ? effects : []"
+                :selectedSegments="
+                  selectedStrips.find((s) => s.index === strip.index)?.segments || []
+                "
+                @strip-select="
+                  (strip, barIndex) => {
+                    const selectedStrip = selectedStrips.find((s) => s.index === strip.index);
+                    if (!selectedStrip) {
+                      selectedStrips.push({
+                        index: strip.index,
+                        name: strip.name,
+                        segments: [barIndex],
+                      });
+                    } else {
+                      if (selectedStrip.segments.includes(barIndex)) {
+                        selectedStrip.segments.splice(selectedStrip.segments.indexOf(barIndex), 1);
+                      } else {
+                        selectedStrip.segments.push(barIndex);
+                      }
+                    }
                   }
-                }
-              }
-            "
-            @split="splitStrip"
-          />
-        </template>
+                "
+                @split="splitStrip"
+              />
+            </template>
+          </div>
+        </ScrollArea>
         <div class="flex max-w-xs gap-1">
+        </div>
+      </CardContent>
+      <CardFooter>
+        <span class="flex gap-1">
           <Input
             type="text"
             placeholder="Effect name"
             v-model="ownEffectName"
-            class="px-4 py-2 mr-2 inline-block"
+          class="px-4 py-2"
           />
           <Button
             :disabled="ownEffectName === ''"
@@ -272,8 +277,9 @@ export type Effect = {
           >
             Save effect
           </Button>
-        </div>
-      </CardContent>
+      </span>
+        
+      </CardFooter>
     </Card>
   </div>
 </template>
@@ -290,7 +296,6 @@ export default {
       brightness: 200,
       selectedColor: '#ffffff',
       selectedStrips: [] as SelectedStrip[],
-      searching: false,
       effectSearch: '',
       dbeffectSearch: '',
       ownEffectName: '',
@@ -304,7 +309,6 @@ export default {
   },
   methods: {
     fetchLeds() {
-      this.searching = true;
       axios
         .get(`${this.remoteURL}/leds`, { timeout: 250 })
         .then(async (response) => {
@@ -314,12 +318,8 @@ export default {
             return;
           }
           this.strips = response.data;
-          this.searching = false;
         })
-        .catch(() => {
-          this.searching = false;
-          // console.error(error);
-        });
+        .catch(() => {});
     },
     async fetchEffects() {
       try {
@@ -331,10 +331,20 @@ export default {
 
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
-        this.dbeffects = response2.data.sort((a: { name: string }, b: { name: string }) =>
-          a.name.localeCompare(b.name)
+        console.log(response2.data);
+        this.dbeffects = response2.data.sort(
+          (a: { name: string; preDefined: number }, b: { name: string; preDefined: number }) => {
+            // First, check if either of the effects has preDefined set to 1
+            if (a.preDefined === 1 && b.preDefined !== 1) {
+              return -1;
+            }
+            if (a.preDefined !== 1 && b.preDefined === 1) {
+              return 1;
+            }
+            // If both have the same preDefined value, sort by name
+            return a.name.localeCompare(b.name);
+          }
         );
-        console.log(this.dbeffects);
       } catch (error) {
         console.error('Error fetching effects:', error);
       }

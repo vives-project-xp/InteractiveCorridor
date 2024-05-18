@@ -4,7 +4,7 @@ const { hexToRgb } = require("./utils");
 const db = require("./dB");
 const axios = require("axios");
 
-const segmentsLengths = [8, 4, 2, 1];
+const segmentsLengths = [1, 2, 4, 8];
 
 const getLeds = async (req, res) => {
   const strips = [];
