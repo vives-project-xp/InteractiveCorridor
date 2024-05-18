@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -261,11 +260,15 @@ export type Effect = {
           </div>
         </ScrollArea>
         <div class="flex max-w-xs gap-1">
+        </div>
+      </CardContent>
+      <CardFooter>
+        <span class="flex gap-1">
           <Input
             type="text"
             placeholder="Effect name"
             v-model="ownEffectName"
-            class="px-4 py-2 mr-2 inline-block"
+          class="px-4 py-2"
           />
           <Button
             :disabled="ownEffectName === ''"
@@ -274,8 +277,9 @@ export type Effect = {
           >
             Save effect
           </Button>
-        </div>
-      </CardContent>
+      </span>
+        
+      </CardFooter>
     </Card>
   </div>
 </template>
