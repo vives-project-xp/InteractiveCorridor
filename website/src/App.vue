@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { Button } from '@/components/ui/button';
 import { BookMarked, Github, Moon, Sun } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 </script>
 
 <template>
@@ -16,36 +17,63 @@ import { BookMarked, Github, Moon, Sun } from 'lucide-vue-next';
         <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
       </li>
       <li>
-        <a
-          href="https://github.com/vives-project-xp/InteractiveCorridor#readme"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button variant="outline">
-            <Github />
-          </Button>
-        </a>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <a
+                href="https://github.com/vives-project-xp/InteractiveCorridor#readme"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline">
+                  <Github />
+                </Button>
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>View project on GitHub</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </li>
       <li>
-        <a
-          href="https://github.com/vives-project-xp/InteractiveCorridor/tree/main/docs#readme"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button variant="outline">
-            <BookMarked />
-          </Button>
-        </a>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <a
+                href="https://github.com/vives-project-xp/InteractiveCorridor/tree/main/docs#readme"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline">
+                  <BookMarked />
+                </Button>
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open documentation</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </li>
       <li>
-        <Button variant="outline" @click="toggleDarkMode">
-          <template v-if="isDarkMode">
-            <Moon />
-          </template>
-          <template v-else>
-            <Sun />
-          </template>
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <Button variant="outline" @click="toggleDarkMode">
+                <template v-if="isDarkMode">
+                  <Moon />
+                </template>
+                <template v-else>
+                  <Sun />
+                </template>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Toggle theme</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </li>
     </ul>
   </nav>
