@@ -13,21 +13,24 @@ paths:
       summary: Get LED configurations
       responses:
         200:
-          description: Successful operation
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/LEDConfiguration'
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ledstrip"
+
     post:
       summary: Set LED configurations
       parameters:
-        - in: body
-          name: body
+        - in: query
+          name: query
           required: true
           schema:
             type: array
             items:
-              $ref: '#/definitions/LEDConfiguration'
+              $ref: "#/components/schemas/Ledstrip"
       responses:
         200:
           description: LED configurations set successfully
@@ -35,8 +38,8 @@ paths:
     post:
       summary: Change LED segments
       parameters:
-        - in: body
-          name: body
+        - in: query
+          name: query
           required: true
           schema:
             type: object
@@ -49,16 +52,16 @@ paths:
                     description: The index of the LED strip
       responses:
         200:
-          description: LED segments changed successfully      
+          description: LED segments changed successfully
   /effects:
     post:
       summary: Set effect for LED strips
       parameters:
-        - in: body
-          name: body
+        - in: query
+          name: query
           required: true
           schema:
-            $ref: '#/definitions/SetEffectRequest'
+            $ref: "#/components/schemas/Effect"
       responses:
         200:
           description: Effect set successfully
@@ -67,29 +70,33 @@ paths:
       responses:
         200:
           description: Successful operation
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/EffectDescription'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Effect"
   /db/effects:
     get:
       summary: Get all effects
       responses:
         200:
           description: Successful operation
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Effect'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Effect"
   /saveeffect:
     post:
       summary: Save a new effect
       parameters:
-        - in: body
-          name: body
+        - in: query
+          name: query
           required: true
           schema:
-            $ref: '#/definitions/Effect'
+            $ref: "#/components/schemas/Effect"
       responses:
         200:
           description: Effect saved successfully
@@ -97,8 +104,8 @@ paths:
     post:
       summary: Load an effect
       parameters:
-        - in: body
-          name: body
+        - in: query
+          name: query
           required: true
           schema:
             type: object
@@ -113,8 +120,8 @@ paths:
     delete:
       summary: Delete an effect by name
       parameters:
-        - in: body
-          name: body
+        - in: query
+          name: query
           required: true
           schema:
             type: object
@@ -122,6 +129,9 @@ paths:
               name:
                 type: string
                 description: The name of the effect to delete
+      responses:
+        200:
+          description: Effect deleted successfully
 components:
   schemas:
     Effect:
@@ -179,7 +189,7 @@ components:
           type: number
           description: Eindindex van het segment
           example: 11
-        length: 
+        length:
           type: number
           description: Lengte van het segment
           example: 11
