@@ -61,7 +61,47 @@ paths:
           name: query
           required: true
           schema:
-            $ref: "#/components/schemas/Effect"
+            type: object
+            properties:
+              strips:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ledstrip"
+              delay:
+                type: number
+                description: Delay for the effect
+                minimum: 1
+                maximum: 1000
+                nullable: true
+              effect:
+                type: number
+                description: ID of the effect
+                example: 0
+              intensity:
+                type: number
+                description: Intensity of the effect
+                minimum: 1
+                maximum: 255
+                nullable: true
+              mirror:
+                type: boolean
+                description: Mirror the effect
+                nullable: true
+              reverse:
+                type: boolean
+                description: Reverse the effect
+                nullable: true
+              reverseDelay:
+                type: boolean
+                description: Reverse the delay
+                nullable: true
+              speed:
+                type: number
+                description: Speed of the effect
+                minimum: 1
+                maximum: 255
+                nullable: true
+
       responses:
         200:
           description: Effect set successfully
