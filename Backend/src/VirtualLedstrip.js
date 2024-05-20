@@ -113,7 +113,12 @@ class VirtualLedstrip {
   }
 
   updateSegments() {
-    const body = {
+    let body = {};
+
+    const resetSegments = Array(8).fill({ start: 0, stop: 0, len: 0, grp: 0 });
+    this.publish(JSON.stringify({ seg: resetSegments }));
+
+    body = {
       seg: this.segments.map((segment) => ({
         start: segment.start,
         stop: segment.end,
