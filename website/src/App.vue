@@ -12,12 +12,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
     >
       Interactive Corridor
     </span>
-    <ul class="flex gap-4">
-      <li>
-        <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
-      </li>
-      <li>
-        <TooltipProvider>
+    <TooltipProvider>
+      <ul class="flex gap-4">
+        <li>
+          <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
+        </li>
+        <li>
           <Tooltip>
             <TooltipTrigger as-child>
               <a
@@ -34,10 +34,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
               <p>View project on GitHub</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>
-      </li>
-      <li>
-        <TooltipProvider>
+        </li>
+        <li>
           <Tooltip>
             <TooltipTrigger as-child>
               <a
@@ -54,10 +52,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
               <p>Open documentation</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>
-      </li>
-      <li>
-        <TooltipProvider>
+        </li>
+        <li>
           <Tooltip>
             <TooltipTrigger as-child>
               <Button variant="outline" @click="toggleDarkMode">
@@ -73,9 +69,9 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
               <p>Toggle theme</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </TooltipProvider>
   </nav>
 
   <main class="p-6 xl:w-[1250px] xl:m-auto">
