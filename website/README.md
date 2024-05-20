@@ -1,6 +1,6 @@
 # Welcome to the "Website" page
 
-This website is utilized to manage all corridors, thereby creating stunning effects in the hallway.
+This website is utilized to manage all corridors, thereby creating stunning effects in the hallway. [Website](http://10.11.0.100:9002/api-docs/) You must be connected to the Devbit network to access the website or you can do this yourself via Docker Desktop.
 
 ## Technologies used
 
