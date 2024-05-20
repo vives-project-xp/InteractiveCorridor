@@ -6,17 +6,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 </script>
 
 <template>
-  <nav class="flex justify-between items-center p-5 bg-secondary">
+  <nav class="flex justify-between items-center bg-secondary p-4 md:p-5">
     <span
-      class="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent text-3xl font-bold"
+      class="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent text-xl sm:text-3xl font-bold"
     >
       Interactive Corridor
     </span>
     <TooltipProvider>
-      <ul class="flex gap-4">
-        <li>
-          <!-- <RouterLink to="/" :class="navItemClass">Home</RouterLink> -->
-        </li>
+      <ul class="flex gap-1 md:gap-4">
         <li>
           <Tooltip>
             <TooltipTrigger as-child>
@@ -25,7 +22,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="outline">
+                <Button variant="outline" class="h-9 px-3 md:h-10 md:px-4">
                   <Github />
                 </Button>
               </a>
@@ -43,7 +40,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="outline">
+                <Button variant="outline" class="h-9 px-3 md:h-10 md:px-4">
                   <BookMarked />
                 </Button>
               </a>
@@ -56,7 +53,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
         <li>
           <Tooltip>
             <TooltipTrigger as-child>
-              <Button variant="outline" @click="toggleDarkMode">
+              <Button variant="outline" class="h-9 px-3 md:h-10 md:px-4" @click="toggleDarkMode">
                 <template v-if="isDarkMode">
                   <Moon />
                 </template>
