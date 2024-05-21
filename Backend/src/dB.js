@@ -215,9 +215,13 @@ const loadEffect = (req, res) => {
       return;
     }
     var leds = results[0].effectData;
+    console.log(leds);
     while (typeof leds != "object") {
+      console.log(typeof leds);
+      console.log(leds);
       leds = JSON.parse(leds);
     }
+    console.log(typeof leds);
     leds.forEach((strip) => {
       const deserializedStrip = strip;
       const matchingLedStrip = ledstrips.ledstrips.find(

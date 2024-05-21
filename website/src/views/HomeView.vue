@@ -317,12 +317,13 @@ export default {
   },
   methods: {
     resetInactivityTimer() {
-      console.log('resetting inactivity timer');
       clearTimeout(this.inactivityTimer);
       this.photoVisible = false;
       this.inactivityTimer = setTimeout(() => {
-        console.log('showing photo');
         this.photoVisible = true;
+        setTimeout(() => {
+          this.resetInactivityTimer();
+        }, 4000);
       }, 10000); // 10 seconds
     },
     fetchLeds() {
@@ -509,7 +510,7 @@ export default {
 
 <style>
 .photo-animation {
-  animation: moveUpAndFade 4s infinite ease-in-out; /* Herhaal de animatie elke 4 seconden */
+  animation: moveUpAndFade 4s ease-in-out; /* Herhaal de animatie elke 4 seconden */
 }
 
 @keyframes moveUpAndFade {
