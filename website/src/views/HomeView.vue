@@ -324,7 +324,7 @@ export default {
         setTimeout(() => {
           this.resetInactivityTimer();
         }, 4000);
-      }, 10000); // 10 seconds
+      }, 30 * 1000); // 10 seconds
     },
     fetchLeds() {
       axios
