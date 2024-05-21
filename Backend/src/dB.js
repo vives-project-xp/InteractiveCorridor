@@ -2,7 +2,57 @@ const mysql = require("mysql2");
 require("dotenv").config();
 const ledstrips = require("./ledstrips");
 const { Segment } = require("./VirtualLedstrip");
-const predefinedEffects = require("./predefined-effects.json");
+const fs = require("fs");
+const path = require("path");
+
+const predefinedEffectsPath = path.resolve(
+  __dirname,
+  "predefined-effects.json"
+);
+const predefinedEffectsExamplePath = path.resolve(
+  __dirname,
+  "predefined-effects-example.json"
+);
+
+function checkAndLoadPredefinedEffects() {
+  return new Promise((resolve, reject) => {
+    fs.access(predefinedEffectsPath, fs.constants.F_OK, (err) => {
+      if (err) {
+        // If the file doesn't exist, copy the predefined-effects-example.json file
+        fs.copyFile(
+          predefinedEffectsExamplePath,
+          predefinedEffectsPath,
+          (err) => {
+            if (err) {
+              console.error(
+                "Error copying predefined-effects-example.json:",
+                err
+              );
+              reject(err);
+              return;
+            }
+            console.log("predefined-effects.json file created successfully");
+            resolve();
+          }
+        );
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+async function init() {
+  try {
+    await checkAndLoadPredefinedEffects();
+    const predefinedEffects = require(predefinedEffectsPath);
+    console.log("predefinedEffects loaded successfully");
+  } catch (error) {
+    console.error("Failed to initialize predefinedEffects:", error);
+  }
+}
+
+init();
 
 let connection;
 
