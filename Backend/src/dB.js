@@ -42,10 +42,12 @@ function checkAndLoadPredefinedEffects() {
   });
 }
 
+let predefinedEffects = [];
+
 async function init() {
   try {
     await checkAndLoadPredefinedEffects();
-    const predefinedEffects = require(predefinedEffectsPath);
+    predefinedEffects = require(predefinedEffectsPath);
     console.log("predefinedEffects loaded successfully");
   } catch (error) {
     console.error("Failed to initialize predefinedEffects:", error);

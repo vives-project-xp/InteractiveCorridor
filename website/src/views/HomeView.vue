@@ -1,6 +1,13 @@
 <script lang="ts" setup>
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -259,17 +266,11 @@ export type Effect = {
             </template>
           </div>
         </ScrollArea>
-        <div class="flex max-w-xs gap-1">
-        </div>
+        <div class="flex max-w-xs gap-1"></div>
       </CardContent>
       <CardFooter>
         <span class="flex gap-1">
-          <Input
-            type="text"
-            placeholder="Effect name"
-            v-model="ownEffectName"
-          class="px-4 py-2"
-          />
+          <Input type="text" placeholder="Effect name" v-model="ownEffectName" class="px-4 py-2" />
           <Button
             :disabled="ownEffectName === ''"
             @click="saveEffect(ownEffectName)"
@@ -277,10 +278,15 @@ export type Effect = {
           >
             Save effect
           </Button>
-      </span>
-        
+        </span>
       </CardFooter>
     </Card>
+  </div>
+  <div
+    v-if="photoVisible"
+    class="fixed inset-0 flex bottom-[-300px] justify-center photo-animation"
+  >
+    <img src="../../img/Pointer.png" alt="Pointer" class="max-w-full max-h-full scale-50" />
   </div>
 </template>
 
@@ -305,9 +311,20 @@ export default {
       intensity: [128],
       delay: [0],
       throttleDelay: 100,
+      photoVisible: false,
+      inactivityTimer: 0,
     };
   },
   methods: {
+    resetInactivityTimer() {
+      console.log('resetting inactivity timer');
+      clearTimeout(this.inactivityTimer);
+      this.photoVisible = false;
+      this.inactivityTimer = setTimeout(() => {
+        console.log('showing photo');
+        this.photoVisible = true;
+      }, 10000); // 10 seconds
+    },
     fetchLeds() {
       axios
         .get(`${this.remoteURL}/leds`, { timeout: 250 })
@@ -472,6 +489,45 @@ export default {
         this.setColor(this.selectedColor);
       }
     );
+    this.inactivityTimer = setTimeout(() => {
+      this.photoVisible = true;
+    }, 10000);
+    document.addEventListener('mousemove', this.resetInactivityTimer);
+    document.addEventListener('keydown', this.resetInactivityTimer);
+    document.addEventListener('click', this.resetInactivityTimer);
+    document.addEventListener('scroll', this.resetInactivityTimer);
+  },
+  onBeforeUnmount() {
+    document.removeEventListener('mousemove', this.resetInactivityTimer);
+    document.removeEventListener('keydown', this.resetInactivityTimer);
+    document.removeEventListener('click', this.resetInactivityTimer);
+    document.removeEventListener('scroll', this.resetInactivityTimer);
+    clearTimeout(this.inactivityTimer);
   },
 };
 </script>
+
+<style>
+.photo-animation {
+  animation: moveUpAndFade 4s infinite ease-in-out; /* Herhaal de animatie elke 4 seconden */
+}
+
+@keyframes moveUpAndFade {
+  0% {
+    opacity: 0.1;
+    transform: translateY(0);
+  }
+  5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-150px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-150px); /* Beweeg naar boven */
+  }
+}
+</style>
