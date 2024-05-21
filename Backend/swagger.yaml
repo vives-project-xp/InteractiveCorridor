@@ -127,7 +127,17 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Effect"
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID of the effect
+                    name:
+                      type: string
+                      description: Name of the effect
+                    effectData:
+                      type: string
+                      description: JSON string of effect data
   /saveeffect:
     post:
       summary: Save a new effect
