@@ -127,22 +127,36 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Effect"
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: ID of the effect
+                    name:
+                      type: string
+                      description: Name of the effect
+                    effectData:
+                      type: string
+                      description: JSON string of effect data
   /saveeffect:
     post:
-      summary: Save a new effect
+      summary: Save the current ledstrip configuration
       parameters:
         - in: query
           name: query
           required: true
           schema:
-            $ref: "#/components/schemas/Effect"
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the effect
       responses:
         200:
           description: Effect saved successfully
   /loadeffect:
     post:
-      summary: Load an effect
+      summary: Load a saved led configuration
       parameters:
         - in: query
           name: query

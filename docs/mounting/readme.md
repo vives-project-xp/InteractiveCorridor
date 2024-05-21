@@ -21,3 +21,7 @@ To reduce costs, we have shortened the length of the defusers on the wall and th
 
 <img src="./images/First_Corridor.jpg" alt="image" width="300" heigt="auto">
 
+### Final Result (14/05/2024)
+This is the complete setup that you can control and we are very proud of this.😊
+
+<img src="./images/FinaleOpstellingt.PNG" alt="image" width="300" heigt="auto">
