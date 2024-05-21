@@ -20,7 +20,7 @@ Welcome to the documentation page! This is your go-to resource for understanding
 
 The installation of the hardware is quite simple. You can follow the steps below to install the hardware system:
 
-1. **Mount the ledstrips**: Mount the ledstrips on the pillars. Mounting can be found in [mounting](./mounting/).
+1. **Mount the ledstrips**: Mount the ledstrips on the pillars. Mounting can be found in [mounting](./mounting/). You will also learn more about the process.
 2. **Setup the ESP**: Setup the ESP32-C3. Installation steps can be found [here](./ESP_SETUP.md).
 3. **Run the backend**: Run the backend. Installation steps can be found [here](../Backend/README.md#installation).
 
