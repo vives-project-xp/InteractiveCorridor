@@ -58,5 +58,7 @@ As an added bonus, we've incorporated a delightful feature that allows you to ef
 
 Of course we have set dark theme as default 😉
 
+You can also go to our GitHub page and documentation page when you press the buttons at the top right of the screen.
+
 but here is an example of the white theme:
 ![White team](./img/HoofdpaginaWhite.webp)
