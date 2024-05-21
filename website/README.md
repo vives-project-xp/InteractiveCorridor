@@ -40,7 +40,15 @@ The ability to save custom effects streamlines your workflow, allowing you to ef
 
 ![Own effects](./img/Owneffects.webp)
 
+
 ## Settings page
+
+- **Speed**: When you change the speed of an effect, the playback speed will be faster or slower.
+- **Intensity**: Specifically, the "Intensity" setting adjusts the density or frequency of the effect applied to the LED strip.
+- **Delay**: By adjusting the delay you will create a delay between 2 or more corridors so that, for example, they will turn on alternately with the blink effect.
+- **Reverse Delay**: If you want the delay to work in a mirrored order, click this button (instead of the last corridor turning on first, the first corridor will turn on first and then the rest).
+- **Mirror**: When you select the "Mirrored" option, each corridor will display the effect in a mirrored fashion.
+- **Reverse**: When you press this button the effect will be played in reverse, although your effect runs from left to right by default, it will now be reversed.
 
 ![Settings](./img/Settings.webp)
 
@@ -49,6 +57,8 @@ The ability to save custom effects streamlines your workflow, allowing you to ef
 As an added bonus, we've incorporated a delightful feature that allows you to effortlessly switch between light and dark themes for your website. Simply look to the top right corner of your screen, where you'll find an inviting sun and moon icon. By clicking on these icons, you can seamlessly transition between the two themes, catering to your preferred browsing experience.
 
 Of course we have set dark theme as default 😉
+
+You can also go to our GitHub page and documentation page when you press the buttons at the top right of the screen.
 
 but here is an example of the white theme:
 ![White team](./img/HoofdpaginaWhite.webp)
