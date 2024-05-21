@@ -18,12 +18,12 @@ A list of tests that should be performed on the software. The software should be
   - [ ] An enduser should be able to look at the website and know how to split a ledstrip in multiple segments
   - [ ] An enduser should be able to look at the website and know how to change the color of a segment
   - [ ] An enduser should be able to look at the website and know how to change the color of a whole ledstrip
-- [ ] The software should be easy to install
-  - [ ] An step by step installation guide should be available
-  - [ ] Someone with basic knowledge of computers should be able to install the software
-  - [ ] After setting up the config files the software should be able to start with one command
-- [ ] The software should be easy to configure
-  - [ ] A step by step configuration guide should be available with with files to edit and what to edit
+- [x] The software should be easy to install
+  - [x] An step by step installation guide should be available
+  - [x] Someone with basic knowledge of computers should be able to install the software
+  - [x] After setting up the config files the software should be able to start with one command
+- [x] The software should be easy to configure
+  - [x] A step by step configuration guide should be available with with files to edit and what to edit
 
 </details>
 
@@ -46,7 +46,7 @@ A list of tests that should be performed on the software. The software should be
 ## Hardware
 
 <details>
-<summary>components</summary>
+<summary>Components</summary>
 
 - [x] The converter should convert the 24V input into 5V output
 - [x] The level shifter should be able to make the 3.3V signal into a 5V signal
