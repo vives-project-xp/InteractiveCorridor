@@ -71,7 +71,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
     </TooltipProvider>
   </nav>
 
-  <main class="p-6 xl:w-[1250px] xl:m-auto">
+  <main class="p-6 xl:w-[1300px] xl:m-auto">
     <RouterView />
   </main>
 </template>
