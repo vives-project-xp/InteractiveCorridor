@@ -40,6 +40,9 @@ A list of tests that should be performed on the software. The software should be
   - [x] The README.md file should contain an UML diagram of the Virtual Ledstrip
   - [x] The README.md file should contain documentation of the Virtual Ledstrip
 - [x] There shoud be a docs folder with a README.md file
+- [x] Swagger API docs
+  - [x] The API should be documented with Swagger
+  - [x] The Swagger docs should have the save paramters and responses as the API
 
 </details>
 
