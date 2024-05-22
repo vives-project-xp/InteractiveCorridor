@@ -15,7 +15,6 @@ Welcome to the documentation page! This is your go-to resource for understanding
     - [Wiring for Level shifter](#wiring-for-level-shifter)
   - [ESP Pinout](#esp-pinout)
   - [Measurements](#measurements)
-  - [Planning](#planning)
 
 ## Installation
 
