@@ -36,7 +36,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
           <Tooltip>
             <TooltipTrigger as-child>
               <a
-                href="https://github.com/vives-project-xp/InteractiveCorridor/tree/main/docs#readme"
+                :href="origin + ':3000'"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -87,6 +87,7 @@ export default {
   data() {
     return {
       isDarkMode: document.body.classList.contains('dark'),
+      origin: window.location.origin,
     };
   },
   methods: {
