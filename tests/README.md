@@ -7,17 +7,17 @@ A list of tests that should be performed on the software. The software should be
 <details>
 <summary>Ease of use</summary>
 
-- [ ] An enduser should be able to use the software without any prior knowledge
-  - [ ] An enduser should be able to look and the website and know how to controll the ledstrips
-  - [ ] An enduser should be able to look at the website and know how to change the settings
-  - [ ] An enduser should be able to look at the website and know how to change the color of the ledstrips
-  - [ ] An enduser should be able to look at the website and know how to change the brightness of the ledstrips
-  - [ ] An enduser should be able to look at the website and know how to change the speed of the ledstrips
-  - [ ] An enduser should be able to look at the website and know how to change the mode of the ledstrips
-  - [ ] An enduser should be able to look at the website and know how to change the direction of the ledstrips
-  - [ ] An enduser should be able to look at the website and know how to split a ledstrip in multiple segments
-  - [ ] An enduser should be able to look at the website and know how to change the color of a segment
-  - [ ] An enduser should be able to look at the website and know how to change the color of a whole ledstrip
+- [x] An enduser should be able to use the software without any prior knowledge
+  - [x] An enduser should be able to look and the website and know how to controll the ledstrips
+  - [x] An enduser should be able to look at the website and know how to change the settings
+  - [x] An enduser should be able to look at the website and know how to change the color of the ledstrips
+  - [x] An enduser should be able to look at the website and know how to change the brightness of the ledstrips
+  - [x] An enduser should be able to look at the website and know how to change the speed of the ledstrips
+  - [x] An enduser should be able to look at the website and know how to change the mode of the ledstrips
+  - [x] An enduser should be able to look at the website and know how to change the direction of the ledstrips
+  - [x] An enduser should be able to look at the website and know how to split a ledstrip in multiple segments
+  - [x] An enduser should be able to look at the website and know how to change the color of a segment
+  - [x] An enduser should be able to look at the website and know how to change the color of a whole ledstrip
 - [x] The software should be easy to install
   - [x] An step by step installation guide should be available
   - [x] Someone with basic knowledge of computers should be able to install the software
