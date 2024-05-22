@@ -46,7 +46,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
               </a>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Open documentation</p>
+              <p>Open API documentation</p>
             </TooltipContent>
           </Tooltip>
         </li>
