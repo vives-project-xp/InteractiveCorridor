@@ -15,6 +15,7 @@ Welcome to the documentation page! This is your go-to resource for understanding
     - [Wiring for Level shifter](#wiring-for-level-shifter)
   - [ESP Pinout](#esp-pinout)
   - [Measurements](#measurements)
+  - [Planning](#planning)
 
 ## Installation
 
@@ -121,3 +122,10 @@ The [architecture diagram](./ArchitectureDiagram.drawio) can be visualized in [a
 We have scope images of the level shifter, illustrating how the ESP (depicted in yellow) sends a 3.3V data signal. As it traverses the level shifter (represented by the blue signal), it is boosted to 5V. The green signal, measured at the collector of the first transistor, demonstrates signal inversion, necessitating the use of a second transistor.
 
 <img src="./images/scope_level_shifter.png" alt="Level Shifter" width="450">
+
+## Planning
+
+| Date       |                                       |
+| ---------- | ------------------------------------- |
+| 21/05/2024 | Finish presentation                   |
+| 22/05/2024 | Wrap up project and give presentation |
