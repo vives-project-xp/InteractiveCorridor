@@ -88,7 +88,7 @@ const props = defineProps({
         <div
           v-for="(segment, barIndex) in props.strip.segments"
           :key="barIndex"
-          class="flex flex-wrap gap-2"
+          class="flex flex-wrap gap-1"
         >
           <div
             class="flex items-center rounded m-1 cursor-pointer max-w-60 md:max-w-96"
