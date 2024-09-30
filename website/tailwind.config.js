@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
-  safelist: ['dark'],
+  adminMode: ['class'],
+  safelist: ['dark', 'admin'],
 
   content: [
     './pages/**/*.{ts,tsx,vue}',

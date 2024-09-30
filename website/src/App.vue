@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { BookMarked, Github, Moon, Sun } from 'lucide-vue-next';
+import { BookMarked, Github, Moon, Sun, Lock, Unlock } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 </script>
@@ -35,11 +35,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
         <li>
           <Tooltip>
             <TooltipTrigger as-child>
-              <a
-                :href="origin + ':3000'"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a :href="origin + ':3000'" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" class="h-9 px-3 md:h-10 md:px-4">
                   <BookMarked />
                 </Button>
@@ -67,11 +63,52 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
             </TooltipContent>
           </Tooltip>
         </li>
+        <li>
+          <Tooltip>
+            <TooltipTrigger as-child>
+              <Button
+                :class="isAdminMode ? 'bg-green-500' : 'bg-red-500'"
+                variant="outline"
+                class="h-9 px-3 md:h-10 md:px-4"
+                @click="toggleAdminMode"
+              >
+                <template v-if="isAdminMode">
+                  <Unlock />
+                </template>
+                <template v-else>
+                  <Lock />
+                </template>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Toggle AdminMode</p>
+            </TooltipContent>
+          </Tooltip>
+        </li>
       </ul>
     </TooltipProvider>
   </nav>
-
-  <main class="p-6 xl:w-[1270px] xl:m-auto">
+  <div
+    v-if="showPasswordModal"
+    class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center modal"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-md z-50" @click.stop>
+      <h3 class="text-xl font-bold mb-4 text-black">Enter Admin Password</h3>
+      <input
+        type="password"
+        v-model="passwordInput"
+        class="border p-2 w-full text-black"
+        placeholder="Password"
+      />
+      <div class="mt-4 flex justify-end">
+        <button @click="validatePassword" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">
+          Submit
+        </button>
+        <button @click="closeModal" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <main class="p-6 xl:w-[1270px] xl:m-auto z-0">
     <RouterView />
   </main>
 </template>
@@ -87,6 +124,10 @@ export default {
   data() {
     return {
       isDarkMode: document.body.classList.contains('dark'),
+      isAdminMode: document.body.classList.contains('admin'),
+      adminPassword: import.meta.env.VITE_ADMIN_PASSWORD,
+      showPasswordModal: false,
+      passwordInput: '',
       origin: window.location.origin,
     };
   },
@@ -94,6 +135,24 @@ export default {
     toggleDarkMode() {
       document.body.classList.toggle('dark');
       this.isDarkMode = document.body.classList.contains('dark');
+    },
+    toggleAdminMode() {
+      if (!this.isAdminMode) {
+        this.showPasswordModal = true;
+      }
+    },
+    validatePassword() {
+      if (this.passwordInput === this.adminPassword) {
+        document.body.classList.toggle('admin');
+        this.isAdminMode = document.body.classList.contains('admin');
+        this.closeModal();
+      } else {
+        alert('Incorrect password!');
+      }
+    },
+    closeModal() {
+      this.showPasswordModal = false;
+      this.passwordInput = '';
     },
   },
   mounted() {

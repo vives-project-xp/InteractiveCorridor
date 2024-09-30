@@ -18,6 +18,7 @@ services:
       context: ./website/
       args:
         VITE_BACKEND_URL: "${BACKEND_URL}:${BACKEND_PORT}"
+        VITE_ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
     restart: always
     env_file:
       - ./.env

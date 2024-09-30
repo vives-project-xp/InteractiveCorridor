@@ -30,7 +30,7 @@ export type Effect = {
 <template>
   <div class="flex flex-col md:flex-row gap-4">
     <aside class="m-auto md:m-0 w-full md:w-fit">
-      <Tabs default-value="color-picker" class="w-full sticky top-4">
+      <Tabs default-value="color-picker" class="w-full sticky top-4 z-10">
         <TabsList class="w-full">
           <TabsTrigger class="w-full" value="color-picker">Color Picker</TabsTrigger>
           <TabsTrigger class="w-full" value="effects">Effects</TabsTrigger>
@@ -349,7 +349,6 @@ export default {
 
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
-        console.log(response2.data);
         this.dbeffects = response2.data.sort(
           (a: { name: string; preDefined: number }, b: { name: string; preDefined: number }) => {
             // First, check if either of the effects has preDefined set to 1

@@ -7,6 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 ARG VITE_BACKEND_URL
+ARG VITE_ADMIN_PASSWORD
 
 COPY . .
 
