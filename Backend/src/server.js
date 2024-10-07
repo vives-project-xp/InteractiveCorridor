@@ -52,6 +52,7 @@ const executeTask = () => {
 
 const startTimer = () => {
   if (TIMER_INTERVAL === 0) {
+    startTimer();
     return;
   }
   setTimeout(() => {

@@ -16,7 +16,7 @@ const predefinedEffectsExamplePath = path.resolve(
 
 function checkAndLoadPredefinedEffects() {
   return new Promise((resolve, reject) => {
-    fs.access(predefinedEffectsPath, fs.constants.F_OK, (err) => {
+    fs.access(predefinedEffectsPath, fs.constants.F_OKw, (err) => {
       if (err) {
         // If the file doesn't exist, copy the predefined-effects-example.json file
         fs.copyFile(
@@ -218,7 +218,6 @@ const loadEffect = (req, res) => {
     while (typeof leds != "object") {
       leds = JSON.parse(leds);
     }
-    console.log(typeof leds);
     leds.forEach((strip) => {
       const deserializedStrip = strip;
       const matchingLedStrip = ledstrips.ledstrips.find(
