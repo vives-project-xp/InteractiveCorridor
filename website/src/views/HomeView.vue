@@ -19,6 +19,7 @@ import ColorPicker from '@/components/color-picker.vue';
 import LedEffect from '@/components/led-effect.vue';
 import LedStrip, { type SelectedStrip, type IncomingStrip } from '@/components/led-strip.vue';
 import { throttle } from '@/lib/utils';
+import axios from 'axios';
 export type Effect = {
   name: string;
   description: string;
@@ -124,7 +125,7 @@ export type Effect = {
                       :onClick="() => loadEffect(effect.name)"
                     />
                     <button
-                      v-if="effect.preDefined !== 1"
+                      v-if="effect.preDefined !== 1 && isAdminMode"
                       @click="deleteEffect(effect.name)"
                       class="text-red-600 hover:text-red-800"
                     >
@@ -214,6 +215,22 @@ export type Effect = {
                     @update:checked="(e) => setEffect('reverse', e.valueOf())"
                   />
                 </div>
+
+                <div v-if="isAdminMode">
+                  <label for="timeoutSlider">Timeout Time: {{ timeouttime[0] }} min.</label>
+                  <Slider
+                    v-model="timeouttime"
+                    id="timeoutSlider"
+                    label="Timeout Time"
+                    class="w-full pt-2"
+                    :min="0"
+                    :step="1"
+                    :max="10"
+                    @update:model-value="
+                      throttle(() => setTimeoutTime(timeouttime[0]), throttleDelay)
+                    "
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -291,8 +308,6 @@ export type Effect = {
 </template>
 
 <script lang="ts">
-import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -310,9 +325,11 @@ export default {
       speed: [128],
       intensity: [128],
       delay: [0],
+      timeouttime: [import.meta.env.VITE_TIMEOUT_TIME],
       throttleDelay: 100,
       photoVisible: false,
       inactivityTimer: 0,
+      isAdminMode: document.body.classList.contains('admin'),
     };
   },
   methods: {
@@ -327,6 +344,7 @@ export default {
       }, 30 * 1000); // 10 seconds
     },
     fetchLeds() {
+      this.isAdminMode = document.body.classList.contains('admin');
       axios
         .get(`${this.remoteURL}/leds`, { timeout: 250 })
         .then(async (response) => {
@@ -477,11 +495,27 @@ export default {
         segments: strip.segments.map((_, i) => i),
       }));
     },
+    setTimeoutTime(time: number) {
+      const data = {
+        time: time,
+      };
+      axios.post(`${this.remoteURL}/timeout`, data).catch((error) => {
+        console.error(error);
+      });
+    },
+    getTimeoutTime() {
+      axios.get(`${this.remoteURL}/timeout`).then((response) => {
+        this.timeouttime = [response.data.time];
+
+        console.log(this.timeouttime);
+      });
+    },
   },
   mounted() {
     document.body.classList.add('bg-background');
     this.fetchLeds();
     this.fetchEffects();
+    this.getTimeoutTime();
     setInterval(this.fetchLeds, 250);
     this.$watch(
       () => [this.brightness, this.selectedColor, this.selectedStrips],

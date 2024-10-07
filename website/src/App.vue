@@ -12,6 +12,15 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
     >
       Interactive Corridor
     </span>
+    <div class="flex justify-center items-center">
+      <span
+        v-if="isAdminMode"
+        class="text-red-500 text-2xl md:text-3xl font-extrabold bg-yellow-100 p-4 rounded-lg shadow-lg"
+      >
+        ADMIN MODE ACTIVE
+      </span>
+    </div>
+
     <TooltipProvider>
       <ul class="flex gap-1 md:gap-4">
         <li>
@@ -139,6 +148,9 @@ export default {
     toggleAdminMode() {
       if (!this.isAdminMode) {
         this.showPasswordModal = true;
+      } else {
+        document.body.classList.toggle('admin');
+        this.isAdminMode = document.body.classList.contains('admin');
       }
     },
     validatePassword() {

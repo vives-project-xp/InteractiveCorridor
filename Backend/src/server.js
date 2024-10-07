@@ -45,23 +45,34 @@ app.use(
 );
 
 let lastRequestTime = Date.now();
-const TIMER_INTERVAL = process.env.TIMEOUT_TIME * 60 * 1000;
+let TIMER_INTERVAL = process.env.TIMEOUT_TIME;
 const executeTask = () => {
   leds.setDefault();
 };
 
 const startTimer = () => {
+  if (TIMER_INTERVAL === 0) {
+    return;
+  }
   setTimeout(() => {
     const currentTime = Date.now();
     // Controleer of er gedurende de timerinterval geen verzoeken zijn ontvangen
-    if (currentTime - lastRequestTime >= TIMER_INTERVAL) {
+    if (currentTime - lastRequestTime >= TIMER_INTERVAL * 60 * 1000) {
       executeTask();
     }
     // Herstart de timer
     startTimer();
-  }, TIMER_INTERVAL);
+  }, TIMER_INTERVAL * 60 * 1000);
 };
 startTimer();
+
+const setTimeoutTime = (req, res) => {
+  TIMER_INTERVAL = req.body.time;
+};
+
+const getTimeoutTime = (req, res) => {
+  res.send({ time: TIMER_INTERVAL });
+};
 
 app.use((req, res, next) => {
   if (!(req.method === "GET" && req.path === "/leds")) {
@@ -81,6 +92,9 @@ app.get("/db/effects", db.getEffects);
 app.post("/saveeffect", db.saveEffect);
 app.post("/loadeffect", db.loadEffect);
 app.delete("/deleteeffect", db.deleteEffect);
+
+app.post("/timeout", setTimeoutTime);
+app.get("/timeout", getTimeoutTime);
 
 app.get("/*", (req, res) => {
   res.redirect("/api-docs");
