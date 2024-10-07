@@ -46,8 +46,12 @@ app.use(
 
 let lastRequestTime = Date.now();
 let TIMER_INTERVAL = process.env.TIMEOUT_TIME;
+let default_effect = false;
 const executeTask = () => {
-  leds.setDefault();
+  if (!default_effect) {
+    leds.setDefault();
+    default_effect = true;
+  }
 };
 
 const startTimer = () => {
@@ -78,6 +82,7 @@ const getTimeoutTime = (req, res) => {
 app.use((req, res, next) => {
   if (!(req.method === "GET" && req.path === "/leds")) {
     lastRequestTime = Date.now();
+    default_effect = false;
   }
   next();
 });
