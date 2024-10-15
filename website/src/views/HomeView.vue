@@ -247,7 +247,10 @@ export type Effect = {
             Click on a segment to select it. Click on the 'All' button to select all segments.
           </CardDescription>
         </div>
-        <Button @click="selectAll" variant="secondary">Select all</Button>
+        <div class="flex gap-2">
+          <Button @click="splitAll" variant="secondary">Split all</Button>
+          <Button @click="selectAll" variant="secondary">Select all</Button>
+        </div>
       </CardHeader>
       <CardContent>
         <ScrollArea class="h-[500px] w-full p-2.5 rounded-md border">
@@ -494,6 +497,11 @@ export default {
         name: strip.name,
         segments: strip.segments.map((_, i) => i),
       }));
+    },
+    splitAll() {
+      for (const strip of this.strips) {
+        this.splitStrip(strip);
+      }
     },
     setTimeoutTime(time: number) {
       const data = {
