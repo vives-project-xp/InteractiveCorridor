@@ -82,7 +82,7 @@
 
   @media (min-width: 768px) and (max-width: 1024px) {
     nav {
-      display: none; /* Verberg op tabletformaten */
+      display: none !important; /* Verberg op tabletformaten */
     }
   }
 }
