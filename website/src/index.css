@@ -72,17 +72,17 @@
   z-index: 9999;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  nav {
-    display: none; /* Verberg op tabletformaten */
-  }
-}
-
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    nav {
+      display: none; /* Verberg op tabletformaten */
+    }
   }
 }
