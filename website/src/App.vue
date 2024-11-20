@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 </script>
 
 <template>
-  <nav class="flex justify-between items-center bg-secondary p-4 md:p-5 visible sm:invisible">
+  <nav class="flex justify-between items-center bg-secondary p-4 md:p-5">
     <span
       class="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent text-xl sm:text-3xl font-bold"
     >
