@@ -122,7 +122,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
   </main>
 </template>
 
-<style scoped></style>
+<style></style>
 
 <script lang="ts">
 export default {
