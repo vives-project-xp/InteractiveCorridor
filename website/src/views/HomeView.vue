@@ -224,8 +224,8 @@ export type Effect = {
                     label="Timeout Time"
                     class="w-full pt-2"
                     :min="0"
-                    :step="1"
-                    :max="10"
+                    :step="Math.pow(2, Math.floor(Math.log2(timeouttime[0] + 1)))"
+                    :max="180"
                     @update:model-value="
                       throttle(() => setTimeoutTime(timeouttime[0]), throttleDelay)
                     "
