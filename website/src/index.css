@@ -85,4 +85,8 @@
       display: none !important; /* Verberg op tabletformaten */
     }
   }
+
+  .button.selected {
+    border: 2px solid black; /* Zwarte rand voor de geselecteerde knop */
+  }
 }

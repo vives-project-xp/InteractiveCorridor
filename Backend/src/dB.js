@@ -165,6 +165,7 @@ const saveEffect = (req, res) => {
       start: segment.start,
       end: segment.end,
       color: segment.color,
+      bgColor: segment.bgColor,
       effect: segment.effect,
     })),
   }));
@@ -234,7 +235,8 @@ const loadEffect = (req, res) => {
           matchingLedStrip,
           segment.start,
           segment.end,
-          segment.color
+          segment.color,
+          segment.bgColor
         );
         newSegment.setEffect(segment.effect);
         matchingLedStrip.segments.push(newSegment);
@@ -267,6 +269,7 @@ const deserializeStrip = (serializedStrip) => {
         start: segment.start,
         end: segment.end,
         color: segment.color,
+        bgColor: segment.bgColor,
         effect: segment.effect,
       })),
     };

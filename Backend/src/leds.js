@@ -17,6 +17,7 @@ const getLeds = async (req, res) => {
         length: segment.length,
         effect: segment.effect.id,
         color: segment.getHex(),
+        bgColor: segment.getBGHex(),
       });
     }
     strips.push({
@@ -32,19 +33,45 @@ const postLeds = async (req, res) => {
   const strips = req.body;
   for (const reqStrip of strips) {
     const strip = ledstrips.find((s) => s.index === reqStrip.index);
-
     if (!strip) continue;
-
     for (let i = 0; i < reqStrip.segments.length; i++) {
       const seg = strip.segments[i];
-      const reqColor = hexToRgb(reqStrip.segments[i].color);
-      if (reqColor !== seg.color) seg.setColor(reqColor);
+
+      const reqColor =
+        typeof reqStrip.segments[i].color === "string"
+          ? hexToRgb(reqStrip.segments[i].color)
+          : reqStrip.segments[i].color;
+
+      const reqBGColor =
+        typeof reqStrip.segments[i].bgColor === "string"
+          ? hexToRgb(reqStrip.segments[i].bgColor)
+          : reqStrip.segments[i].bgColor;
+
+      if (
+        reqColor &&
+        (reqColor.r !== seg.color.r ||
+          reqColor.g !== seg.color.g ||
+          reqColor.b !== seg.color.b)
+      ) {
+        seg.setColor(reqColor);
+      }
+
+      if (
+        reqBGColor &&
+        (reqBGColor.r !== seg.bgColor.r ||
+          reqBGColor.g !== seg.bgColor.g ||
+          reqBGColor.b !== seg.bgColor.b)
+      ) {
+        seg.setBgColor(reqBGColor);
+      }
+
       if (reqStrip.segments[i].start !== seg.start)
         seg.setStart(reqStrip.segments[i].start);
+
       if (reqStrip.segments[i].end !== seg.end)
         seg.setEnd(reqStrip.segments[i].end);
     }
-    //strip.updateSegments();
+
     strip.updateColor();
   }
   return getLeds(req, res); // return the updated ledstrips

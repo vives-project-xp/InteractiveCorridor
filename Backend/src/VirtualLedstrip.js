@@ -11,6 +11,11 @@ class Segment {
     g: 255,
     b: 255,
   };
+  bgColor = {
+    r: 0,
+    g: 0,
+    b: 0,
+  };
   effect = {
     id: 0,
     delay: 0,
@@ -21,7 +26,7 @@ class Segment {
     reverseDelay: false,
   };
 
-  constructor(parent, start, end, color) {
+  constructor(parent, start, end, color, bgColor) {
     this.parent = parent;
     this.setStart(start);
     this.setEnd(end);
@@ -30,6 +35,13 @@ class Segment {
         r: 255,
         g: 255,
         b: 255,
+      }
+    );
+    this.setBgColor(
+      bgColor || {
+        r: 0,
+        g: 0,
+        b: 0,
       }
     );
   }
@@ -48,6 +60,12 @@ class Segment {
       .padStart(2, "0")}${this.color.b.toString(16).padStart(2, "0")}`;
   }
 
+  getBGHex() {
+    return `#${this.bgColor.r.toString(16).padStart(2, "0")}${this.bgColor.g
+      .toString(16)
+      .padStart(2, "0")}${this.bgColor.b.toString(16).padStart(2, "0")}`;
+  }
+
   setStart(start) {
     this.start = start;
   }
@@ -58,6 +76,10 @@ class Segment {
 
   setColor(color) {
     this.color = color;
+  }
+
+  setBgColor(bgColor) {
+    this.bgColor = bgColor;
   }
 
   setEffect(effect) {
@@ -135,7 +157,7 @@ class VirtualLedstrip {
       seg: this.segments.map((segment) => ({
         col: [
           [segment.color.r, segment.color.g, segment.color.b],
-          [0, 0, 0],
+          [segment.bgColor.r, segment.bgColor.g, segment.bgColor.b],
           [0, 0, 0],
         ],
         pal: 0,
@@ -156,7 +178,7 @@ class VirtualLedstrip {
         pal: 0,
         col: [
           [segment.color.r, segment.color.g, segment.color.b],
-          [0, 0, 0],
+          [segment.bgColor.r, segment.bgColor.g, segment.bgColor.b],
           [0, 0, 0],
         ],
       })),

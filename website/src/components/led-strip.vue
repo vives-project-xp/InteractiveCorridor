@@ -16,6 +16,7 @@ export type IncomingStrip = {
     length: number;
     effect: number;
     color: string;
+    bgColor: string;
   }[];
 };
 

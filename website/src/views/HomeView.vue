@@ -43,9 +43,24 @@ export type Effect = {
               <CardTitle>Color picker</CardTitle>
             </CardHeader>
             <CardContent>
+              <div class="flex justify-center">
+                <button
+                  v-for="(button, index) in buttons"
+                  :key="index"
+                  :style="{ backgroundColor: button === 1 ? selectedColor : selectedBGColor }"
+                  :class="[
+                    'w-12 h-12 rounded-full flex items-center justify-center m-3',
+                    { selected: currentButton === index + 1 },
+                  ]"
+                  @click="selectButton(index + 1)"
+                >
+                  {{ index + 1 }}
+                </button>
+              </div>
               <div class="flex justify-center h-min">
                 <ColorPicker
-                  :color="selectedColor"
+                  v-model="currentColor"
+                  :color="currentColor"
                   :on-change="(color) => throttle(() => setColor(color.hexString), throttleDelay)"
                 />
               </div>
@@ -319,6 +334,10 @@ export default {
       strips: [] as IncomingStrip[],
       brightness: 200,
       selectedColor: '#ffffff',
+      selectedBGColor: '#000000',
+      currentColor: '#ffffff',
+      currentButton: 1,
+      buttons: [1, 2],
       selectedStrips: [] as SelectedStrip[],
       effectSearch: '',
       dbeffectSearch: '',
@@ -336,6 +355,10 @@ export default {
     };
   },
   methods: {
+    selectButton(button: number) {
+      this.currentColor = button === 1 ? this.selectedColor : this.selectedBGColor;
+      this.currentButton = button;
+    },
     resetInactivityTimer() {
       clearTimeout(this.inactivityTimer);
       this.photoVisible = false;
@@ -401,8 +424,14 @@ export default {
         console.error(error);
       });
     },
-    setColor(color: string) {
-      this.selectedColor = color;
+    setColor(_currentcolor: string) {
+      if (this.currentButton === 1) {
+        this.selectedColor = _currentcolor;
+      } else {
+        this.selectedBGColor = _currentcolor;
+      }
+
+      console.log(_currentcolor, this.selectedColor, this.selectedBGColor);
 
       const formData = [];
       for (const strip of this.selectedStrips) {
@@ -411,7 +440,7 @@ export default {
 
         const stripData = {
           index: strip.index,
-          segments: [] as { start: number; end: number; color: string }[],
+          segments: [] as { start: number; end: number; color: string; bgColor: string }[],
         };
         for (let i = 0; i < s.segments.length; i++) {
           const segment = s.segments[i];
@@ -419,13 +448,13 @@ export default {
           stripData.segments.push({
             start: segment.start,
             end: segment.end,
-            color: strip.segments.includes(i) ? color : segment.color,
+            color: strip.segments.includes(i) ? this.selectedColor : segment.color,
+            bgColor: strip.segments.includes(i) ? this.selectedBGColor : segment.bgColor,
           });
         }
 
         formData.push(stripData);
       }
-
       axios.post(`${this.remoteURL}/leds`, formData).catch((error) => {
         console.error(error);
       });
@@ -526,9 +555,9 @@ export default {
     this.getTimeoutTime();
     setInterval(this.fetchLeds, 250);
     this.$watch(
-      () => [this.brightness, this.selectedColor, this.selectedStrips],
+      () => [this.brightness, this.selectedColor, this.selectedBGColor, this.selectedStrips],
       () => {
-        this.setColor(this.selectedColor);
+        this.setColor(this.currentButton === 1 ? this.selectedColor : this.selectedBGColor);
       }
     );
     this.inactivityTimer = setTimeout(() => {
