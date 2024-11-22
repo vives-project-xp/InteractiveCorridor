@@ -86,7 +86,17 @@
     }
   }
 
-  .button.selected {
-    border: 2px solid black; /* Zwarte rand voor de geselecteerde knop */
+  .color.border.selected {
+    border: 5px solid greenyellow !important; /* Zwarte rand voor de geselecteerde knop */
+  }
+
+  .color.border {
+    text-shadow:
+      -1px 0 black,
+      0 1px black,
+      1px 0 black,
+      0 -1px black;
+    color: white;
+    border: 5px solid black !important; /* Zwarte rand voor de geselecteerde knop */
   }
 }

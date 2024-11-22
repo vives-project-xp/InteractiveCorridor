@@ -49,6 +49,7 @@ export type Effect = {
                   :key="index"
                   :style="{ backgroundColor: button === 1 ? selectedColor : selectedBGColor }"
                   :class="[
+                    'color border',
                     'w-12 h-12 rounded-full flex items-center justify-center m-3',
                     { selected: currentButton === index + 1 },
                   ]"
