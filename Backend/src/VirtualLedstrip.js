@@ -6,16 +6,23 @@ const ledstripCount = process.env.LEDSTRIP_COUNT || 6;
 class Segment {
   start = 0;
   end = 0;
-  color = {
-    r: 255,
-    g: 255,
-    b: 255,
-  };
-  bgColor = {
-    r: 0,
-    g: 0,
-    b: 0,
-  };
+  colors = [
+    {
+      r: 255,
+      g: 255,
+      b: 255,
+    },
+    {
+      r: 0,
+      g: 0,
+      b: 0,
+    },
+    {
+      r: 0,
+      g: 0,
+      b: 0,
+    },
+  ];
   effect = {
     id: 0,
     delay: 0,
@@ -26,23 +33,28 @@ class Segment {
     reverseDelay: false,
   };
 
-  constructor(parent, start, end, color, bgColor) {
+  constructor(parent, start, end, colors) {
     this.parent = parent;
     this.setStart(start);
     this.setEnd(end);
     this.setColor(
-      color || {
-        r: 255,
-        g: 255,
-        b: 255,
-      }
-    );
-    this.setBgColor(
-      bgColor || {
-        r: 0,
-        g: 0,
-        b: 0,
-      }
+      colors || [
+        {
+          r: 255,
+          g: 255,
+          b: 255,
+        },
+        {
+          r: 0,
+          g: 0,
+          b: 0,
+        },
+        {
+          r: 0,
+          g: 0,
+          b: 0,
+        },
+      ]
     );
   }
 
@@ -55,15 +67,24 @@ class Segment {
   }
 
   getHex() {
-    return `#${this.color.r.toString(16).padStart(2, "0")}${this.color.g
-      .toString(16)
-      .padStart(2, "0")}${this.color.b.toString(16).padStart(2, "0")}`;
-  }
+    return this.colors.map((color) => {
+      if (typeof color === "string" && /^#[0-9A-F]{6}$/i.test(color)) {
+        return color;
+      }
 
-  getBGHex() {
-    return `#${this.bgColor.r.toString(16).padStart(2, "0")}${this.bgColor.g
-      .toString(16)
-      .padStart(2, "0")}${this.bgColor.b.toString(16).padStart(2, "0")}`;
+      if (
+        typeof color.r !== "number" ||
+        typeof color.g !== "number" ||
+        typeof color.b !== "number"
+      ) {
+        throw new Error(
+          "Invalid color format. Expected an object with r, g, and b properties."
+        );
+      }
+      return `#${color.r.toString(16).padStart(2, "0")}${color.g
+        .toString(16)
+        .padStart(2, "0")}${color.b.toString(16).padStart(2, "0")}`;
+    });
   }
 
   setStart(start) {
@@ -74,12 +95,8 @@ class Segment {
     this.end = end;
   }
 
-  setColor(color) {
-    this.color = color;
-  }
-
-  setBgColor(bgColor) {
-    this.bgColor = bgColor;
+  setColor(colors) {
+    this.colors = colors;
   }
 
   setEffect(effect) {
@@ -155,11 +172,7 @@ class VirtualLedstrip {
   updateColor() {
     const body = {
       seg: this.segments.map((segment) => ({
-        col: [
-          [segment.color.r, segment.color.g, segment.color.b],
-          [segment.bgColor.r, segment.bgColor.g, segment.bgColor.b],
-          [0, 0, 0],
-        ],
+        col: segment.colors.map((color) => [color.r, color.g, color.b]),
         pal: 0,
       })),
     };
@@ -176,11 +189,7 @@ class VirtualLedstrip {
         rev: segment.effect.reverse || false,
         mi: segment.effect.mirror || false,
         pal: 0,
-        col: [
-          [segment.color.r, segment.color.g, segment.color.b],
-          [segment.bgColor.r, segment.bgColor.g, segment.bgColor.b],
-          [0, 0, 0],
-        ],
+        col: segment.colors.map((color) => [color.r, color.g, color.b]),
       })),
       tb: this.segments[0].effect.reverseDelay
         ? this.segments[0].effect.delay * (ledstripCount - this.index)

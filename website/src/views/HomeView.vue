@@ -47,7 +47,7 @@ export type Effect = {
                 <button
                   v-for="(button, index) in buttons"
                   :key="index"
-                  :style="{ backgroundColor: button === 1 ? selectedColor : selectedBGColor }"
+                  :style="{ backgroundColor: selectedColors[index] }"
                   :class="[
                     'color border',
                     'w-12 h-12 rounded-full flex items-center justify-center m-3',
@@ -60,7 +60,6 @@ export type Effect = {
               </div>
               <div class="flex justify-center h-min">
                 <ColorPicker
-                  v-model="currentColor"
                   :color="currentColor"
                   :on-change="(color) => throttle(() => setColor(color.hexString), throttleDelay)"
                 />
@@ -334,11 +333,10 @@ export default {
       dbeffects: [] as Effect[] | undefined,
       strips: [] as IncomingStrip[],
       brightness: 200,
-      selectedColor: '#ffffff',
-      selectedBGColor: '#000000',
+      selectedColors: ['#ffffff', '#000000', '#000000'],
       currentColor: '#ffffff',
       currentButton: 1,
-      buttons: [1, 2],
+      buttons: [1, 2, 3],
       selectedStrips: [] as SelectedStrip[],
       effectSearch: '',
       dbeffectSearch: '',
@@ -357,8 +355,8 @@ export default {
   },
   methods: {
     selectButton(button: number) {
-      this.currentColor = button === 1 ? this.selectedColor : this.selectedBGColor;
       this.currentButton = button;
+      this.currentColor = this.selectedColors[button];
     },
     resetInactivityTimer() {
       clearTimeout(this.inactivityTimer);
@@ -394,6 +392,16 @@ export default {
 
         // Haal de effecten op van 'http://localhost/api/db/effects'
         const response2 = await axios.get(`${this.remoteURL}/db/effects`);
+        console.log(response2.data);
+        if (!Array.isArray(response2.data)) {
+          this.fetchEffects();
+          return;
+        } else {
+          if (response2.data.length === 0) {
+            this.fetchEffects();
+            return;
+          }
+        }
         this.dbeffects = response2.data.sort(
           (a: { name: string; preDefined: number }, b: { name: string; preDefined: number }) => {
             // First, check if either of the effects has preDefined set to 1
@@ -425,14 +433,8 @@ export default {
         console.error(error);
       });
     },
-    setColor(_currentcolor: string) {
-      if (this.currentButton === 1) {
-        this.selectedColor = _currentcolor;
-      } else {
-        this.selectedBGColor = _currentcolor;
-      }
-
-      console.log(_currentcolor, this.selectedColor, this.selectedBGColor);
+    setColor(color: string) {
+      this.selectedColors[this.currentButton - 1] = color;
 
       const formData = [];
       for (const strip of this.selectedStrips) {
@@ -441,7 +443,7 @@ export default {
 
         const stripData = {
           index: strip.index,
-          segments: [] as { start: number; end: number; color: string; bgColor: string }[],
+          segments: [] as { start: number; end: number; colors: string[] }[],
         };
         for (let i = 0; i < s.segments.length; i++) {
           const segment = s.segments[i];
@@ -449,8 +451,7 @@ export default {
           stripData.segments.push({
             start: segment.start,
             end: segment.end,
-            color: strip.segments.includes(i) ? this.selectedColor : segment.color,
-            bgColor: strip.segments.includes(i) ? this.selectedBGColor : segment.bgColor,
+            colors: strip.segments.includes(i) ? this.selectedColors : segment.colors,
           });
         }
 
@@ -556,9 +557,9 @@ export default {
     this.getTimeoutTime();
     setInterval(this.fetchLeds, 250);
     this.$watch(
-      () => [this.brightness, this.selectedColor, this.selectedBGColor, this.selectedStrips],
+      () => [this.brightness, this.selectedColors, this.selectedStrips],
       () => {
-        this.setColor(this.currentButton === 1 ? this.selectedColor : this.selectedBGColor);
+        this.setColor(this.selectedColors[this.currentButton]);
       }
     );
     this.inactivityTimer = setTimeout(() => {

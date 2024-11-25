@@ -15,8 +15,7 @@ export type IncomingStrip = {
     end: number;
     length: number;
     effect: number;
-    color: string;
-    bgColor: string;
+    colors: [string, string, string];
   }[];
 };
 
@@ -113,7 +112,7 @@ const props = defineProps({
               v-for="(ledIndex, ledIndexInBar) in segment.end - segment.start + 1"
               :key="ledIndexInBar"
               class="first:rounded-l first:border-l last:rounded-r last:border-r border-y"
-              :color="segment.color || '#000000'"
+              :colors="segment.colors || ['#000000', '#000000', '#000000']"
               :effect="
                 props.effects?.find((e) => Number(e.id) === Number(segment.effect)) || {
                   name: 'Unknown',

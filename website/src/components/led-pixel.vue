@@ -1,15 +1,16 @@
 <script lang="ts" setup>
-import { cn, copyToClipboard } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 type hexColor = string;
 const props = defineProps({
-  color: {
-    type: String as () => hexColor,
+  colors: {
+    type: Array as () => hexColor[],
     required: true,
-    validator: (prop: string) => {
-      return prop.match(/^#[0-9a-fA-F]{3,6}$/) !== null;
+    validator: (prop: hexColor[]) => {
+      return (
+        prop.length === 3 && prop.every((color) => color.match(/^#[0-9a-fA-F]{3,6}$/) !== null)
+      );
     },
   },
   effect: {
@@ -27,7 +28,7 @@ const props = defineProps({
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger as-child>
-        <div :class="cn('size-4', props.class)" :style="{ backgroundColor: props.color }"></div>
+        <div :class="cn('size-4', props.class)" :style="{ backgroundColor: props.colors[0] }"></div>
       </TooltipTrigger>
       <TooltipContent class="flex flex-col gap-2 max-w-48">
         <div>
@@ -35,21 +36,11 @@ const props = defineProps({
           <p class="text-xs text-wrap">{{ props.effect.description }}</p>
         </div>
         <div class="flex justify-center space-x-1">
-          <code class="bg-muted rounded py-[2px] px-1">{{ props.color }}</code>
-          <Button
-          variant="secondary"
-          class="py-[2px] px-1 h-5 text-xs"
-          @click="
-            () => {
-              console.log('copying', props.color);
-              setButtonText('Copied!', 1000);
-              copyToClipboard(props.color);
-            }
-          "
-        >
-          {{ copyButtonText }}
-        </Button>
-      </div>
+          <div v-for="(color, index) in colors" :key="index">
+            <code class="bg-muted rounded py-[2px] px-1">{{ color }}</code>
+          </div>
+          >
+        </div>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>

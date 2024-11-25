@@ -164,8 +164,7 @@ const saveEffect = (req, res) => {
     segments: ledstrip.segments.map((segment) => ({
       start: segment.start,
       end: segment.end,
-      color: segment.color,
-      bgColor: segment.bgColor,
+      colors: segment.colors,
       effect: segment.effect,
     })),
   }));
@@ -235,8 +234,7 @@ const loadEffect = (req, res) => {
           matchingLedStrip,
           segment.start,
           segment.end,
-          segment.color,
-          segment.bgColor
+          segment.colors
         );
         newSegment.setEffect(segment.effect);
         matchingLedStrip.segments.push(newSegment);

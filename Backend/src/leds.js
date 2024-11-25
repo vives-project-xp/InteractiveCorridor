@@ -16,8 +16,7 @@ const getLeds = async (req, res) => {
         end: segment.end,
         length: segment.length,
         effect: segment.effect.id,
-        color: segment.getHex(),
-        bgColor: segment.getBGHex(),
+        colors: segment.getHex(),
       });
     }
     strips.push({
@@ -37,32 +36,21 @@ const postLeds = async (req, res) => {
     for (let i = 0; i < reqStrip.segments.length; i++) {
       const seg = strip.segments[i];
 
-      const reqColor =
-        typeof reqStrip.segments[i].color === "string"
-          ? hexToRgb(reqStrip.segments[i].color)
-          : reqStrip.segments[i].color;
-
-      const reqBGColor =
-        typeof reqStrip.segments[i].bgColor === "string"
-          ? hexToRgb(reqStrip.segments[i].bgColor)
-          : reqStrip.segments[i].bgColor;
+      const reqColors =
+        typeof reqStrip.segments[i].colors[0] === "string"
+          ? reqStrip.segments[i].colors.map(hexToRgb)
+          : reqStrip.segments[i].colors;
 
       if (
-        reqColor &&
-        (reqColor.r !== seg.color.r ||
-          reqColor.g !== seg.color.g ||
-          reqColor.b !== seg.color.b)
+        Array.isArray(reqColors) &&
+        reqColors.some(
+          (color, index) =>
+            (seg.colors[index] && color.r !== seg.colors[index].r) ||
+            (seg.colors[index] && color.g !== seg.colors[index].g) ||
+            (seg.colors[index] && color.b !== seg.colors[index].b)
+        )
       ) {
-        seg.setColor(reqColor);
-      }
-
-      if (
-        reqBGColor &&
-        (reqBGColor.r !== seg.bgColor.r ||
-          reqBGColor.g !== seg.bgColor.g ||
-          reqBGColor.b !== seg.bgColor.b)
-      ) {
-        seg.setBgColor(reqBGColor);
+        seg.setColor(reqColors);
       }
 
       if (reqStrip.segments[i].start !== seg.start)
@@ -71,7 +59,6 @@ const postLeds = async (req, res) => {
       if (reqStrip.segments[i].end !== seg.end)
         seg.setEnd(reqStrip.segments[i].end);
     }
-
     strip.updateColor();
   }
   return getLeds(req, res); // return the updated ledstrips
